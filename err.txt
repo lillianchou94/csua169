@@ -1,0 +1,23 @@
+WARNING: Cucumber-rails required outside of env.rb.  The rest of loading is being deferred until env.rb is called.
+  To avoid this warning, move 'gem 'cucumber-rails', :require => false' under only group :test in your Gemfile.
+  If already in the :test group, be sure you are specifying ':require => false'.
+rake aborted!
+ActiveRecord::StatementInvalid: Could not find table 'elections'
+/usr/local/rvm/gems/ruby-2.3.0/gems/activerecord-4.2.5/lib/active_record/connection_adapters/sqlite3_adapter.rb:511:in `table_structure'
+/usr/local/rvm/gems/ruby-2.3.0/gems/activerecord-4.2.5/lib/active_record/connection_adapters/sqlite3_adapter.rb:385:in `columns'
+/usr/local/rvm/gems/ruby-2.3.0/gems/activerecord-4.2.5/lib/active_record/connection_adapters/schema_cache.rb:43:in `columns'
+/usr/local/rvm/gems/ruby-2.3.0/gems/activerecord-4.2.5/lib/active_record/attributes.rb:93:in `columns'
+/usr/local/rvm/gems/ruby-2.3.0/gems/activerecord-4.2.5/lib/active_record/attributes.rb:98:in `columns_hash'
+/usr/local/rvm/gems/ruby-2.3.0/gems/activerecord-4.2.5/lib/active_record/inheritance.rb:205:in `subclass_from_attributes?'
+/usr/local/rvm/gems/ruby-2.3.0/gems/activerecord-4.2.5/lib/active_record/inheritance.rb:54:in `new'
+/usr/local/rvm/gems/ruby-2.3.0/gems/activerecord-4.2.5/lib/active_record/persistence.rb:33:in `create'
+/home/ubuntu/workspace/iteration1/db/seeds.rb:5:in `<top (required)>'
+/usr/local/rvm/gems/ruby-2.3.0/gems/activesupport-4.2.5/lib/active_support/dependencies.rb:268:in `load'
+/usr/local/rvm/gems/ruby-2.3.0/gems/activesupport-4.2.5/lib/active_support/dependencies.rb:268:in `block in load'
+/usr/local/rvm/gems/ruby-2.3.0/gems/activesupport-4.2.5/lib/active_support/dependencies.rb:240:in `load_dependency'
+/usr/local/rvm/gems/ruby-2.3.0/gems/activesupport-4.2.5/lib/active_support/dependencies.rb:268:in `load'
+/usr/local/rvm/gems/ruby-2.3.0/gems/railties-4.2.5/lib/rails/engine.rb:547:in `load_seed'
+/usr/local/rvm/gems/ruby-2.3.0/gems/activerecord-4.2.5/lib/active_record/tasks/database_tasks.rb:250:in `load_seed'
+/usr/local/rvm/gems/ruby-2.3.0/gems/activerecord-4.2.5/lib/active_record/railties/databases.rake:183:in `block (2 levels) in <top (required)>'
+Tasks: TOP => db:seed
+(See full trace by running task with --trace)
