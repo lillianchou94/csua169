@@ -1,4 +1,8 @@
 Feature: dashboard pages content
+  As a admin,
+	I want to see my dashboard
+	So that I can see all the elections I am a part of and I can add new elections
+	
   Scenario: Admin dashboard page
     Given I am on the dashboard pre-voting page for an admin
     Then I should see "CSUA Voting System"
