@@ -1,1 +1,17 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  election_id: 'third election'
+  election_time: DateTime.new(2001,2,5)
+  position: "peasant"
+  candidate: "me3"
+  total_votes: 3
+  num_won: 2
+
+two:
+  election_id: 'third election'
+  election_time: DateTime.new(2001,2,5)
+  position: "peasant"
+  candidate: "me3"
+  total_votes: 3
+  num_won: 2

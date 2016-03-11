@@ -18,7 +18,7 @@ class ElectionsControllerTest < ActionController::TestCase
 
   test "should create election" do
     assert_difference('Election.count') do
-      post :create, election: { try: @election.try }
+      post :create, election: { election_id: @election.election_id }
     end
 
     assert_redirected_to election_path(assigns(:election))
@@ -35,7 +35,7 @@ class ElectionsControllerTest < ActionController::TestCase
   end
 
   test "should update election" do
-    patch :update, id: @election, election: { try: @election.try }
+    patch :update, id: @election, election: { election_id: @election.election_id }
     assert_redirected_to election_path(assigns(:election))
   end
 
