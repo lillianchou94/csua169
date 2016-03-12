@@ -11,19 +11,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160310103154) do
+ActiveRecord::Schema.define(version: 20160312000005) do
+
+  create_table "elections", force: :cascade do |t|
+    t.string   "election_id",   limit: 255
+    t.datetime "election_time"
+    t.string   "position",      limit: 255
+    t.string   "candidate",     limit: 255
+    t.integer  "total_votes"
+    t.integer  "num_won"
+    t.string   "election_name"
+  end
+
   create_table "users", force: :cascade do |t|
-    t.string "user_id", limit: 255
+    t.string  "user_id", limit: 255
     t.integer "csua"
     t.integer "hkn"
   end
 
-  create_table "elections", force: :cascade do |t|
-    t.string "election_id", limit: 255
-    t.datetime "election_time"
-    t.string "position", limit: 255
-    t.string "candidate", limit: 255
-    t.integer "total_votes"
-    t.integer "num_won"
-  end
 end

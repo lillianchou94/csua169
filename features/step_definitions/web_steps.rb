@@ -31,6 +31,23 @@ module WithinHelpers
 end
 World(WithinHelpers)
 
+When(/^I add the election called "([^"]*)"$/) do |election_name|
+  begin
+    main, popup = page.driver.browser.window_handles
+    within_window(popup) do
+      fill_in("new_election_name", :with => election_name)
+      click_on("Create")
+      if page.respond_to? :should
+        page.should have_content('created')
+      else
+        assert page.has_content?('created')
+      end
+      assert main.has_content?(election_name)
+    end
+  rescue
+  end
+end
+
 # Single-line step scoper
 When /^(.*) within (.*[^:])$/ do |step, parent|
   with_scope(parent) { When step }

@@ -24,6 +24,18 @@ module NavigationHelpers
     when /^the elections page for an admin$/
       '/election_show_elections'
       
+    ####  
+    when /^the add election page$/
+      '/election_add_election'
+    when /^the delete election page$/
+      '/election_delete_election'
+    when /^the add position page$/
+      '/election_add_position'
+    when /^the delete position page$/
+      'election_delete_position'
+    #when /^the election list page$/
+    #  '/election_list'
+      
 
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
