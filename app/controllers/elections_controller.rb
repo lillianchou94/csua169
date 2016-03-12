@@ -16,8 +16,6 @@ respond_to :js
       return @@position_list
     end
     
-  
-  
   def show_elections
     @election_list = Election.all
     #@@position_list = Hash.new
