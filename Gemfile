@@ -9,6 +9,9 @@ group :production do
   gem 'thin'
   gem 'pg'
 end
+
+gem "codeclimate-test-reporter", group: :test, require: nil
+
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
@@ -40,6 +43,8 @@ gem 'jquery-ui-rails'
 gem 'bootstrap-sass'
 
 gem 'capybara'
+
+gem 'selenium-webdriver'
 
 # bundle exec rake doc:rails generates the API under doc/api.
 

@@ -20,19 +20,21 @@ function open_position_modal(button_id) {
 </script>
 <input id="button_id" style="display:none;" value=""></input>
 <ul style="display:inline;list-style-type:none">
-  <li><button type="button" onclick="open_election_modal()">Add election</button></li>
+  <li><button type="button" onclick="open_election_modal()"><i class="fa fa-plus-square-o"></i> Add election</button></li>
   <% for @election in @election_list %>
-    <li> <%= @election.election_id %>
+  <li><br></li>
+  <li> <%= @election.election_name %>
     <ul style="list-style-type:none;margin-left:-20px">
       <% if @position_list_acc != nil && @position_list_acc != {} %>
         <% if @position_list_acc[@election.election_id] != nil && @position_list_acc[@election.election_id] != [] %>
           <% for @position in @position_list_acc[@election.election_id] %>
-            <li><button type="button" id="<%= @election.election_id %>_<%= @position %>" onclick="alert('This is not implemented yet')"> <%= @position %> </button></li>
+            <li style="margin-bottom:2px;margin-top:1px"><button style="background:none;border:none;padding:0;font-family:arial,sans-serif;color:#000;text-decoration:underline;cursor:pointer;" type="button" id="<%= @election.election_id %>_<%= @position %>" onclick="alert('This is not implemented yet')"> <%= @position %> </button></li>
           <% end %>
         <% end %>
       <% end %>
       <% @curr_election = @election.election_id %>
-      <li><button type="button" id="<%=@election.election_id%>" onclick="open_position_modal('<%=@election.election_id%>')">Add position</button></li>
+      <li style="margin-bottom:2px;margin-top:1px"></i><button type="button" id="<%=@election.election_id%>" onclick="open_position_modal('<%=@election.election_id%>')"><i class="fa fa-plus-square-o"></i> Add position</button></li>
+      
     </ul>
     </li>
   <% end %>

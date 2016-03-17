@@ -17,9 +17,12 @@ module NavigationHelpers
       '/'
     #when /^the CSUA Voting System login page$/
     
-    when /^the dashboard pre-voting page for an admin$/
+    when /^the Election pre-voting page for an admin$/
       '/'
-    when /^the dashboard pre-voting page for a user$/
+    when /^the dashboard page for an admin$/
+      '/'
+      
+    when /^the Election pre-voting page for a user$/
       '/'
     when /^the elections page for an admin$/
       '/election_show_elections'

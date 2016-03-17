@@ -1,4 +1,6 @@
 require 'rails_helper'
+require "capybara/dsl"
+
 
 RSpec.describe ElectionsController, type: :request do
   describe "testing routing" do
@@ -22,7 +24,6 @@ RSpec.describe ElectionsController, type: :request do
       expect(response).to redirect_to('/dashboard/home')
     end
   end
-
 end
 
 RSpec.describe ElectionsController, type: :controller do
@@ -33,6 +34,19 @@ RSpec.describe ElectionsController, type: :controller do
       get "show_elections"
     end
   end
+end
 
-  
+RSpec.feature "Election Creation", :type => :feature do
+  scenario "Admin creates a new election" do
+    visit "/election_show_elections"
+    click_button "Add election"
+  # within "hiddenFrameID" do
+  #   fill_in('Organization:', :with => 'Election Test')
+  #   click_button "Create"
+  # end
+    # fill_in "", :with => "Election Test"
+    # click_button "Create"
+
+    # expect(page).to have_text("Election Test")
+  end
 end
