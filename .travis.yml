@@ -12,3 +12,5 @@ desc 'run Rspec specs'
 task :spec do
   sh 'rspec spec'
 end
+RAILS_ENV=test
+RACK_ENV=test
