@@ -3,10 +3,10 @@ rvm:
 - 2.0.0
 - 2.1.0
 - 2.1.3
-source: rubygems
-gem: "bundler"  
-gem: "rspec"    , "~> 2.8.0"
-gem: "rake"     #included if using rake
+# source: rubygems
+# gem: "bundler"  
+# gem: "rspec"    , "~> 2.8.0"
+# gem: "rake"     #included if using rake
 env:
   - DB=sqlite
   - DB=mysql
