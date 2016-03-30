@@ -33,7 +33,7 @@ respond_to :js
     end
     # render 'elections/show_elections.html.erb'
   end
-
+  
   def show_elections_add
     if params[:new_election_name] != nil && params[:new_election_org] != nil
       election_param_name = params[:new_election_name]
@@ -48,21 +48,21 @@ respond_to :js
         election_id_temp += "_"+count.to_s
       end
       #:election_name => election_param_name, 
-      Election.create!({:election_id => ""+election_id_temp, :election_time => DateTime.now.strftime("%m%d%Y"), :position => "", :candidate => "", :total_votes => 0, :num_won => 0})
+      Election.create!({:election_id => ""+election_id_temp, :election_name => election_param_name, :election_time => DateTime.now.strftime("%m%d%Y"), :position => "", :candidate => "", :total_votes => 0, :num_won => 0})
       @election_list = Election.all
       @position_list_acc = @@position_list
     end
     render 'elections/show_elections.html.erb'
   end
   
-  # def show_elections_delete
-  #   if params[:new_election_id] != nil
-  #     Election.destroy_all(election_id: params[:new_election_id])
-  #     @election_list = Election.all
-  #     @position_list_acc = @@position_list
-  #   end
-  #   render 'elections/show_elections.html.erb'
-  # end
+  def show_elections_delete
+    if params[:new_election_id] != nil
+      Election.destroy_all(election_id: params[:new_election_id])
+      @election_list = Election.all
+      @position_list_acc = @@position_list
+    end
+    render 'elections/show_elections.html.erb'
+  end
   
   def show_positions_add
     if params[:election_id] != nil && params[:new_position_name] != nil

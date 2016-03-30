@@ -14,11 +14,11 @@ Feature: dashboard pages content
     When I press "Add election"
     And I add the election called "primary"
     Then I should be on the elections page for an admin
-    #When I am on the election list page
+    # When I am on the election list page
  		# Then I should see "primary"
 		#Then I should see "New election name:"
 
-    #Given I am on the add position page
+    # Given I am on the add position page
     #Then I should see "Organization:"
 		 	
 	#And I should see "Apply to postions"
