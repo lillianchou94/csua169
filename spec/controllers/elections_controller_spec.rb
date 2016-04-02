@@ -6,6 +6,7 @@ RSpec.describe ElectionsController, type: :request do
   
   before do
     Rails.application.env_config["omniauth.auth"] = OmniAuth.config.mock_auth[:google]
+    OmniAuth.config.test_mode = true
   end
   
   describe "testing routing" do
@@ -29,6 +30,9 @@ RSpec.describe ElectionsController, type: :request do
       expect(response).to redirect_to('/dashboard/home')
     end
   end
+  
+  
+  
 end
 
 RSpec.describe ElectionsController, type: :controller do

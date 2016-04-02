@@ -20517,3 +20517,33 @@ Processing by ElectionsController#embed_livestream as HTML
   Rendered elections/show_embed.html.erb within layouts/application (0.4ms)
 Completed 200 OK in 4ms (Views: 3.2ms | ActiveRecord: 0.0ms)
   [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+Started GET "/" for 127.0.0.1 at 2016-04-02 03:28:56 +0000
+Started GET "/login" for 127.0.0.1 at 2016-04-02 03:28:56 +0000
+Processing by ElectionsController#login as HTML
+  Rendered elections/login.html.erb within layouts/application (4.4ms)
+Completed 200 OK in 336ms (Views: 320.6ms | ActiveRecord: 0.0ms)
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+Started GET "/election_show_elections" for 127.0.0.1 at 2016-04-02 03:28:56 +0000
+Processing by ElectionsController#show_elections as HTML
+  [1m[36mElection Load (0.2ms)[0m  [1mSELECT "elections".* FROM "elections"[0m
+  Rendered elections/show_elections.html.erb within layouts/application (1.3ms)
+Completed 200 OK in 6ms (Views: 4.3ms | ActiveRecord: 0.3ms)
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+Started GET "/" for 127.0.0.1 at 2016-04-02 03:28:56 +0000
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+Processing by ElectionsController#show_elections as HTML
+  Rendered elections/show_elections.html.erb within layouts/application (0.3ms)
+Completed 200 OK in 8ms (Views: 7.2ms | ActiveRecord: 0.0ms)
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+Started GET "/election_show_elections" for 127.0.0.1 at 2016-04-02 03:28:57 +0000
+Processing by ElectionsController#show_elections as HTML
+  [1m[35mElection Load (0.3ms)[0m  SELECT "elections".* FROM "elections"
+  Rendered elections/show_elections.html.erb within layouts/application (0.1ms)
+Completed 200 OK in 3ms (Views: 2.2ms | ActiveRecord: 0.3ms)
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
