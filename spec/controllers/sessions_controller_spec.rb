@@ -12,21 +12,21 @@ RSpec.describe SessionsController, type: :request do
   
   describe "failed login" do
     it "successfully renders the correct page when login failed" do
-      get "auth/:provider/callback"
-      expect(response).to render_template(:create)
+      get "/auth/:provider/callback"
+      expect(response).to render_template('sessions#create')
     end
   end
   
   describe "successful login" do
     it "renders the correct page when login is successful" do
-      get "auth/failure"
+      get "/auth/failure"
       expect(response).to redirect_to('/')
     end
   end
   
   describe "signout" do
     it "successfully renders the correct page when signing out" do
-      get "signout"
+      get "/signout"
       expect(response).to render_template(:destroy)
     end
   end  
