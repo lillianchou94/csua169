@@ -55,18 +55,4 @@ RSpec.describe ElectionsController, type: :controller do
   end
   
 end
-
-RSpec.feature "Election Creation", :type => :feature do
-  scenario "Admin creates a new election" do
-    visit "/election_show_elections"
-    click_button "Add election"
-  # within "hiddenFrameID" do
-  #   fill_in('Organization:', :with => 'Election Test')
-  #   click_button "Create"
-  # end
-    # fill_in "", :with => "Election Test"
-    # click_button "Create"
-
-    # expect(page).to have_text("Election Test")
-  end
 end

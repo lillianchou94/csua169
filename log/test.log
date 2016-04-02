@@ -20896,3 +20896,171 @@ Processing by ElectionsController#show_elections as HTML
   Rendered elections/show_elections.html.erb within layouts/application (0.1ms)
 Completed 200 OK in 6ms (Views: 4.5ms | ActiveRecord: 0.2ms)
   [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+Started GET "/" for 127.0.0.1 at 2016-04-02 03:46:44 +0000
+Started GET "/login" for 127.0.0.1 at 2016-04-02 03:46:44 +0000
+Processing by ElectionsController#login as HTML
+  Rendered elections/login.html.erb within layouts/application (10.9ms)
+Completed 200 OK in 354ms (Views: 330.8ms | ActiveRecord: 0.0ms)
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+Started GET "/election_show_elections" for 127.0.0.1 at 2016-04-02 03:46:45 +0000
+Processing by ElectionsController#show_elections as HTML
+  [1m[36mElection Load (5.8ms)[0m  [1mSELECT "elections".* FROM "elections"[0m
+  Rendered elections/show_elections.html.erb within layouts/application (1.5ms)
+Completed 200 OK in 12ms (Views: 4.3ms | ActiveRecord: 6.0ms)
+  [1m[35m (3.9ms)[0m  rollback transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+Started GET "/" for 127.0.0.1 at 2016-04-02 03:46:45 +0000
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+Processing by ElectionsController#show_elections as HTML
+  Rendered elections/show_elections.html.erb within layouts/application (0.2ms)
+Completed 200 OK in 7ms (Views: 6.8ms | ActiveRecord: 0.0ms)
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  rollback transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+Started GET "/election_show_elections" for 127.0.0.1 at 2016-04-02 03:46:45 +0000
+Processing by ElectionsController#show_elections as HTML
+  [1m[35mElection Load (0.2ms)[0m  SELECT "elections".* FROM "elections"
+  Rendered elections/show_elections.html.erb within layouts/application (0.1ms)
+Completed 200 OK in 3ms (Views: 2.1ms | ActiveRecord: 0.2ms)
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+Started GET "/" for 127.0.0.1 at 2016-04-02 03:47:34 +0000
+Started GET "/login" for 127.0.0.1 at 2016-04-02 03:47:34 +0000
+Processing by ElectionsController#login as HTML
+  Rendered elections/login.html.erb within layouts/application (5.1ms)
+Completed 200 OK in 316ms (Views: 299.4ms | ActiveRecord: 0.0ms)
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+Started GET "/election_show_elections" for 127.0.0.1 at 2016-04-02 03:47:34 +0000
+Processing by ElectionsController#show_elections as HTML
+  [1m[36mElection Load (0.2ms)[0m  [1mSELECT "elections".* FROM "elections"[0m
+  Rendered elections/show_elections.html.erb within layouts/application (1.8ms)
+Completed 200 OK in 17ms (Views: 5.4ms | ActiveRecord: 0.6ms)
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+Started GET "/" for 127.0.0.1 at 2016-04-02 03:47:34 +0000
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+Processing by ElectionsController#show_elections as HTML
+  Rendered elections/show_elections.html.erb within layouts/application (0.3ms)
+Completed 200 OK in 10ms (Views: 9.3ms | ActiveRecord: 0.0ms)
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+Processing by ElectionsController#embed_livestream as HTML
+Completed 500 Internal Server Error in 52ms (ActiveRecord: 0.0ms)
+  [1m[35m (0.2ms)[0m  rollback transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+Started GET "/election_show_elections" for 127.0.0.1 at 2016-04-02 03:47:34 +0000
+Processing by ElectionsController#show_elections as HTML
+  [1m[35mElection Load (0.3ms)[0m  SELECT "elections".* FROM "elections"
+  Rendered elections/show_elections.html.erb within layouts/application (0.1ms)
+Completed 200 OK in 3ms (Views: 1.7ms | ActiveRecord: 0.3ms)
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+Started GET "/" for 127.0.0.1 at 2016-04-02 03:48:42 +0000
+Started GET "/login" for 127.0.0.1 at 2016-04-02 03:48:42 +0000
+Processing by ElectionsController#login as HTML
+  Rendered elections/login.html.erb within layouts/application (9.1ms)
+Completed 200 OK in 307ms (Views: 290.2ms | ActiveRecord: 0.0ms)
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+Started GET "/election_show_elections" for 127.0.0.1 at 2016-04-02 03:48:43 +0000
+Processing by ElectionsController#show_elections as HTML
+  [1m[36mElection Load (0.2ms)[0m  [1mSELECT "elections".* FROM "elections"[0m
+  Rendered elections/show_elections.html.erb within layouts/application (1.1ms)
+Completed 200 OK in 8ms (Views: 6.0ms | ActiveRecord: 0.3ms)
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+Started GET "/" for 127.0.0.1 at 2016-04-02 03:48:43 +0000
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+Processing by ElectionsController#show_elections as HTML
+  Rendered elections/show_elections.html.erb within layouts/application (0.2ms)
+Completed 200 OK in 9ms (Views: 8.5ms | ActiveRecord: 0.0ms)
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+Processing by ElectionsController#embed_livestream as HTML
+Completed 500 Internal Server Error in 49ms (ActiveRecord: 0.0ms)
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+Started GET "/election_show_elections" for 127.0.0.1 at 2016-04-02 03:48:43 +0000
+Processing by ElectionsController#show_elections as HTML
+  [1m[35mElection Load (0.2ms)[0m  SELECT "elections".* FROM "elections"
+  Rendered elections/show_elections.html.erb within layouts/application (0.1ms)
+Completed 200 OK in 3ms (Views: 1.5ms | ActiveRecord: 0.2ms)
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+Started GET "/" for 127.0.0.1 at 2016-04-02 03:49:39 +0000
+Started GET "/login" for 127.0.0.1 at 2016-04-02 03:49:39 +0000
+Processing by ElectionsController#login as HTML
+  Rendered elections/login.html.erb within layouts/application (10.8ms)
+Completed 200 OK in 367ms (Views: 338.7ms | ActiveRecord: 0.0ms)
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.2ms)[0m  begin transaction
+Started GET "/election_show_elections" for 127.0.0.1 at 2016-04-02 03:49:39 +0000
+Processing by ElectionsController#show_elections as HTML
+  [1m[36mElection Load (0.3ms)[0m  [1mSELECT "elections".* FROM "elections"[0m
+  Rendered elections/show_elections.html.erb within layouts/application (1.0ms)
+Completed 200 OK in 7ms (Views: 4.0ms | ActiveRecord: 0.4ms)
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+Started GET "/" for 127.0.0.1 at 2016-04-02 03:49:39 +0000
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+Processing by ElectionsController#show_elections as HTML
+  Rendered elections/show_elections.html.erb within layouts/application (0.2ms)
+Completed 200 OK in 8ms (Views: 7.6ms | ActiveRecord: 0.0ms)
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+Processing by ElectionsController#embed_livestream as HTML
+Completed 500 Internal Server Error in 10ms (ActiveRecord: 0.0ms)
+  [1m[35m (0.0ms)[0m  rollback transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+Started GET "/election_show_elections" for 127.0.0.1 at 2016-04-02 03:49:39 +0000
+Processing by ElectionsController#show_elections as HTML
+  [1m[35mElection Load (0.2ms)[0m  SELECT "elections".* FROM "elections"
+  Rendered elections/show_elections.html.erb within layouts/application (0.1ms)
+Completed 200 OK in 3ms (Views: 2.2ms | ActiveRecord: 0.2ms)
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.2ms)[0m  begin transaction
+Started GET "/" for 127.0.0.1 at 2016-04-02 03:50:00 +0000
+Started GET "/login" for 127.0.0.1 at 2016-04-02 03:50:00 +0000
+Processing by ElectionsController#login as HTML
+  Rendered elections/login.html.erb within layouts/application (7.7ms)
+Completed 200 OK in 465ms (Views: 442.6ms | ActiveRecord: 0.0ms)
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+Started GET "/election_show_elections" for 127.0.0.1 at 2016-04-02 03:50:00 +0000
+Processing by ElectionsController#show_elections as HTML
+  [1m[36mElection Load (0.3ms)[0m  [1mSELECT "elections".* FROM "elections"[0m
+  Rendered elections/show_elections.html.erb within layouts/application (2.9ms)
+Completed 200 OK in 8ms (Views: 6.3ms | ActiveRecord: 0.4ms)
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+Started GET "/" for 127.0.0.1 at 2016-04-02 03:50:00 +0000
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+Processing by ElectionsController#show_elections as HTML
+  Rendered elections/show_elections.html.erb within layouts/application (0.4ms)
+Completed 200 OK in 11ms (Views: 10.8ms | ActiveRecord: 0.0ms)
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+Processing by ElectionsController#embed_livestream as HTML
+Completed 500 Internal Server Error in 14ms (ActiveRecord: 0.0ms)
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+Started GET "/election_show_elections" for 127.0.0.1 at 2016-04-02 03:50:01 +0000
+Processing by ElectionsController#show_elections as HTML
+  [1m[35mElection Load (0.3ms)[0m  SELECT "elections".* FROM "elections"
+  Rendered elections/show_elections.html.erb within layouts/application (0.2ms)
+Completed 200 OK in 4ms (Views: 2.6ms | ActiveRecord: 0.3ms)
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m

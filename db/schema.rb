@@ -14,7 +14,7 @@
 ActiveRecord::Schema.define(version: 20160312000005) do
 
   create_table "elections", force: :cascade do |t|
-    t.references   :users
+    t.integer  "users_id"
     t.string   "election_name"
     t.string   "election_id"
     t.string   "election_livestream"
@@ -24,18 +24,17 @@ ActiveRecord::Schema.define(version: 20160312000005) do
     t.integer  "num_votes"
     t.datetime "election_time"
     t.boolean  "did_win"
-
   end
-  
+
   create_table "nominations", force: :cascade do |t|
-    t.references   :users
-    t.string   "election_id"
-    t.string   "organization"
-    t.string   "user_id"
-    t.integer  "threshold"
-    t.string   "position"
-    t.integer  "num_seconds"
-    t.string   "prime_product"
+    t.integer "users_id"
+    t.string  "election_id"
+    t.string  "organization"
+    t.string  "user_id"
+    t.integer "threshold"
+    t.string  "position"
+    t.integer "num_seconds"
+    t.string  "prime_product"
   end
 
   create_table "users", force: :cascade do |t|
@@ -48,7 +47,7 @@ ActiveRecord::Schema.define(version: 20160312000005) do
     t.string  "organization"
     t.boolean "admin_status"
     t.integer "user_prime"
-    t.string  "votes" #flatten json: key is election_name_Position; value: person voted for
+    t.string  "votes"
   end
 
 end
