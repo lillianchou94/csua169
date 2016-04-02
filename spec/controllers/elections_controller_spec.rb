@@ -32,8 +32,11 @@ RSpec.describe ElectionsController, type: :request do
     end
   end
   
-  describe "login" do
-    
+  describe "failed login" do
+    it "successfully renders the login page when login failed" do
+      get "auth/failure"
+      expect(response).to redirect_to('/')
+    end
   end
   
 end
@@ -54,10 +57,11 @@ RSpec.describe ElectionsController, type: :controller do
     end
   end
   
-  describe "show_elections_add" do
-    it "receive call to show livestream" do
-      expect(controller).to receive(:login)
-      get "login"
+  describe "calling show_elections_add" do
+    it "controller to receive call" do
+      get :show_elections_add
+      expect(controller).to receive(:show_elections_add)
+      
     end
   end
 end
