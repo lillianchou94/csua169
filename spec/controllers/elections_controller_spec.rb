@@ -25,6 +25,7 @@ RSpec.describe ElectionsController, type: :request do
     end
   end
   
+  
   describe "Home requests" do
     it 'successfully renders the show template on GET /' do
       get "/"
@@ -50,6 +51,15 @@ end
 
 RSpec.describe ElectionsController, type: :controller do
   
+  describe "show_elections check current_user" do
+    it "should have no current_user" do
+      get "show_elections"
+      session[:user_id] = 11234
+      expect(@current_user).to eq(nil)
+    end
+  end
+  
+  
   describe "show_elections" do
     it "receive call to show elections" do
       expect(controller).to receive(:show_elections)
@@ -70,17 +80,17 @@ RSpec.describe ElectionsController, type: :controller do
     end
   end
   
-  describe "calling show_elections_add" do
+  describe "calling dashboard" do
     it "should be successful" do
-      get :show_elections_add
+      get :dashboard
       response.should be_success
     end
   end
   
-  describe "calling show_positions_add" do
+  describe "calling show_elections_add" do
     it "should be successful" do
-      # post :show_positions_add
-      # response.should be_success
+      get :show_elections_add
+      response.should be_success
     end
   end
     

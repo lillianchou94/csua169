@@ -10,6 +10,8 @@ group :production do
   gem 'pg'
 end
 
+gem "fakeweb", "~> 1.3"
+
 gem 'coveralls', require: false
 
 gem "codeclimate-test-reporter", group: :test, require: nil

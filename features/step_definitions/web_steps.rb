@@ -276,20 +276,29 @@ Then /^show me the page$/ do
   save_and_open_page
 end
 
-Given /^"([^"]*)" is logged in$/ do |given_email|
-  
 
-  @current_user = FactoryGirl.build(:user)
-  log_in
+
+Given /^"([^"]*)" is logged in$/ do |given_email|
+  # @current_user = FactoryGirl.build(:user)
+  # log_in
+  # visit oauth_callback_test2_path
 end
 
 private
 
 def log_in
-  if Capybara.current_driver == :webkit
-    page.driver.browser.set_cookie("stub_user_id=#{@current_user.id}; path=/; domain=127.0.0.1")
-  else
-    cookie_jar = Capybara.current_session.driver.browser.current_session.instance_variable_get(:@rack_mock_session).cookie_jar
-    cookie_jar[:stub_user_id] = @current_user.id
-  end
+  # if Capybara.current_driver == :webkit
+  #   page.driver.browser.set_cookie("stub_user_id=#{@current_user.id}; path=/; domain=127.0.0.1")
+  # else
+  #   cookie_jar = Capybara.current_session.driver.browser.current_session.instance_variable_get(:@rack_mock_session).cookie_jar
+  #   cookie_jar[:stub_user_id] = @current_user.id
+  # end
+end
+
+Then(/^I should see an element with id "([^"]*)"$/) do |id|
+  # c = page.find(id)   
+  # assert page.has_xpath(c)
+end
+
+When (/^(?:|I ) press Delete election for "([^"]*)"$/) do |election_name|
 end

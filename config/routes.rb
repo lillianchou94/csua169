@@ -2,7 +2,9 @@ Rails.application.routes.draw do
   resources :elections, only:[:show]
   resources :election_list, only: [:show]
   
-  get '/auth/:provider/callback', to: 'sessions#create'
+  get '/o/oauth2/auth', to: 'sessions#create', as: 'oauth_callback_test2'
+  get '/auth/google_oauth2/callback', to: 'sessions#create', as: 'oauth_callback_test'
+  get '/auth/:provider/callback', to: 'sessions#create', as: 'oauth_callback'
   get '/auth/failure', to: redirect('/')
   get '/signout', to: 'sessions#destroy', as: 'signout'
 

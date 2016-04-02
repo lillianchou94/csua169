@@ -9,5 +9,10 @@ class ElectionsControllerTest < ActionController::TestCase
     get :show, id: @election
     assert_response :success
   end
+  
+  test "should show election" do
+    get :show_elections, id: @election
+    assert_response :success
+  end
 
 end
