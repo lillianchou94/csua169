@@ -43,20 +43,26 @@ respond_to :js
   
   def show_elections
     @election_list = Election.all
-    #@@position_list = Hash.new
-    for election in @election_list do
-      if @@position_list.key?(election.election_id) == false
-        @@position_list[election.election_id] = []
+    if session[:user_id]
+      @current_user = User.find_by(id: session[:user_id])
+      if @current_user != nil
+        @election_list = Election.all
+        #@@position_list = Hash.new
+        for election in @election_list do
+          if @@position_list.key?(election.election_id) == false
+            @@position_list[election.election_id] = []
+          end
+          #@position_list[election.election_id] = ['Secretary','Treasurer','Vice President','President']
+          #@position_list[election.election_name]['Secretary'] = []
+        end
+        @position_list_acc = @@position_list
+        respond_to do |format|
+          format.html
+          format.rss
+        end
+        # render 'elections/show_elections.html.erb'
       end
-      #@position_list[election.election_id] = ['Secretary','Treasurer','Vice President','President']
-      #@position_list[election.election_name]['Secretary'] = []
     end
-    @position_list_acc = @@position_list
-    respond_to do |format|
-      format.html
-      format.rss
-    end
-    # render 'elections/show_elections.html.erb'
   end
   
   def login

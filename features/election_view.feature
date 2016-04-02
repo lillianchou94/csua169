@@ -48,14 +48,14 @@ Feature: Election pages content
     Then I should see "Sign out"
  
   Scenario: test routes
-    Given I am on the add election page
-		Given I am on the delete election page
-    #Given I am on the add position page
-    Given I am on the delete position page
     Given I am on the authentication failure page
     Given I am on the signout page
     Given I am on the election dashboard page
     Given I am on the election embed livestream page
+    Given I am on the add election page
+		Given I am on the delete election page
+    Given I am on the add position page
+    Given I am on the delete position page
     #Given I am on the home page
     #Given I am on the election page
     #Given I am on the election list page
