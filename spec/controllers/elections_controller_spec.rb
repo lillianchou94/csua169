@@ -47,12 +47,17 @@ RSpec.describe ElectionsController, type: :controller do
     end
   end
   
-  describe "embed_livestream" do
-    it "receive call to show livestream" do
-      expect(controller).to receive(:embed_livestream)
-      get "embed_livestream"
+  describe "login page" do
+    it "receive call to render login" do
+      expect(controller).to receive(:login)
+      get "login"
     end
   end
   
-end
+  describe "show_elections_add" do
+    it "receive call to show livestream" do
+      expect(controller).to receive(:login)
+      get "login"
+    end
+  end
 end

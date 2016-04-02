@@ -10,7 +10,7 @@ User.create(user_name: 'E', user_email: 'e@gmail.com', organization: "HKN", admi
 
 
 Election.create(election_livestream: '', election_id: 'csua_04012016', election_name: 'csua1', organization: 'CSUA', position: "President", user_id: "a@gmail.com", num_votes: 0, did_win: false)
-Nomination.create(election_id: 'csua_04012016', organization: 'CSUA', position: "President", threshold: 2, user_id: "a@gmail.com", num_seconds: 0, prime_product: 1)
+#Nomination.create(election_id: 'csua_04012016', organization: 'CSUA', position: "President", threshold: 2, user_id: "a@gmail.com", num_seconds: 0, prime_product: 1)
 
 # Examples:
 #
