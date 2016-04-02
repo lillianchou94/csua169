@@ -5,8 +5,7 @@ Feature: Election pages content
 	
 	@omniauth_test
 	Scenario: login page
-	  Given I am signed in with provider "google_oauth2"
-    And I am on the dashboard page for googleuser
+	  Given I am on the dashboard page for an admin
     Then I should see "CSUA Voting System"
     And I should see "Rest of dashboard goes here"
 	  And I should see "Add election"

@@ -276,13 +276,6 @@ Then /^show me the page$/ do
   save_and_open_page
 end
 
-Given /^I am signed in with provider "(.*)"$/ do |provider|
-    
-  Capybara.current_driver = :selenium
-  visit "/auth/#{provider.downcase}"
-  Capybara.use_default_driver
-end
-
 Given /^"([^"]*)" is logged in$/ do |given_email|
   
 
