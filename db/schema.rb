@@ -14,19 +14,41 @@
 ActiveRecord::Schema.define(version: 20160312000005) do
 
   create_table "elections", force: :cascade do |t|
-    t.string   "election_id",   limit: 255
-    t.datetime "election_time"
-    t.string   "position",      limit: 255
-    t.string   "candidate",     limit: 255
-    t.integer  "total_votes"
-    t.integer  "num_won"
+    t.references   :users
     t.string   "election_name"
+    t.string   "election_id"
+    t.string   "election_livestream"
+    t.string   "organization"
+    t.string   "position"
+    t.string   "user_id"
+    t.integer  "num_votes"
+    t.datetime "election_time"
+    t.boolean  "did_win"
+
+  end
+  
+  create_table "nominations", force: :cascade do |t|
+    t.references   :users
+    t.string   "election_id"
+    t.string   "organization"
+    t.string   "user_id"
+    t.integer  "threshold"
+    t.string   "position"
+    t.integer  "num_seconds"
+    t.string   "prime_product"
   end
 
   create_table "users", force: :cascade do |t|
-    t.string  "user_id", limit: 255
-    t.integer "csua"
-    t.integer "hkn"
+    t.string  "user_name"
+    t.string  "provider"
+    t.string  "uid"
+    t.string  "oauth_token"
+    t.string  "oauth_expires_at"
+    t.string  "user_email"
+    t.string  "organization"
+    t.boolean "admin_status"
+    t.integer "user_prime"
+    t.string  "votes" #flatten json: key is election_name_Position; value: person voted for
   end
 
 end

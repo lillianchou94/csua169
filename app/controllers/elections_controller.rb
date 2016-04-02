@@ -2,20 +2,45 @@ class ElectionsController < ApplicationController
 respond_to :html
 respond_to :js
   
-  def show
-  end
   
-  attr_accessor :election_list, :position_list_acc, :curr_election
+  attr_accessor :election_list, :embed_livestream, :position_list_acc, :curr_election
   
   @@position_list = Hash.new
-    def Election.position_list=(x)
-      @@position_list = x
+  def Election.position_list=(x)
+    @@position_list = x
+  end
+  
+  def Election.position_list
+    return @@position_list
+  end
+  
+  
+  def logged_using_omniauth? request
+    res = nil
+    omniauth = request.env["omniauth.auth"]
+    if omniauth != nil
+      res = Authentication.find_by_provider_and_uid(omniauth['provider'], omniauth['uid']) 
     end
-    
-    def Election.position_list
-      return @@position_list
+    return res
+  end
+  
+  def dashboard
+    #@embed_livestream = "https://www.youtube.com/embed/KF47Za1lfjM"
+    #puts "livestream url is #{@embed_livestream}"
+    render 'elections/show_main.html.erb'
+  end
+  
+  def embed_livestream
+    @embed_livestream = ""
+    if params[:election_id] != nil
+      elec = Election.find_by(election_id: params[:election_id])
+      if elec != nil
+        @embed_livestream = elec.election_livestream
+      end
     end
-    
+    render 'elections/show_embed.html.erb'
+  end
+  
   def show_elections
     @election_list = Election.all
     #@@position_list = Hash.new
@@ -34,12 +59,16 @@ respond_to :js
     # render 'elections/show_elections.html.erb'
   end
   
+  def login
+    render 'login.html.erb'
+  end
+  
   def show_elections_add
     if params[:new_election_name] != nil && params[:new_election_org] != nil
       election_param_name = params[:new_election_name]
       election_param_org = params[:new_election_org]
-      
-      election_id_temp = election_param_org+DateTime.now.strftime("%m%d%Y")
+      embed_livestream = params[:new_election_livestream]
+      election_id_temp = election_param_org+DateTime.now.strftime("%m%d%Y").to_s
       if Election.find_by(election_id: election_id_temp) != nil
         count = 1
         while Election.find_by(election_id: election_id_temp+"_"+count.to_s) != nil
@@ -47,8 +76,8 @@ respond_to :js
         end
         election_id_temp += "_"+count.to_s
       end
-      #:election_name => election_param_name, 
-      Election.create!({:election_id => ""+election_id_temp, :election_name => election_param_name, :election_time => DateTime.now.strftime("%m%d%Y"), :position => "", :candidate => "", :total_votes => 0, :num_won => 0})
+      election_time_new = DateTime.now.strftime("%m%d%Y").to_s
+      Election.create!(:election_livestream => embed_livestream, :election_id => election_id_temp, :election_name => election_param_name, :election_time => election_time_new, :organization => "", :position => "", :user_id => "", :num_votes => 0, :did_win => false)    
       @election_list = Election.all
       @position_list_acc = @@position_list
     end
@@ -56,8 +85,13 @@ respond_to :js
   end
   
   def show_elections_delete
-    if params[:new_election_id] != nil
-      Election.destroy_all(election_id: params[:new_election_id])
+    if params[:election_id] != nil
+      tempE = Election.find_by(election_id: params[:election_id])
+      puts "wat"
+      if tempE.election_livestream == @embed_livestream
+        @embed_livestream = ""
+      end
+      Election.destroy_all(election_id: params[:election_id])
       @election_list = Election.all
       @position_list_acc = @@position_list
     end
@@ -83,18 +117,18 @@ respond_to :js
     end
   end
   
-  # def show_positions_delete
-  #   if params[:election_id] != nil && params[:position_name] != nil
-  #     if @@position_list != nil && @@position_list.key?(params[:election_id]) == true
-  #       if @@position_list[params[:election_id]].include?(params[:position_name])
-  #         @@position_list[params[:election_id]].delete(params[:position_name])
-  #       end
-  #     end
-  #     @election_list = Election.all
-  #     @position_list_acc = @@position_list
-  #   end
-  #   render 'elections/show_elections.html.erb'
-  # end
+  def show_positions_delete
+    if params[:election_id] != nil && params[:position_name] != nil
+      if @@position_list != nil && @@position_list.key?(params[:election_id]) == true
+        if @@position_list[params[:election_id]].include?(params[:position_name])
+          @@position_list[params[:election_id]].delete(params[:position_name])
+        end
+      end
+      @election_list = Election.all
+      @position_list_acc = @@position_list
+    end
+    render 'elections/show_elections.html.erb'
+  end
   
   # def show_elections_new
 

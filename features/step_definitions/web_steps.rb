@@ -23,6 +23,7 @@ require 'uri'
 require 'cgi'
 require File.expand_path(File.join(File.dirname(__FILE__), "..", "support", "paths"))
 require File.expand_path(File.join(File.dirname(__FILE__), "..", "support", "selectors"))
+require 'factory_girl_rails'
 
 module WithinHelpers
   def with_scope(locator)
@@ -31,10 +32,15 @@ module WithinHelpers
 end
 World(WithinHelpers)
 
+When /^I confirm popup$/ do
+  page.driver.browser.switch_to.alert.accept    
+end
+
 When(/^I add the election called "([^"]*)"$/) do |election_name|
   begin
     main, popup = page.driver.browser.window_handles
     within_window(popup) do
+      fill_in("new_election_org", :with => "csua")
       fill_in("new_election_name", :with => election_name)
       click_on("Create")
       if page.respond_to? :should
@@ -268,4 +274,29 @@ end
 
 Then /^show me the page$/ do
   save_and_open_page
+end
+
+Given /^I am signed in with provider "(.*)"$/ do |provider|
+    
+  Capybara.current_driver = :selenium
+  visit "/auth/#{provider.downcase}"
+  Capybara.use_default_driver
+end
+
+Given /^"([^"]*)" is logged in$/ do |given_email|
+  
+
+  @current_user = FactoryGirl.build(:user)
+  log_in
+end
+
+private
+
+def log_in
+  if Capybara.current_driver == :webkit
+    page.driver.browser.set_cookie("stub_user_id=#{@current_user.id}; path=/; domain=127.0.0.1")
+  else
+    cookie_jar = Capybara.current_session.driver.browser.current_session.instance_variable_get(:@rack_mock_session).cookie_jar
+    cookie_jar[:stub_user_id] = @current_user.id
+  end
 end

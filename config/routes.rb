@@ -1,18 +1,29 @@
 Rails.application.routes.draw do
   resources :elections, only:[:show]
   resources :election_list, only: [:show]
+  
+  get 'auth/:provider/callback', to: 'sessions#create'
+  get 'auth/failure', to: redirect('/')
+  get 'signout', to: 'sessions#destroy', as: 'signout'
+
+  resources :sessions, only: [:create, :destroy]
+  resource :home, only: [:show]
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
   # resources :elections
   #root :to => redirect('/dashboard/home')
   get "/dashboard/*page" => "elections#show"
   get "/election_show_elections" => "elections#show_elections"
+
+  get "/login" => "elections#login"
   match "/election_add_election" => "elections#show_elections_add", via: [:get,:post]
   match "/election_delete_election" => "elections#show_elections_delete", via: [:get,:post]
   match "/election_add_position" => "elections#show_positions_add", via: [:get,:post]
   match "/election_delete_position" => "elections#show_positions_delete", via: [:get,:post]
+  match "/election_dashboard" => "elections#dashboard", via: [:get,:post]
+  match "/election_embed_livestream" => "elections#embed_livestream", via: [:get,:post]
   
-  root :to => redirect("/dashboard/home")
+  root :to => redirect("/login")
 
   # # get "/loginlogin"
  

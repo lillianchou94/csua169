@@ -58,3 +58,46 @@ end
 # See https://github.com/cucumber/cucumber-rails/blob/master/features/choose_javascript_database_strategy.feature
 Cucumber::Rails::Database.javascript_strategy = :truncation
 
+Before do
+  if Capybara.current_driver == :selenium
+    require 'headless'
+
+    headless = Headless.new
+    headless.start
+  end
+  OmniAuth.config.add_mock(:google, {
+    :provider => 'google_oauth2',
+    :uid => '117985932382438250843',
+    :info => {
+      :name => 'Cs Ua',
+      :email => 'csua169.project@gmail.com',
+    },
+    :credentials => {
+      :token => 'ya29..uAK8LBtmT5hRfLPoq2FhrtVgPVEJ8z73eCFQnxgF_PQn...',
+      :expires_at => 1459560093
+    }
+  })
+end
+
+Before('@omniauth_test') do
+  OmniAuth.config.test_mode = true
+  #Capybara.default_host = 'https://csua-169-lillianchou94.c9users.io'
+
+  OmniAuth.config.add_mock(:google, {
+    :provider => 'google_oauth2',
+    :uid => '117985932382438250843',
+    :info => {
+      :name => 'Cs Ua',
+      :email => 'csua169.project@gmail.com',
+    },
+    :credentials => {
+      :token => 'ya29..uAK8LBtmT5hRfLPoq2FhrtVgPVEJ8z73eCFQnxgF_PQn...',
+      :expires_at => 1459560093
+    }
+  })
+  Rails.application.env_config["omniauth.auth"] = OmniAuth.config.mock_auth[:google]
+end
+
+After('@omniauth_test') do
+  OmniAuth.config.test_mode = false
+end

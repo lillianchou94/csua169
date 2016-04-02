@@ -14,20 +14,19 @@ module NavigationHelpers
     case page_name
 
     when /^the home\s?page$/
-      '/'
-    #when /^the CSUA Voting System login page$/
-    
+      '/home'
+    when /^the login page$/
+      '/login'
     when /^the Election pre-voting page for an admin$/
-      '/'
+      '/dashboard/home'
     when /^the dashboard page for an admin$/
-      '/'
-      
+      '/dashboard/home'
     when /^the Election pre-voting page for a user$/
       '/'
-    when /^the elections page for an admin$/
+    when /^the show elections page for an admin$/
       '/election_show_elections'
-      
-    ####  
+    when /^the dashboard page for googleuser$/
+      '/dashboard/home'
     when /^the add election page$/
       '/election_add_election'
     when /^the delete election page$/
@@ -35,17 +34,26 @@ module NavigationHelpers
     when /^the add position page$/
       '/election_add_position'
     when /^the delete position page$/
-      'election_delete_position'
-    #when /^the election list page$/
-    #  '/election_list'
-      
+      '/election_delete_position'
+    when /^the election list page$/
+      '/election_list/'
+    when /^the authentication failure page$/
+      '/auth/failure'
+    when /^the signout page$/
+      '/signout'
+    when /^the election dashboard page$/
+      '/election_dashboard'
+    when /^the election embed livestream page$/
+      '/election_embed_livestream'
+    when /^the election page$/
+      '/elections'
 
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
     #
     #   when /^(.*)'s profile page$/i
     #     user_profile_path(User.find_by_login($1))
-
+    
     else
       begin
         page_name =~ /^the (.*) page$/

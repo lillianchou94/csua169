@@ -1,42 +1,70 @@
-<script>
+<% if current_user != nil %>
+  <script>
+  
+  function open_election_modal() {
+  	$(function() {
+  		$("#hiddenFrameID").empty();
+  		$("#electionmodal").dialog({autoOpen: false, modal:true});
+  		$("#electionmodal").dialog("open");
+  	});
+  };
+  
+  function open_position_modal(button_id) {
+  	$(function() {
+  	  $("#button_id").val(button_id);
+  		$("#hiddenFrameID").empty();
+  		$("#positionmodal").prepend('<input id="button_election_id" style="display:none;" value='+button_id+'>')
+  		$("#positionmodal").dialog({autoOpen: false, modal:true});
+  		$("#positionmodal").dialog("open");
+  	});
+  };
+  function delete_election(election_id) {
+    if(confirm("Are you sure?")) {
+      $("#button_id").val(button_id);
+      $.ajax({
+        type: 'POST',
+        url: '/election_delete_election',
+        data: {'election_id': election_id},
+        cache: false,
+        success: function(result) {
+            $('#'+election_id).remove();
+        }
+      });
+    }
+  }
+  function update_dashboard(election_id) {
+    $.ajax({
+      type: 'POST',
+      url: '/election_embed_livestream',
+      data: {'election_id': election_id},
+      cache: false,
+      success: function(result) {
+        $('#election_embed_livestream').html(result)
+      }
+    });
+  }
+  </script>
 
-function open_election_modal() {
-	$(function() {
-		$("#hiddenFrameID").empty();
-		$("#electionmodal").dialog({autoOpen: false, modal:true});
-		$("#electionmodal").dialog("open");
-	});
-};
-
-function open_position_modal(button_id) {
-	$(function() {
-	  $("#button_id").val(button_id);
-		$("#hiddenFrameID").empty();
-		$("#positionmodal").prepend('<input id="button_election_id" style="display:none;" value='+button_id+'>')
-		$("#positionmodal").dialog({autoOpen: false, modal:true});
-		$("#positionmodal").dialog("open");
-	});
-};
-</script>
-<input id="button_id" style="display:none;" value=""></input>
-<ul style="display:inline;list-style-type:none">
-  <li><button type="button" onclick="open_election_modal()"><i class="fa fa-plus-square-o"></i> Add election</button></li>
-  <% for @election in @election_list %>
-  <li><br></li>
-  <li> <%= @election.election_name %>
-    <ul style="list-style-type:none;margin-left:-20px">
-      <% if @position_list_acc != nil && @position_list_acc != {} %>
-        <% if @position_list_acc[@election.election_id] != nil && @position_list_acc[@election.election_id] != [] %>
-          <% for @position in @position_list_acc[@election.election_id] %>
-            <li style="margin-bottom:2px;margin-top:1px"><button style="background:none;border:none;padding:0;font-family:arial,sans-serif;color:#000;text-decoration:underline;cursor:pointer;" type="button" id="<%= @election.election_id %>_<%= @position %>" onclick="alert('This is not implemented yet')"> <%= @position %> </button></li>
+  <input id="button_id" style="display:none;" value=""></input>
+  <ul style="display:inline;list-style-type:none">
+    <li><button type="button" onclick="open_election_modal()"><i class="fa fa-plus-square-o"></i> Add election</button></li>
+    <% for @election in @election_list %>
+    <li><br></li>
+    <li id="<%= @election.election_id %>"> <i class="fa fa-times" style="cursor:pointer;cursor:hand;" onclick="delete_election('<%=@election.election_id%>')"></i> <p style="display:inline;cursor:pointer;cursor:hand;text-decoration:underline" onclick="update_dashboard('<%=@election.election_id%>')"> <%= @election.election_name %> </p>
+      <ul style="list-style-type:none;margin-left:-20px">
+        <% if @position_list_acc != nil && @position_list_acc != {} %>
+          <% if @position_list_acc[@election.election_id] != nil && @position_list_acc[@election.election_id] != [] %>
+            <% for @position in @position_list_acc[@election.election_id] %>
+              <li style="margin-bottom:2px;margin-top:1px"><button style="background:none;border:none;padding:0;font-family:arial,sans-serif;color:#000;text-decoration:underline;cursor:pointer;" type="button" id="<%= @election.election_id %>_<%= @position %>" onclick="alert('This is not implemented yet')"> <%= @position %> </button></li>
+            <% end %>
           <% end %>
         <% end %>
-      <% end %>
-      <% @curr_election = @election.election_id %>
-      <li style="margin-bottom:2px;margin-top:1px"></i><button type="button" id="<%=@election.election_id%>" onclick="open_position_modal('<%=@election.election_id%>')"><i class="fa fa-plus-square-o"></i> Add position</button></li>
-      
-    </ul>
-    </li>
-  <% end %>
-</ul>
+        <% @curr_election = @election.election_id %>
+        <li style="margin-bottom:2px;margin-top:1px"></i><button type="button" id="<%=@election.election_id%>" onclick="open_position_modal('<%=@election.election_id%>')"><i class="fa fa-plus-square-o"></i> Add position</button></li>
+        
+      </ul>
+      </li>
+    <% end %>
+  </ul>
+<% end %>
 
