@@ -11,12 +11,12 @@ Feature: Election pages content
     And I should see "Rest of dashboard goes here"
 	  And I should see "Add election"
 
-# 	Scenario: Admin elections page with delete feature
-#     Given I am on the show elections page for an admin
-#     Then I should see "Delete Election"
-#     When I press Delete election for "Election 1"
-#     Then I should be on the show elections page for an admin
-#     And I should not see "Election 1"
+	Scenario: Admin elections page with delete feature
+    Given I am on the show elections page for an admin
+    Then I should see "Delete Election"
+    When I press Delete election for "Election 1"
+    Then I should be on the show elections page for an admin
+    And I should not see "Election 1"
 	
   Scenario: Admin Election page
     Given I am on the Election pre-voting page for an admin

@@ -5,8 +5,9 @@ require "capybara/dsl"
 RSpec.describe ElectionsController, type: :request do
   
   before do
-    Rails.application.env_config["omniauth.auth"] = OmniAuth.config.mock_auth[:google]
     OmniAuth.config.test_mode = true
+    Rails.application.env_config["omniauth.auth"] = OmniAuth.config.mock_auth[:google]
+    
   end
   
   describe "testing routing" do
@@ -27,11 +28,13 @@ RSpec.describe ElectionsController, type: :request do
   describe "Home requests" do
     it 'successfully renders the show template on GET /' do
       get "/"
-      expect(response).to redirect_to('/dashboard/home')
+      expect(response).to redirect_to('/login')
     end
   end
   
-  
+  describe "login" do
+    
+  end
   
 end
 
@@ -43,6 +46,14 @@ RSpec.describe ElectionsController, type: :controller do
       get "show_elections"
     end
   end
+  
+  describe "embed_livestream" do
+    it "receive call to show livestream" do
+      expect(controller).to receive(:embed_livestream)
+      get "embed_livestream"
+    end
+  end
+  
 end
 
 RSpec.feature "Election Creation", :type => :feature do
