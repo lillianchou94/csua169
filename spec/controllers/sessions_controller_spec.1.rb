@@ -31,8 +31,6 @@ RSpec.describe SessionsController, type: :request do
     end
   end  
   
-  signout
-  
 end
 
 RSpec.describe SessionsController, type: :controller do
