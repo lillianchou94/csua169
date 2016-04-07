@@ -1,0 +1,13 @@
+language: ruby
+rvm:
+- 2.3.0
+# source: rubygems
+# gem: "bundler"  
+# gem: "rspec"    , "~> 2.8.0"
+# gem: "rake"     #included if using rake
+env:
+  - DB=sqlite3
+install:
+  - bundle install --path vendor/bundle
+script:
+  - RAILS_ENV=test bundle exec rake --trace

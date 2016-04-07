@@ -1,0 +1,8 @@
+WARNING: Cucumber-rails required outside of env.rb.  The rest of loading is being deferred until env.rb is called.
+  To avoid this warning, move 'gem 'cucumber-rails', :require => false' under only group :test in your Gemfile.
+  If already in the :test group, be sure you are specifying ':require => false'.
+[2016-03-10 07:42:50] INFO  WEBrick 1.3.1
+[2016-03-10 07:42:50] INFO  ruby 2.3.0 (2015-12-25) [x86_64-linux]
+[2016-03-10 07:42:50] INFO  WEBrick::HTTPServer#start: pid=8928 port=8080
+[2016-03-10 07:43:36] INFO  going to shutdown ...
+[2016-03-10 07:43:36] INFO  WEBrick::HTTPServer#start done.

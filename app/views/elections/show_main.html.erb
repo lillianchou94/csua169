@@ -1,0 +1,26 @@
+<!-- main dashboard -->
+<% if current_user != nil %>
+	<script>
+	
+	function open_election_modal() {
+		$(function() {
+			$("#hiddenFrameID").empty();
+			$("#electionmodal").dialog({autoOpen: false, modal:true});
+			$("#electionmodal").dialog("open");
+		});
+	};
+	
+	function open_position_modal(button_id) {
+		$(function() {
+		  $("#button_id").val(button_id);
+			$("#hiddenFrameID").empty();
+			$("#positionmodal").prepend('<input id="button_election_id" style="display:none;" value='+button_id+'>')
+			$("#positionmodal").dialog({autoOpen: false, modal:true});
+			$("#positionmodal").dialog("open");
+		});
+	};
+	</script>
+	
+	<p>Rest of dashboard goes here</p>
+
+<% end %>

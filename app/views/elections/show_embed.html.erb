@@ -1,0 +1,6 @@
+<% if current_user != nil %>
+  <% if @embed_livestream != "" %>
+    <iframe width="560" height="315" src="<%=@embed_livestream%>" style="float:right" frameborder="0" allowfullscreen></iframe>
+  <% end %>
+<% end %>
+
