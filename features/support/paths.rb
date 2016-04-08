@@ -18,7 +18,11 @@ module NavigationHelpers
       '/login'
     when /^the Election pre-voting page for an admin$/
       '/dashboard/home'
-    when /^the dashboard page for an admin$/
+    when /^the dashboard page as an admin$/
+      '/dashboard/home'
+    when /^the dashboard page as a specialadmin$/
+      '/dashboard/home'
+    when /^the dashboard page for a member/
       '/dashboard/home'
     when /^the Election pre-voting page for a user$/
       '/'

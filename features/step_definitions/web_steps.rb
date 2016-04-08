@@ -302,3 +302,23 @@ end
 
 When (/^(?:|I ) press Delete election for "([^"]*)"$/) do |election_name|
 end
+
+When(/^I add the organization called "([^"]*)"$/) do |org_name|
+    fail "Unimplemented" # Write code here that turns the phrase above into concrete actions
+end
+
+Then(/^(?:|I )should see a drop down menu to the right of "([^"]*)"$/) do |text|
+    fail "Unimplemented" # Write code here that turns the phrase above into concrete actions
+end
+
+Then(/^(?:|I )should see "([^"]*)" in the drop down menu to the right of "([^"]*)"$/) do |text|
+    fail "Unimplemented" # Write code here that turns the phrase above into concrete actions
+end
+
+Then(/^(?:|I )should not see "([^"]*)" in the drop down menu to the right of "([^"]*)"$/) do |text|
+    fail "Unimplemented" # Write code here that turns the phrase above into concrete actions
+end
+
+Then(/^(?:|I )should see "([^"]*)" in the "([^"]*)" field$/) do |text|
+    fail "Unimplemented" # Write code here that turns the phrase above into concrete actions
+end
