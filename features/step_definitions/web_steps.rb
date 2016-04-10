@@ -25,7 +25,7 @@ require File.expand_path(File.join(File.dirname(__FILE__), "..", "support", "pat
 require File.expand_path(File.join(File.dirname(__FILE__), "..", "support", "selectors"))
 #require 'net/http'
 #require 'webmock'
-require "capybara-webkit"
+#require "capybara-webkit"
 
 module WithinHelpers
   def with_scope(locator)

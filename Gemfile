@@ -55,7 +55,7 @@ gem 'bootstrap-sass'
 gem 'capybara'
 
 gem 'selenium-webdriver'
-gem "capybara-webkit"
+#gem "capybara-webkit" 
 
 gem 'headless'
 
@@ -85,6 +85,7 @@ group :development, :test do
   gem 'watir-webdriver'
   gem 'chromedriver-helper'
   gem 'webmock'
+
 end
 
 group :development do
