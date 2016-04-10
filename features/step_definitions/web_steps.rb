@@ -23,7 +23,9 @@ require 'uri'
 require 'cgi'
 require File.expand_path(File.join(File.dirname(__FILE__), "..", "support", "paths"))
 require File.expand_path(File.join(File.dirname(__FILE__), "..", "support", "selectors"))
-require 'factory_girl_rails'
+#require 'net/http'
+#require 'webmock'
+require "capybara-webkit"
 
 module WithinHelpers
   def with_scope(locator)
@@ -31,28 +33,6 @@ module WithinHelpers
   end
 end
 World(WithinHelpers)
-
-When /^I confirm popup$/ do
-  page.driver.browser.switch_to.alert.accept    
-end
-
-When(/^I add the election called "([^"]*)"$/) do |election_name|
-  begin
-    main, popup = page.driver.browser.window_handles
-    within_window(popup) do
-      fill_in("new_election_org", :with => "csua")
-      fill_in("new_election_name", :with => election_name)
-      click_on("Create")
-      if page.respond_to? :should
-        page.should have_content('created')
-      else
-        assert page.has_content?('created')
-      end
-      assert main.has_content?(election_name)
-    end
-  rescue
-  end
-end
 
 # Single-line step scoper
 When /^(.*) within (.*[^:])$/ do |step, parent|
@@ -276,23 +256,64 @@ Then /^show me the page$/ do
   save_and_open_page
 end
 
-
-
-Given /^"([^"]*)" is logged in$/ do |given_email|
-  @current_user = FactoryGirl.build(:user)
-  log_in
-  # visit oauth_callback_test2_path
+When(/^I add the election called "([^"]*)"$/) do |election_name|
+  fail "Unimplemented"
+  # begin
+  #   main, popup = page.driver.browser.window_handles
+  #   within_window(popup) do
+  #     fill_in("new_election_org", :with => "csua1")
+  #     fill_in("new_election_name", :with => election_name)
+  #     click_button("Create")
+  #     if page.respond_to? :should
+  #       page.should have_content('csua1')
+  #     else
+  #       assert page.has_content?('csua1')
+  #     end
+  #     assert main.has_content?(election_name)
+  #   end
+  # #rescue
+  # end
 end
 
-private
+Then(/^"([^"]*)" is in a new window$/) do |text|
 
-def log_in
-  if Capybara.current_driver == :webkit
-    page.driver.browser.set_cookie("stub_user_id=#{@current_user.id}; path=/; domain=127.0.0.1")
-  else
-    cookie_jar = Capybara.current_session.driver.browser.current_session.instance_variable_get(:@rack_mock_session).cookie_jar
-    cookie_jar[:stub_user_id] = @current_user.id
+  begin
+    main, popup = page.driver.browser.window_handles
+    within_window(popup) do
+      fill_in("new_election_org", :with => "csua1")
+      fill_in("new_election_name", :with => election_name)
+      click_button("Create")
+    end
+  
   end
+  # @driver = WebMock.stub_request(:get, "https://mighty-spire-11641.herokuapp.com/election_add_election").
+  # with(:headers => {'Accept'=>'*/*', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'User-Agent'=>'Ruby'}).
+  # to_return(:status => 200, :body => "", :headers => {})
+  # page.driver.browser.window_handles.last
+
+  # #fill_in("new_election_org", :with => "csua1")
+  
+end
+
+When /^I confirm popup$/ do
+  Capybara.javascript_driver = :webkit
+  within_window(windows.last) do
+  # code here
+  end
+  #page.driver.browser.switch_to.alert.accept
+  # @driver = Selenium::WebDriver.for(:firefox)
+  # @driver.navigate.to 'https://mighty-spire-11641.herokuapp.com/election_show_elections'
+  # @driver.find_element(:id, "positionmodal").click
+  # alertBox = @driver.switch_to.alert
+  
+  # if page.respond_to? :should
+  #   page.should have_content(alertBox.text)
+  # else
+  #   assert page.has_content?(alertBox.text)
+  # end
+  # alertBox.accept
+  # @driver.quit
+  
 end
 
 Then(/^I should see an element with id "([^"]*)"$/) do |id|
@@ -301,4 +322,24 @@ Then(/^I should see an element with id "([^"]*)"$/) do |id|
 end
 
 When (/^(?:|I ) press Delete election for "([^"]*)"$/) do |election_name|
+end
+
+When(/^I add the organization called "([^"]*)"$/) do |org_name|
+    fail "Unimplemented" # Write code here that turns the phrase above into concrete actions
+end
+
+Then(/^(?:|I )should see a drop down menu to the right of "([^"]*)"$/) do |text|
+    fail "Unimplemented" # Write code here that turns the phrase above into concrete actions
+end
+
+Then(/^(?:|I )should see "([^"]*)" in the drop down menu to the right of "([^"]*)"$/) do |text|
+    fail "Unimplemented" # Write code here that turns the phrase above into concrete actions
+end
+
+Then(/^(?:|I )should not see "([^"]*)" in the drop down menu to the right of "([^"]*)"$/) do |text|
+    fail "Unimplemented" # Write code here that turns the phrase above into concrete actions
+end
+
+Then(/^(?:|I )should see "([^"]*)" in the "([^"]*)" field$/) do |text|
+    fail "Unimplemented" # Write code here that turns the phrase above into concrete actions
 end

@@ -8,6 +8,14 @@ SimpleCov.start 'rails'
 # files.
 
 require 'cucumber/rails'
+require "test/unit"
+require "rubygems"
+require "selenium/client"
+
+require "capybara"
+require "capybara/cucumber"
+require "rspec"
+require "capybara/dsl"
 # Capybara defaults to CSS3 selectors rather than XPath.
 # If you'd prefer to use XPath, just uncomment this line and adjust any
 # selectors in your step definitions to use the XPath syntax.
@@ -84,25 +92,47 @@ FakeWeb.register_uri(:get, 'http://google.com/account/verify_credentials.json', 
 #   })
 # end
 
-# Before('@omniauth_test') do
-#   OmniAuth.config.test_mode = true
-#   #Capybara.default_host = 'https://csua-169-lillianchou94.c9users.io'
+Before('@omniauth_test') do
+  OmniAuth.config.test_mode = true
+  #Capybara.default_host = 'https://csua-169-lillianchou94.c9users.io'
 
-#   OmniAuth.config.add_mock(:google, {
-#     :provider => 'google_oauth2',
-#     :uid => '117985932382438250843',
-#     :info => {
-#       :name => 'Cs Ua',
-#       :email => 'csua169.project@gmail.com',
-#     },
-#     :credentials => {
-#       :token => 'ya29..uAK8LBtmT5hRfLPoq2FhrtVgPVEJ8z73eCFQnxgF_PQn...',
-#       :expires_at => 1459560093
-#     }
-#   })
-#   Rails.application.env_config["omniauth.auth"] = OmniAuth.config.mock_auth[:google]
+  OmniAuth.config.add_mock(:google, {
+    :provider => 'google_oauth2',
+    :uid => '117985932382438250843',
+    :info => {
+      :name => 'Cs Ua',
+      :email => 'csua169.project@gmail.com',
+    },
+    :credentials => {
+      :token => 'ya29..uAK8LBtmT5hRfLPoq2FhrtVgPVEJ8z73eCFQnxgF_PQn...',
+      :expires_at => 1459560093
+    }
+  })
+  Rails.application.env_config["omniauth.auth"] = OmniAuth.config.mock_auth[:google]
+end
+
+After('@omniauth_test') do
+  OmniAuth.config.test_mode = false
+end
+
+#Selenium::WebDriver::Chrome::Service.executable_path = '/usr/local/rvm/gems/ruby-2.3.0/bin/chromedriver'
+
+# Capybara.register_driver :selenium_chrome do |app|   
+#   Capybara::Selenium::Driver.new(app, :browser => :chrome)
 # end
 
-# After('@omniauth_test') do
-#   OmniAuth.config.test_mode = false
+# include RSpec::Matchers
+
+# $timeout = 50
+# Capybara.configure do |capybara|
+#   capybara.register_driver :selenium_ff do |app|
+#     capybara::Selenium::Driver.new(app, :browser => :firefox)
+#   end
+  
+#   capybara.default_driver = :selenium_ff
+#   capybara.run_server = false  
+# end
+
+# RSpec.configure do |config|
+#   config.include Capybara::DSL
 # end
