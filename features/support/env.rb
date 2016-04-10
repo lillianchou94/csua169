@@ -8,14 +8,14 @@ SimpleCov.start 'rails'
 # files.
 
 require 'cucumber/rails'
-require "test/unit"
-require "rubygems"
-require "selenium/client"
+# require "test/unit"
+# require "rubygems"
+# require "selenium/client"
 
-require "capybara"
-require "capybara/cucumber"
-require "rspec"
-require "capybara/dsl"
+# require "capybara"
+# require "capybara/cucumber"
+# require "rspec"
+# require "capybara/dsl"
 # Capybara defaults to CSS3 selectors rather than XPath.
 # If you'd prefer to use XPath, just uncomment this line and adjust any
 # selectors in your step definitions to use the XPath syntax.
