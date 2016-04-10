@@ -6,39 +6,55 @@ Feature: Election pages content for non-admin
 
   # Voters page for modal dialog
   Scenario: Voters dashboard page during voting
-    Given I am on the show elections page for a "voter" # need step def
-    Then I should see "Role" # need step def
-    And I should see a drop down menu to the right of "Role" # need step def
-    When I press the drop down menu # need step def
+    # need step def
+    Given I am on the show elections page for a "voter" 
+    # need step def
+    Then I should see "Role" 
+    # need step def
+    And I should see a drop down menu to the right of "Role" 
+    # need step def
+    When I press the drop down menu 
+    # need step def
     Then I should see a list of candidates
-    When I press "Candidate 1" # need step def
-    Then I should see "Candidate 1" in the "Role" field # need step def
+    When I press "Candidate 1" 
+    # need step def
+    Then I should see "Candidate 1" in the "Role" field 
   
   # Modal Dialog to press password
   Scenario: First time voting on the computer and cache is cleared
-    Given I have just voted for a candidate # need step def
-    Then I should see a modal dialog # need step def -> Selenium 
-    When I enter the secret key # need step def 
-    Then I should see a confirmation page # need step def 
+    # need step def
+    Given I have just voted for a candidate
+    # need step def -> Selenium 
+    Then I should see a modal dialog
+    # need step def 
+    When I enter the secret key
+    # need step def 
+    Then I should see a confirmation page
 
   # Cache stored password
   Scenario: Password stored in cache and no longer needs to be entered
-    Given I have just voted for a candidate # need step def
+    # need step def
+    Given I have just voted for a candidate
     Then I should not see a modal dialog
-    And I should see "Candidate 1" in the "Role" field # need step def
+    # need step def
+    And I should see "Candidate 1" in the "Role" field
   
   # Test encryption
   Scenario: Correct encryption and decryption after voting
     Given I have just voted for a candidate and cache contains secret key 
-    Then I should have an encrypted value of my votes# need step def
-    And I should have a decryped value of my votes # need step def
-    And I should see "Candidate 1" in the "Role" field # need step def
+    # need step def
+    Then I should have an encrypted value of my votes
+    # need step def
+    And I should have a decryped value of my votes
+    # need step def
+    And I should see "Candidate 1" in the "Role" field
   
   Scenario: Attempt encrpytion without secret key (sad path)
     Given I have just voted for a candidate and cache does not contain a secret
     When I attempt to encrypt the votes
     Then I should not have a encrypted value
-    And I should see an error # need step definition
+    # need step definition
+    And I should see an error
   
     
     

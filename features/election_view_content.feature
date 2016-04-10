@@ -4,67 +4,83 @@ Feature: Election pages content
   So that I can see all the elections I am a part of and I can add new elections
   
   @omniauth_test
-  Scenario: login page
-    Given I am on the dashboard page for an admin
+  Scenario: logging in (/dashboard/home)
+    Given I am on the dashboard page as an admin
     Then I should see "CSUA Voting System"
     And I should see "Sign in with Google"
-    # And I should see "Rest of dashboard goes here"
-    # And I should see "Add election"
-
+    Then I follow "Sign in with Google"
+    Then I am on the dashboard page as an admin
+    And I should see "Hello,"
+    #Cs is the first name of the user specified in env.rb
+    And I should see "Cs"
+    And I should see "Sign out"
+    Then I am on the show elections page for an admin
+    And I should see "Add election"
+    When I press "Add election"
+    # Then I should see "Organization"
+    When I am on the dashboard page as an admin 
+    When I follow "Sign out"
+    Then I am on the signout page
+    And I should see "Sign in with Google"
+    And I should not see "Sign out"
+    
+  #@omniauth_test
+  Scenario: logging in (/login)
+    Given I am on the login page
+    Then I should see "CSUA Voting System"
+    And I should see "Sign in with Google"
+    When I follow "Sign in with Google"
+    Then I am on the dashboard page as an admin
+    And I should see "Sign out"
+    
   Scenario: Admin elections page with delete feature
     Given I am on the show elections page for an admin
     Then I should see an element with id "delete_election_id"
     # When I press Delete election for "Election 1"
     Then I should be on the show elections page for an admin
     And I should not see "Election 1"
-	
-  Scenario: Admin Election page
-    Given I am on the Election pre-voting page for an admin
-    Then I should see "CSUA Voting System"
     
+  # @javascript
   Scenario: Admin elections page
     Given I am on the show elections page for an admin
-    # Then I should see "Add position"
-    Then I should see "Add election"
     When I press "Add election"
-    And I add the election called "election1"
+    # Then in the popup window, there should be "Organization:"
+    # Then I confirm popup
+    # Then "Organization:" is in a new window
+    # And I add the election called "election1"
     Then I should be on the show elections page for an admin
-    Then I should see "Add election" 
-    # FIX THIS LATER
+    And I should see "Add election" 
     # When I am on the election list page
-    # Then I should see "election1"
-    # Then I should see "New election name:"
-    # Given I am on the add election page
-    # Given I am on the add position page
-    
-  Scenario: dashboard  
-    Given I am on the dashboard page for an admin
+    Then I should see "election1"
+    Then I should see "New election name:"
+    Then I should see "Add position"
+  
+  Scenario: authentication failure page
+    Given I am on the authentication failure page
     Then I should see "CSUA Voting System"
     And I should see "Sign in with Google"
-  
-  Scenario: logging in
-    Given I am on the dashboard page for an admin
-    And "blah@gmail.com" is logged in
-    Then I should see "CSUA Voting System"
  
-  Scenario: test routes
-    Given I am on the authentication failure page
-    Given I am on the signout page
+  Scenario: test other routes
     Given I am on the election dashboard page
     Given I am on the election embed livestream page
-    # Given I am on the delete election page
-    # Given I am on the add position page
-    # Given I am on the delete position page
-    # Given I am on the home page
-    # Given I am on the election page
-    # Given I am on the election list page
+    # Given I am on the add election page
+  # Scenario: delete election page
+  #   Given I am on the delete election page
+  # Scenario: add position page
+  #   Given I am on the add position page
+  # Scenario: delete position page
+  #   Given I am on the delete position page
+  # Scenario: home page
+  #   Given I am on the home page
+  
   
   # happy paths for add organization  
   Scenario: super-admin election page
     Given I am on the show elections page for a super-admin
     Then I should see "Add organization"
     When I press "Add organization"
-    And I add the organization called "org1" # need step def
+    # need step def
+    And I add the organization called "org1"
     Then I should be on the show elections page for an super-admin
     Then I should see "Add organization"
     And I should see "org1"
@@ -83,18 +99,26 @@ Feature: Election pages content
     Given I am on the show elections page for an admin
     When I press "Add election"
     Then I should see "Organization:"
-    And I should see a drop down menu to the right of "Organization:" # need step def
-    And I should see "org1" in the drop down menu to the right of "Organization:" # need step def
-    And I should see "org2" in the drop down menu to the right of "Organization:" # need step def
+    # need step def
+    And I should see a drop down menu to the right of "Organization:"
+    # need step def
+    And I should see "org1" in the drop down menu to the right of "Organization:"
+    # need step def
+    And I should see "org2" in the drop down menu to the right of "Organization:"
     When I press "org1"
-    Then I should see "org1" in the "Organization:" field # need step def
+    # need step def
+    Then I should see "org1" in the "Organization:" field
     
   Scenario: admin for "org1" (election page)
     Given I am on the show elections page for an admin
     When I press "Add election"
     Then I should see "Organization:"
-    And I should see a drop down menu to the right of "Organization:" # need step def
-    And I should see "org1" in the drop down menu to the right of "Organization:" # need step def
-    And I should not see "org2" in the drop down menu to the right of "Organization:" # need step def
+    # need step def
+    And I should see a drop down menu to the right of "Organization:"
+    # need step def
+    And I should see "org1" in the drop down menu to the right of "Organization:"
+    # need step def
+    And I should not see "org2" in the drop down menu to the right of "Organization:"
     When I press "org1"
-    Then I should see "org1" in the "Organization:" field # need step def
+    # need step def
+    Then I should see "org1" in the "Organization:" field

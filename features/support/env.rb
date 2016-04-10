@@ -8,6 +8,14 @@ SimpleCov.start 'rails'
 # files.
 
 require 'cucumber/rails'
+require "test/unit"
+require "rubygems"
+require "selenium/client"
+
+require "capybara"
+require "capybara/cucumber"
+require "rspec"
+require "capybara/dsl"
 # Capybara defaults to CSS3 selectors rather than XPath.
 # If you'd prefer to use XPath, just uncomment this line and adjust any
 # selectors in your step definitions to use the XPath syntax.
@@ -106,3 +114,25 @@ end
 After('@omniauth_test') do
   OmniAuth.config.test_mode = false
 end
+
+#Selenium::WebDriver::Chrome::Service.executable_path = '/usr/local/rvm/gems/ruby-2.3.0/bin/chromedriver'
+
+# Capybara.register_driver :selenium_chrome do |app|   
+#   Capybara::Selenium::Driver.new(app, :browser => :chrome)
+# end
+
+# include RSpec::Matchers
+
+# $timeout = 50
+# Capybara.configure do |capybara|
+#   capybara.register_driver :selenium_ff do |app|
+#     capybara::Selenium::Driver.new(app, :browser => :firefox)
+#   end
+  
+#   capybara.default_driver = :selenium_ff
+#   capybara.run_server = false  
+# end
+
+# RSpec.configure do |config|
+#   config.include Capybara::DSL
+# end

@@ -16,20 +16,16 @@ module NavigationHelpers
       '/home'
     when /^the login page$/
       '/login'
-    when /^the Election pre-voting page for an admin$/
-      '/dashboard/home'
     when /^the dashboard page as an admin$/
       '/dashboard/home'
     when /^the dashboard page as a specialadmin$/
       '/dashboard/home'
     when /^the dashboard page for a member/
       '/dashboard/home'
-    when /^the Election pre-voting page for a user$/
-      '/'
-    when /^the show elections page for an admin$/
-      '/election_show_elections'
     when /^the dashboard page for googleuser$/
       '/dashboard/home'
+    when /^the show elections page for an admin$/
+      '/election_show_elections'
     when /^the add election page$/
       '/election_add_election'
     when /^the delete election page$/

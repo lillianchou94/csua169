@@ -4,7 +4,7 @@ Feature: Dashboard page main content
 	So that I can see all the election details and start streaming
 	
 	Scenario: Admin Dashboard page with before nomination started
-    And I am on the dashboard page for an admin
+    And I am on the dashboard page as an admin
     # And I follow "Sign in with Google"
     # And Google authorizes me
     Then I should see "CSUA Voting System"
@@ -12,12 +12,12 @@ Feature: Dashboard page main content
   
   Scenario: Admin Dashboard page with before voting started
     Given I am signed in
-    And I am on the dashboard page for an admin
+    And I am on the dashboard page as an admin
     Then I should see "CSUA Voting System"
     # And I should see "Start Voting"
   
   Scenario: Admin Dashboard page with after election ended
-    Given I am on the dashboard page for an admin
+    Given I am on the dashboard page as an admin
     Then I should see "CSUA Voting System"
     # And I should see "Election Result"
     
