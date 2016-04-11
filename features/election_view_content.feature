@@ -60,9 +60,8 @@ Feature: Election pages content
     Then I should see "CSUA Voting System"
     And I should see "Sign in with Google"
  
-  Scenario: test other routes
+  Scenario: election dashboard page
     Given I am on the election dashboard page
-    Given I am on the election embed livestream page
     # Given I am on the add election page
   # Scenario: delete election page
   #   Given I am on the delete election page

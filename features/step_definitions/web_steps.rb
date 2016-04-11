@@ -316,6 +316,18 @@ When /^I confirm popup$/ do
   
 end
 
+Given(/^I am logged in as an admin$/) do
+  visit path_to('/dashboard/home') # dashboard page as an admin
+  click_link("Sign in with Google")
+  visit path_to('/dashboard/home')
+  if page.respond_to? :should
+    page.should have_content("Sign out")
+  else
+    assert page.has_content?("Sign out")
+  end
+  
+end
+
 Then(/^I should see an element with id "([^"]*)"$/) do |id|
   # c = page.find(id)   
   # assert page.has_xpath(c)
