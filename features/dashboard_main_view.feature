@@ -21,7 +21,7 @@ Feature: Dashboard page main content
     Then I should see "CSUA Voting System"
     # And I should see "Election Result"
     
-  Scenario: Voter Dashboard during an election
-    Given I am on the dashboard page for a voter
-    Then I should not see "Create Organization"
-    And I should not see "CSUA Voting System"
+  # Scenario: Voter Dashboard during an election
+  #   Given I am on the dashboard page for a voter
+  #   Then I should not see "Create Organization"
+  #   And I should not see "CSUA Voting System"
