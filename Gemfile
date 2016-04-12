@@ -12,8 +12,6 @@ end
 
 gem "fakeweb", "~> 1.3"
 
-gem 'coveralls', require: false
-
 gem "codeclimate-test-reporter", group: :test, require: nil
 
 # Use SCSS for stylesheets
@@ -81,11 +79,19 @@ group :development, :test do
   
   gem 'rspec-rails', '~> 3.0'
   gem 'test-unit-rails'
-  gem "selenium-client", ">=1.2.18"
+  gem 'selenium-client', '>=1.2.18'
   gem 'watir-webdriver'
   gem 'chromedriver-helper'
   gem 'webmock'
-
+  gem 'capybara-webkit'
+  
+  gem 'childprocess'
+  gem 'rubyzip'
+  gem 'websocket'
+  gem 'ci_reporter'
+  gem 'rack'
+  gem 'yard'
+  
 end
 
 group :development do
@@ -97,5 +103,6 @@ group :development do
 end
 
 group :test do
+  gem 'coveralls', require: false
   gem 'factory_girl_rails'
 end

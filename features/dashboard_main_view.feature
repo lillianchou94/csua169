@@ -1,7 +1,7 @@
 Feature: Dashboard page main content
   As a admin
-	I want to see my Streaming and Election Details on my main dashboard depending on if elections started
-	So that I can see all the election details and start streaming
+	I want to see Election Details on my main dashboard depending on if elections started
+	So that I can see all the election details
 	
 	Scenario: Admin Dashboard page with before nomination started
     And I am on the dashboard page as an admin
@@ -25,5 +25,3 @@ Feature: Dashboard page main content
     Given I am on the dashboard page for a voter
     Then I should not see "Create Organization"
     And I should not see "CSUA Voting System"
-
-    

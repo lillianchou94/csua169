@@ -3,75 +3,12 @@ Feature: Election pages content
   I want to see my Election Panel
   So that I can see all the elections I am a part of and I can add new elections
   
-  @omniauth_test
-  Scenario: logging in (/dashboard/home)
-    Given I am on the dashboard page as an admin
-    Then I should see "CSUA Voting System"
-    And I should see "Sign in with Google"
-    Then I follow "Sign in with Google"
-    Then I am on the dashboard page as an admin
-    And I should see "Hello,"
-    #Cs is the first name of the user specified in env.rb
-    And I should see "Cs"
-    And I should see "Sign out"
-    Then I am on the show elections page for an admin
-    And I should see "Add election"
-    When I press "Add election"
-    # Then I should see "Organization"
-    When I am on the dashboard page as an admin 
-    When I follow "Sign out"
-    Then I am on the signout page
-    And I should see "Sign in with Google"
-    And I should not see "Sign out"
-    
-  #@omniauth_test
-  Scenario: logging in (/login)
-    Given I am on the login page
-    Then I should see "CSUA Voting System"
-    And I should see "Sign in with Google"
-    When I follow "Sign in with Google"
-    Then I am on the dashboard page as an admin
-    And I should see "Sign out"
-    
-  Scenario: Admin elections page with delete feature
-    Given I am on the show elections page for an admin
-    Then I should see an element with id "delete_election_id"
-    # When I press Delete election for "Election 1"
-    Then I should be on the show elections page for an admin
-    And I should not see "Election 1"
-    
-  # @javascript
-  Scenario: Admin elections page
-    Given I am on the show elections page for an admin
-    When I press "Add election"
-    # Then in the popup window, there should be "Organization:"
-    # Then I confirm popup
-    # Then "Organization:" is in a new window
-    # And I add the election called "election1"
-    Then I should be on the show elections page for an admin
-    And I should see "Add election" 
-    # When I am on the election list page
-    Then I should see "election1"
-    Then I should see "New election name:"
-    Then I should see "Add position"
-  
-  Scenario: authentication failure page
-    Given I am on the authentication failure page
-    Then I should see "CSUA Voting System"
-    And I should see "Sign in with Google"
+  Background:
+    Given I am logged in as an admin 
  
   Scenario: election dashboard page
     Given I am on the election dashboard page
-    # Given I am on the add election page
-  # Scenario: delete election page
-  #   Given I am on the delete election page
-  # Scenario: add position page
-  #   Given I am on the add position page
-  # Scenario: delete position page
-  #   Given I am on the delete position page
-  # Scenario: home page
-  #   Given I am on the home page
-  
+    Then I should see "Rest of dashboard goes here"
   
   # happy paths for add organization  
   Scenario: super-admin election page

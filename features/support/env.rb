@@ -120,19 +120,3 @@ end
 # Capybara.register_driver :selenium_chrome do |app|   
 #   Capybara::Selenium::Driver.new(app, :browser => :chrome)
 # end
-
-# include RSpec::Matchers
-
-# $timeout = 50
-# Capybara.configure do |capybara|
-#   capybara.register_driver :selenium_ff do |app|
-#     capybara::Selenium::Driver.new(app, :browser => :firefox)
-#   end
-  
-#   capybara.default_driver = :selenium_ff
-#   capybara.run_server = false  
-# end
-
-# RSpec.configure do |config|
-#   config.include Capybara::DSL
-# end

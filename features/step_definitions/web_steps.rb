@@ -24,8 +24,9 @@ require 'cgi'
 require File.expand_path(File.join(File.dirname(__FILE__), "..", "support", "paths"))
 require File.expand_path(File.join(File.dirname(__FILE__), "..", "support", "selectors"))
 #require 'net/http'
-#require 'webmock'
-#require "capybara-webkit"
+require 'webmock'
+require 'capybara-webkit'
+require 'selenium-webdriver'
 
 module WithinHelpers
   def with_scope(locator)
@@ -257,7 +258,12 @@ Then /^show me the page$/ do
 end
 
 When(/^I add the election called "([^"]*)"$/) do |election_name|
-  fail "Unimplemented"
+  # driver = WebMock.stub_request(:post, "http://127.0.0.1:4444/wd/hub/session").
+  #       with(:body => "{\"desiredCapabilities\":{\"browserName\":\"firefox\",\"version\":\"\",\"platform\":\"ANY\",\"javascriptEnabled\":true,\"cssSelectorsEnabled\":true,\"takesScreenshot\":true,\"nativeEvents\":false,\"rotatable\":false}}",
+  #           :headers => {'Accept'=>'application/json', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'Content-Length'=>'193', 'Content-Type'=>'application/json; charset=utf-8', 'User-Agent'=>'Ruby'}).
+  #       to_return(:status => 200, :body => "", :headers => {})
+  #Capybara.default_driver = :selenium
+  popup = page.driver.browser.window_handles.last
   # begin
   #   main, popup = page.driver.browser.window_handles
   #   within_window(popup) do
@@ -276,23 +282,15 @@ When(/^I add the election called "([^"]*)"$/) do |election_name|
 end
 
 Then(/^"([^"]*)" is in a new window$/) do |text|
-
-  begin
-    main, popup = page.driver.browser.window_handles
-    within_window(popup) do
-      fill_in("new_election_org", :with => "csua1")
-      fill_in("new_election_name", :with => election_name)
-      click_button("Create")
-    end
-  
-  end
-  # @driver = WebMock.stub_request(:get, "https://mighty-spire-11641.herokuapp.com/election_add_election").
-  # with(:headers => {'Accept'=>'*/*', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'User-Agent'=>'Ruby'}).
-  # to_return(:status => 200, :body => "", :headers => {})
-  # page.driver.browser.window_handles.last
-
-  # #fill_in("new_election_org", :with => "csua1")
-  
+  fail "Unimplemented"
+  # begin
+  #   main, popup = page.driver.browser.window_handles
+  #   within_window(popup) do
+  #     fill_in("new_election_org", :with => "csua1")
+  #     fill_in("new_election_name", :with => election_name)
+  #     click_button("Create")
+  #   end
+  # end
 end
 
 When /^I confirm popup$/ do
@@ -317,9 +315,9 @@ When /^I confirm popup$/ do
 end
 
 Given(/^I am logged in as an admin$/) do
-  visit path_to('/dashboard/home') # dashboard page as an admin
+  visit path_to('the dashboard page as an admin')
   click_link("Sign in with Google")
-  visit path_to('/dashboard/home')
+  visit path_to('the dashboard page as an admin')
   if page.respond_to? :should
     page.should have_content("Sign out")
   else
