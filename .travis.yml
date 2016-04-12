@@ -11,3 +11,5 @@ install:
   - bundle install --path vendor/bundle
 script:
   - RAILS_ENV=test bundle exec rake --trace
+after_success:
+- coveralls
