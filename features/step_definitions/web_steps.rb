@@ -24,8 +24,8 @@ require 'cgi'
 require File.expand_path(File.join(File.dirname(__FILE__), "..", "support", "paths"))
 require File.expand_path(File.join(File.dirname(__FILE__), "..", "support", "selectors"))
 #require 'net/http'
-require 'webmock'
-require 'capybara-webkit'
+#require 'webmock'
+#require 'capybara-webkit'
 require 'selenium-webdriver'
 
 module WithinHelpers
@@ -258,72 +258,112 @@ Then /^show me the page$/ do
 end
 
 When(/^I add the election called "([^"]*)"$/) do |election_name|
-  # driver = WebMock.stub_request(:post, "http://127.0.0.1:4444/wd/hub/session").
-  #       with(:body => "{\"desiredCapabilities\":{\"browserName\":\"firefox\",\"version\":\"\",\"platform\":\"ANY\",\"javascriptEnabled\":true,\"cssSelectorsEnabled\":true,\"takesScreenshot\":true,\"nativeEvents\":false,\"rotatable\":false}}",
-  #           :headers => {'Accept'=>'application/json', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'Content-Length'=>'193', 'Content-Type'=>'application/json; charset=utf-8', 'User-Agent'=>'Ruby'}).
-  #       to_return(:status => 200, :body => "", :headers => {})
-  #Capybara.default_driver = :selenium
-  popup = page.driver.browser.window_handles.last
-  # begin
-  #   main, popup = page.driver.browser.window_handles
-  #   within_window(popup) do
-  #     fill_in("new_election_org", :with => "csua1")
-  #     fill_in("new_election_name", :with => election_name)
-  #     click_button("Create")
-  #     if page.respond_to? :should
-  #       page.should have_content('csua1')
-  #     else
-  #       assert page.has_content?('csua1')
-  #     end
-  #     assert main.has_content?(election_name)
-  #   end
-  # #rescue
-  # end
-end
-
-Then(/^"([^"]*)" is in a new window$/) do |text|
-  fail "Unimplemented"
-  # begin
-  #   main, popup = page.driver.browser.window_handles
-  #   within_window(popup) do
-  #     fill_in("new_election_org", :with => "csua1")
-  #     fill_in("new_election_name", :with => election_name)
-  #     click_button("Create")
-  #   end
-  # end
-end
-
-When /^I confirm popup$/ do
-  Capybara.javascript_driver = :webkit
-  within_window(windows.last) do
-  # code here
-  end
-  #page.driver.browser.switch_to.alert.accept
-  # @driver = Selenium::WebDriver.for(:firefox)
-  # @driver.navigate.to 'https://mighty-spire-11641.herokuapp.com/election_show_elections'
-  # @driver.find_element(:id, "positionmodal").click
-  # alertBox = @driver.switch_to.alert
+  raise "Error add" unless @driver.page_source.include? "Add Election"
+  raise "Error org" unless @driver.page_source.include? "Organization:"
+  raise "Error election" unless @driver.page_source.include? "New election name:"
+  raise "Error livestream" unless @driver.page_source.include? "YT livestream (optional):"
+  raise "Error submit" unless @driver.page_source.include? "submit"
+  org_element = @driver.find_element(:id => 'new_election_org')
   
-  # if page.respond_to? :should
-  #   page.should have_content(alertBox.text)
-  # else
-  #   assert page.has_content?(alertBox.text)
-  # end
-  # alertBox.accept
-  # @driver.quit
+  # div = @driver.find_element(:id, 'electionmodal')
+  # puts div.attribute('textContent')
+  # puts @driver.execute_script("return arguments[0].textContent", div)
   
+  # org_elem = div.find_element(:id, 'new_election_org')
+  # org_elem.send_keys "election1"
+  
+  org_element.send_keys "org1"
+  org_element.submit
+  election_elem = @driver.find_element(:id => 'new_election_name')
+  election_elem.send_keys "election1"
+  election_elem.submit
+  @driver.find_element(:id => 'submit').click
+  wait = Selenium::WebDriver::Wait.new(timeout: 20)
+  wait.until { @driver.page_source.include? "election1" }
+  #raise "Error election add fail" unless @driver.page_source.include? "election1"
+  
+  #@driver.switch_to.window("hiddenFrame")
+  #puts @driver.page_source
+  # @driver.switch_to.frame "hiddenFrame"
+  # puts @driver.page_source
+  # raise "Error org2" unless @driver.page_source.include? "Organization:"
+  
+  # wait = Selenium::WebDriver::Wait.new(:timeout => 15)
+  # form = wait.until {
+  #   element = @driver.find_element(:name, "election_form")
+  #   element if element.displayed?
+  # }
+  # puts "Test Passed: Form input found" if form.displayed?
+
+  #main, popup = @driver.window_handles
+  #@driver.switch_to.window( @driver.window_handles.last )
+  #@driver.switch_to.frame("hiddenFrame")
+  
+  # @driver.execute_script("open_election_modal()")
+  # a = @driver.switch_to.alert
+  # wait.until ExpectedConditions.alertIsPresent
+  # if a.text == 'Organization'
+  #   a.dismiss
+  # end
+  
+  #blah.send_keys "blah"
+  # #@driver.find_element(:id => 'button_id').click
+  # raise "Error add" unless @driver.page_source.include? "Add Election"
+  # #org_element.send_keys "blah"
+  
+
 end
 
 Given(/^I am logged in as an admin$/) do
-  visit path_to('the dashboard page as an admin')
-  click_link("Sign in with Google")
-  visit path_to('the dashboard page as an admin')
-  if page.respond_to? :should
-    page.should have_content("Sign out")
-  else
-    assert page.has_content?("Sign out")
-  end
   
+  @driver = Selenium::WebDriver.for :firefox
+  @driver.navigate.to "https://csua-169-lillianchou94.c9users.io"
+  @driver.manage.timeouts.implicit_wait = 5
+
+  raise "Error CSUA" unless @driver.page_source.include? "CSUA"
+  @driver.find_element(:id => 'sign_in_id').click
+  email_elem = @driver.find_element(:id => 'Email')
+  email_elem.send_keys "email1111222@gmail.com"
+  email_elem.submit
+  password_elem = @driver.find_element(:id => 'Passwd')
+  password_elem.send_keys "169email"
+  password_elem.submit
+  wait = Selenium::WebDriver::Wait.new(timeout: 3)
+  wait.until { @driver.page_source.include? "CSUA" }
+  raise "Error CSUA afterwards" unless @driver.page_source.include? "CSUA"
+  raise "Error hello" unless @driver.page_source.include? "Hello, "
+  raise "Error add" unless @driver.page_source.include? "Add Election"
+  #@driver.quit
+end
+
+Then(/^I am logged in as an admin from the login page$/) do
+  
+  @driver = Selenium::WebDriver.for :firefox
+  @driver.navigate.to "https://csua-169-lillianchou94.c9users.io/login"
+  @driver.manage.timeouts.implicit_wait = 5
+
+  raise "Error CSUA" unless @driver.page_source.include? "CSUA"
+  @driver.find_element(:id => 'sign_in_id').click
+  email_elem = @driver.find_element(:id => 'Email')
+  email_elem.send_keys "email1111222@gmail.com"
+  email_elem.submit
+  password_elem = @driver.find_element(:id => 'Passwd')
+  password_elem.send_keys "169email"
+  password_elem.submit
+  wait = Selenium::WebDriver::Wait.new(timeout: 5)
+  wait.until { @driver.page_source.include? "CSUA" }
+  raise "Error CSUA afterwards" unless @driver.page_source.include? "CSUA"
+  raise "Error hello" unless @driver.page_source.include? "Hello, "
+  raise "Error add" unless @driver.page_source.include? "Add Election"
+  #@driver.quit
+end
+
+Then(/^I see "([^"]*)"$/) do |text|
+  raise "Not found error" unless @driver.page_source.include? text
+end
+
+Then(/^I log out$/) do
+  @driver.quit
 end
 
 Then(/^I should see an element with id "([^"]*)"$/) do |id|

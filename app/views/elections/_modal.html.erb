@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.5); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+    position: relative;
+    background-color: #fefefe;
+    margin: auto;
+    padding: 0;
+    border: 1px solid #888;
+    width: 80%;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.3),0 6px 20px 0 rgba(0,0,0,0.2);
+    -webkit-animation-name: animatetop;
+    -webkit-animation-duration: 0.4s;
+    animation-name: animatetop;
+    animation-duration: 0.4s
+}
+
+/* Add Animation */
+@-webkit-keyframes animatetop {
+    from {top:-300px; opacity:0} 
+    to {top:0; opacity:1}
+}
+
+@keyframes animatetop {
+    from {top:-300px; opacity:0}
+    to {top:0; opacity:1}
+}
+
+/* The Close Button */
+.close {
+    color: white;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal-header {
+    padding: 5px 12px;
+    background-color: #5cb85c;
+    color: white;
+}
+
+.modal-body {padding: 10px 2px;}
+
+.modal-footer {
+    padding: 10px 12px;
+    background-color: #5cb85c;
+    color: white;
+}
+</style>
+</head>
+<body>
+
+<h2>Voting Modal</h2>
+
+<!-- Trigger/Open The Modal -->
+<button id="myBtn">Vote</button>
+
+<!-- The Modal -->
+<div id="myModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <div class="modal-header">
+      <span class="close">×</span>
+      <h2>Enter your Password</h2>
+    </div>
+    <div class="modal-body">
+      <input id="nome" name="nome" type="password" placeholder="" class="input-xlarge" required="">
+      <button id="myBtn2">Confirm</button>
+    </div>
+    <div class="modal-footer">
+      <h3>   </h3>
+    </div>
+  </div>
+
+</div>
+
+<!-- The Modal 2 -->
+<div id="myModal2" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <div class="modal-header">
+      <span class="close">×</span>
+      <h2>Enter your Password</h2>
+    </div>
+    <div class="modal-body">
+        <p id="Password"> Got to this part </p>
+    </div>
+    <div class="modal-footer">
+      <h3>CSUA 169</h3>
+    </div>
+  </div>
+</div>
+
+<script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/aes.js"></script>
+<script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/components/enc-base64-min.js"></script>
+
+
+<script>
+// Get the modal
+var modal = document.getElementById('myModal');
+
+var modal2 = document.getElementById('myModal2');
+
+var htmltxt = document.getElementById('Password');
+
+var inputText = document.getElementById('nome');
+
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn");
+
+var btn2 = document.getElementById("myBtn2");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+var span2 = document.getElementsByClassName("close")[1];
+
+// When the user clicks the button, open the modal 
+btn.onclick = function() {
+    modal.style.display = "block";
+}
+
+btn2.onclick = function() {
+    var input_val = inputText.value;
+    htmltxt.innerHTML = input_val;
+    var encodeuri = btoa(input_val)
+    var text = "HELLO WORLD" // Retrieve value from Database.
+    var key = CryptoJS.enc.Base64.parse(encodeuri.toString());
+    var iv  = CryptoJS.enc.Base64.parse("EBESExQVFhcYGRobHB0eHw==");
+    var encrypted;
+    var encrypted = CryptoJS.AES.encrypt(text, key, {iv : iv});
+    var decrypted = CryptoJS.AES.decrypt(encrypted, key, {iv: iv});
+
+    alert(decrypted.toString(CryptoJS.enc.Utf8));
+    
+    modal.style.display = "none";
+        
+}
+
+span.onclick = function() {
+    modal.style.display = "none";
+
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,145 @@
+<!-- main dashboard -->
+<script>
+  function upload_csv(formData, organization){
+    $.ajax({
+      url: "/election_import",
+      data: {'file': formData, 'organization': organization},
+      processData: false, 
+      contentType: false, 
+      type: 'POST',
+      success: function(data)
+      { 
+        $('#election_settings').html(data)
+        alert('CSV file imported')
+      }
+    });
+  }
+  
+  function submit_individual(user_name, user_email, organization, admin_status){
+    $.ajax({
+      url: formURL,
+      type: 'POST',
+      mimeType:"/election_add_individual",
+      data: {'user_email':user_email,
+               'organization':organization,
+               'user_name':user_name,
+               'admin_status':admin_status
+        },
+      contentType: false,
+      cache: false,
+      processData:false,
+      success: function(data, textStatus, jqXHR)
+      {
+      }
+    }); //Submit the form
+    
+    function delete_individual(user_name, user_email, organization, admin_status){
+    $.ajax({
+      url: formURL,
+      type: 'POST',
+      mimeType:"/election_delete_individual",
+      data: {'user_email':user_email,
+               'organization':organization,
+               'user_name':user_name
+        },
+      contentType: false,
+      cache: false,
+      processData:false,
+      success: function(data, textStatus, jqXHR)
+      {
+      }
+    }); 
+  }
+  
+</script>
+
+
+<%= flash[:notice] %>
+<%@my_orgs.each do |org| %>
+    <h1><%= org %></h1>
+    <h2>Admins</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @org_admin_pair[org].each do |admin| %>
+          <tr>
+            <td><%= admin.user_name %></td>
+            <td><%= admin.user_email %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <br>
+    <div>
+    
+    <form name="admin_individual_form" id="admin_individual_form">
+      <h4>Add/Delete an Admin for <%=org%></h4>
+        Name: <input type="text" name="user_name"/> <br/>
+        Email: <input type="text" name="user_email" /> <br/>
+        Organization: <input type="text" name="organization" value=<%=org%>><br/>
+        <button value="admin_individual_form_add" onclick="submit_individual('user_name', 'user_email', <%=org%>, <%=1=%>)">Add</button>
+        <button value="admin_individual_form_delete" onclick="delete_individual('user_name', 'user_email', <%=org%>, <%=1=%>)">Delete</button>
+    </form>
+   
+    <div id="dvImportSegments" class="fileupload ">
+      <form>
+        <fieldset>
+            <legend>Upload a CSV File for Admins</legend>
+            Make sure you only have the following columns in this order: Name, Email
+            <br> 
+                <input type="file" name="File Upload" id="txtFileUpload" accept=".csv" />
+                <button value="Submit" onclick="upload_csv('txtFileUpload', <%=org%>)">Upload CSV</button>
+         </fieldset>
+      </form>
+    </div>
+    
+    <h2>Members</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @org_member_pair[org].each do |member| %>
+          <tr>
+            <td><%= member.user_name %></td>
+            <td><%= member.user_email %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <br>
+    <div>
+    
+    <form name="admin_individual_form" id="admin_individual_form">
+    <h4>Add/Delete a Member for <%=org%></h4>
+      Name: <input type="text" name="user_name"/> <br/>
+      Email: <input type="text" name="user_email" /> <br/>
+      Organization: <input type="text" name="organization" value=<%=org%>><br/>
+      <button value="admin_individual_form_submit" onclick="submit_individual('user_name', 'user_email', <%=org%>, <%=0=%>)">Add</button>
+      <button value="admin_individual_form_delete" onclick="delete_individual('user_name', 'user_email', <%=org%>, <%=1=%>)">Delete</button>
+    </form>  
+      
+    <div id="dvImportSegments" class="fileupload ">
+      <form>
+        <fieldset>
+            <legend>Upload a CSV File for Members</legend>
+            Make sure you only have the following columns in this order: Name, Email
+            <br>
+                <input type="file" name="File Upload" id="txtFileUpload" accept=".csv" />
+                <button value="Submit" onclick="upload_csv('txtFileUpload')">Upload CSV</button>
+         </fieldset>
+      </form>
+    </div>
+<% end %>
+
+
+
+

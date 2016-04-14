@@ -2,9 +2,9 @@ Rails.application.routes.draw do
   resources :elections, only:[:show]
   resources :election_list, only: [:show]
   
-  get '/o/oauth2/auth', to: 'sessions#create', as: 'oauth_callback_test2'
-  get '/auth/google_oauth2/callback', to: 'sessions#create', as: 'oauth_callback_test'
-  get '/auth/:provider/callback', to: 'sessions#create', as: 'oauth_callback'
+  #get '/o/oauth2/auth', to: 'sessions#create', as: 'oauth_callback_test2'
+  #get '/auth/google_oauth2/callback', to: 'sessions#create', as: 'oauth_callback_test'
+  get '/auth/:provider/callback', to: 'sessions#create', as: 'oauth_callback_test2'
   get '/auth/failure', to: redirect('/')
   get '/signout', to: 'sessions#destroy', as: 'signout'
 
@@ -24,6 +24,10 @@ Rails.application.routes.draw do
   match "/election_delete_position" => "elections#show_positions_delete", via: [:get,:post]
   match "/election_dashboard" => "elections#dashboard", via: [:get,:post]
   match "/election_embed_livestream" => "elections#embed_livestream", via: [:get,:post]
+  match "/election_show_nominations" => "elections#show_nominations", via: [:get,:post]
+  match "/election_post_nominations" => "elections#post_nominations", via: [:get,:post]
+  match "/election_settings" => "elections#show_settings", via: [:get,:post], as: :settings
+  
   
   root :to => redirect("/login")
 

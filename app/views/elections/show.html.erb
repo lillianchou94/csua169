@@ -20,7 +20,7 @@
         Hello, <strong><%= current_user.user_name.partition(" ").first %></strong>.
         <%= link_to "Sign out", signout_path, id: "sign_out" %>
       <% else %>
-        <%= link_to "Sign in with Google", oauth_callback_test2_path, id: "sign_in" %>
+        <%= link_to "Sign in with Google", "/auth/google_oauth2", id: "sign_in" %>
       <% end %>
     </div>
     <div>
@@ -34,7 +34,7 @@
 				<div class="election_column" id="election_content" style="float:left"></div>
 			    
 			    <div id="electionmodal" title="Add Election"; style="display:none">
-				  <form action="/election_add_election" method="post" target="hiddenFrame" id="electionform" onsubmit="setTimeout(function () { window.location.reload(); }, 10)">
+			    <form action="/election_add_position" method="post" target="hiddenFrame" id="positionform" onsubmit="set_election_id(); setTimeout(function () { window.location.reload(); }, 10)">
 				  	<input type='hidden' name='<%=request_forgery_protection_token.to_s%>' value="<%=form_authenticity_token%>">
 				  	<label>Organization:</label>
 				  	<input id="new_election_org" name="new_election_org" type="text" value="csua">
@@ -42,7 +42,7 @@
 				    <label>New election name:</label>
 				    <input id="new_election_name" name="new_election_name" type="text" autofocus><br>
 				    <label>YT livestream (optional):</label>
-				    <input id="new_election_name" name="new_election_livestream" type="text"><br>
+				    <input id="new_election_livestream" name="new_election_livestream" type="text"><br>
 				    <input id="submit" type="submit" value="Create">
 				  </form>
 				</div>
@@ -78,6 +78,7 @@
 				    $("#election_id").val($("#button_id").val());
 				}
 			};
+
 			function open_position_modal(button_id) {
 				$(function(button_id) {
 					$("#hiddenFrameID").empty();
@@ -126,7 +127,7 @@
 		      });
 			};
 			get_election_embed_livestream();
-			setInterval(function() {get_election_content();get_election_dashboard()},5000);
+			setInterval(function() {get_election_content()},5000);
 		});
 		</script>
     <% end %>

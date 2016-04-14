@@ -10,7 +10,7 @@ group :production do
   gem 'pg'
 end
 
-gem "fakeweb", "~> 1.3"
+#gem "fakeweb", "~> 1.3"
 
 gem "codeclimate-test-reporter", group: :test, require: nil
 
@@ -82,14 +82,14 @@ group :development, :test do
   gem 'selenium-client', '>=1.2.18'
   gem 'watir-webdriver'
   gem 'chromedriver-helper'
-  gem 'webmock'
+  #gem 'webmock'
   gem 'capybara-webkit'
   
   gem 'childprocess'
   gem 'rubyzip'
   gem 'websocket'
   gem 'ci_reporter'
-  gem 'rack'
+  #gem 'rack'
   gem 'yard'
   
 end

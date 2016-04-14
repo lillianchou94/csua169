@@ -8,3 +8,4 @@ Feature: Voting Livestream
     
   Scenario: election embed livestream page
     Given I am on the election embed livestream page
+    Then I log out

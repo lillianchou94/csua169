@@ -43,6 +43,31 @@
       }
     });
   }
+  function update_dashboard_position(election_id_position) {
+    var election_id = election_id_position.substr(0,election_id_position.indexOf('__'));
+    var position_id = election_id_position.substr(election_id_position.indexOf('__')+2);
+    $.ajax({
+      type: 'POST',
+      url: '/election_dashboard',
+      data: {'election_id': election_id, 'position_id': position_id},
+      cache: false,
+      success: function(result) {
+        $('#election_dashboard').html(result)
+      }
+    });
+  }
+  function update_dashboard_settings() {
+    $.ajax({
+      type: 'GET',
+      url: '/election_settings',
+      data: {},
+      cache: false,
+      success: function(result) {
+        $('#election_dashboard').html(result)
+      }
+    });
+  }
+  
   </script>
 
   <input id="button_id" style="display:none;" value=""></input>
@@ -55,7 +80,7 @@
         <% if @position_list_acc != nil && @position_list_acc != {} %>
           <% if @position_list_acc[@election.election_id] != nil && @position_list_acc[@election.election_id] != [] %>
             <% for @position in @position_list_acc[@election.election_id] %>
-              <li style="margin-bottom:2px;margin-top:1px"><button style="background:none;border:none;padding:0;font-family:arial,sans-serif;color:#000;text-decoration:underline;cursor:pointer;" type="button" id="<%= @election.election_id %>_<%= @position %>" onclick="alert('This is not implemented yet')"> <%= @position %> </button></li>
+              <li style="margin-bottom:2px;margin-top:1px"><button style="background:none;border:none;padding:0;font-family:arial,sans-serif;color:#000;text-decoration:underline;cursor:pointer;" type="button" id="<%= @election.election_id %>__<%= @position %>" onclick="update_dashboard_position('<%= @election.election_id %>__<%= @position %>')"> <%= @position %> </button></li>
             <% end %>
           <% end %>
         <% end %>
@@ -66,4 +91,5 @@
       </li>
     <% end %>
   </ul>
+  <i class="fa fa-cog" aria-hidden="true" onclick="update_dashboard_settings()" style="display:inline;cursor:pointer;cursor:hand;text-decoration:underline">Settings</i>
 

@@ -24,6 +24,67 @@ respond_to :js
     return res
   end
   
+  def show_settings
+    @current_user = User.find_by(id: session[:user_id])
+    all_same_user = User.where(user_email: @current_user.user_email)
+    @my_orgs = Array.new
+    for user in all_same_user
+      @my_orgs << user.organization
+    end
+    @org_member_pair = Hash.new
+    @org_admin_pair = Hash.new
+    for org in @my_orgs
+      @org_member_pair[org] = User.where(organization: org, admin_status: 0)
+      @org_admin_pair[org] = User.where(organization: org, admin_status: 1)
+    end
+  end
+  
+  def import
+    begin
+      User.import(params[:file], params[:organization])
+      redirect_to :action => 'show_settings', notice: "Users imported."
+    rescue
+      redirect_to :action => 'show_settings', notice: "Invalid CSV file format."
+    end
+  end
+  
+  def add_individual
+    User.create(:user_name => params[:user_name], :user_email => params[:user_email], :organization => params[:organization], :admin_status => params[:admin_status])
+  end
+  
+  def delete_individual
+    user_to_delete = User.where(:user_name => params[:user_name], :user_email => params[:user_email], :organization => params[:organization])
+    User.delete(user_to_delete[0].id)
+  end
+  
+  def show_nominations
+    
+    @election_id = params.key?(:election_id) ? params[:election_id] : ''
+    @position_id = params.key?(:position_id) ? params[:position_id] : ''
+    
+    @current_user = User.find_by(id: session[:user_id])
+    @user_list = User.all
+    if @election_id != '' and @position_id != ''
+      respond_to do |format|
+            format.html
+            format.rss
+      end
+    end
+    #render 'elections/show_nominations.html.erb'
+  end
+  
+  def post_nominations
+    # update the db based on the nominations
+    @election_id = params.key?(:election_id) ? params[:election_id] : ''
+    @position_id = params.key?(:position_id) ? params[:position_id] : ''
+    @user_selected = params.key?(:user_selected) ? params[:user_selected] : ''
+    puts "WHOA THIS WORKED??"
+    
+    @current_user_email = params.key?(:user_email) ? params[:user_email] : ''
+    render 'elections/submit_nominations.html.erb'
+  end
+  
+  
   def dashboard
   #Super-Admin can only create an organization
     #is_admin = 0-> Regular Access, 1-> Admin Rights, 2-> Super Admin Rights
@@ -42,11 +103,17 @@ respond_to :js
     #Both
       # Nominate 
       # Vote
-    
-    
+    puts "hi"
+    if params.key?(:election_id) and params.key?(:position_id)
+      puts "redirecting to"
+      redirect_to :action => 'show_nominations',:election_id => params[:election_id], :position_id => params[:position_id]
+    else
+      render 'elections/show_main.html.erb'
+    end
     #@embed_livestream = "https://www.youtube.com/embed/KF47Za1lfjM"
     #puts "livestream url is #{@embed_livestream}"
-    render 'elections/show_main.html.erb'
+    
+   # render 'elections/show_main.html.erb'
   end
   
   def embed_livestream

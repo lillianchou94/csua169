@@ -1,0 +1,46 @@
+<!-- left election panel -->
+  <script>
+  function submit_nomination(user_email) {
+    var user_selected = $("input:radio[name='user']:checked").val();
+    var election_id = $('#election_selected_id').val();
+    var position_name_id = $('#position_name_id').val();
+    if(user_selected == null) {
+      alert('Select a nominee');
+    }
+    else {
+      $.ajax({
+        type: 'POST',
+        url: '/election_post_nominations',
+        data: {'user_email':user_email,
+               'election_id':election_id,
+               'position_id':position_name_id,
+               'user_selected':user_selected
+        },
+        cache: false,
+        success: function(result) {
+  		              $('#election_dashboard').html(result)
+  		  }
+      });
+    }
+  }
+  </script>
+ 
+  <% if @current_user and @election_id != '' and @position_id != ''%>
+  <p>Nomination for <%=@position_id%></p>
+  <input id="election_selected_id" type="text" value="<%=@election_id%>" hidden>
+  <input id="position_name_id" type="text" value="<%=@position_id%>" hidden>
+  
+  <form id="nomination_form_id"></form>
+    <% for @user in @user_list %>
+      <div class="radio">
+        <label><input type="radio" name="user" value="<%=@user.user_email%>"><%=@user.user_name%> (<%=@user.user_email%>)</label>
+      </div>
+    <% end %>
+    <button value="Submit" onclick="submit_nomination('<%=@user.user_email%>')">Submit</button>
+  </form>
+  <% end %>
+  <% if @election_id == '' or @position_id == '' %>
+  <p> You've reached this page in error</p>
+  <% end %>
+  
+
