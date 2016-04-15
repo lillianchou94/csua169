@@ -358,7 +358,7 @@ Given(/^I am logged in as a member/) do
   @driver = Selenium::WebDriver.for :firefox
   @driver.navigate.to "https://csua-169.herokuapp.com"
   #@driver.navigate.to "https://fierce-reef-37936.herokuapp.com"
-  @driver.manage.timeouts.implicit_wait = 10
+  @driver.manage.timeouts.implicit_wait = 20
 
   raise "Error CSUA" unless @driver.page_source.include? "CSUA"
   @driver.find_element(:id => 'sign_in_id').click

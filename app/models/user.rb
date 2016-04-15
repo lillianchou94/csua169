@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   require 'csv'
   require 'prime'
-  self.table_name = "users"
+  #self.table_name = "users"
   # has_many :elections
   # has_many :nominations
   attr_accessible :user_name, :is_active, :provider, :uid, :oauth_token, :oauth_expires_at, :user_email, :organization, :admin_status, :user_prime, :votes, :has_voted
