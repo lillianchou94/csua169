@@ -30,6 +30,9 @@ gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.0'
 
+#for Heroku debugging
+gem 'rails_12factor', group: :production
+
 #OAuth authentication
 gem 'omniauth'
 gem 'omniauth-google-oauth2'

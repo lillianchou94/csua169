@@ -373,7 +373,6 @@ Given(/^I am logged in as a member/) do
   raise "Error CSUA afterwards" unless @driver.page_source.include? "CSUA"
   raise "Error hello" unless @driver.page_source.include? "Hello, "
   raise "Error add" unless @driver.page_source.include? "Add Election"
-  #@driver.quit
 end
 
 Given(/^I am logged in as a special admin/) do
@@ -395,7 +394,6 @@ Given(/^I am logged in as a special admin/) do
   raise "Error CSUA afterwards" unless @driver.page_source.include? "CSUA"
   raise "Error hello" unless @driver.page_source.include? "Hello, "
   raise "Error add" unless @driver.page_source.include? "Add Election"
-  #@driver.quit
 end
 
 Then(/^I see "([^"]*)"$/) do |text|
@@ -410,6 +408,9 @@ end
 Then(/^I log out$/) do
   @driver.quit
 end
+
+
+
 
 Then(/^I should see an element with id "([^"]*)"$/) do |id|
   # c = page.find(id)   
