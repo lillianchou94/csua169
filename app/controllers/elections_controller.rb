@@ -94,19 +94,12 @@ respond_to :js
     prime = curr_user.user_prime
     prime = 3 # THIS NEEDS TO BE USER PRIME but the user prime is not initialized
     puts "USER"
-    puts curr_user
-    # puts curr_user.user_name # current user name is "just"?
-    # puts curr_user.user_email
+    puts curr_user.user_name # current user name is "just"?
     # puts "PRIMEEEEEE"
     # puts prime
-    # puts Nomination.all
     
-    # if nomination exists
     if not Nomination.where(:position => @position_id).blank?
       exist = Nomination.find_by(:position => @position_id)
-      # puts "======================================================================="
-      # puts exist
-      
       # if the current user prime exists in the prime product of the given position
       # user cannot nominate again for the same position
       if exist.prime_product != 0
