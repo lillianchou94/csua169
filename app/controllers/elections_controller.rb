@@ -89,12 +89,36 @@ respond_to :js
     @position_id = params.key?(:position_id) ? params[:position_id] : ''
     @user_selected = params.key?(:user_selected) ? params[:user_selected] : ''
     @current_user_email = params.key?(:user_email) ? params[:user_email] : ''
-    
-    prime = User.find_by(:user_email => @current_user_email).user_prime
     org = Election.find_by(:election_id => @election_id).organization
-    Nomination.create!(:election_id => @election_id, :organization => org, :user_id => @user_selected, :threshold => 1, :position => @position_id, :num_seconds => 0, :prime_product => prime)
+    curr_user = User.find_by(:user_email => @current_user_email)
+    prime = curr_user.user_prime
+    prime = 3 # THIS NEEDS TO BE USER PRIME but the user prime is not initialized
+    puts "USER"
+    puts curr_user
+    # puts curr_user.user_name # current user name is "just"?
+    # puts curr_user.user_email
+    # puts "PRIMEEEEEE"
+    # puts prime
+    # puts Nomination.all
     
-    render 'elections/submit_nominations.html.erb'
+    # if nomination exists
+    if not Nomination.where(:position => @position_id).blank?
+      exist = Nomination.find_by(:position => @position_id)
+      # puts "======================================================================="
+      # puts exist
+      
+      # if the current user prime exists in the prime product of the given position
+      # user cannot nominate again for the same position
+      if exist.prime_product != 0
+        has_nominated = exist.prime_product.to_f / prime.to_f
+        if has_nominated % 1 == 0
+          render 'elections/nominations_error.html.erb'
+        end
+      end
+    else
+      Nomination.create!(:election_id => @election_id, :organization => org, :user_id => @user_selected, :threshold => 1, :position => @position_id, :num_seconds => 0, :prime_product => prime)
+      render 'elections/submit_nominations.html.erb'
+    end
   end
   
   

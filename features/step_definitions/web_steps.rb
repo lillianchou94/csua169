@@ -295,6 +295,7 @@ When(/^I add the election called "([^"]*)" for the organization "([^"]*)"$/) do 
 end
 
 When(/^I add the postion "([^"]*)" for election "([^"]*)"$/) do |position_name, election_name|
+  # not done yet
   wait = Selenium::WebDriver::Wait.new(timeout: 20)
   raise "Error add position" unless @driver.page_source.include? "Add Position"
   raise "Error position" unless @driver.page_source.include? "New position:"
@@ -321,6 +322,7 @@ When(/^I add the postion "([^"]*)" for election "([^"]*)"$/) do |position_name, 
 end
 
 When(/^I delete the election "([^"]*)"$/) do |election_name|
+  # not done yet
   raise "Error delete1" unless @driver.page_source.include? election_name
   delete_name = "delete_election_" + election_name
   delete_elem = @driver.find_element(:id => delete_name)
