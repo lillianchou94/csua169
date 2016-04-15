@@ -92,16 +92,15 @@ respond_to :js
     org = Election.find_by(:election_id => @election_id).organization
     curr_user = User.find_by(:user_email => @current_user_email)
     prime = curr_user.user_prime
-    prime = 3 # THIS NEEDS TO BE USER PRIME but the user prime is not initialized
-    puts "USER"
-    puts curr_user.user_name # current user name is "just"?
-    # puts "PRIMEEEEEE"
-    # puts prime
+    prime = 3 # NEEDS TO BE USER PRIME? but user prime is not initialized
+    # puts "USER"
+    # puts curr_user.user_name # current user name is "just"?
     
     if not Nomination.where(:position => @position_id).blank?
       exist = Nomination.find_by(:position => @position_id)
-      # if the current user prime exists in the prime product of the given position
-      # user cannot nominate again for the same position
+      
+      # if current user prime exists in prime product of given position then
+      # user cannot nominate again for same position
       if exist.prime_product != 0
         has_nominated = exist.prime_product.to_f / prime.to_f
         if has_nominated % 1 == 0

@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
   self.table_name = "users"
   # has_many :elections
   # has_many :nominations
-  attr_accessible :user_name, :provider, :uid, :oauth_token, :oauth_expires_at, :user_email, :organization, :admin_status, :user_prime, :votes
+  attr_accessible :user_name, :is_active, :provider, :uid, :oauth_token, :oauth_expires_at, :user_email, :organization, :admin_status, :user_prime, :votes, :has_voted
 
   def self.makeInactive(organization)
     org_user = User.where(organization: organization)
@@ -29,7 +29,7 @@ class User < ActiveRecord::Base
   end 
 
   def self.from_omniauth(auth)
-    puts "auth is #{auth}"
+    #puts "auth is #{auth}"
     where(provider: auth.provider, uid: auth.uid).first_or_initialize do |user|
       # if user.nil?
       #   user = User.create(:user_name => 'Fake User 1')

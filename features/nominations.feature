@@ -7,7 +7,7 @@ Feature: Nominate candidates
   
   Scenario: Nominate a candidate
     # during nomination phase
-    Given I am signed in as "member"
+    Given I am logged in as a member
     And I am on the dashboard page for a member 
     Then I should see "test election"
     When I press "test candidate"
@@ -29,22 +29,25 @@ Feature: Nominate candidates
     Then I should see "Nominate"
     When I press "Nominate"
     Then I should see "You have already nominated a member."
+    Then I log out
   
   Scenario: Not nomination phase
-    Given I am signed in as "member"
+    Given I am logged in as a member
     And I am on the dashboard page for a member 
     Then I should see "test election"
     When I press "test candidate"
     And it is not the nomination phase
     Then I should not see "Nominate"
+    Then I log out
     
   Scenario: Non-special admin cannot start nomination phase
-    Given I am signed in as "member"
+    Given I am logged in as a member
     And I am on the dashboard page for a member
     Then I should see "test election"
     When I press "test candidate"
     And it is not the nomination phase
     Then I should not see "Nominate"
+    Then I log out
     
   Scenario: Special admin start nomination phase
     Given I am signed in as "specialadmin"
@@ -61,7 +64,7 @@ Feature: Nominate candidates
     And I should see "Submit"
     
   Scenario: Nominate invalid candidate
-    Given I am signed in as "member"
+    Given I am logged in as a member
     And I am on the dashboard page for a member 
     Then I should see "test election"
     When I press "test candidate"
@@ -74,3 +77,4 @@ Feature: Nominate candidates
     And I should see "President"
     And I should see "Email"
     And I should see "Submit"
+    Then I log out
