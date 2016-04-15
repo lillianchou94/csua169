@@ -1,18 +1,23 @@
 <!-- main dashboard -->
 <script>
   function upload_csv(formData, organization){
-    $.ajax({
-      url: "/election_import",
-      data: {'file': formData, 'organization': organization},
-      processData: false, 
-      contentType: false, 
-      type: 'POST',
-      success: function(res)
-      { 
-        $('#election_settings').html(res)
-        alert('CSV file imported')
-      }
-    });
+    var csvFile = $('#csvFile').val();
+    if (csvFile == null){
+      alert('Please attach a valid CSV file')
+    } else{
+      $.ajax({
+        url: "/election_import",
+        data: {'file': csvFile, 'organization': organization},
+        processData: false, 
+        contentType: false, 
+        type: 'POST',
+        success: function(res)
+        { 
+          $('#election_settings').html(res)
+          alert('CSV file imported')
+        }
+      });
+    }
   };
   
   function submit_individual(organization, admin_status){
@@ -39,8 +44,8 @@
     })}; //Submit the form
   };
   function delete_individual(organization, admin_status){
-    var user_name = $('#add_user_name_id').val();
-    var user_email = $('#add_user_email_id').val();
+    var user_name = $('#del_user_name_id').val();
+    var user_email = $('#del_user_email_id').val();
     
     if(user_name == "" || user_email == "") {
       alert('User must have a name and email');
@@ -92,8 +97,8 @@
       <h4>Add/Delete an Admin for <%=org%></h4>
         Name: <input type="text" id="add_user_name_id" name="user_name"/> <br/>
         Email: <input type="text" id="add_user_email_id" name="user_email" /> <br/>
-        <button value="admin_individual_form_add" onclick="submit_individual('<%=org%>', '1')">Add</button>
-        <button value="admin_individual_form_delete" onclick="delete_individual('user_name', 'user_email', '<%=org%>', '1')">Delete</button>
+        <button value="admin_individual_form_add" onclick="submit_individual('<%=org%>', 1); return false;">Add</button>
+        <button value="admin_individual_form_delete" onclick="delete_individual('<%=org%>', 1); return false;">Delete</button>
     </form>
    
     <div id="dvImportSegments" class="fileupload ">
@@ -102,8 +107,8 @@
             <legend>Upload a CSV File for Admins</legend>
             Make sure you only have the following columns in this order: Name, Email
             <br> 
-                <input type="file" name="File Upload" id="txtFileUpload" accept=".csv" />
-                <button value="Submit" onclick="upload_csv('txtFileUpload', <%=org%>)">Upload CSV</button>
+                <input type="file" name="File Upload" id="csvFile" accept=".csv" />
+                <button value="Submit" onclick="upload_csv('csvFile', <%=org%>); return false;">Upload CSV</button>
          </fieldset>
       </form>
     </div>
@@ -132,8 +137,8 @@
     <h4>Add/Delete a Member for <%=org%></h4>
       Name: <input type="text" id="del_user_name_id" name="user_name"/> <br/>
       Email: <input type="text" id="del_user_email_id" name="user_email" /> <br/>
-      <button value="member_individual_form_submit" onclick="submit_individual('user_name', 'user_email', <%=org%>, 0)">Add</button>
-      <button value="member_individual_form_delete" onclick="delete_individual('user_name', 'user_email', <%=org%>, 0)">Delete</button>
+      <button value="member_individual_form_submit" onclick="submit_individual(<%=org%>, 0); return false;">Add</button>
+      <button value="member_individual_form_delete" onclick="delete_individual(<%=org%>, 0); return false;">Delete</button>
     </form>  
       
     <div id="dvImportSegments" class="fileupload ">
@@ -142,8 +147,8 @@
             <legend>Upload a CSV File for Members</legend>
             Make sure you only have the following columns in this order: Name, Email
             <br>
-                <input type="file" name="File Upload" id="txtFileUpload" accept=".csv" />
-                <button value="Submit" onclick="upload_csv('txtFileUpload')">Upload CSV</button>
+                <input type="file" name="File Upload" id="csvFile" accept=".csv" />
+                <button value="Submit" onclick="upload_csv('csvFile'); return false;">Upload CSV</button>
          </fieldset>
       </form>
     </div>

@@ -40,9 +40,9 @@
 				  	<input id="new_org" name="new_org" type="text"><br>
 				  	<% if current_user != nil %>
       			<% puts "this is #{current_user}" %>
-      			<label>Super Admin Name:</label>
+      			<label>Admin Name:</label>
 				  	<input id="super_admin_name" name="super_admin_name" type="text" value=<%= current_user.user_name%>><br>
-				  	<label>Super Admin Email:</label>
+				  	<label>Admin Email:</label>
 				  	<input id="super_admin_email" name="super_admin_email" type="text" value=<%= current_user.user_email%>><br>
 			      <% end %>
 				    <input id="org_submit" type="submit" value="Create">

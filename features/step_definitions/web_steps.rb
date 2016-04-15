@@ -107,11 +107,17 @@ When /^(?:|I )attach the file "([^"]*)" to "([^"]*)"$/ do |path, field|
 end
 
 Then /^(?:|I )should see "([^"]*)"$/ do |text|
-  if page.respond_to? :should
-    page.should have_content(text)
-  else
-    assert page.has_content?(text)
-  end
+  
+  wait = Selenium::WebDriver::Wait.new(timeout: 20)
+  wait.until { @driver.page_source.include? "Add election" }
+  
+  raise "Error "+text+" not found" unless @driver.execute_script("return $(':contains("+text+")').length;") != 0
+
+  #if page.respond_to? :should
+  #  page.should have_content(text)
+  #else
+  #  assert page.has_content?(text)
+  #end
 end
 
 Then /^(?:|I )should see \/([^\/]*)\/$/ do |regexp|
@@ -323,7 +329,12 @@ Given(/^I am logged in as an admin$/) do
 end
 
 Then(/^I see "([^"]*)"$/) do |text|
-  raise "Not found error" unless @driver.page_source.include? text
+  # seeing without starting the driver
+  if page.respond_to? :should
+    page.should have_content(text)
+  else
+    assert page.has_content?(text)
+  end
 end
 
 Then(/^I log out$/) do

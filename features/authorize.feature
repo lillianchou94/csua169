@@ -5,17 +5,17 @@ Feature: secure login
   
   Scenario: logging in (/dashboard/home)
     Given I am on the dashboard page as an admin
-    Then I should see "CSUA Voting System"
-    And I should see "Sign in with Google"
+    Then I see "CSUA Voting System"
+    And I see "Sign in with Google"
     Then I am logged in as an admin
-    And I see "Hello,"
-    And I see "Sign out"
-    # Given I am on the show elections page for an admin
-    # Then I should see "Add election"
-    # When I press "Add election"
-    # Then I am on the signout page
+    And I should see "Hello,"
+    And I should see "Sign out"
+    Given I am on the show elections page for an admin
+    Then I should see "Add election"
+    When I press "Add election"
+    Then I am on the signout page
     And I log out
   
   # Scenario: authentication failure page
   #   Given I am on the authentication failure page
-  #   Then I should see "CSUA Voting System"
+  #   Then I see "CSUA Voting System"

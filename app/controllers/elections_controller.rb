@@ -50,15 +50,21 @@ respond_to :js
   
   def add_individual
     User.create(:user_name => params[:user_name], :user_email => params[:user_email], :organization => params[:organization], :admin_status => params[:admin_status])
+    redirect_to :action => 'show_settings', notice: "#{:user_name} Added."
   end
   
   def delete_individual
-    user_to_delete = User.where(:user_name => params[:user_name], :user_email => params[:user_email], :organization => params[:organization])
-    User.delete(user_to_delete[0].id)
+    if User.exists? (:user_name => params[:user_name], :user_email => params[:user_email], :organization => params[:organization]){
+      user_to_delete = User.where(:user_name => params[:user_name], :user_email => params[:user_email], :organization => params[:organization])
+      User.delete(user_to_delete[0].id)
+      redirect_to :action => 'show_settings', notice: "#{user_to_delete} imported."
+    } else{
+      redirect_to :action => 'show_settings', notice: "#{user_to_delete} not found."
+    }
+    
   end
   
   def show_nominations
-    
     @election_id = params.key?(:election_id) ? params[:election_id] : ''
     @position_id = params.key?(:position_id) ? params[:position_id] : ''
     
@@ -81,6 +87,10 @@ respond_to :js
     puts "WHOA THIS WORKED??"
     
     @current_user_email = params.key?(:user_email) ? params[:user_email] : ''
+    @prime = User.where(user_email = @current_user_email).user_prime
+    @org = Election.where(election_id = @election_id).organization
+    Nomination.create!(:election_id => @election_id, :organization => @org, :user_id => @user_selected, :threshold => 1, :position => @position_id, :num_seconds => 0, :prime_product => @prime)    
+    
     render 'elections/submit_nominations.html.erb'
   end
   
@@ -156,10 +166,10 @@ respond_to :js
   end
 
   def show_organizations_add
-    if params[:new_org] != nil
-    #   election_param_name = params[:new_election_name]
-    #   election_param_org = params[:new_election_org]
-    #   embed_livestream = params[:new_election_livestream]
+    if params[:new_org] != nil && params[:super_admin_name] != nil && params[:super_admin_email] != nil
+      org_param_name = params[:new_org]
+      super_admin_param_name = params[:super_admin_name]
+      super_admin_param_email = params[:super_admin_email]
     #   election_id_temp = election_param_org+DateTime.now.strftime("%m%d%Y").to_s
     #   if Election.find_by(election_id: election_id_temp) != nil
     #     count = 1
