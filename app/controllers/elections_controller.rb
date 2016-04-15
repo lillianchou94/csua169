@@ -54,13 +54,13 @@ respond_to :js
   end
   
   def delete_individual
-    if User.exists? (:user_name => params[:user_name], :user_email => params[:user_email], :organization => params[:organization]){
-      user_to_delete = User.where(:user_name => params[:user_name], :user_email => params[:user_email], :organization => params[:organization])
-      User.delete(user_to_delete[0].id)
-      redirect_to :action => 'show_settings', notice: "#{user_to_delete} imported."
-    } else{
-      redirect_to :action => 'show_settings', notice: "#{user_to_delete} not found."
-    }
+    # if User.exists? (:user_name => params[:user_name], :user_email => params[:user_email], :organization => params[:organization])
+    #   user_to_delete = User.where(:user_name => params[:user_name], :user_email => params[:user_email], :organization => params[:organization])
+    #   User.delete(user_to_delete[0].id)
+    #   redirect_to :action => 'show_settings', notice: "#{user_to_delete} imported."
+    # else
+    #   redirect_to :action => 'show_settings', notice: "#{user_to_delete} not found."
+    
     
   end
   
