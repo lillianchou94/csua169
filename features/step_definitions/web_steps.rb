@@ -263,15 +263,16 @@ When(/^I add the election called "([^"]*)"$/) do |election_name|
   raise "Error election" unless @driver.page_source.include? "New election name:"
   raise "Error livestream" unless @driver.page_source.include? "YT livestream (optional):"
   raise "Error submit" unless @driver.page_source.include? "submit"
+  
+  demo_div = driver.find_element(:id, 'electionmodal')
+
+  puts demo_div.attribute('innerHTML')
+  puts driver.execute_script("return arguments[0].innerHTML", demo_div)
+
+  puts demo_div.attribute('textContent')
+  puts driver.execute_script("return arguments[0].textContent", demo_div)
+  
   org_element = @driver.find_element(:id => 'new_election_org')
-  
-  # div = @driver.find_element(:id, 'electionmodal')
-  # puts div.attribute('textContent')
-  # puts @driver.execute_script("return arguments[0].textContent", div)
-  
-  # org_elem = div.find_element(:id, 'new_election_org')
-  # org_elem.send_keys "election1"
-  
   org_element.send_keys "org1"
   org_element.submit
   election_elem = @driver.find_element(:id => 'new_election_name')
