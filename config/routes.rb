@@ -16,6 +16,11 @@ Rails.application.routes.draw do
   #root :to => redirect('/dashboard/home')
   get "/dashboard/*page" => "elections#show"
   get "/election_show_elections" => "elections#show_elections"
+  match "/election_add_individual" => "elections#add_individual"
+  match "/election_import" => "elections#import"
+  match "election_delete_individual" => "elections#delete_individual
+  "
+
 
   get "/login" => "elections#login"
   match "/election_add_organization" => "elections#show_organizations_add", via: [:get,:post]

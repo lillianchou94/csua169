@@ -15,8 +15,11 @@
     });
   };
   
-  function submit_individual(user_name, user_email, organization, admin_status){
-    if(user_name == null || user_email == null) {
+  function submit_individual(organization, admin_status){
+    var user_name = $('#user_name_id').val();
+    var user_email = $('#user_email_id').val();
+    
+    if(user_name == "" || user_email == "") {
       alert('User must have a name and email');
     } else{
     $.ajax({
@@ -80,9 +83,9 @@
     
     <form name="admin_individual_form" id="admin_individual_form">
       <h4>Add/Delete an Admin for <%=org%></h4>
-        Name: <input type="text" name="user_name"/> <br/>
-        Email: <input type="text" name="user_email" /> <br/>
-        <button value="admin_individual_form_add" onclick="submit_individual('user_name', 'user_email', '<%=org%>', '1')">Add</button>
+        Name: <input type="text" id="user_name_id" name="user_name"/> <br/>
+        Email: <input type="text" id="user_email_id" name="user_email" /> <br/>
+        <button value="admin_individual_form_add" onclick="submit_individual('<%=org%>', '1')">Add</button>
         <button value="admin_individual_form_delete" onclick="delete_individual('user_name', 'user_email', '<%=org%>', '1')">Delete</button>
     </form>
    

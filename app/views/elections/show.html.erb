@@ -41,7 +41,7 @@
 				  	<% if current_user != nil %>
       			<% puts "this is #{current_user}" %>
       			<label>Super Admin Name:</label>
-				  	<input id="super_admin_name" name="super_admin_name" type="text" value=<%= current_user.user_name%>><br>
+				  	<input id="super_admin_name" name="super_admin_name" type="text" value=<%= current_user.user_name.partition(" ")%>><br>
 				  	<label>Super Admin Email:</label>
 				  	<input id="super_admin_email" name="super_admin_email" type="text" value=<%= current_user.user_email%>><br>
 			      <% end %>
