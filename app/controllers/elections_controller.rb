@@ -163,10 +163,10 @@ respond_to :js
   end
 
   def show_organizations_add
-    if params[:new_org] != nil && params[:super_admin_name] != nil && params[:super_admin_email] != nil
-      org_param_name = params[:new_org]
-      super_admin_param_name = params[:super_admin_name]
-      super_admin_param_email = params[:super_admin_email]
+    # if params[:new_org] != nil && params[:super_admin_name] != nil && params[:super_admin_email] != nil
+      # org_param_name = params[:new_org]
+      # super_admin_param_name = params[:super_admin_name]
+      # super_admin_param_email = params[:super_admin_email]
     #   election_id_temp = election_param_org+DateTime.now.strftime("%m%d%Y").to_s
     #   if Election.find_by(election_id: election_id_temp) != nil
     #     count = 1
@@ -179,7 +179,7 @@ respond_to :js
     #   Election.create!(:election_livestream => embed_livestream, :election_id => election_id_temp, :election_name => election_param_name, :election_time => election_time_new, :organization => "", :position => "", :user_id => "", :num_votes => 0, :did_win => false)    
     #   @election_list = Election.all
     #   @position_list_acc = @@position_list
-    end
+    # end
     render 'elections/show_elections.html.erb'
   end
   
