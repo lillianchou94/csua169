@@ -1,5 +1,12 @@
 <!-- left election panel -->
   <script>
+  function open_organization_modal() {
+    $(function() {
+  		$("#hiddenFrameID").empty();
+  		$("#organizationmodal").dialog({autoOpen: false, modal:true});
+  		$("#organizationmodal").dialog("open");
+  	});
+  };
   
   function open_election_modal() {
   	$(function() {

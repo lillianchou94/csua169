@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   get "/election_show_elections" => "elections#show_elections"
 
   get "/login" => "elections#login"
+  match "/election_add_organization" => "elections#show_organizations_add", via: [:get,:post]
   match "/election_add_election" => "elections#show_elections_add", via: [:get,:post]
   match "/election_delete_election" => "elections#show_elections_delete", via: [:get,:post]
   match "/election_add_position" => "elections#show_positions_add", via: [:get,:post]

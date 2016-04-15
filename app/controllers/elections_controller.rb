@@ -154,6 +154,27 @@ respond_to :js
   def login
     render 'login.html.erb'
   end
+
+  def show_organizations_add
+    # if params[:new_election_name] != nil && params[:new_election_org] != nil
+    #   election_param_name = params[:new_election_name]
+    #   election_param_org = params[:new_election_org]
+    #   embed_livestream = params[:new_election_livestream]
+    #   election_id_temp = election_param_org+DateTime.now.strftime("%m%d%Y").to_s
+    #   if Election.find_by(election_id: election_id_temp) != nil
+    #     count = 1
+    #     while Election.find_by(election_id: election_id_temp+"_"+count.to_s) != nil
+    #       count += 1
+    #     end
+    #     election_id_temp += "_"+count.to_s
+    #   end
+    #   election_time_new = DateTime.now.strftime("%m%d%Y").to_s
+    #   Election.create!(:election_livestream => embed_livestream, :election_id => election_id_temp, :election_name => election_param_name, :election_time => election_time_new, :organization => "", :position => "", :user_id => "", :num_votes => 0, :did_win => false)    
+    #   @election_list = Election.all
+    #   @position_list_acc = @@position_list
+    # end
+    render 'elections/show_elections.html.erb'
+  end
   
   def show_elections_add
     if params[:new_election_name] != nil && params[:new_election_org] != nil

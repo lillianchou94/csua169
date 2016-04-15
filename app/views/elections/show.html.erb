@@ -33,7 +33,12 @@
 			    <!-- election panel code -->
 				<div class="election_column" id="election_content" style="float:left"></div>
 
-			    <div id="orgmodal" title="Add Organization"; style="display:none">
+			    <div id="organizationmodal" title="Add Organization"; style="display:none">
+			    <form action="/election_add_organization" method="post" target="hiddenFrame" id="positionform" onsubmit="set_election_id(); setTimeout(function () { window.location.reload(); }, 10)">
+				  	<input type='hidden' name='<%=request_forgery_protection_token.to_s%>' value="<%=form_authenticity_token%>">
+				  	<label>New organization name:</label>
+				  	<input id="new_org" name="new_org" type="text"><br>
+				  </form>
 				</div>
 
 			    
@@ -68,7 +73,7 @@
 				  </form>
 				</div>
 			</div>
-			<div style="width:10px"></div>
+			<div style="width:10px">	</div>
 			<div id="main_page" style="border:1px solid gray; height:100%">
 			    <!-- main dashboard -->
 			    <div class="election_dashboard" id="election_dashboard" style="float:left">This is the election dashboard stuff</div>
