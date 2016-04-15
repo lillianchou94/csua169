@@ -49,19 +49,23 @@ respond_to :js
   end
   
   def add_individual
-    User.create(:user_name => params[:user_name], :user_email => params[:user_email], :organization => params[:organization], :admin_status => params[:admin_status])
-    redirect_to :action => 'show_settings', notice: "#{:user_name} Added."
+    user = User.where(:user_name => params[:user_name], :user_email => params[:user_email], :organization => params[:organization], :admin_status => params[:admin_status])
+    if user.count > 0
+      redirect_to :action => 'show_settings', notice: "User already exist"
+    else
+      User.create!(:user_name => params[:user_name], :user_email => params[:user_email], :organization => params[:organization], :admin_status => params[:admin_status])
+      redirect_to :action => 'show_settings', notice: "#{:user_name} Added."
+    end
   end
   
   def delete_individual
-    # if User.exists? (:user_name => params[:user_name], :user_email => params[:user_email], :organization => params[:organization])
-    #   user_to_delete = User.where(:user_name => params[:user_name], :user_email => params[:user_email], :organization => params[:organization])
-    #   User.delete(user_to_delete[0].id)
-    #   redirect_to :action => 'show_settings', notice: "#{user_to_delete} imported."
-    # else
-    #   redirect_to :action => 'show_settings', notice: "#{user_to_delete} not found."
-    
-    
+    user = User.where(:user_name => params[:user_name], :user_email => params[:user_email], :organization => params[:organization])
+    if user.count > 0
+      User.delete(user)
+      redirect_to :action => 'show_settings', notice: "#{user_to_delete} deleted."
+    else
+      redirect_to :action => 'show_settings', notice: "#{user_to_delete} not found."
+    end
   end
   
   def show_nominations
@@ -86,8 +90,8 @@ respond_to :js
     @user_selected = params.key?(:user_selected) ? params[:user_selected] : ''
     @current_user_email = params.key?(:user_email) ? params[:user_email] : ''
     
-    prime = User.where(user_email: @current_user_email).user_prime
-    org = Election.where(election_id: @election_id).organization
+    prime = User.find_by(:user_email => @current_user_email).user_prime
+    org = Election.find_by(:election_id => @election_id).organization
     Nomination.create!(:election_id => @election_id, :organization => org, :user_id => @user_selected, :threshold => 1, :position => @position_id, :num_seconds => 0, :prime_product => prime)
     
     render 'elections/submit_nominations.html.erb'
@@ -165,10 +169,10 @@ respond_to :js
   end
 
   def show_organizations_add
-    # if params[:new_org] != nil && params[:super_admin_name] != nil && params[:super_admin_email] != nil
-      # org_param_name = params[:new_org]
-      # super_admin_param_name = params[:super_admin_name]
-      # super_admin_param_email = params[:super_admin_email]
+    if params[:new_org] != nil && params[:super_admin_name] != nil && params[:super_admin_email] != nil
+      org_param_name = params[:new_org]
+      super_admin_param_name = params[:super_admin_name]
+      super_admin_param_email = params[:super_admin_email]
     #   election_id_temp = election_param_org+DateTime.now.strftime("%m%d%Y").to_s
     #   if Election.find_by(election_id: election_id_temp) != nil
     #     count = 1
@@ -181,7 +185,7 @@ respond_to :js
     #   Election.create!(:election_livestream => embed_livestream, :election_id => election_id_temp, :election_name => election_param_name, :election_time => election_time_new, :organization => "", :position => "", :user_id => "", :num_votes => 0, :did_win => false)    
     #   @election_list = Election.all
     #   @position_list_acc = @@position_list
-    # end
+    end
     render 'elections/show_elections.html.erb'
   end
   

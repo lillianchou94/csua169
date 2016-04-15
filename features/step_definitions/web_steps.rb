@@ -107,10 +107,8 @@ When /^(?:|I )attach the file "([^"]*)" to "([^"]*)"$/ do |path, field|
 end
 
 Then /^(?:|I )should see "([^"]*)"$/ do |text|
-  
   wait = Selenium::WebDriver::Wait.new(timeout: 20)
   wait.until { @driver.page_source.include? "Add election" }
-  
   raise "Error "+text+" not found" unless @driver.execute_script("return $(':contains("+text+")').length;") != 0
 
   #if page.respond_to? :should
@@ -131,11 +129,14 @@ Then /^(?:|I )should see \/([^\/]*)\/$/ do |regexp|
 end
 
 Then /^(?:|I )should not see "([^"]*)"$/ do |text|
-  if page.respond_to? :should
-    page.should have_no_content(text)
-  else
-    assert page.has_no_content?(text)
-  end
+  wait = Selenium::WebDriver::Wait.new(timeout: 20)
+  wait.until { @driver.page_source.include? "Add election" }
+  raise "Error "+text+" found" unless not @driver.execute_script("return $(':contains("+text+")').length;") != 0
+  # if page.respond_to? :should
+  #   page.should have_no_content(text)
+  # else
+  #   assert page.has_no_content?(text)
+  # end
 end
 
 Then /^(?:|I )should not see \/([^\/]*)\/$/ do |regexp|
@@ -263,53 +264,76 @@ Then /^show me the page$/ do
   save_and_open_page
 end
 
-When(/^I add the election called "([^"]*)"$/) do |election_name|
+When(/^I add the election called "([^"]*)" for the organization "([^"]*)"$/) do |election_name, org_name|
   wait = Selenium::WebDriver::Wait.new(timeout: 20)
-  #wait.until { @driver.page_source.include? "open_election_modal()" }
-  #@driver.execute_script("open_election_modal()")
   raise "Error add" unless @driver.page_source.include? "Add Election"
   raise "Error org" unless @driver.page_source.include? "Organization:"
-  #raise "Error election" unless @driver.page_source.include? "New election name:"
-  #raise "Error livestream" unless @driver.page_source.include? "YT livestream (optional):"
-  #raise "Error submit" unless @driver.page_source.include? "submit"
   
-  # demo_div = @driver.find_element(:id, 'electionmodal')
-  # puts demo_div.attribute('innerHTML')
-  # puts "=================================================="
-  # puts @driver.execute_script("return arguments[0].innerHTML", demo_div)
-  # puts demo_div.attribute('textContent')
-  # puts @driver.execute_script("return arguments[0].textContent", demo_div)
-  #puts "#{@driver.page_source}"
-  org_element = @driver.find_element(:id => 'new_election_org')
   @driver.execute_script("$('#new_election_org').parents().css({'display':'block','visibility':'visible'})")
-  org_element.click
-  org_element.send_keys "org1"
-  election_elem = @driver.find_element(:id => 'new_election_name')
   @driver.execute_script("$('#new_election_name').parents().css({'display':'block','visibility':'visible'})")
-  election_elem.click
-  election_elem.send_keys "election1"
-  org_submit = @driver.find_element(:id => 'election_submit')
   @driver.execute_script("$('#election_submit').parents().css({'display':'block','visibility':'visible'})")
-  org_submit.click
+  org_element = @driver.find_element(:id => 'new_election_org')
+  org_element.click
+  org_element.send_keys org_name
+  election_elem = @driver.find_element(:id => 'new_election_name')
+  election_elem.click
+  election_elem.send_keys election_name
+  org_submit = @driver.find_element(:id => 'electionform').submit
   
   wait = Selenium::WebDriver::Wait.new(timeout: 20)
   wait.until { @driver.page_source.include? "Add election" }
+  wait.until { @driver.page_source.include? election_name }
+  
+  #puts "CSUA is #{@driver.execute_script("return $(':contains(CSUA)').length;")}"
+  #puts "election1 is #{@driver.execute_script("return $(':contains(election1)').length;")}"
+  #puts "election2 is #{@driver.execute_script("return $(':contains(election2)').length;")}"
+  raise "Error election not found" unless @driver.page_source.include? election_name
+  #raise "Error election 1 not found" unless @driver.execute_script("return $(':contains(election1)').length;") != 0
+  #raise "Error election 2 not found" unless @driver.execute_script("return $(':contains(election2)').length;") != 0
+  #raise "Error election add fail" unless @driver.page_source.include? "election1"
+
+end
+
+When(/^I add the postion "([^"]*)" for election "([^"]*)"$/) do |position_name, election_name|
+  wait = Selenium::WebDriver::Wait.new(timeout: 20)
+  raise "Error add position" unless @driver.page_source.include? "Add Position"
+  raise "Error position" unless @driver.page_source.include? "New position:"
+  
+  @driver.execute_script("$('#new_position_name').parents().css({'display':'block','visibility':'visible'})")
+  position_element = @driver.find_element(:id => 'new_position_name')
+  position_element.click
+  position_element.send_keys position_name
+  position_submit = @driver.find_element(:id => 'positionform').submit
+  
+  wait = Selenium::WebDriver::Wait.new(timeout: 20)
+  wait.until { @driver.page_source.include? "Add position" }
+  wait.until { @driver.page_source.include? position_name }
   #puts "#{@driver.page_source}"
   
   #puts "CSUA is #{@driver.execute_script("return $(':contains(CSUA)').length;")}"
   #puts "election1 is #{@driver.execute_script("return $(':contains(election1)').length;")}"
   #puts "election2 is #{@driver.execute_script("return $(':contains(election2)').length;")}"
-  raise "Error election 1 not found" unless @driver.execute_script("return $(':contains(election1)').length;") != 0
+  raise "Error position not found" unless @driver.page_source.include? "position_name"
+  #raise "Error election 1 not found" unless @driver.execute_script("return $(':contains(election1)').length;") != 0
   #raise "Error election 2 not found" unless @driver.execute_script("return $(':contains(election2)').length;") != 0
   #raise "Error election add fail" unless @driver.page_source.include? "election1"
-  
 
+end
+
+When(/^I delete the election "([^"]*)"$/) do |election_name|
+  raise "Error delete1" unless @driver.page_source.include? election_name
+  delete_name = "delete_election_" + election_name
+  delete_elem = @driver.find_element(:id => delete_name)
+  puts @driver.page_source
+  delete_elem.click
+  raise "Error delete2" unless not @driver.page_source.include? election_name
+  
 end
 
 Given(/^I am logged in as an admin$/) do
   
   @driver = Selenium::WebDriver.for :firefox
-  @driver.navigate.to "https://csua-169-lillianchou94.c9users.io"
+  @driver.navigate.to "https://csua-169.herokuapp.com"
   @driver.manage.timeouts.implicit_wait = 10
 
   raise "Error CSUA" unless @driver.page_source.include? "CSUA"
@@ -344,9 +368,6 @@ end
 Then(/^I should see an element with id "([^"]*)"$/) do |id|
   # c = page.find(id)   
   # assert page.has_xpath(c)
-end
-
-When (/^(?:|I ) press Delete election for "([^"]*)"$/) do |election_name|
 end
 
 When(/^I add the organization called "([^"]*)"$/) do |org_name|

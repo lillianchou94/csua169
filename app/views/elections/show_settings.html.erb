@@ -1,9 +1,10 @@
 <!-- main dashboard -->
 <script>
   function upload_csv(formData, organization){
-    var csvFile = $('#csvFile').val();
+    var csvFile = formData;
+    var organization = organization;
     if (csvFile == null){
-      alert('Please attach a valid CSV file')
+      alert('Please attach a valid CSV file');
     } else{
       $.ajax({
         url: "/election_import",
@@ -13,39 +14,61 @@
         type: 'POST',
         success: function(res)
         { 
-          $('#election_settings').html(res)
-          alert('CSV file imported')
+          $("#hiddenFrameID").empty();
+          alert('CSV file imported');
         }
       });
     }
   };
   
   function submit_individual(organization, admin_status){
-    var user_name = $('#add_user_name_id').val();
-    var user_email = $('#add_user_email_id').val();
+    if (admin_status == '1'){
+      var user_id = "#" + organization + "_admin_name";
+      var email_id = "#" + organization + "_admin_email";
+    }
+    else{
+      var user_id = "#" + organization + "_member_name";
+      var email_id = "#" + organization + "_member_email";
+    }
+
+    var user_name = $(user_id).val();
+    var user_email = $(email_id).val();
+    var organization = organization;
+    var admin_status = admin_status;
     
     if(user_name == "" || user_email == "") {
       alert('User must have a name and email');
-    } else{
-    $.ajax({
-      url: "/election_add_individual",
-      type: 'POST',
-      data: {'user_email':user_email,
-               'organization':organization,
-               'user_name':user_name,
-               'admin_status':admin_status
-        },
-      contentType: false,
-      cache: false,
-      processData:false,
-      success: function(res)
-      {
-      }
-    })}; //Submit the form
+    } 
+    else{
+      $.ajax({
+        url: "/election_add_individual",
+        type: 'POST',
+        data: {'user_email':user_email,
+                 'organization':organization,
+                 'user_name':user_name,
+                 'admin_status':admin_status
+          },
+        cache: false,
+        success: function(res)
+        {
+          $("#hiddenFrameID").empty();
+          alert('Added');
+        }
+      })}; //Submit the form
   };
   function delete_individual(organization, admin_status){
-    var user_name = $('#del_user_name_id').val();
-    var user_email = $('#del_user_email_id').val();
+    if (admin_status == '1'){
+      var user_id = "#" + organization + "_admin_name";
+      var email_id = "#" + organization + "_admin_email";
+    }
+    else{
+      var user_id = "#" + organization + "_member_name";
+      var email_id = "#" + organization + "_member_email";
+    }
+    var user_name = $(user_id).val();
+    var user_email = $(email_id).val();
+    var organization = organization;
+    var admin_status = admin_status;
     
     if(user_name == "" || user_email == "") {
       alert('User must have a name and email');
@@ -57,11 +80,11 @@
              'organization':organization,
              'user_name':user_name
       },
-      contentType: false,
       cache: false,
-      processData:false,
       success: function(res)
       {
+        $("#hiddenFrameID").empty();
+        alert('Deleted');
       }
     }); 
   }
@@ -93,12 +116,12 @@
     <br>
     <div>
     
-    <form name="admin_individual_form" id="admin_individual_form">
+    <form name="admin_individual_form" id="admin_individual_form" target="hiddenFrame">
       <h4>Add/Delete an Admin for <%=org%></h4>
-        Name: <input type="text" id="add_user_name_id" name="user_name"/> <br/>
-        Email: <input type="text" id="add_user_email_id" name="user_email" /> <br/>
-        <button value="admin_individual_form_add" onclick="submit_individual('<%=org%>', 1); return false;">Add</button>
-        <button value="admin_individual_form_delete" onclick="delete_individual('<%=org%>', 1); return false;">Delete</button>
+        Name: <input type="text" id="<%=org%>_admin_name" name="user_name"/> <br/>
+        Email: <input type="text" id="<%=org%>_admin_email" name="user_email" /> <br/>
+        <button value="admin_individual_form_add" onclick="submit_individual('<%=org%>', '1'); return false;">Add</button>
+        <button value="admin_individual_form_delete" onclick="delete_individual('<%=org%>', '1'); return false;">Delete</button>
     </form>
    
     <div id="dvImportSegments" class="fileupload ">
@@ -133,16 +156,16 @@
     <br>
     <div>
     
-    <form name="member_individual_form" id="member_individual_form">
+    <form name="member_individual_form" id="member_individual_form" target="hiddenFrame">
     <h4>Add/Delete a Member for <%=org%></h4>
-      Name: <input type="text" id="del_user_name_id" name="user_name"/> <br/>
-      Email: <input type="text" id="del_user_email_id" name="user_email" /> <br/>
-      <button value="member_individual_form_submit" onclick="submit_individual(<%=org%>, 0); return false;">Add</button>
-      <button value="member_individual_form_delete" onclick="delete_individual(<%=org%>, 0); return false;">Delete</button>
+      Name: <input type="text" id="<%=org%>_member_name" name="user_name"/> <br/>
+      Email: <input type="text" id="<%=org%>_member_email" name="user_email" /> <br/>
+      <button value="member_individual_form_submit" onclick="submit_individual('<%=org%>', '0'); return false;">Add</button>
+      <button value="member_individual_form_delete" onclick="delete_individual('<%=org%>', '0'); return false;">Delete</button>
     </form>  
       
     <div id="dvImportSegments" class="fileupload ">
-      <form>
+      <form name="csv_form" id="csv_form" target="hiddenFrame">
         <fieldset>
             <legend>Upload a CSV File for Members</legend>
             Make sure you only have the following columns in this order: Name, Email
@@ -154,6 +177,6 @@
     </div>
 <% end %>
 
-
+<iframe name="hiddenFrame" class="hide" id="hiddenFrameID" style="display:none;height:1;width:1;"></iframe>
 
 

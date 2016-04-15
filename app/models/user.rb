@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   require 'csv'
+  require 'prime'
   self.table_name = "users"
   # has_many :elections
   # has_many :nominations
@@ -8,7 +9,7 @@ class User < ActiveRecord::Base
   def self.makeInactive(organization)
     org_user = User.where(organization: organization)
     org_user.each do |user|
-      user.is_active = false
+      user.update_attributes(:is_active, false)
     end
   end
 

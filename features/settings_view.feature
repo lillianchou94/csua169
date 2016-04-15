@@ -21,8 +21,8 @@ Feature: Admin Settings Page and Member Management
     And I should see "Members"
     And I should see "Admins"
     
-  Scenario: Default Settings Page: user that is not an admin for any org (sad path)
-    Given I am signed in as "Member A"
+  Scenario: Default Settings Page: user that is not an admin for CSUA (sad path)
+    Given I am logged in as an admin
     And I follow "Settings"
     Then I should not see "CSUA"
     And I should not see "HKN"
