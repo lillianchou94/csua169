@@ -1,0 +1,51 @@
+Running via Spring preloader in process 70996
+Using the default profile...
+Feature: Add and delete elections
+  As a admin
+  I want to be able to add elections and delete elections
+  So that I can start elections and end elections
+
+  Background:                        # features/add-delete_election.feature:6
+    Given I am logged in as an admin # features/step_definitions/web_steps.rb:303
+    And I see "Hello,"               # features/step_definitions/web_steps.rb:325
+
+  Scenario: Add election                                     # features/add-delete_election.feature:10
+    Given I am on the show elections page for an admin       # features/step_definitions/web_steps.rb:48
+    And I should see "Add election"                          # features/step_definitions/web_steps.rb:109
+    When I press "Add election"                              # features/step_definitions/web_steps.rb:56
+    And I add the election called "election1"                # features/step_definitions/web_steps.rb:260
+      CSUA is 4
+      election1 is 8
+      election2 is 0
+    Then I should be on the show elections page for an admin # features/step_definitions/web_steps.rb:234
+    And I should see "Add election"                          # features/step_definitions/web_steps.rb:109
+      #When I am on the election list page
+    Then I should see "election1"                            # features/step_definitions/web_steps.rb:109
+      expected to find text "election1" in "Add organization Add election Settings" (RSpec::Expectations::ExpectationNotMetError)
+      ./features/step_definitions/web_steps.rb:111:in `/^(?:|I )should see "([^"]*)"$/'
+      features/add-delete_election.feature:18:in `Then I should see "election1"'
+    Then I should see "New election name:"                   # features/step_definitions/web_steps.rb:109
+    Then I should see "Add position"                         # features/step_definitions/web_steps.rb:109
+    Then I log out                                           # features/step_definitions/web_steps.rb:329
+
+Failing Scenarios:
+cucumber features/add-delete_election.feature:10 # Scenario: Add election
+
+1 scenario (1 failed)
+12 steps (1 failed, 3 skipped, 8 passed)
+0m24.732s
+Coverage report generated for Cucumber Features to /home/ubuntu/workspace/iteration3/coverage. 34 / 207 LOC (16.43%) covered.
+/usr/local/rvm/rubies/ruby-2.3.0/lib/ruby/2.3.0/psych.rb:19:in `require': Interrupt
+	from /usr/local/rvm/rubies/ruby-2.3.0/lib/ruby/2.3.0/psych.rb:19:in `<top (required)>'
+	from /usr/local/rvm/rubies/ruby-2.3.0/lib/ruby/2.3.0/yaml.rb:6:in `require'
+	from /usr/local/rvm/rubies/ruby-2.3.0/lib/ruby/2.3.0/yaml.rb:6:in `<top (required)>'
+	from /usr/local/rvm/gems/ruby-2.3.0/gems/cucumber-2.3.2/lib/cucumber.rb:1:in `require'
+	from /usr/local/rvm/gems/ruby-2.3.0/gems/cucumber-2.3.2/lib/cucumber.rb:1:in `<top (required)>'
+	from /usr/local/rvm/gems/ruby-2.3.0/gems/cucumber-2.3.2/lib/cucumber/cli/main.rb:2:in `require'
+	from /usr/local/rvm/gems/ruby-2.3.0/gems/cucumber-2.3.2/lib/cucumber/cli/main.rb:2:in `<top (required)>'
+	from /usr/local/rvm/gems/ruby-2.3.0/gems/cucumber-2.3.2/bin/cucumber:6:in `require'
+	from /usr/local/rvm/gems/ruby-2.3.0/gems/cucumber-2.3.2/bin/cucumber:6:in `<top (required)>'
+	from /usr/local/rvm/gems/ruby-2.3.0/bin/cucumber:23:in `load'
+	from /usr/local/rvm/gems/ruby-2.3.0/bin/cucumber:23:in `<main>'
+	from /usr/local/rvm/gems/ruby-2.3.0/bin/ruby_executable_hooks:15:in `eval'
+	from /usr/local/rvm/gems/ruby-2.3.0/bin/ruby_executable_hooks:15:in `<main>'

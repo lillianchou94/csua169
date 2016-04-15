@@ -7,22 +7,21 @@
       processData: false, 
       contentType: false, 
       type: 'POST',
-      success: function(data)
+      success: function(res)
       { 
-        $('#election_settings').html(data)
+        $('#election_settings').html(res)
         alert('CSV file imported')
       }
     });
-  }
+  };
   
   function submit_individual(user_name, user_email, organization, admin_status){
     if(user_name == "" || user_email == "") {
       alert('User must have a name and email');
-    }
+    } else{
     $.ajax({
-      url: formURL,
+      url: /election_add_individual",
       type: 'POST',
-      mimeType:"/election_add_individual",
       data: {'user_email':user_email,
                'organization':organization,
                'user_name':user_name,
@@ -31,28 +30,27 @@
       contentType: false,
       cache: false,
       processData:false,
-      success: function(data, textStatus, jqXHR)
+      success: function(res)
       {
       }
-    }); //Submit the form
-    
-    function delete_individual(user_name, user_email, organization, admin_status){
-    $.ajax({
-      url: formURL,
-      type: 'POST',
-      mimeType:"/election_delete_individual",
-      data: {'user_email':user_email,
-               'organization':organization,
-               'user_name':user_name
-        },
-      contentType: false,
-      cache: false,
-      processData:false,
-      success: function(data, textStatus, jqXHR)
-      {
-      }
-    }); 
-  }
+    })}; //Submit the form
+  };
+  function delete_individual(user_name, user_email, organization, admin_status){
+  $.ajax({
+    url: "/election_delete_individual",
+    type: 'POST',
+    data: {'user_email':user_email,
+             'organization':organization,
+             'user_name':user_name
+      },
+    contentType: false,
+    cache: false,
+    processData:false,
+    success: function(res)
+    {
+    }
+  }); 
+};
   
 </script>
 
@@ -84,9 +82,8 @@
       <h4>Add/Delete an Admin for <%=org%></h4>
         Name: <input type="text" name="user_name"/> <br/>
         Email: <input type="text" name="user_email" /> <br/>
-        Organization: <input type="text" name="organization" value=<%=org%>><br/>
-        <button value="admin_individual_form_add" onclick="submit_individual('user_name', 'user_email', <%=org%>, <%=1=%>)">Add</button>
-        <button value="admin_individual_form_delete" onclick="delete_individual('user_name', 'user_email', <%=org%>, <%=1=%>)">Delete</button>
+        <button value="admin_individual_form_add" onclick="submit_individual('user_name', 'user_email', '<%=org%>', '1')">Add</button>
+        <button value="admin_individual_form_delete" onclick="delete_individual('user_name', 'user_email', '<%=org%>', '1')">Delete</button>
     </form>
    
     <div id="dvImportSegments" class="fileupload ">
@@ -121,13 +118,12 @@
     <br>
     <div>
     
-    <form name="admin_individual_form" id="admin_individual_form">
+    <form name="member_individual_form" id="member_individual_form">
     <h4>Add/Delete a Member for <%=org%></h4>
       Name: <input type="text" name="user_name"/> <br/>
       Email: <input type="text" name="user_email" /> <br/>
-      Organization: <input type="text" name="organization" value=<%=org%>><br/>
-      <button value="admin_individual_form_submit" onclick="submit_individual('user_name', 'user_email', <%=org%>, <%=0=%>)">Add</button>
-      <button value="admin_individual_form_delete" onclick="delete_individual('user_name', 'user_email', <%=org%>, <%=1=%>)">Delete</button>
+      <button value="member_individual_form_submit" onclick="submit_individual('user_name', 'user_email', <%=org%>, 0)">Add</button>
+      <button value="member_individual_form_delete" onclick="delete_individual('user_name', 'user_email', <%=org%>, 0)">Delete</button>
     </form>  
       
     <div id="dvImportSegments" class="fileupload ">

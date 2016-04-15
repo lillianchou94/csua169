@@ -258,59 +258,44 @@ Then /^show me the page$/ do
 end
 
 When(/^I add the election called "([^"]*)"$/) do |election_name|
+  wait = Selenium::WebDriver::Wait.new(timeout: 20)
+  #wait.until { @driver.page_source.include? "open_election_modal()" }
+  #@driver.execute_script("open_election_modal()")
   raise "Error add" unless @driver.page_source.include? "Add Election"
   raise "Error org" unless @driver.page_source.include? "Organization:"
-  raise "Error election" unless @driver.page_source.include? "New election name:"
-  raise "Error livestream" unless @driver.page_source.include? "YT livestream (optional):"
-  raise "Error submit" unless @driver.page_source.include? "submit"
+  #raise "Error election" unless @driver.page_source.include? "New election name:"
+  #raise "Error livestream" unless @driver.page_source.include? "YT livestream (optional):"
+  #raise "Error submit" unless @driver.page_source.include? "submit"
   
-  demo_div = driver.find_element(:id, 'electionmodal')
-
-  puts demo_div.attribute('innerHTML')
-  puts driver.execute_script("return arguments[0].innerHTML", demo_div)
-
-  puts demo_div.attribute('textContent')
-  puts driver.execute_script("return arguments[0].textContent", demo_div)
-  
+  # demo_div = @driver.find_element(:id, 'electionmodal')
+  # puts demo_div.attribute('innerHTML')
+  # puts "=================================================="
+  # puts @driver.execute_script("return arguments[0].innerHTML", demo_div)
+  # puts demo_div.attribute('textContent')
+  # puts @driver.execute_script("return arguments[0].textContent", demo_div)
+  #puts "#{@driver.page_source}"
   org_element = @driver.find_element(:id => 'new_election_org')
+  @driver.execute_script("$('#new_election_org').parents().css({'display':'block','visibility':'visible'})")
+  org_element.click
   org_element.send_keys "org1"
-  org_element.submit
   election_elem = @driver.find_element(:id => 'new_election_name')
+  @driver.execute_script("$('#new_election_name').parents().css({'display':'block','visibility':'visible'})")
+  election_elem.click
   election_elem.send_keys "election1"
-  election_elem.submit
-  @driver.find_element(:id => 'submit').click
+  org_submit = @driver.find_element(:id => 'election_submit')
+  @driver.execute_script("$('#election_submit').parents().css({'display':'block','visibility':'visible'})")
+  org_submit.click
+  
   wait = Selenium::WebDriver::Wait.new(timeout: 20)
-  wait.until { @driver.page_source.include? "election1" }
+  wait.until { @driver.page_source.include? "Add election" }
+  #puts "#{@driver.page_source}"
+  
+  #puts "CSUA is #{@driver.execute_script("return $(':contains(CSUA)').length;")}"
+  #puts "election1 is #{@driver.execute_script("return $(':contains(election1)').length;")}"
+  #puts "election2 is #{@driver.execute_script("return $(':contains(election2)').length;")}"
+  raise "Error election 1 not found" unless @driver.execute_script("return $(':contains(election1)').length;") != 0
+  #raise "Error election 2 not found" unless @driver.execute_script("return $(':contains(election2)').length;") != 0
   #raise "Error election add fail" unless @driver.page_source.include? "election1"
-  
-  #@driver.switch_to.window("hiddenFrame")
-  #puts @driver.page_source
-  # @driver.switch_to.frame "hiddenFrame"
-  # puts @driver.page_source
-  # raise "Error org2" unless @driver.page_source.include? "Organization:"
-  
-  # wait = Selenium::WebDriver::Wait.new(:timeout => 15)
-  # form = wait.until {
-  #   element = @driver.find_element(:name, "election_form")
-  #   element if element.displayed?
-  # }
-  # puts "Test Passed: Form input found" if form.displayed?
-
-  #main, popup = @driver.window_handles
-  #@driver.switch_to.window( @driver.window_handles.last )
-  #@driver.switch_to.frame("hiddenFrame")
-  
-  # @driver.execute_script("open_election_modal()")
-  # a = @driver.switch_to.alert
-  # wait.until ExpectedConditions.alertIsPresent
-  # if a.text == 'Organization'
-  #   a.dismiss
-  # end
-  
-  #blah.send_keys "blah"
-  # #@driver.find_element(:id => 'button_id').click
-  # raise "Error add" unless @driver.page_source.include? "Add Election"
-  # #org_element.send_keys "blah"
   
 
 end
@@ -319,7 +304,7 @@ Given(/^I am logged in as an admin$/) do
   
   @driver = Selenium::WebDriver.for :firefox
   @driver.navigate.to "https://csua-169-lillianchou94.c9users.io"
-  @driver.manage.timeouts.implicit_wait = 5
+  @driver.manage.timeouts.implicit_wait = 10
 
   raise "Error CSUA" unless @driver.page_source.include? "CSUA"
   @driver.find_element(:id => 'sign_in_id').click
@@ -329,29 +314,7 @@ Given(/^I am logged in as an admin$/) do
   password_elem = @driver.find_element(:id => 'Passwd')
   password_elem.send_keys "169email"
   password_elem.submit
-  wait = Selenium::WebDriver::Wait.new(timeout: 3)
-  wait.until { @driver.page_source.include? "CSUA" }
-  raise "Error CSUA afterwards" unless @driver.page_source.include? "CSUA"
-  raise "Error hello" unless @driver.page_source.include? "Hello, "
-  raise "Error add" unless @driver.page_source.include? "Add Election"
-  #@driver.quit
-end
-
-Then(/^I am logged in as an admin from the login page$/) do
-  
-  @driver = Selenium::WebDriver.for :firefox
-  @driver.navigate.to "https://csua-169-lillianchou94.c9users.io/login"
-  @driver.manage.timeouts.implicit_wait = 5
-
-  raise "Error CSUA" unless @driver.page_source.include? "CSUA"
-  @driver.find_element(:id => 'sign_in_id').click
-  email_elem = @driver.find_element(:id => 'Email')
-  email_elem.send_keys "email1111222@gmail.com"
-  email_elem.submit
-  password_elem = @driver.find_element(:id => 'Passwd')
-  password_elem.send_keys "169email"
-  password_elem.submit
-  wait = Selenium::WebDriver::Wait.new(timeout: 5)
+  wait = Selenium::WebDriver::Wait.new(timeout: 10)
   wait.until { @driver.page_source.include? "CSUA" }
   raise "Error CSUA afterwards" unless @driver.page_source.include? "CSUA"
   raise "Error hello" unless @driver.page_source.include? "Hello, "

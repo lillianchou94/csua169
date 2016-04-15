@@ -4,11 +4,11 @@ Feature: Admin Settings Page and Member Management
   So that I can add / drop other admins, upload CSV file to update members of my organization and add / delete individual members.
 	
 	Scenario: Has access to settings page (should work for all users)
-    Given I am signed in
+    Given I am logged in as an admin
     Then I should see "Settings"
   
   Scenario: Default Settings Page: Admin A for CSUA (happy path)
-    Given I am signed in as "Admin A"
+    Given I am logged in as an admin
     And I follow "Settings"
     Then I should see "CSUA"
     And I should not see "HKN"

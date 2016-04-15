@@ -33,18 +33,25 @@
 			    <!-- election panel code -->
 				<div class="election_column" id="election_content" style="float:left"></div>
 
-			    <div id="organizationmodal" title="Add Organization"; style="display:none">
-			    <form action="/election_add_organization" method="post" target="hiddenFrame" id="positionform" onsubmit="set_election_id(); setTimeout(function () { window.location.reload(); }, 10)">
+			  <div id="organizationmodal" title="Add Organization"; style="display:none">
+			    <form action="/election_add_organization" method="post" target="hiddenFrame" id="orgform" onsubmit="set_org_id(); setTimeout(function () { window.location.reload(); }, 10)">
 				  	<input type='hidden' name='<%=request_forgery_protection_token.to_s%>' value="<%=form_authenticity_token%>">
 				  	<label>New organization name:</label>
 				  	<input id="new_org" name="new_org" type="text"><br>
-				    <input id="submit" type="submit" value="Create">
+				  	<% if current_user != nil %>
+      			<% puts "this is #{current_user}" %>
+      			<label>Super Admin Name:</label>
+				  	<input id="super_admin_name" name="super_admin_name" type="text" value=current_user.user_name><br>
+				  	<label>Super Admin Email:</label>
+				  	<input id="super_admin_email" name="super_admin_email" type="text" value=current_user.user_email><br>
+			      <% end %>
+				    <input id="org_submit" type="submit" value="Create">
 				  </form>
 				</div>
 
 			    
-			    <div id="electionmodal" title="Add Election"; style="display:none">
-			    <form action="/election_add_position" method="post" target="hiddenFrame" id="positionform" onsubmit="set_election_id(); setTimeout(function () { window.location.reload(); }, 10)">
+			  <div id="electionmodal" title="Add Election"; style="display:none">
+			    <form action="/election_add_election" method="post" target="hiddenFrame" id="electionform" onsubmit="set_election_id(); setTimeout(function () { window.location.reload(); }, 10)">
 				  	<input type='hidden' name='<%=request_forgery_protection_token.to_s%>' value="<%=form_authenticity_token%>">
 				  	<label>Organization:</label>
 				  	<input id="new_election_org" name="new_election_org" type="text" value="csua">
@@ -53,24 +60,24 @@
 				    <input id="new_election_name" name="new_election_name" type="text" autofocus><br>
 				    <label>YT livestream (optional):</label>
 				    <input id="new_election_livestream" name="new_election_livestream" type="text"><br>
-				    <input id="submit" type="submit" value="Create">
+				    <input id="election_submit" type="submit" value="Create">
 				  </form>
 				</div>
 			    
-			    <div id="positionmodal" title="Add Position"; style="display:none">
-			    	<script>
-			    	function set_election_id() {
+		    <div id="positionmodal" title="Add Position"; style="display:none">
+		    	<script>
+		    	function set_election_id() {
 						if ( $("#button_election_id").length ) {
-						    $("#election_id").val($("#button_election_id").val());
+					    $("#election_id").val($("#button_election_id").val());
 						}
 					};
-			    	</script>
-				  <form action="/election_add_position" method="post" target="hiddenFrame" id="positionform" onsubmit="set_election_id(); setTimeout(function () { window.location.reload(); }, 10)">
+		    	</script>
+			  	<form action="/election_add_position" method="post" target="hiddenFrame" id="positionform" onsubmit="set_election_id(); setTimeout(function () { window.location.reload(); }, 10)">
 				  	<input type='hidden' name='<%=request_forgery_protection_token.to_s%>' value="<%=form_authenticity_token%>">
 				    <label>New position:</label>
 				    <input id="new_position_name" name="new_position_name" type="text">
 				    <input id="election_id" name="election_id" type="hidden" value=""><br>
-				    <input id="submit" type="submit" value="Create">
+				    <input id="eap_submit" type="submit" value="Create">
 				  </form>
 				</div>
 			</div>
@@ -103,7 +110,7 @@
 					$("#hiddenFrameID").empty();
 					$("#positionmodal").dialog({autoOpen: false, modal:true});
 					$("#election_id").value(button_id);
-					$("#submit").click(function(e) {
+					$("#eap_submit").click(function(e) {
 						$("#positionmodal").dialog("close");
 						$("#hiddenFrameID").empty();
 					});

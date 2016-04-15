@@ -36,7 +36,7 @@ ActiveRecord::Schema.define(version: 20160312000005) do
     t.integer "threshold"
     t.string  "position"
     t.integer "num_seconds"
-    t.string  "prime_product" # integer?
+    t.string  "prime_product" # integer? yeah there's a gem for dis
   end
 
   create_table "users", force: :cascade do |t|

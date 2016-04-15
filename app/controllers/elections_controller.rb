@@ -156,7 +156,7 @@ respond_to :js
   end
 
   def show_organizations_add
-    # if params[:new_election_name] != nil && params[:new_election_org] != nil
+    if params[:new_org] != nil
     #   election_param_name = params[:new_election_name]
     #   election_param_org = params[:new_election_org]
     #   embed_livestream = params[:new_election_livestream]
@@ -172,7 +172,7 @@ respond_to :js
     #   Election.create!(:election_livestream => embed_livestream, :election_id => election_id_temp, :election_name => election_param_name, :election_time => election_time_new, :organization => "", :position => "", :user_id => "", :num_votes => 0, :did_win => false)    
     #   @election_list = Election.all
     #   @position_list_acc = @@position_list
-    # end
+    end
     render 'elections/show_elections.html.erb'
   end
   
