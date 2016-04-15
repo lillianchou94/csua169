@@ -16,6 +16,9 @@
   }
   
   function submit_individual(user_name, user_email, organization, admin_status){
+    if(user_name == "" || user_email == "") {
+      alert('User must have a name and email');
+    }
     $.ajax({
       url: formURL,
       type: 'POST',

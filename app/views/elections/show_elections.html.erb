@@ -79,6 +79,7 @@
 
   <input id="button_id" style="display:none;" value=""></input>
   <ul style="display:inline;list-style-type:none">
+    <li><button type="button" onclick="open_organization_modal()"><i class="fa fa-plus-square-o"></i> Add organization</button></li>
     <li><button type="button" onclick="open_election_modal()"><i class="fa fa-plus-square-o"></i> Add election</button></li>
     <% for @election in @election_list %>
     <li><br></li>
