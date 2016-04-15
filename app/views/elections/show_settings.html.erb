@@ -16,8 +16,8 @@
   };
   
   function submit_individual(organization, admin_status){
-    var user_name = $('#user_name_id').val();
-    var user_email = $('#user_email_id').val();
+    var user_name = $('#add_user_name_id').val();
+    var user_email = $('#add_user_email_id').val();
     
     if(user_name == "" || user_email == "") {
       alert('User must have a name and email');
@@ -38,21 +38,28 @@
       }
     })}; //Submit the form
   };
-  function delete_individual(user_name, user_email, organization, admin_status){
-  $.ajax({
+  function delete_individual(organization, admin_status){
+    var user_name = $('#add_user_name_id').val();
+    var user_email = $('#add_user_email_id').val();
+    
+    if(user_name == "" || user_email == "") {
+      alert('User must have a name and email');
+    } else{
+    $.ajax({
     url: "/election_delete_individual",
     type: 'POST',
     data: {'user_email':user_email,
              'organization':organization,
              'user_name':user_name
       },
-    contentType: false,
-    cache: false,
-    processData:false,
-    success: function(res)
-    {
-    }
-  }); 
+      contentType: false,
+      cache: false,
+      processData:false,
+      success: function(res)
+      {
+      }
+    }); 
+  }
 };
   
 </script>
@@ -83,8 +90,8 @@
     
     <form name="admin_individual_form" id="admin_individual_form">
       <h4>Add/Delete an Admin for <%=org%></h4>
-        Name: <input type="text" id="user_name_id" name="user_name"/> <br/>
-        Email: <input type="text" id="user_email_id" name="user_email" /> <br/>
+        Name: <input type="text" id="add_user_name_id" name="user_name"/> <br/>
+        Email: <input type="text" id="add_user_email_id" name="user_email" /> <br/>
         <button value="admin_individual_form_add" onclick="submit_individual('<%=org%>', '1')">Add</button>
         <button value="admin_individual_form_delete" onclick="delete_individual('user_name', 'user_email', '<%=org%>', '1')">Delete</button>
     </form>
@@ -123,8 +130,8 @@
     
     <form name="member_individual_form" id="member_individual_form">
     <h4>Add/Delete a Member for <%=org%></h4>
-      Name: <input type="text" name="user_name"/> <br/>
-      Email: <input type="text" name="user_email" /> <br/>
+      Name: <input type="text" id="del_user_name_id" name="user_name"/> <br/>
+      Email: <input type="text" id="del_user_email_id" name="user_email" /> <br/>
       <button value="member_individual_form_submit" onclick="submit_individual('user_name', 'user_email', <%=org%>, 0)">Add</button>
       <button value="member_individual_form_delete" onclick="delete_individual('user_name', 'user_email', <%=org%>, 0)">Delete</button>
     </form>  
