@@ -32,6 +32,10 @@
 			<div id="elections" style="border:1px solid gray; width:200px; height:100%;float:left">
 			    <!-- election panel code -->
 				<div class="election_column" id="election_content" style="float:left"></div>
+
+			    <div id="orgmodal" title="Add Organization"; style="display:none">
+				</div>
+
 			    
 			    <div id="electionmodal" title="Add Election"; style="display:none">
 			    <form action="/election_add_position" method="post" target="hiddenFrame" id="positionform" onsubmit="set_election_id(); setTimeout(function () { window.location.reload(); }, 10)">
