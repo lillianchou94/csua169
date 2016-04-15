@@ -85,9 +85,11 @@ respond_to :js
     @position_id = params.key?(:position_id) ? params[:position_id] : ''
     @user_selected = params.key?(:user_selected) ? params[:user_selected] : ''
     @current_user_email = params.key?(:user_email) ? params[:user_email] : ''
-    @prime = User.where(user_email: @current_user_email).user_prime
-    @org = Election.where(election_id: @election_id).organization
-    Nomination.create!(:election_id => @election_id, :organization => @org, :user_id => @user_selected, :threshold => 1, :position => @position_id, :num_seconds => 0, :prime_product => @prime)    
+    
+    prime = User.where(user_email: @current_user_email).user_prime
+    org = Election.where(election_id: @election_id).organization
+    Nomination.create!(:election_id => @election_id, :organization => org, :user_id => @user_selected, :threshold => 1, :position => @position_id, :num_seconds => 0, :prime_product => prime)
+    
     render 'elections/submit_nominations.html.erb'
   end
   
