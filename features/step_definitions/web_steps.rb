@@ -334,6 +334,7 @@ Given(/^I am logged in as an admin$/) do
   
   @driver = Selenium::WebDriver.for :firefox
   @driver.navigate.to "https://csua-169.herokuapp.com"
+  #@driver.navigate.to "https://fierce-reef-37936.herokuapp.com"
   @driver.manage.timeouts.implicit_wait = 10
 
   raise "Error CSUA" unless @driver.page_source.include? "CSUA"
