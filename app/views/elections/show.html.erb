@@ -89,6 +89,14 @@
 				}
 			};
 
+			function open_organization_modal() {
+			    $(function() {
+			  		$("#hiddenFrameID").empty();
+			  		$("#organizationmodal").dialog({autoOpen: false, modal:true});
+			  		$("#organizationmodal").dialog("open");
+			  	});
+			};
+
 			function open_position_modal(button_id) {
 				$(function(button_id) {
 					$("#hiddenFrameID").empty();
