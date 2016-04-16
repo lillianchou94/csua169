@@ -83,7 +83,7 @@
     <li><button type="button" onclick="open_election_modal()"><i class="fa fa-plus-square-o"></i> Add election</button></li>
     <% for @election in @election_list %>
     <li><br></li>
-    <li id="<%= @election.election_id %>"> <i id="delete_election_<%=@election.election_id%>" class="fa fa-times" style="cursor:pointer;cursor:hand;" onclick="delete_election('<%=@election.election_id%>')"></i> <p style="display:inline;cursor:pointer;cursor:hand;text-decoration:underline" onclick="update_dashboard('<%=@election.election_id%>')"> <%= @election.election_name %> </p>
+    <li id="<%= @election.election_id %>"> <i id="delete_election_<%=@election.election_id%>" name="delete_election_<%=@election.election_name%> class="fa fa-times" style="cursor:pointer;cursor:hand;" onclick="delete_election('<%=@election.election_id%>')"></i> <p style="display:inline;cursor:pointer;cursor:hand;text-decoration:underline" onclick="update_dashboard('<%=@election.election_id%>')"> <%= @election.election_name %> </p>
       <ul style="list-style-type:none;margin-left:-20px">
         <% if @position_list_acc != nil && @position_list_acc != {} %>
           <% if @position_list_acc[@election.election_id] != nil && @position_list_acc[@election.election_id] != [] %>

@@ -405,11 +405,11 @@ When(/^I click in the browser "([^"]*)"$/) do |click_id|
   @driver.find_element(:id => click_id).click
 end
 
-When(/^I click in the browser for org "([^"]*)" position "([^"]*)"$/) do |org,position|
-  click_id = org+DateTime.now.strftime("%m%d%Y").to_s+'__'+position
+When(/^I click in the browser for nametag "([^"]*)" position "([^"]*)"$/) do |org,position|
+  click_id = org+'__'+position
   wait = Selenium::WebDriver::Wait.new(timeout: 20)
   wait.until{ @driver.page_source.include? click_id }
-  @driver.find_element(:id => click_id).click
+  @driver.find_element(:name => click_id).click
 end
 
 When(/^I follow in the browser "([^"]*)"$/) do |click_id|
