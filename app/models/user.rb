@@ -5,9 +5,9 @@ class User < ActiveRecord::Base
   attr_accessible :user_name, :is_active, :provider, :uid, :oauth_token, :oauth_expires_at, :user_email, :organization, :admin_status, :user_prime, :votes, :has_voted
   validates :user_name, presence: true
   validates :user_email, presence: true
-  validates :organization, presence: true
-  validates :user_prime, presence: true
-  validates :admin_status, presence: true
+  #validates :organization, presence: true
+  #validates :user_prime, presence: true
+  #validates :admin_status, presence: true
   
   #return the next prime
   def self.getPrime()
@@ -47,6 +47,9 @@ class User < ActiveRecord::Base
       user.user_email = auth.info.email
       user.oauth_token = auth.credentials.token
       user.oauth_expires_at = Time.at(auth.credentials.expires_at)
+      user.user_prime = (user.user_prime != 0 ? user.user_prime : user.getPrime())
+      user.organization = (user.organization != '' ? user.organization : 'csua')
+      user.admin_status = (user.admin_status != nil ? user.admin_status : 0)
       user.save!
     end
   end

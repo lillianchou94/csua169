@@ -18,7 +18,7 @@ Feature: Nominate candidates
     When I click in the browser "new_election_org04162016__test_candidate"
     Then I should see in the browser "Nomination for test_candidate"
     And I select radio button "id_email1111222@gmail.com" from "nomination_form_id"
-    And I submit form "nomination_form_id"
+    And I click in the browser "nomination_form_submit_id"
     Then I should see in the browser "a@gmail.com"
     And I should see in the browser "Adam Rockler"
     And I should see in the browser "Nominations"
