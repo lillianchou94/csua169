@@ -219,7 +219,7 @@ respond_to :js
         election_id_temp += "_"+count.to_s
       end
       election_time_new = DateTime.now.strftime("%m%d%Y").to_s
-      Election.create!(:election_livestream => embed_livestream, :election_id => election_id_temp, :election_name => election_param_name, :election_time => election_time_new, :organization => "", :position => "", :user_id => "", :num_votes => 0, :did_win => false)    
+      Election.create!(:election_livestream => embed_livestream, :election_id => election_id_temp, :election_name => election_param_name, :election_time => election_time_new, :organization => election_param_org, :position => "", :user_id => "", :num_votes => 0, :did_win => false)    
       @election_list = Election.all
       @position_list_acc = @@position_list
     end
