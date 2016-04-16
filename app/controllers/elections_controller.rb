@@ -101,11 +101,8 @@ respond_to :js
       
       # if current user prime exists in prime product of given position then
       # user cannot nominate again for same position
-      if exist.prime_product != 0
-        has_nominated = exist.prime_product.to_f / prime.to_f
-        if has_nominated % 1 == 0
-          render 'elections/nominations_error.html.erb'
-        end
+      if (exist.prime_product != 0) and (exist.prime_product.to_f / prime.to_f) % 1 == 0
+        render 'elections/nominations_error.html.erb'
       end
     else
       Nomination.create!(:election_id => @election_id, :organization => org, :user_id => @user_selected, :threshold => 1, :position => @position_id, :num_seconds => 0, :prime_product => prime)
@@ -189,15 +186,8 @@ respond_to :js
       org_param_name = params[:new_org]
       super_admin_param_name = params[:super_admin_name]
       super_admin_param_email = params[:super_admin_email]
-    #   election_id_temp = election_param_org+DateTime.now.strftime("%m%d%Y").to_s
-    #   if Election.find_by(election_id: election_id_temp) != nil
-    #     count = 1
-    #     while Election.find_by(election_id: election_id_temp+"_"+count.to_s) != nil
-    #       count += 1
-    #     end
-    #     election_id_temp += "_"+count.to_s
-    #   end
-    #   election_time_new = DateTime.now.strftime("%m%d%Y").to_s
+      super_admin_user = User.where(user_email: super_admin_param_email)
+      super_admin_user.update_attributes(organization: org_param_name)
     #   Election.create!(:election_livestream => embed_livestream, :election_id => election_id_temp, :election_name => election_param_name, :election_time => election_time_new, :organization => "", :position => "", :user_id => "", :num_votes => 0, :did_win => false)    
     #   @election_list = Election.all
     #   @position_list_acc = @@position_list
