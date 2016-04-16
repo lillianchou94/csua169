@@ -15,7 +15,7 @@ Feature: Nominate candidates
     Then I should see in the browser "test election"
     When I press "test candidate"
     Then I should see in the browser "Nominate"
-    When I press "Nominate"
+    When I click in the browser "new_election_org04162016__test candidate"
     And I select "President" from "Positions"
     And I fill in "Email" with "a@gmail.com"
     And I press "Submit"

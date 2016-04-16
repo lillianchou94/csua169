@@ -53,7 +53,7 @@ RSpec.describe ElectionsController, type: :controller do
   
   describe 'DELETE destroy' do
     before :each do
-      @user = User.create!(:user_name => "A", :user_email => "a@gmail.com", :organization => "CSUA")
+      @user = User.create!(:user_name => "A", :user_email => "a@gmail.com", :organization => "CSUA", :user_prime => 2, :admin_status => 1)
     end
     
     it "deletes the user that exist" do
@@ -71,34 +71,34 @@ RSpec.describe ElectionsController, type: :controller do
   
   describe 'Create User' do
     before :each do
-      @user = User.create!(:user_name => "A", :user_email => "a@gmail.com", :organization => "CSUA")
+      @user = User.create!(:user_name => "A", :user_email => "a@gmail.com", :organization => "CSUA", :user_prime => 2, :admin_status => 1)
     end
     
     it "creates a new user" do
-      get :add_individual
-      user = User.create(:name => 'User A')
+      get :add_individual, user_name: "NOTAUSER", user_email: "notauser@gmail.com", organization: "CSUA", admin_status: 1, user_prime: 2
+      user = User.create(:user_name => 'User A', :user_email => "a@gmail.com", :organization => "CSUA", :user_prime => 2, :admin_status => 1)
       expect(user).to be_persisted
     end
     
     it "does not add the user that exist" do
       expect{
-        delete :add_individual, user_name: "A", user_email: "a@gmail.com", organization: "CSUA"
+        delete :add_individual, user_name: "A", user_email: "a@gmail.com", organization: "CSUA", user_prime: 2, admin_status: 1
       }.to change(User,:count).by(0)
     end
       
     it "add a user that doesn't exist" do
       expect{
-        delete :add_individual, user_name: "NEWUSER", user_email: "newuser@gmail.com", organization: "CSUA"
+        delete :add_individual, user_name: "NEWUSER", user_email: "newuser@gmail.com", organization: "CSUA", user_prime: 2, admin_status: 1
       }.to change(User,:count).by(1)
     end
   end
   
   describe "show_settings" do
     before :each do
-      @user1 = User.create!(:user_name => "A1", :user_email => "a1@gmail.com", :organization => "CSUA", :admin_status => 1)
-      id = User.where(:user_name => "A1", :user_email => "a1@gmail.com", :organization => "CSUA", :admin_status => 1)
-      @user2 = User.create!(:user_name => "A2", :user_email => "a2@gmail.com", :organization => "CSUA")
-      @user3 = User.create!(:user_name => "A1", :user_email => "a1@gmail.com", :organization => "HKN", :admin_status => 0)
+      @user1 = User.create!(:user_name => "A1", :user_email => "a1@gmail.com", :organization => "CSUA", :admin_status => 1, :user_prime => 2)
+      id = User.where(:user_name => "A1", :user_email => "a1@gmail.com", :organization => "CSUA", :admin_status => 1, :user_prime => 2)
+      @user2 = User.create!(:user_name => "A2", :user_email => "a2@gmail.com", :organization => "CSUA", :admin_status => 1, :user_prime => 2)
+      @user3 = User.create!(:user_name => "A1", :user_email => "a1@gmail.com", :organization => "HKN", :admin_status => 0, :user_prime => 2)
       @all_same_user = User.where(:user_email => "a1@gmail.com")
       @my_orgs = Array.new
       for user in @all_same_user

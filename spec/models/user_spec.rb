@@ -7,13 +7,17 @@ RSpec.describe User, type: :model do
         :user_name => "A",
         :user_email => "A@gmail.com",
         :is_active => true,
-        :organization => "CSUA"
+        :organization => "CSUA",
+        :user_prime => 2,
+        :admin_status => 1
       })
       B = User.create!({
         :user_name => "B",
         :user_email => "B@gmail.com",
         :is_active => true,
-        :organization => "CSUA"
+        :organization => "CSUA",
+        :user_prime => 2,
+        :admin_status => 1
       })
       User.makeInactive("CSUA")
       A.is_active.should eq(true)

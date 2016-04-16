@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
   validates :admin_status, presence: true
   
   #return the next prime
-  def getPrime()
+  def self.getPrime()
     max = User.maximum(:user_prime)
     prime = Prime.take_while {|p| p < max}
     newpri = Prime.first prime.count+2

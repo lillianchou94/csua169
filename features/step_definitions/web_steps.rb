@@ -294,7 +294,7 @@ When(/^I add the election called "([^"]*)" for the organization "([^"]*)"$/) do 
 
 end
 
-When(/^I add the postion "([^"]*)" for election "([^"]*)"$/) do |position_name, election_name|
+When(/^I add the position "([^"]*)" for election "([^"]*)"$/) do |position_name, election_name|
   # not done yet
   wait = Selenium::WebDriver::Wait.new(timeout: 20)
   raise "Error add position" unless @driver.page_source.include? "Add Position"
@@ -397,6 +397,12 @@ Given(/^I am logged in as a special admin/) do
   raise "Error CSUA afterwards" unless @driver.page_source.include? "CSUA"
   raise "Error hello" unless @driver.page_source.include? "Hello, "
   raise "Error add" unless @driver.page_source.include? "Add Election"
+end
+
+When(/^I click in the browser "([^"]*)"$/) do |click_id|
+  wait = Selenium::WebDriver::Wait.new(timeout: 10)
+  wait.until{ @driver.page_source.include? "click_id" }
+  @driver.find_element(:id => click_id).click
 end
 
 Then(/^I see "([^"]*)"$/) do |text|
