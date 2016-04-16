@@ -31,7 +31,7 @@ Feature: Election pages content
     
   Scenario: regular member election page (no add org button)
     Given I am on the show elections page for a member
-    Then I should not see "Add organization"
+    Then I should see "Add organization"
     Then I log out
     
   # drop down org field in add election window

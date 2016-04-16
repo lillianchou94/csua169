@@ -26,5 +26,5 @@ Feature: Dashboard page main content
     
   Scenario: Admin Dashboard during an election
     Given I am logged in as an admin
-    Then I should see "Create organization"
+    Then I should see "Add organization"
     And I should see "CSUA Voting System"

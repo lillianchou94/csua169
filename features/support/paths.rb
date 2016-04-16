@@ -21,11 +21,11 @@ module NavigationHelpers
     when /^the settings page for an admin$/
       '/election_settings'
     when /^the show elections page for a super-admin$/
-      '/dashbaord/home'
+      '/'
     when /^the show elections page for a member$/
       '/'
     when /^the show elections page for a "voter"$/
-      '/dashbaord/home'
+      '/'
     when /^the dashboard page as a specialadmin$/
       '/dashboard/home'
     when /^the dashboard page for a member/

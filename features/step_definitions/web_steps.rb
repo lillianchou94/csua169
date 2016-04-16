@@ -437,18 +437,18 @@ When(/^I add the organization called "([^"]*)"$/) do |org_name|
     # Write code here that turns the phrase above into concrete actions
 end
 
-Then(/^(?:|I )should see a drop down menu to the right of "([^"]*)"$/) do |text1, text2|
+Then(/^(?:|I )should see a drop down menu to the right of "([^"]*)"$/) do |text|
     # Write code here that turns the phrase above into concrete actions
 end
 
-Then(/^(?:|I )should see "([^"]*)" in the drop down menu to the right of "([^"]*)"$/) do |text1, text2, text3|
+Then(/^(?:|I )should see "([^"]*)" in the drop down menu to the right of "([^"]*)"$/) do |text1, text2|
      # Write code here that turns the phrase above into concrete actions
 end
 
-Then(/^(?:|I )should not see "([^"]*)" in the drop down menu to the right of "([^"]*)"$/) do |text1, text2, text3|
+Then(/^(?:|I )should not see "([^"]*)" in the drop down menu to the right of "([^"]*)"$/) do |text1, text2|
      # Write code here that turns the phrase above into concrete actions
 end
 
-Then(/^(?:|I )should see "([^"]*)" in the "([^"]*)" field$/) do |text1, text2, text3|
+Then(/^(?:|I )should see "([^"]*)" in the "([^"]*)" field$/) do |text1, text2|
      # Write code here that turns the phrase above into concrete actions
 end
