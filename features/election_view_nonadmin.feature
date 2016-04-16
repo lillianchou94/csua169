@@ -9,14 +9,14 @@ Feature: Election pages content for non-admin
     # need step def
     Given I am on the show elections page for a "voter" 
     # need step def
-    Then I should see "Role" 
+    # Then I should see "Role" 
     # need step def
     And I should see a drop down menu to the right of "Role" 
     # need step def
     When I press the drop down menu 
     # need step def
     Then I should see a list of candidates
-    When I press "Candidate 1" 
+    # When I press "Candidate 1" 
     # need step def
     Then I should see "Candidate 1" in the "Role" field 
   
