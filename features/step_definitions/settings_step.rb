@@ -10,6 +10,11 @@ Then /^(?:|I )should see on the settings page "([^"]*)"$/ do |text|
   wait.until { @driver.page_source.include? "Admins" }
 end
 
+Then /^(?:|I )should not see in the browser "([^"]*)"$/ do |text|
+  wait = Selenium::WebDriver::Wait.new(timeout: 20)
+  wait.until { @driver.page_source.exclude? text }
+end
+
 Then /^(?:|I )should see in the browser "([^"]*)"$/ do |text|
   wait = Selenium::WebDriver::Wait.new(timeout: 20)
   wait.until { @driver.page_source.include? text }
