@@ -5,6 +5,10 @@ rvm:
 # gem: "bundler"  
 # gem: "rspec"    , "~> 2.8.0"
 # gem: "rake"     #included if using rake
+before_script: 
+  - "export DISPLAY=:99.0"
+  - "sh -e -a /etc/init.d/xvfb start"
+  - sleep 3
 env:
   - DB=sqlite3
 install:

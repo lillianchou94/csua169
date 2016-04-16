@@ -1,33 +1,31 @@
 class User < ActiveRecord::Base
-  require 'csv'
-  require 'prime'
   #self.table_name = "users"
   # has_many :elections
   # has_many :nominations
   attr_accessible :user_name, :is_active, :provider, :uid, :oauth_token, :oauth_expires_at, :user_email, :organization, :admin_status, :user_prime, :votes, :has_voted
 
   def self.makeInactive(organization)
-    org_user = User.where(organization: organization)
+    org_user = User.where(:organization => organization)
     org_user.each do |user|
-      user.update_attributes(:is_active, false)
+      user.update_attribute(:is_active, false)
     end
   end
 
   #make all user of the org inactive first, then reactivate them or create new
-  def self.import(file, organization)
-    self.makeInactive(organization)
-    CSV.foreach(file.path, headers: true) do |row|
-      user_hash = row.to_hash
-      user = user.where(user_name: user_hash["name"], user_email: user_hash["user_email"], organization: organization)
-
-      if user.count == 1
-        user.first.update_attributes(is_active: true)
+  def self.import(file, org, admin_status)
+    self.makeInactive(org)
+    CSV.parse(File.read(file)).each do |row|
+      user = User.where(:user_name => row[0], :user_email => row[1], :organization => org, :admin_status => admin_status)
+      if user.count > 1
+        user.update_all(:is_active => true)
+      elsif user.count == 1
+        user.update_all(:is_active => true)
       else
-        User.create!(user_name: user_hash["name"], user_email: user_hash["user_email"], organization: organization, is_active: true)
+        User.create!(:user_name => row[0], :user_email => row[1], :organization => org, :is_active => true, :admin_status => admin_status)
       end 
     end
   end 
-
+  
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_initialize do |user|
       user.provider = auth.provider

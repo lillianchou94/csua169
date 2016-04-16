@@ -12,12 +12,13 @@ Rails.application.routes.draw do
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
   # resources :elections
-  #root :to => redirect('/dashboard/home')
+  # root :to => redirect('/dashboard/home')
   get "/dashboard/*page" => "elections#show"
   get "/election_show_elections" => "elections#show_elections"
   match "/election_add_individual" => "elections#add_individual", via: [:get,:post]
   match "election_delete_individual" => "elections#delete_individual", via: [:get,:post]
-  match "/election_import" => "elections#import", via: [:get,:post]
+  match "/election_import" => "elections#import", via: [:get,:post], as: :import
+
 
   get "/login" => "elections#login"
   match "/election_add_organization" => "elections#show_organizations_add", via: [:get,:post]

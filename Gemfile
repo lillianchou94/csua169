@@ -87,7 +87,7 @@ group :development, :test do
   gem 'chromedriver-helper'
   #gem 'webmock'
   gem 'capybara-webkit'
-  
+  gem 'factory_girl_rails'
   gem 'childprocess'
   gem 'rubyzip'
   gem 'websocket'

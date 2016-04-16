@@ -1,8 +1,7 @@
 class ElectionsController < ApplicationController
 respond_to :html
 respond_to :js
-  
-  
+
   attr_accessor :election_list, :embed_livestream, :position_list_acc, :curr_election
   
   @@position_list = Hash.new
@@ -41,30 +40,34 @@ respond_to :js
   
   def import
     begin
-      User.import(params[:file], params[:organization])
-      redirect_to :action => 'show_settings', notice: "Users imported."
+      User.import(params[:file].tempfile.to_path.to_s, params[:organization])
+      flash[:notice] = "Users Imported!" 
+      redirect_to :action => 'show_settings'
     rescue
-      redirect_to :action => 'show_settings', notice: "Invalid CSV file format."
+      flash[:notice] = "#{params[:file].tempfile.to_path.to_s} Invalid CSV file format???."
+      redirect_to :action => 'show_settings'
     end
   end
   
   def add_individual
     user = User.where(:user_name => params[:user_name], :user_email => params[:user_email], :organization => params[:organization], :admin_status => params[:admin_status])
     if user.count > 0
-      redirect_to :action => 'show_settings', notice: "User already exist"
+      flash[:notice] = "User already exist"
+      redirect_to :action => 'show_settings'
     else
       User.create!(:user_name => params[:user_name], :user_email => params[:user_email], :organization => params[:organization], :admin_status => params[:admin_status])
-      redirect_to :action => 'show_settings', notice: "#{:user_name} Added."
+      flash[:notice] = "#{:user_name} Added."
+      redirect_to :action => 'show_settings'
     end
   end
   
   def delete_individual
     user = User.where(:user_name => params[:user_name], :user_email => params[:user_email], :organization => params[:organization])
     if user.count > 0
-      User.delete(user)
-      redirect_to :action => 'show_settings', notice: "#{user_to_delete} deleted."
+      User.destroy(user)
+      redirect_to :action => 'show_settings', notice: "#{user} deleted."
     else
-      redirect_to :action => 'show_settings', notice: "#{user_to_delete} not found."
+      redirect_to :action => 'show_settings', notice: "#{user} not found."
     end
   end
   
@@ -157,6 +160,7 @@ respond_to :js
     @election_list = Election.all
     if session[:user_id]
       @current_user = User.find_by(id: session[:user_id])
+      @rows_of_same_user = User.where(:user_email => @current_user.user_email)
       if @current_user != nil
         @election_list = Election.all
         #@@position_list = Hash.new
@@ -186,12 +190,11 @@ respond_to :js
       org_param_name = params[:new_org]
       super_admin_param_name = params[:super_admin_name]
       super_admin_param_email = params[:super_admin_email]
-      super_admin_user = User.where(user_email: super_admin_param_email)
-      super_admin_user.update_attributes(organization: org_param_name)
-    #   Election.create!(:election_livestream => embed_livestream, :election_id => election_id_temp, :election_name => election_param_name, :election_time => election_time_new, :organization => "", :position => "", :user_id => "", :num_votes => 0, :did_win => false)    
-    #   @election_list = Election.all
-    #   @position_list_acc = @@position_list
+      # super_admin_user = User.where(user_email: super_admin_param_email)
+      # super_admin_user.update_attributes(organization: org_param_name)
+      User.create!(:user_name => super_admin_param_name, :user_email => super_admin_param_email, :organization => org_param_name, :is_active => true, :admin_status => 2)
     end
+    
     render 'elections/show_elections.html.erb'
   end
   

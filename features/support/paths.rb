@@ -18,6 +18,8 @@ module NavigationHelpers
       '/login'
     when /^the dashboard page as an admin$/
       '/dashboard/home'
+    when /^the settings page for an admin$/
+      '/election_settings'
     when /^the dashboard page as a specialadmin$/
       '/dashboard/home'
     when /^the dashboard page for a member/
