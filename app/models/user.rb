@@ -3,6 +3,11 @@ class User < ActiveRecord::Base
   # has_many :elections
   # has_many :nominations
   attr_accessible :user_name, :is_active, :provider, :uid, :oauth_token, :oauth_expires_at, :user_email, :organization, :admin_status, :user_prime, :votes, :has_voted
+  validates :user_name, presence: true
+  validates :user_email, presence: true
+  validates :organization, presence: true
+  validates :user_prime, presence: true
+  validates :admin_status, presence: true
   
   #return the next prime
   def getPrime()
