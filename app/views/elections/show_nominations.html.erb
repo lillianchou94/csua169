@@ -36,7 +36,7 @@
         <label><input type="radio" name="user" id="id_<%=@user.user_email%>" value="<%=@user.user_email%>"><%=@user.user_name%> (<%=@user.user_email%>)</label>
       </div>
     <% end %>
-    <button value="Submit" onclick="submit_nomination('<%=@user.user_email%>')">Submit</button>
+    <button value="Submit" id="nomination_form_submit_id" onclick="submit_nomination('<%=@user.user_email%>')">Submit</button>
   </form>
   <% end %>
   <% if @election_id == '' or @position_id == '' %>

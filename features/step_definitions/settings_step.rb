@@ -39,6 +39,10 @@ When /^(?:|I )fill in the field "([^"]*)" with "([^"]*)"$/ do |field, value|
   @driver.find_element(:name, field).send_keys value
 end
 
+And /^(?:|I )select radio button "([^"]*)" from "([^"]*)"$/ do |field, form|
+  @driver.find_element(:id => field).click
+end
+
 Then(/^I should see a list of preset members for CSUA$/) do
   @driver.find_element(:id,'admin_individual_form').displayed?
   @driver.find_element(:id,'dvImportSegments').displayed?
