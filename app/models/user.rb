@@ -29,12 +29,7 @@ class User < ActiveRecord::Base
   end 
 
   def self.from_omniauth(auth)
-    #puts "auth is #{auth}"
     where(provider: auth.provider, uid: auth.uid).first_or_initialize do |user|
-      # if user.nil?
-      #   user = User.create(:user_name => 'Fake User 1')
-      # end
-      
       user.provider = auth.provider
       user.uid = auth.uid
       user.user_name = auth.info.name
