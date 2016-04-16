@@ -7,6 +7,8 @@ User.create(user_name: 'B', user_email: 'b@gmail.com', organization: "HKN", admi
 User.create(user_name: 'C', user_email: 'c@gmail.com', organization: "HKN", admin_status: 0, user_prime: 7, votes: '{"hkn_04012016_President":"7"}')
 User.create(user_name: 'D', user_email: 'd@gmail.com', organization: "CSUA", admin_status: 0, user_prime: 11, votes: '{}')
 User.create(user_name: 'E', user_email: 'e@gmail.com', organization: "HKN", admin_status: 0, user_prime: 13, votes: '{}')
+User.create(user_name: 'Lilly Chou', user_email: 'lillianchou94@gmail.com', organization: "CSUA", admin_status: 1, user_prime: 17, votes: '{}')
+User.create(user_name: 'Lilly Chou', user_email: 'lillianchou94@gmail.com', organization: "HKN", admin_status: 1, user_prime: 19, votes: '{}')
 
 
 Election.create(election_livestream: '', election_id: 'csua_04012016', election_name: 'csua1', organization: 'CSUA', position: "President", user_id: "a@gmail.com", num_votes: 0, did_win: false)

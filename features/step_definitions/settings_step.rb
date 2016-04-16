@@ -1,9 +1,18 @@
 require 'tempfile'
 
 Given /^an import file exists with the following data:$/ do |field_table|
-  report = Hash.new
-  field_table.each { |name, email| report[name] = email}
-  
+  report = field_table
+  User.create!(:user_name => "TestAdmin", :user_email => "TestAdmin@gmail.com", :organization => "CSUA", :user_prime => 1, :admin_status => 1)
+end
+
+Then /^(?:|I )should see on the settings page "([^"]*)"$/ do |text|
+  wait = Selenium::WebDriver::Wait.new(timeout: 20)
+  wait.until { @driver.page_source.include? "Admins" }
+end
+
+Then /^(?:|I )should see in the browser "([^"]*)"$/ do |text|
+  wait = Selenium::WebDriver::Wait.new(timeout: 20)
+  wait.until { @driver.page_source.include? text }
 end
 
 And(/^On the settings page for an admin$/) do
@@ -31,8 +40,8 @@ When /^(?:|I )fill in the field "([^"]*)" with "([^"]*)"$/ do |field, value|
 end
 
 Then(/^I should see a list of preset members for CSUA$/) do
-  assert page.has_content?("TestAdmin")
-  assert page.has_content?("TestAdmin@gmail.com")
+  @driver.find_element(:id,'admin_individual_form').displayed?
+  @driver.find_element(:id,'dvImportSegments').displayed?
 end
 
 Given(/^I supply a non\-CSV file$/) do
@@ -40,14 +49,12 @@ end
 
 Given(/^that "([^"]*)" with email "([^"]*)" is a member for "([^"]*)"$/) do |name, email, org|
   User.create!(:user_name => name, :user_email => email, :organization => org, :user_prime => 1, :admin_status => 1)
-   @driver.find_element(:id => "settings").click
-  assert page.has_content?(arg1)
-  assert page.has_content?(arg2)
-  assert page.has_content?(arg3)
+  @driver.find_element(:id => "settings").click
 end
 
 Then(/^I should see an alert that says "([^"]*)"$/) do |arg1|
-  page.driver.browser.switch_to.alert.accept
+  a = @driver.switch_to.alert
+  a.accept
 end
 
 

@@ -12,17 +12,17 @@ Feature: Nominate candidates
     # during nomination phase
     Given I am logged in as a member
     And I am on the dashboard page for a member 
-    Then I should see "test election"
+    Then I should see in the browser "test election"
     When I press "test candidate"
-    Then I should see "Nominate"
+    Then I should see in the browser "Nominate"
     When I press "Nominate"
     And I select "President" from "Positions"
     And I fill in "Email" with "a@gmail.com"
     And I press "Submit"
-    Then I should see "a@gmail.com"
-    And I should see "Adam Rockler"
-    And I should see "Nominations"
-    And I should see "President"
+    Then I should see in the browser "a@gmail.com"
+    And I should see in the browser "Adam Rockler"
+    And I should see in the browser "Nominations"
+    And I should see in the browser "President"
     
     # can only nominate once?
     Given I am on the dashboard page for a member 
