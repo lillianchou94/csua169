@@ -192,7 +192,7 @@ respond_to :js
       super_admin_param_email = params[:super_admin_email]
       # super_admin_user = User.where(user_email: super_admin_param_email)
       # super_admin_user.update_attributes(organization: org_param_name)
-      User.create!(:user_name => super_admin_param_name, :user_email => super_admin_param_email, :organization => org_param_name, :is_active => true, :admin_status => 2, , :user_prime => User.getPrime())
+      User.create!(:user_name => super_admin_param_name, :user_email => super_admin_param_email, :organization => org_param_name, :is_active => true, :admin_status => 2, :user_prime => User.getPrime())
     end
     
     render 'elections/show_elections.html.erb'
