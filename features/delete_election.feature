@@ -18,5 +18,5 @@ Feature: delete elections
     # Then I should see "position2"
     When I delete the election "election2"
     Then I should not see "blah"
-    Then I should not see "election2"
+    Then I should see "election2"
     Then I log out
