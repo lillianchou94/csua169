@@ -88,7 +88,7 @@
         <% if @position_list_acc != nil && @position_list_acc != {} %>
           <% if @position_list_acc[@election.election_id] != nil && @position_list_acc[@election.election_id] != [] %>
             <% for @position in @position_list_acc[@election.election_id] %>
-              <li style="margin-bottom:2px;margin-top:1px"><button style="background:none;border:none;padding:0;font-family:arial,sans-serif;color:#000;text-decoration:underline;cursor:pointer;" type="button" id="<%= @election.election_id %>__<%= @position %>" onclick="update_dashboard_position('<%= @election.election_id %>__<%= @position %>')"> <%= @position %> </button></li>
+              <li style="margin-bottom:2px;margin-top:1px"><button style="background:none;border:none;padding:0;font-family:arial,sans-serif;color:#000;text-decoration:underline;cursor:pointer;" type="button" id="<%= @election.election_id %>__<%= @position %>" name="<%=@election.election_name%>__<%=@position%>" onclick="update_dashboard_position('<%= @election.election_id %>__<%= @position %>')"> <%= @position %> </button></li>
             <% end %>
           <% end %>
         <% end %>

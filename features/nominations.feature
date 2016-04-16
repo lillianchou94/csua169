@@ -16,7 +16,7 @@ Feature: Nominate candidates
     And I add the position "test_candidate" for election "test election"
     Then I should see in the browser "test election"
     #Then I should see in the browser "csua04162016__test_candidate"
-    When I click in the browser for org "csua" position "test_candidate"
+    When I click in the browser for nametag "test election" position "test_candidate"
     Then I should see in the browser "Nomination for test_candidate"
     And I select radio button "id_email1111222@gmail.com" from "nomination_form_id"
     And I click in the browser "nomination_form_submit_id"
