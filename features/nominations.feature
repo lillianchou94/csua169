@@ -26,7 +26,7 @@ Feature: Nominate candidates
     Then I should see in the browser "Nomination for test_candidate"
     And I select radio button "id_email1111222@gmail.com" from "nomination_form_id"
     And I click in the browser "nomination_form_submit_id"
-    Then I should not see in the browser "Did not submit nominations successfully"
+    Then I should not see in the browser "Submitted nominations successfully."
     
     #Then I should see in the browser "You have already nominated for this position"
     Then I log out
