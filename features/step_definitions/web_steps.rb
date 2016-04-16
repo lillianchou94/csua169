@@ -334,7 +334,7 @@ end
 
 Given(/^I am logged in as an admin$/) do
   @driver = Selenium::WebDriver.for :firefox
-  @driver.navigate.to "https://csua-169.herokuapp.com"
+  @driver.navigate.to "https://csuavotingtest.herokuapp.com"
   #@driver.navigate.to "https://fierce-reef-37936.herokuapp.com"
   @driver.manage.timeouts.implicit_wait = 10
 
@@ -356,7 +356,7 @@ end
 
 Given(/^I am logged in as a member/) do
   @driver = Selenium::WebDriver.for :firefox
-  @driver.navigate.to "https://csua-169.herokuapp.com"
+  @driver.navigate.to "https://csuavotingtest.herokuapp.com"
   #@driver.navigate.to "https://fierce-reef-37936.herokuapp.com"
   @driver.manage.timeouts.implicit_wait = 20
 
@@ -379,7 +379,7 @@ end
 
 Given(/^I am logged in as a special admin/) do
   @driver = Selenium::WebDriver.for :firefox
-  @driver.navigate.to "https://csua-169.herokuapp.com"
+  @driver.navigate.to "https://csuavotingtest.herokuapp.com"
   #@driver.navigate.to "https://fierce-reef-37936.herokuapp.com"
   @driver.manage.timeouts.implicit_wait = 10
 

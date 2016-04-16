@@ -3,9 +3,13 @@ class User < ActiveRecord::Base
   # has_many :elections
   # has_many :nominations
   attr_accessible :user_name, :is_active, :provider, :uid, :oauth_token, :oauth_expires_at, :user_email, :organization, :admin_status, :user_prime, :votes, :has_voted
-
+  
+  #return the next prime
   def getPrime()
     max = User.maximum(:user_prime)
+    prime = Prime.take_while {|p| p < max}
+    newpri = Prime.first prime.count+2
+    return newpri[prime.count+1]
   end
 
   def self.makeInactive(organization)
@@ -25,7 +29,7 @@ class User < ActiveRecord::Base
       elsif user.count == 1
         user.update_all(:is_active => true)
       else
-        User.create!(:user_name => row[0], :user_email => row[1], :organization => org, :is_active => true, :admin_status => admin_status)
+        User.create!(:user_name => row[0], :user_email => row[1], :organization => org, :is_active => true, :admin_status => admin_status, :user_prime => self.getPrime())
       end 
     end
   end 

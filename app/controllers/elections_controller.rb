@@ -55,7 +55,7 @@ respond_to :js
       flash[:notice] = "User already exist"
       redirect_to :action => 'show_settings'
     else
-      User.create!(:user_name => params[:user_name], :user_email => params[:user_email], :organization => params[:organization], :admin_status => params[:admin_status])
+      User.create!(:user_name => params[:user_name], :user_email => params[:user_email], :organization => params[:organization], :admin_status => params[:admin_status], :user_prime => User.getPrime())
       flash[:notice] = "#{:user_name} Added."
       redirect_to :action => 'show_settings'
     end
@@ -108,7 +108,7 @@ respond_to :js
         render 'elections/nominations_error.html.erb'
       end
     else
-      Nomination.create!(:election_id => @election_id, :organization => org, :user_id => @user_selected, :threshold => 1, :position => @position_id, :num_seconds => 0, :prime_product => prime)
+      Nomination.create!(:election_id => @election_id, :organization => org, :user_id => @user_selected, :threshold => 1, :position => @position_id, :num_seconds => 0)
       render 'elections/submit_nominations.html.erb'
     end
   end
@@ -192,7 +192,7 @@ respond_to :js
       super_admin_param_email = params[:super_admin_email]
       # super_admin_user = User.where(user_email: super_admin_param_email)
       # super_admin_user.update_attributes(organization: org_param_name)
-      User.create!(:user_name => super_admin_param_name, :user_email => super_admin_param_email, :organization => org_param_name, :is_active => true, :admin_status => 2)
+      User.create!(:user_name => super_admin_param_name, :user_email => super_admin_param_email, :organization => org_param_name, :is_active => true, :admin_status => 2, , :user_prime => User.getPrime())
     end
     
     render 'elections/show_elections.html.erb'
