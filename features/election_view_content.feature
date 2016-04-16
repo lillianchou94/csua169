@@ -15,12 +15,12 @@ Feature: Election pages content
   Scenario: super-admin election page
     Given I am on the show elections page for a super-admin
     Then I should see "Add organization"
-    When I press "Add organization"
+    When I click Add organization
     # need step def
     And I add the organization called "org1"
-    Then I should be on the show elections page for an super-admin
+    Then I should be on the show elections page for a super-admin
     Then I should see "Add organization"
-    And I should see "org1"
+    And I should see "org1" on the page
     Then I log out
     
   # sad paths for add organization
@@ -45,7 +45,7 @@ Feature: Election pages content
     And I should see "org1" in the drop down menu to the right of "Organization:"
     # need step def
     And I should see "org2" in the drop down menu to the right of "Organization:"
-    When I press "org1"
+    When I click org1
     # need step def
     Then I should see "org1" in the "Organization:" field
     Then I log out
@@ -60,7 +60,7 @@ Feature: Election pages content
     And I should see "org1" in the drop down menu to the right of "Organization:"
     # need step def
     And I should not see "org2" in the drop down menu to the right of "Organization:"
-    When I press "org1"
+    When I click org1
     # need step def
     Then I should see "org1" in the "Organization:" field
     Then I log out

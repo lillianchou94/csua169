@@ -234,6 +234,8 @@ respond_to :js
         @embed_livestream = ""
       end
       Election.destroy_all(election_id: params[:election_id])
+      Nomination.destroy_all(election_id: params[:election_id])
+      
       @election_list = Election.all
       @position_list_acc = @@position_list
     end

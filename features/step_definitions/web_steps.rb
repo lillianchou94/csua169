@@ -452,3 +452,16 @@ end
 Then(/^(?:|I )should see "([^"]*)" in the "([^"]*)" field$/) do |text1, text2|
      # Write code here that turns the phrase above into concrete actions
 end
+
+When(/^I click Add organization$/) do
+  # pending # Write code here that turns the phrase above into concrete actions
+end
+
+
+When(/^I click org1/) do
+  # pending # Write code here that turns the phrase above into concrete actions
+end
+
+Then(/^I should see "([^"]*)" on the page$/) do |arg1|
+  # pending # Write code here that turns the phrase above into concrete actions
+end

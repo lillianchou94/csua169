@@ -21,7 +21,7 @@ module NavigationHelpers
     when /^the settings page for an admin$/
       '/election_settings'
     when /^the show elections page for a super-admin$/
-      '/'
+      '/login'
     when /^the show elections page for a member$/
       '/'
     when /^the show elections page for a "voter"$/
