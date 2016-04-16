@@ -4,6 +4,10 @@ class User < ActiveRecord::Base
   # has_many :nominations
   attr_accessible :user_name, :is_active, :provider, :uid, :oauth_token, :oauth_expires_at, :user_email, :organization, :admin_status, :user_prime, :votes, :has_voted
 
+  def getPrime()
+    max = User.maximum(:user_prime)
+  end
+
   def self.makeInactive(organization)
     org_user = User.where(:organization => organization)
     org_user.each do |user|
