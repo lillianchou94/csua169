@@ -123,14 +123,14 @@
       <h4>Add/Delete an Admin for <%=org%></h4>
         Name: <input type="text" id="<%=org%>_admin_name" name="user_name"/> <br/>
         Email: <input type="text" id="<%=org%>_admin_email" name="user_email" /> <br/>
-        <button value="admin_individual_form_add" onclick="submit_individual('<%=org%>', '1'); return false;">Add</button>
-        <button value="admin_individual_form_delete" onclick="delete_individual('<%=org%>', '1'); return false;">Delete</button>
+        <button value="admin_individual_form_add" id="submit_button" onclick="submit_individual('<%=org%>', '1'); return false;">Add</button>
+        <button value="admin_individual_form_delete" id="delete_button" onclick="delete_individual('<%=org%>', '1'); return false;">Delete</button>
     </form>
    
-    <%= form_tag import_path, multipart: true do %>
-    <%= file_field_tag :file, accept: 'csv' %>
-      <%= submit_tag "Import", :class => 'btn btn-primary' %>
-    <% end %>
+    <!--<%= form_tag import_path, multipart: true do %>-->
+    <!--<%= file_field_tag :file, accept: 'csv' %>-->
+    <!--  <%= submit_tag "Import", :class => 'btn btn-primary' %>-->
+    <!--<% end %>-->
    
     <div id="dvImportSegments" class="fileupload ">
       <form target="hiddenFrame">

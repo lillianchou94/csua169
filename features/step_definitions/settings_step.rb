@@ -1,20 +1,9 @@
 require 'tempfile'
 
-Then(/^I click on "([^"]*)"$/) do |arg1|
-  fail "Unimplemented" # Write code here that turns the phrase above into concrete actions
-end
-
-Given(/^I click "([^"]*)"$/) do |arg1|
-  fail "Unimplemented" # Write code here that turns the phrase above into concrete actions
-end
-
-
 Given /^an import file exists with the following data:$/ do |field_table|
-  report = Ruport::Data::Table.new(:column_names => field_table.hashes.first.keys)
-  field_table.hashes.each { |hash| report << hash }
-  @current_import_file = Tempfile.new("import.csv")
-  @current_import_file << report.to_csv
-  @current_import_file.close
+  report = Hash.new
+  field_table.each { |name, email| report[name] = email}
+  
 end
 
 And(/^On the settings page for an admin$/) do
@@ -29,6 +18,18 @@ And(/^On the settings page for an admin$/) do
   # raise "Error delete2" unless not @driver.page_source.include? election_name
 end
 
+And (/^I click Add$/) do
+  @driver.find_element(:id => "submit_button").click
+end
+
+And (/^I click Upload CSV/) do
+  @driver.find_element(:id => "submit_button").click
+end
+
+When /^(?:|I )fill in the field "([^"]*)" with "([^"]*)"$/ do |field, value|
+  @driver.find_element(:name, field).send_keys value
+end
+
 Then(/^I should see a list of preset members for CSUA$/) do
   assert page.has_content?("TestAdmin")
   assert page.has_content?("TestAdmin@gmail.com")
@@ -37,11 +38,9 @@ end
 Given(/^I supply a non\-CSV file$/) do
 end
 
-Given(/^that there are no members in the organization$/) do
-  fail "Unimplemented" # Write code here that turns the phrase above into concrete actions
-end
-
-Given(/^that "([^"]*)" with email "([^"]*)" is a member for "([^"]*)"$/) do |arg1, arg2, arg3|
+Given(/^that "([^"]*)" with email "([^"]*)" is a member for "([^"]*)"$/) do |name, email, org|
+  User.create!(:user_name => name, :user_email => email, :organization => org, :user_prime => 1, :admin_status => 1)
+   @driver.find_element(:id => "settings").click
   assert page.has_content?(arg1)
   assert page.has_content?(arg2)
   assert page.has_content?(arg3)
@@ -51,14 +50,11 @@ Then(/^I should see an alert that says "([^"]*)"$/) do |arg1|
   page.driver.browser.switch_to.alert.accept
 end
 
-Given(/^"([^"]*)" with email "([^"]*)" is a member$/) do |arg1, arg2|
-  fail "Unimplemented" # Write code here that turns the phrase above into concrete actions
-end
 
 Then(/^I should see "([^"]*)" as an admin$/) do |arg1|
-  fail "Unimplemented" # Write code here that turns the phrase above into concrete actions
+  assert page.has_content?(arg1)
 end
 
 Then(/^I should not see "([^"]*)" as a member$/) do |arg1|
-  fail "Unimplemented"
+  assert page.has_content?(arg1)
 end
