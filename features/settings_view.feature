@@ -105,7 +105,6 @@ Feature: Admin Settings Page and Member Management
     And I fill in the field "user_email" with "a@gmail.com"
     And I click Add
     Then I should see an alert that says "User Added"
-    And On the settings page for an admin
     And I fill in the field "user_name" with "Person A"
     And I fill in the field "user_email" with "a@gmail.com"
     And I click Add

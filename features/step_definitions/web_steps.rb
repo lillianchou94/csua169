@@ -314,7 +314,7 @@ When(/^I add the position "([^"]*)" for election "([^"]*)"$/) do |position_name,
   #puts "CSUA is #{@driver.execute_script("return $(':contains(CSUA)').length;")}"
   #puts "election1 is #{@driver.execute_script("return $(':contains(election1)').length;")}"
   #puts "election2 is #{@driver.execute_script("return $(':contains(election2)').length;")}"
-  raise "Error position not found" unless @driver.page_source.include? "position_name"
+  raise "Error position not found" unless @driver.page_source.include? position_name
   #raise "Error election 1 not found" unless @driver.execute_script("return $(':contains(election1)').length;") != 0
   #raise "Error election 2 not found" unless @driver.execute_script("return $(':contains(election2)').length;") != 0
   #raise "Error election add fail" unless @driver.page_source.include? "election1"
