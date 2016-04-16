@@ -33,7 +33,7 @@
   <form id="nomination_form_id"></form>
     <% for @user in @user_list %>
       <div class="radio">
-        <label><input type="radio" name="user" value="<%=@user.user_email%>"><%=@user.user_name%> (<%=@user.user_email%>)</label>
+        <label><input type="radio" name="user" id="id_<%=@user.user_email%>" value="<%=@user.user_email%>"><%=@user.user_name%> (<%=@user.user_email%>)</label>
       </div>
     <% end %>
     <button value="Submit" onclick="submit_nomination('<%=@user.user_email%>')">Submit</button>

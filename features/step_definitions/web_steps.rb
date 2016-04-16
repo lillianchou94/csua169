@@ -401,13 +401,13 @@ end
 
 When(/^I click in the browser "([^"]*)"$/) do |click_id|
   wait = Selenium::WebDriver::Wait.new(timeout: 20)
-  wait.until{ @driver.page_source.include? "click_id" }
+  wait.until{ @driver.page_source.include? click_id }
   @driver.find_element(:id => click_id).click
 end
 
 When(/^I follow in the browser "([^"]*)"$/) do |click_id|
   wait = Selenium::WebDriver::Wait.new(timeout: 10)
-  wait.until{ @driver.page_source.include? "click_id" }
+  wait.until{ @driver.page_source.include? click_id }
   @driver.find_element(:name => click_id).click
 end
 
