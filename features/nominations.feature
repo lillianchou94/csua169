@@ -13,9 +13,10 @@ Feature: Nominate candidates
     Given I am logged in as a member
     And I am on the dashboard page for a member 
     Then I should see in the browser "test election"
-    When I press "test candidate"
-    Then I should see in the browser "Nominate"
-    When I click in the browser "new_election_org04162016__test candidate"
+    #When I click in the browser "test candidate"
+    Then I should see in the browser "new_election_org04162016__test_candidate"
+    When I click in the browser "new_election_org04162016__test_candidate"
+    Then I should see in the browser "Nomination for test candidate"
     And I select "President" from "Positions"
     And I fill in "Email" with "a@gmail.com"
     And I press "Submit"

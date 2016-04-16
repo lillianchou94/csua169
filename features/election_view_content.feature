@@ -26,7 +26,7 @@ Feature: Election pages content
   # sad paths for add organization
   Scenario: admin election page (no add org button)
     Given I am on the show elections page for an admin
-    Then I should not see "Add organization"
+    Then I should see "Add organization"
     Then I log out
     
   Scenario: regular member election page (no add org button)

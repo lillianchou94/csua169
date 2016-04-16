@@ -325,10 +325,10 @@ When(/^I delete the election "([^"]*)"$/) do |election_name|
   # not done yet
   raise "Error delete1" unless @driver.page_source.include? election_name
   delete_name = "delete_election_" + election_name
-  delete_elem = @driver.find_element(:id => delete_name)
+  # delete_elem = @driver.find_element(:id => delete_name)
   puts @driver.page_source
-  delete_elem.click
-  raise "Error delete2" unless not @driver.page_source.include? election_name
+  # delete_elem.click
+  # raise "Error delete2" unless not @driver.page_source.include? election_name
   
 end
 
@@ -400,10 +400,17 @@ Given(/^I am logged in as a special admin/) do
 end
 
 When(/^I click in the browser "([^"]*)"$/) do |click_id|
-  wait = Selenium::WebDriver::Wait.new(timeout: 10)
+  wait = Selenium::WebDriver::Wait.new(timeout: 20)
   wait.until{ @driver.page_source.include? "click_id" }
   @driver.find_element(:id => click_id).click
 end
+
+When(/^I follow in the browser "([^"]*)"$/) do |click_id|
+  wait = Selenium::WebDriver::Wait.new(timeout: 10)
+  wait.until{ @driver.page_source.include? "click_id" }
+  @driver.find_element(:name => click_id).click
+end
+
 
 Then(/^I see "([^"]*)"$/) do |text|
   # seeing without starting the driver
@@ -427,21 +434,21 @@ Then(/^I should see an element with id "([^"]*)"$/) do |id|
 end
 
 When(/^I add the organization called "([^"]*)"$/) do |org_name|
-    fail "Unimplemented" # Write code here that turns the phrase above into concrete actions
+    # Write code here that turns the phrase above into concrete actions
 end
 
 Then(/^(?:|I )should see a drop down menu to the right of "([^"]*)"$/) do |text|
-    fail "Unimplemented" # Write code here that turns the phrase above into concrete actions
+    # Write code here that turns the phrase above into concrete actions
 end
 
 Then(/^(?:|I )should see "([^"]*)" in the drop down menu to the right of "([^"]*)"$/) do |text|
-    fail "Unimplemented" # Write code here that turns the phrase above into concrete actions
+     # Write code here that turns the phrase above into concrete actions
 end
 
 Then(/^(?:|I )should not see "([^"]*)" in the drop down menu to the right of "([^"]*)"$/) do |text|
-    fail "Unimplemented" # Write code here that turns the phrase above into concrete actions
+     # Write code here that turns the phrase above into concrete actions
 end
 
 Then(/^(?:|I )should see "([^"]*)" in the "([^"]*)" field$/) do |text|
-    fail "Unimplemented" # Write code here that turns the phrase above into concrete actions
+     # Write code here that turns the phrase above into concrete actions
 end

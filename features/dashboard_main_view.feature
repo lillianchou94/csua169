@@ -7,24 +7,24 @@ Feature: Dashboard page main content
 	  Given I am logged in as an admin
     And I am on the dashboard page as an admin
     Then I should see "CSUA Voting System"
-    And I should see "Start Nomination"
+    And I should see "Add organization"
     Then I log out
   
   Scenario: Admin Dashboard page with before voting started
     Given I am logged in as an admin
     And I am on the dashboard page as an admin
     Then I should see "CSUA Voting System"
-    And I should see "Start Voting"
+    And I should see "Add election"
     Then I log out
   
   Scenario: Admin Dashboard page with after election ended
     Given I am logged in as an admin
     And I am on the dashboard page as an admin
     Then I should see "CSUA Voting System"
-    And I should see "Election Result"
+    And I should see "Add position"
     Then I log out
     
-  Scenario: Voter Dashboard during an election
-    Given I am on the dashboard page for a voter
-    Then I should not see "Create Organization"
-    And I should not see "CSUA Voting System"
+  Scenario: Admin Dashboard during an election
+    Given I am logged in as an admin
+    Then I should see "Create Organization"
+    And I should see "CSUA Voting System"
