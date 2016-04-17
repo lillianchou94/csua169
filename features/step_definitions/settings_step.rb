@@ -10,26 +10,11 @@ Then /^(?:|I )should see on the settings page "([^"]*)"$/ do |text|
   wait.until { @driver.page_source.include? "Admins" }
 end
 
-Then /^(?:|I )should not see in the browser "([^"]*)"$/ do |text|
-  wait = Selenium::WebDriver::Wait.new(timeout: 20)
-  wait.until { @driver.page_source.exclude? text }
-end
-
-Then /^(?:|I )should see in the browser "([^"]*)"$/ do |text|
-  wait = Selenium::WebDriver::Wait.new(timeout: 20)
-  wait.until { @driver.page_source.include? text }
-end
-
 And(/^On the settings page for an admin$/) do
-  #session[:user_id] = 1
   wait = Selenium::WebDriver::Wait.new(timeout: 20)
   wait.until {@driver.page_source.include? "Settings"}
   @driver.find_element(:id => "settings").click
-  #click_button("Settings")
-  # delete_elem = @driver.find_element(:id => "settings")
-  # puts @driver.page_source
-  # delete_elem.click
-  # raise "Error delete2" unless not @driver.page_source.include? election_name
+
 end
 
 And (/^I click Add$/) do
@@ -44,9 +29,6 @@ When /^(?:|I )fill in the field "([^"]*)" with "([^"]*)"$/ do |field, value|
   @driver.find_element(:name, field).send_keys value
 end
 
-And /^(?:|I )select radio button "([^"]*)" from "([^"]*)"$/ do |field, form|
-  @driver.find_element(:id => field).click
-end
 
 Then(/^I should see a list of preset members for CSUA$/) do
   @driver.find_element(:id,'admin_individual_form').displayed?

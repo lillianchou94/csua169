@@ -31,7 +31,7 @@ Feature: Nominate candidates
     #Then I should see in the browser "You have already nominated for this position"
     Then I log out
   
-  Scenario: Not nomination phase
+  # Scenario: Not nomination phase
     #Given I am logged in as a member
     #And I am on the dashboard page for a member 
     #Then I should see in the browser "test election"
@@ -40,7 +40,7 @@ Feature: Nominate candidates
     #Then I should not see "Nominate"
     #Then I log out
     
-  Scenario: Non-special admin cannot start nomination phase
+  # Scenario: Non-special admin cannot start nomination phase
     #Given I am logged in as a member
     #And I am on the dashboard page for a member
     #Then I should see "test election"
@@ -49,7 +49,7 @@ Feature: Nominate candidates
     #Then I should not see "Nominate"
     #Then I log out
     
-  Scenario: Special admin start nomination phase
+  # Scenario: Special admin start nomination phase
     #Given I am logged in as a special admin
     #And I am on the dashboard page as a specialadmin
     #Then I should see "test election"

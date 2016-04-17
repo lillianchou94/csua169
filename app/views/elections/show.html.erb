@@ -56,9 +56,9 @@
 				  	<label>Organization:</label>
 				  	<!--<input id="new_election_org" name="new_election_org" type="text" autofocus><br>-->
 				    <select type="text" name="new_election_org" id="new_election_org">
-				    <% User.where(:user_email => current_user.user_email, ).each do |user| %>
+				    <% User.where(:user_email => current_user.user_email, :admin_status => 2).each do |user| %>
   					<% puts "this is #{user}" %>
-  					<option value="new_election_org"><%=user.organization%></option>
+  					<option value="<%=user.organization%>"><%=user.organization%></option>
   					<% end %>
 						</select>
 						<br>

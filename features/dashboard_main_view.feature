@@ -28,3 +28,4 @@ Feature: Dashboard page main content
     Given I am logged in as an admin
     Then I should see "Add organization"
     And I should see "CSUA Voting System"
+    Then I log out

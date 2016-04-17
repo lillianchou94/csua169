@@ -321,14 +321,16 @@ When(/^I add the position "([^"]*)" for election "([^"]*)"$/) do |position_name,
 
 end
 
-When(/^I delete the election "([^"]*)"$/) do |election_name|
+When(/^I delete the election "([^"]*)"$/) do |name|
   # not done yet
-  raise "Error delete1" unless @driver.page_source.include? election_name
-  delete_name = "delete_election_" + election_name
-  # delete_elem = @driver.find_element(:id => delete_name)
-  puts @driver.page_source
+  raise "Error delete1" unless @driver.page_source.include? name
+  #e = Election.find_by(:election_name => name)
+  # electionID = e.election_id # election doesnt exist..
+  delete_name = "delete_election_" + name
+  #delete_elem = @driver.find_element(:id => delete_name)
+  # puts @driver.page_source
   # delete_elem.click
-  # raise "Error delete2" unless not @driver.page_source.include? election_name
+  #raise "Error delete2" unless not @driver.page_source.include? name
   
 end
 
