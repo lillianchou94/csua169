@@ -107,6 +107,7 @@ Feature: Admin Settings Page and Member Management
     Then I should see an alert that says "User Added"
     And I fill in the field "user_name" with "Person A"
     And I fill in the field "user_email" with "a@gmail.com"
+    And On the settings page for an admin
     And I click Add
     Then I should see an alert that says "Member already exist"
     And I should see on the settings page "Person A"
