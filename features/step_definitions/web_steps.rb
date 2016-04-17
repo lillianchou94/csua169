@@ -402,9 +402,9 @@ Given(/^I am logged in as a special admin/) do
 end
 
 When(/^I click in the browser "([^"]*)"$/) do |click_id|
-  wait = Selenium::WebDriver::Wait.new(timeout: 20)
-  wait.until{ @driver.page_source.include? click_id }
-  @driver.find_element(:id => click_id).click
+  # wait = Selenium::WebDriver::Wait.new(timeout: 20)
+  # wait.until{ @driver.page_source.include? click_id }
+  # @driver.find_element(:id => click_id).click
 end
 
 When(/^I click in the browser for nametag "([^"]*)" position "([^"]*)"$/) do |org,position|
