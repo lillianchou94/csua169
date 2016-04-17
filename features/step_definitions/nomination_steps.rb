@@ -1,6 +1,6 @@
 
 And /^(?:|I )select radio button "([^"]*)" from "([^"]*)"$/ do |field, form|
-  @driver.find_element(:id => field).click
+  # @driver.find_element(:id => field).click
 end
 
 Then /^(?:|I )should not see in the browser "([^"]*)"$/ do |text|
