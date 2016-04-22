@@ -3,22 +3,6 @@ Feature: Election pages content for non-admin
 	I want to see my Election Panel
 	So that I can see all the elections I am a part of and I can vote in each of these elections
 	
-
-  # Voters page for modal dialog
-  Scenario: Voters dashboard page during voting
-    # need step def
-    Given I am on the show elections page for a "voter" 
-    # need step def
-    # Then I should see "Role" 
-    # need step def
-    And I should see a drop down menu to the right of "Role" 
-    # need step def
-    When I press the drop down menu 
-    # need step def
-    Then I should see a list of candidates
-    # When I press "Candidate 1" 
-    # need step def
-    Then I should see "Candidate 1" in the "Role" field 
   
   # Modal Dialog to press password
   Scenario: First time voting on the computer and cache is cleared

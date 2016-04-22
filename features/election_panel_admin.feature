@@ -10,43 +10,24 @@ Feature: Election pages content
     Given I am on the election dashboard page
     Then I should see "Rest of dashboard goes here"
     Then I log out
-  
-  # happy paths for add organization  
-  Scenario: super-admin election page
-    Given I am on the show elections page for a super-admin
-    Then I should see "Add organization"
-    When I click Add organization
-    # need step def
-    And I add the organization called "org1"
-    Then I should be on the show elections page for a super-admin
-    Then I should see "Add organization"
-    And I should see "org1" on the page
-    Then I log out
     
-  # sad paths for add organization
-  Scenario: admin election page (no add org button)
-    Given I am on the show elections page for an admin
-    Then I should see "Add organization"
-    Then I log out
-    
-  Scenario: regular member election page (no add org button)
+  Scenario: member election page
     Given I am on the show elections page for a member
-    Then I should see "Add organization"
+    Then I should not see "Add organization"
+    And I should see "Add election"
+    And I should see "Add position"
+    And I should see "Settings"
     Then I log out
-    
+
   # drop down org field in add election window
   Scenario: admin for "org1" and "org2" (election page)
     Given I am on the show elections page for an admin
     When I press "Add election"
     Then I should see "Organization:"
-    # need step def
     And I should see a drop down menu to the right of "Organization:"
-    # need step def
     And I should see "org1" in the drop down menu to the right of "Organization:"
-    # need step def
     And I should see "org2" in the drop down menu to the right of "Organization:"
-    When I click org1
-    # need step def
+    When I click "org1"
     Then I should see "org1" in the "Organization:" field
     Then I log out
     
@@ -54,13 +35,9 @@ Feature: Election pages content
     Given I am on the show elections page for an admin
     When I press "Add election"
     Then I should see "Organization:"
-    # need step def
     And I should see a drop down menu to the right of "Organization:"
-    # need step def
     And I should see "org1" in the drop down menu to the right of "Organization:"
-    # need step def
     And I should not see "org2" in the drop down menu to the right of "Organization:"
-    When I click org1
-    # need step def
+    When I click "org1"
     Then I should see "org1" in the "Organization:" field
     Then I log out

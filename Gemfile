@@ -58,6 +58,8 @@ gem 'capybara'
 gem 'selenium-webdriver'
 #gem "capybara-webkit" 
 
+gem 'rails_admin'
+
 gem 'headless'
 
 # bundle exec rake doc:rails generates the API under doc/api.
@@ -108,4 +110,5 @@ end
 group :test do
   gem 'coveralls', require: false
   gem 'factory_girl_rails'
+  gem 'codeclimate-test-reporter', require: nil
 end
