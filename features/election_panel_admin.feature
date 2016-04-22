@@ -11,7 +11,7 @@ Feature: Election pages content
     Then I should see "Rest of dashboard goes here"
     Then I log out
     
-  Scenario: member election page
+  Scenario: admin election page
     Given I am on the show elections page for a member
     Then I should not see "Add organization"
     And I should see "Add election"

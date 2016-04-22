@@ -24,6 +24,7 @@ Feature: Voting phase for admin
   Scenario: Election has already ended
     Given the election "Election 1" has ended
     Then I should not see "Start Election" for "Election 1"
+    Then I log out
   
   Scenario: CSUA admin vote (happy path)
     Given the election "Election1" has started

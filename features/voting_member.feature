@@ -28,6 +28,7 @@ Feature: Voting phase for member
     And I am on the results page
     And I press "vote"
     Then I should see a timeout error
+    Then I log out
     
   Scenario: Voter inputs into modal, cache has no password
     Given I voted for "candidate1" for postion "position1"
@@ -37,6 +38,7 @@ Feature: Voting phase for member
     When I enter a password
     And I press "Enter"
     Then I should see "You have voted for candidate1"
+    Then I log out
     
   Scenario: Voter votes and cache contains password (happy path)
     Given I voted for "candidate1" for postion "position1"
@@ -44,6 +46,7 @@ Feature: Voting phase for member
     And I press "vote"
     Then I should not see a modal dialog
     Then I should see "You have voted for candidate1"
+    Then I log out
   
   Scenario: Correct encryption and decryption after voting
     Given I voted for "candidate1" for postion "position1"
@@ -54,6 +57,7 @@ Feature: Voting phase for member
     And I should have a "decrypted" value of votes
     When I press "enter"
     Then I should see "You have voted for candidate1"
+    Then I log out
   
   Scenario: Attempt decryption after voting, cache is cleared (sad path)
     Given I voted for "candidate1" for postion "position1"
@@ -63,6 +67,7 @@ Feature: Voting phase for member
     When I attempt to encrypt the votes
     Then I should not have a encrypted value
     And I should see an error
+    Then I log out
 
   Scenario: Voters dashboard page during voting
     Given I am on the show elections page for a "voter" 
@@ -72,4 +77,5 @@ Feature: Voting phase for member
     Then I should see a list of candidates
     # When I press "Candidate 1" 
     Then I should see "Candidate 1" in the "Role" field 
+    Then I log out
     

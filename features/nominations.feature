@@ -31,38 +31,44 @@ Feature: Nominate candidates
     #Then I should see in the browser "You have already nominated for this position"
     Then I log out
   
-  # Scenario: Not nomination phase
-    #Given I am logged in as a member
-    #And I am on the dashboard page for a member 
-    #Then I should see in the browser "test election"
-    #When I press "test candidate"
-    #And it is not the nomination phase
-    #Then I should not see "Nominate"
-    #Then I log out
+  Scenario: Not nomination phase
+    Given I am logged in as a member
+    And I am on the dashboard page for a member 
+    Then I should see in the browser "test election"
+    When I press "test candidate"
+    And it is not the nomination phase
+    Then I should not see "Begin nomination"
+    Then I log out
     
-  # Scenario: Non-special admin cannot start nomination phase
-    #Given I am logged in as a member
-    #And I am on the dashboard page for a member
-    #Then I should see "test election"
-    #When I press "test candidate"
-    #And it is not the nomination phase
-    #Then I should not see "Nominate"
-    #Then I log out
+  Scenario: Non-special admin cannot start nomination phase
+    Given I am logged in as a member
+    And I am on the dashboard page for a member
+    Then I should see "test election"
+    When I press "test candidate"
+    And it is not the nomination phase
+    Then I should not see "Begin nomination"
+    Then I log out
     
-  # Scenario: Special admin start nomination phase
-    #Given I am logged in as a special admin
-    #And I am on the dashboard page as a specialadmin
-    #Then I should see "test election"
-    #When I press "test candidate"
-    #And it is not the nomination phase
-    #Then I should see "Start nomination phase"
-    #When I press "Start nomination phase"
-    #And I fill in "nomination threshold" with 1
-    #And I press "Submit"
-    #Then I should see "Nominations"
-    #And I should see "Email"
-    #And I should see "Submit"
-    #Then I log out
+  Scenario: Special admin start nomination phase
+    Given I am logged in as a special admin
+    And I am on the dashboard page as a specialadmin
+    Then I should see "test election"
+    When I press "test candidate"
+    And it is not the nomination phase
+    Then I should see "Begin nomination"
+    When I press "Begin nomination"
+    Then I should see "Nominations"
+    Then I log out
+  
+  Scenario: Member in another org should not be seen in nomination
+    Given I am logged in as a member
+    And I am on the dashboard page for a member
+    Then I should see in the browser "test election"
+    When I click in the browser "test candidate"
+    And it is the nomination phase
+    Then I should see "Nominations"
+    And I should not see "TestUser NotInOrg"
+    Then I log out
     
   Scenario: Nominate invalid candidate
     Given I am logged in as a member
