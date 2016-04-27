@@ -22,6 +22,11 @@ RailsAdmin.config do |config|
     redirect_to main_app.root_path unless current_user.is_super_admin?
   end
   
+  config.current_user_method do
+    current_user = @current_user
+  end
+
+  
   config.included_models = ["User"]
   config.excluded_models = ["Election", "Nomination"]
 

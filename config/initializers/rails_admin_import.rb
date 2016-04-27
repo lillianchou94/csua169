@@ -6,6 +6,10 @@ RailsAdmin.config do |config|
     all
     import
   end
+  
+  config.current_user_method do
+    current_user = @current_user
+  end
 
   # Optional:
   # Configure global RailsAdminImport options
