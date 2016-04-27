@@ -420,7 +420,7 @@ Given(/^I am logged in as a super admin/) do
   raise "Error hello" unless @driver.page_source.include? "Hello, "
 end
 
-Given(/^I am logged in as an admin in CSUA$/) do
+Given(/^I am logged in as a non member$/) do
   @driver = Selenium::WebDriver.for :firefox
   # @driver.navigate.to "https://csua-169-lillianchou94.c9users.io/login"
   @driver.navigate.to "https://csuavoting.herokuapp.com"
