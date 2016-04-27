@@ -24,7 +24,7 @@ Feature: Election panel content
     Then I log out
 
   Scenario: election panel page should NOT have add, delete election and add position for member #sad path
-    Given I am logged in as an admin in CSUA
+    Given I am logged in as a member in CSUA
     And I am on the election dashboard page
     Then I should see "Click on an election to see election status."
     Then I should see "CSUA Voting System"
@@ -48,9 +48,10 @@ Feature: Election panel content
     And I am on the show elections page for an admin
     When I click Add election
     Then I should see "Organization:"
-    Then "new_election_org" should contain "CSUA"
+    Then the "new_election_org" drop-down should contain the option "CSUA"
+    # Then "new_election_org" should contain "CSUA"
     # And I should see a drop down menu to the right of "Organization:"
     # And I should see CSUA in the drop down menu to the right of "Organization:"
     # And I should not see HKN in the drop down menu to the right of "Organization:"
-    And "new_election_org" should not contain "HKN"
+    # And "new_election_org" should not contain "HKN"
     Then I log out

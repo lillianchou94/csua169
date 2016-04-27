@@ -397,7 +397,6 @@ Given(/^I am logged in as a member in CSUA/) do
   wait.until { @driver.page_source.include? "CSUA" }
   raise "Error CSUA afterwards" unless @driver.page_source.include? "CSUA"
   raise "Error hello" unless @driver.page_source.include? "Hello, "
-  raise "Error add" unless @driver.page_source.include? "Add Election"
 end
 
 Given(/^I am logged in as a super admin/) do
@@ -419,7 +418,6 @@ Given(/^I am logged in as a super admin/) do
   wait.until { @driver.page_source.include? "CSUA" }
   raise "Error CSUA afterwards" unless @driver.page_source.include? "CSUA"
   raise "Error hello" unless @driver.page_source.include? "Hello, "
-  raise "Error add" unless @driver.page_source.include? "Add Election"
 end
 
 Given(/^I am logged in as a non member/) do
@@ -431,7 +429,7 @@ Given(/^I am logged in as a non member/) do
   raise "Error CSUA" unless @driver.page_source.include? "CSUA"
   @driver.find_element(:id => 'sign_in_id').click
   email_elem = @driver.find_element(:id => 'Email')
-  email_elem.send_keys "notamember@gmail.com"
+  email_elem.send_keys "notamember169@gmail.com"
   email_elem.submit
   password_elem = @driver.find_element(:id => 'Passwd')
   password_elem.send_keys "169email"
@@ -440,7 +438,6 @@ Given(/^I am logged in as a non member/) do
   wait.until { @driver.page_source.include? "CSUA" }
   raise "Error CSUA afterwards" unless @driver.page_source.include? "CSUA"
   raise "Error hello" unless @driver.page_source.include? "Hello, "
-  raise "Error add" unless @driver.page_source.include? "Add Election"
 end
 
 When(/^I click in the browser "([^"]*)"$/) do |click_id|
@@ -482,6 +479,10 @@ end
 
 Then /^"([^"]*)" should not contain "([^"]*)"$/ do |dropdown, text|
   expect(page).not_to have_select(dropdown, :options => [text])
+end
+
+Then /^the "([^"]*)" drop-down should contain the option "([^"]*)"$/ do |id, value|
+  page.should have_xpath "//select[@id = '#{id}']/option[@value = '#{value}']"
 end
 
 When(/^I click Add election/) do
