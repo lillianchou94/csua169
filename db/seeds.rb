@@ -16,8 +16,9 @@ User.create(user_name: 'Jason Edward Lee', user_email: 'jasonlee17@berkeley.edu'
 User.create(user_name: 'Shayanth Sinnarajah', user_email: 'ssinnarajah@berkeley.edu', organization: "HKN", admin_status: 1, user_prime: 41, is_active: true, votes: '{}')
 
 User.create(user_name: 'memberfirst memberlast', user_email: 'member169csua@gmail.com', organization: "CSUA", admin_status: 0, user_prime: 43, is_active: true, votes: '{}')
-User.create(user_name: 'firstname lastname', user_email: 'email1111222@gmail.com', organization: "CSUA", admin_status: 1, user_prime: 47, is_active: true, votes: '{}')
-User.create(user_name: 'super admin', user_email: 'super169csua@gmail.com', organization: "CSUA", admin_status: 2, user_prime: 53, is_active: true, votes: '{}')
+User.create(user_name: 'CSUA Admin', user_email: 'email1111222@gmail.com', organization: "CSUA", admin_status: 1, user_prime: 47, is_active: true, votes: '{}')
+User.create(user_name: 'HKN Admin', user_email: 'hknadmin@gmail.com', organization: "HKN", admin_status: 1, user_prime: 53, is_active: true, votes: '{}')
+User.create(user_name: 'super admin', user_email: 'super169csua@gmail.com', organization: "CSUA", admin_status: 2, user_prime: 59, is_active: true, votes: '{}')
 
 
 Election.create(election_livestream: '', election_id: 'csua_04012016', election_name: 'csua1', organization: 'CSUA', position: "President", user_id: "a@gmail.com", num_votes: 0, did_win: false)

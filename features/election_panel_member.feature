@@ -1,7 +1,8 @@
 Feature: Election pages content
   As a member
-  I want to see my Election Panel
-  So that I can see all the elections I am a part of
+  So that I only have access to nomination and voting pages that I am a member of the organization for. 
+  And I should not have access to /admin page nor do I have the ability to start nomination and election.
+  I want to be able to vote only.
   
   Background:
     Given I am logged in as a member 

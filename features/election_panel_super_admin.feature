@@ -1,7 +1,7 @@
 Feature: Election pages content
   As a super-admin
-  I want to see my Election Panel
-  So that I can see all the elections I am a part of and I can add new elections and organizations
+  I want to see my Election Panel and have access to /admin page
+  So that I can see all users for all of the organizations and be able to add organizations via import CSV
   
   Background:
     Given I am logged in as a super-admin 

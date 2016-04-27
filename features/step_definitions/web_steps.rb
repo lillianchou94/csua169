@@ -355,6 +355,28 @@ Given(/^I am logged in as an admin in CSUA$/) do
   #@driver.quit
 end
 
+Given(/^I am logged in as an admin in HKN/) do
+  @driver = Selenium::WebDriver.for :firefox
+  @driver.navigate.to "https://csua-169-lillianchou94.c9users.io/login"
+  #@driver.navigate.to "https://csuavoting.herokuapp.com"
+  @driver.manage.timeouts.implicit_wait = 10
+
+  raise "Error CSUA" unless @driver.page_source.include? "CSUA"
+  @driver.find_element(:id => 'sign_in_id').click
+  email_elem = @driver.find_element(:id => 'Email')
+  email_elem.send_keys "hknadmin@gmail.com"
+  email_elem.submit
+  password_elem = @driver.find_element(:id => 'Passwd')
+  password_elem.send_keys "169email"
+  password_elem.submit
+  wait = Selenium::WebDriver::Wait.new(timeout: 10)
+  wait.until { @driver.page_source.include? "CSUA" }
+  raise "Error CSUA afterwards" unless @driver.page_source.include? "CSUA"
+  raise "Error hello" unless @driver.page_source.include? "Hello, "
+  raise "Error add" unless @driver.page_source.include? "Add Election"
+  #@driver.quit
+end
+
 Given(/^I am logged in as a member in CSUA/) do
   @driver = Selenium::WebDriver.for :firefox
   #@driver.navigate.to "https://csuavoting.herokuapp.com"
@@ -392,6 +414,28 @@ Given(/^I am logged in as a super admin/) do
   email_elem.submit
   password_elem = @driver.find_element(:id => 'Passwd')
   password_elem.send_keys "169email"
+  password_elem.submit
+  wait = Selenium::WebDriver::Wait.new(timeout: 10)
+  wait.until { @driver.page_source.include? "CSUA" }
+  raise "Error CSUA afterwards" unless @driver.page_source.include? "CSUA"
+  raise "Error hello" unless @driver.page_source.include? "Hello, "
+  raise "Error add" unless @driver.page_source.include? "Add Election"
+end
+
+Given(/^I am logged in as a non-member/) do
+  @driver = Selenium::WebDriver.for :firefox
+  #@driver.navigate.to "https://csuavoting.herokuapp.com"
+  @driver.navigate.to "https://csua-169-lillianchou94.c9users.io/login"
+  @driver.manage.timeouts.implicit_wait = 10
+
+  raise "Error CSUA" unless @driver.page_source.include? "CSUA"
+  @driver.find_element(:id => 'sign_in_id').click
+  email_elem = @driver.find_element(:id => 'Email')
+  #email_elem.send_keys "email1111222@gmail.com"
+  email_elem.send_keys "notamember@gmail.com"
+  email_elem.submit
+  password_elem = @driver.find_element(:id => 'Passwd')
+  password_elem.send_keys "169nonmember"
   password_elem.submit
   wait = Selenium::WebDriver::Wait.new(timeout: 10)
   wait.until { @driver.page_source.include? "CSUA" }

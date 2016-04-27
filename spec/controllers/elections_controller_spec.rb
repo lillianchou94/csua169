@@ -3,11 +3,9 @@ require "capybara/dsl"
 
 
 RSpec.describe ElectionsController, type: :request do
-  
   before do
     OmniAuth.config.test_mode = true
     Rails.application.env_config["omniauth.auth"] = OmniAuth.config.mock_auth[:google]
-    
   end
   
   describe "testing routing" do

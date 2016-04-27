@@ -144,7 +144,7 @@ respond_to :json
     # only show successfully nominated users
     election = Election.find_by(:election_id => @election_id)
     org = election.organization
-    nominated_users_id = Nomination.where(:organization => org).pluck(:user_id)
+    nominated_users_id = Nomination.where(:organization => org, :election_id => @election_id).pluck(:user_id)
     nominated_users = User.where(:user_email => nominated_users_id)
     # puts "NOMINATEDDDDDDDD"
     # puts nominated_users_id
@@ -274,9 +274,16 @@ respond_to :json
         render 'elections/show_nominations.html.erb'
         #redirect_to :action => 'show_nominations',:election_id => params[:election_id], :position_id => params[:position_id]
       elsif current_phase == 2    # phase 2 = voting
-        @election_id = current_election_id
+        @election_id = params.key?(:election_id) ? params[:election_id] : ''
+        @position_id = params.key?(:position_id) ? params[:position_id] : ''
         @current_user = User.find_by(id: session[:user_id])
-        @user_list = User.where(organization: @current_user.organization)
+        @curr_user_votes = @current_user.votes
+    
+        # only show successfully nominated users
+        org = Election.find_by(:election_id => @election_id).organization
+        nominated_users_id = Nomination.where(:election_id => @election_id).pluck(:user_id)
+        nominated_users = User.where(:user_email => nominated_users_id, :organization => org)
+        @user_list = nominated_users
         @position_id = params.key?(:position_id) ? params[:position_id] : ''
         render 'elections/show_vote.html.erb'
         #redirect_to :action => 'show_vote',:election_id => params[:election_id], :position_id => params[:position_id]

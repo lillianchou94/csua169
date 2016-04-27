@@ -1,7 +1,7 @@
 Feature: Election pages content
   As a admin
-  I want to see my Election Panel
-  So that I can see all the elections I am a part of and I can add new elections
+  So that I can manage members and elections in my organization
+  I should also be able to add and delete election and be able add and delete members and admins.
   
   Background:
     Given I am logged in as an admin 
