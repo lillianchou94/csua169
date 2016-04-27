@@ -14,10 +14,10 @@ env:
 install:
   - bundle install --path vendor/bundle
 script:
-  - RAILS_ENV=test bundle exec rake db:migrate --trace
-  - bundle exec rake db:test:prepare
-  - bundle exec rspec
-  - bundle exec cucumber
+  - RAILS_ENV=test bundle exec rake --trace
+  # - bundle exec rake db:test:prepare
+  # - bundle exec rspec
+  # - bundle exec cucumber
 after_success:
 - coveralls
 

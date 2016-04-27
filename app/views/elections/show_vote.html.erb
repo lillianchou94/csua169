@@ -13,7 +13,7 @@
     var position_name_id = $('#position_name_id').val();
     var is_cached;
     var current_user_votes = $('#curr_user_votes').val()
-    is_cached_password = get_cookie("password");
+    is_cached_password = getCookie("password");
     
     if(user_selected == null) {
       alert('Vote for a candidate');
@@ -50,7 +50,7 @@
         data: {'user_email' : user_email,
                'election_id' : election_id,
                'user_selected' : user_selected,
-               'position_id' : position_id
+               'position_id' : position_name_id
         },
         cache: false,
         success: function(result) {

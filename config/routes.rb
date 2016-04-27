@@ -40,6 +40,8 @@ Rails.application.routes.draw do
   get "/get_current_phase" => "elections#get_current_phase"
   match "/goto_next_phase" => "elections#goto_next_phase", via: [:get,:post]
   
+  match "/encryption_save" => "elections#encryption_save", via: [:get,:post]
+  match "/show_modal" => "elections#show_modal", via: [:get,:post]
   root :to => redirect("/login")
 
   # # get "/loginlogin"

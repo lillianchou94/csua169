@@ -190,19 +190,16 @@ respond_to :json
     
     curr_user_selected = Nomination.find_by(:user_id => @user_selected)
     
-    @curr_user_selected_prime = User.find_by(:user_email => curr_user_selected.user_email).user_prime # Needs to be accessed in the modal controller
+    @curr_user_selected_prime = User.find_by(:user_email => curr_user_selected.user_id).user_prime # Needs to be accessed in the modal controller
     
     if curr_user.has_voted
       render 'elections/vote_error.html.erb'
     else
       curr_user.update_attribute(:has_voted, true) # this needs to be reset to false when the admin ends current position voting
       curr_user_selected.update_attribute(:num_votes, curr_user_selected.num_votes + 1)
+      @user_cache = curr_user
+      render 'elections/show_modal.html.erb'
     end
-    
-    @user_cache = curr_user
-    
-    render 'elections/modal.html.erb'
-  
   end
   
   def encryption_save
