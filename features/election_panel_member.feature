@@ -6,7 +6,7 @@ Feature: Election panel content
   
   Scenario: election dashboard page should have content for member #happy path
     Given I am logged in as a member in CSUA 
-    Given I am on the election dashboard page
+    And I am on the election dashboard page
     Then I should see "Click on an election to see election status."
     Then I should see "CSUA Voting System"
     And I should not see "Add election"
@@ -15,7 +15,8 @@ Feature: Election panel content
     Then I log out
   
   Scenario: election dashboard page should not have content for non-member #sad path
-    Given I am on the show elections page for a member
+    Given I am logged in as a non member
+    And I am on the election dashboard page
     Then I should see "You are not a registered member. Please make sure your organization leader has added your name and email to the system before trying to log in."
     Then I should see "CSUA Voting System"
     And I should not see "Add election"

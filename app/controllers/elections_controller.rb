@@ -101,11 +101,13 @@ respond_to :json
     @user_selected = params.key?(:user_selected) ? params[:user_selected] : ''
     org = Election.find_by(:election_id => @election_id).organization
     @current_user = User.find_by(id: session[:user_id])
+    
     if not Nomination.where(:position => @position_id).blank?
       exist = Nomination.find_by(:position => @position_id)
       if exist.prime_product == nil
         exist.update_attribute(:prime_product, 1)
       end
+      
       # if current user prime exists in prime product of given position then
       # user cannot nominate again for same position
       if (exist.prime_product != 1) and (exist.prime_product % @current_user.user_prime == 0)
@@ -139,9 +141,6 @@ respond_to :json
     org = election.organization
     nominated_users_id = Nomination.where(:organization => org, :election_id => @election_id).pluck(:user_id)
     nominated_users = User.where(:user_email => nominated_users_id)
-    # puts "NOMINATEDDDDDDDD"
-    # puts nominated_users_id
-    # puts nominated_users
     
     @user_list = nominated_users
     if @election_id != '' and @position_id != ''
@@ -236,7 +235,6 @@ respond_to :json
         # {election_name : {"pos" : personA , "pos2" : personB }}, post request to server-side with the decrypted value. 
       #Client-side cookies
         # document.cookies.=> check whether private keys exists, if not => prompt to ask for private key, else => store private key as cookie
-    
     #Both
       # Nominate 
       # Vote
@@ -267,8 +265,6 @@ respond_to :json
         render 'elections/show_nominations.html.erb'
         #redirect_to :action => 'show_nominations',:election_id => params[:election_id], :position_id => params[:position_id]
       elsif current_phase == 2    # phase 2 = voting
-        puts "NOMMM"
-        puts Nomination.all
         @election_id = params.key?(:election_id) ? params[:election_id] : ''
         @position_id = params.key?(:position_id) ? params[:position_id] : ''
         @current_user = User.find_by(id: session[:user_id])

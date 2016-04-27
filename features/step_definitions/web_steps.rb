@@ -335,8 +335,8 @@ end
 
 Given(/^I am logged in as an admin in CSUA$/) do
   @driver = Selenium::WebDriver.for :firefox
-  @driver.navigate.to "https://csua-169-lillianchou94.c9users.io/login"
-  #@driver.navigate.to "https://csuavoting.herokuapp.com"
+  # @driver.navigate.to "https://csua-169-lillianchou94.c9users.io/login"
+  @driver.navigate.to "https://csuavoting.herokuapp.com"
   @driver.manage.timeouts.implicit_wait = 10
 
   raise "Error CSUA" unless @driver.page_source.include? "CSUA"
@@ -357,8 +357,8 @@ end
 
 Given(/^I am logged in as an admin in HKN/) do
   @driver = Selenium::WebDriver.for :firefox
-  @driver.navigate.to "https://csua-169-lillianchou94.c9users.io/login"
-  #@driver.navigate.to "https://csuavoting.herokuapp.com"
+  # @driver.navigate.to "https://csua-169-lillianchou94.c9users.io/login"
+  @driver.navigate.to "https://csuavoting.herokuapp.com"
   @driver.manage.timeouts.implicit_wait = 10
 
   raise "Error CSUA" unless @driver.page_source.include? "CSUA"
@@ -379,8 +379,8 @@ end
 
 Given(/^I am logged in as a member in CSUA/) do
   @driver = Selenium::WebDriver.for :firefox
-  #@driver.navigate.to "https://csuavoting.herokuapp.com"
-  @driver.navigate.to "https://csua-169-lillianchou94.c9users.io/login"
+  @driver.navigate.to "https://csuavoting.herokuapp.com"
+  # @driver.navigate.to "https://csua-169-lillianchou94.c9users.io/login"
   @driver.manage.timeouts.implicit_wait = 20
 
   raise "Error CSUA" unless @driver.page_source.include? "CSUA"
@@ -402,8 +402,8 @@ end
 
 Given(/^I am logged in as a super admin/) do
   @driver = Selenium::WebDriver.for :firefox
-  #@driver.navigate.to "https://csuavoting.herokuapp.com"
-  @driver.navigate.to "https://csua-169-lillianchou94.c9users.io/login"
+  @driver.navigate.to "https://csuavoting.herokuapp.com"
+  # @driver.navigate.to "https://csua-169-lillianchou94.c9users.io/login"
   @driver.manage.timeouts.implicit_wait = 10
 
   raise "Error CSUA" unless @driver.page_source.include? "CSUA"
@@ -422,10 +422,10 @@ Given(/^I am logged in as a super admin/) do
   raise "Error add" unless @driver.page_source.include? "Add Election"
 end
 
-Given(/^I am logged in as a non-member/) do
+Given(/^I am logged in as a non member/) do
   @driver = Selenium::WebDriver.for :firefox
-  #@driver.navigate.to "https://csuavoting.herokuapp.com"
-  @driver.navigate.to "https://csua-169-lillianchou94.c9users.io/login"
+  @driver.navigate.to "https://csuavoting.herokuapp.com"
+  # @driver.navigate.to "https://csua-169-lillianchou94.c9users.io/login"
   @driver.manage.timeouts.implicit_wait = 10
 
   raise "Error CSUA" unless @driver.page_source.include? "CSUA"
@@ -511,6 +511,10 @@ end
 
 
 When(/^I click org1/) do
+  # pending # Write code here that turns the phrase above into concrete actions
+end
+
+When(/^I click CSUA/) do
   # pending # Write code here that turns the phrase above into concrete actions
 end
 
