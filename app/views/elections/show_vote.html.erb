@@ -1,0 +1,122 @@
+<script src="https://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/aes.js"></script>
+<script src="https://crypto-js.googlecode.com/svn/tags/3.1.2/build/components/enc-base64-min.js"></script>
+<!-- left election panel -->
+  <script>
+  function getCookie(name) {
+    var value = "; " + document.cookie;
+    var parts = value.split("; " + name + "=");
+    if (parts.length == 2) return parts.pop().split(";").shift();
+  }
+  function render_modal(user_email) {
+    var user_selected = $("input:radio[name='nom']:checked").val();
+    var election_id = $('#election_selected_id').val();
+    var position_name_id = $('#position_name_id').val();
+    var is_cached;
+    var current_user_votes = $('#curr_user_votes').val()
+    is_cached_password = get_cookie("password");
+    
+    if(user_selected == null) {
+      alert('Vote for a candidate');
+    }
+    else if (is_cached_password != undefined){
+      var encodeuri = btoa(is_cached_password)
+      var key = CryptoJS.enc.Base64.parse(encodeuri.toString());
+      var iv  = CryptoJS.enc.Base64.parse("EBESExQVFhcYGRobHB0eHw==");
+      var text = current_user_votes
+      var step_text = CryptoJS.AES.decrypt(text, key, {iv: iv});
+      var decrypted_text = step_text.toString(CryptoJS.enc.Utf8);
+      decrypted_text = decrypted_text + "{" + election_id + "{" + position_id + ":" + "3" +  ","; // TODO: Need to find alternative way to retrieve prime
+      var encrypted;
+      var encrypted = CryptoJS.AES.encrypt(decrypted_text, key, {iv : iv});
+      if (encrypted != undefined){
+        $.ajax({
+          type: 'POST',
+          url: '/encryption_save',
+          data: {'encrpyted_text' : encrypted,
+                 'user_email' : user_email,
+                 'election_id' : election_id
+          },
+          cache: false,
+          success: function(result) {
+    		              $('#election_dashboard').html(result)
+    		  }
+        });
+      }
+    }
+    else {
+      $.ajax({
+        type: 'POST',
+        url: '/show_modal',
+        data: {'user_email' : user_email,
+               'election_id' : election_id,
+               'user_selected' : user_selected,
+               'position_id' : position_id
+        },
+        cache: false,
+        success: function(result) {
+  		              $('#election_dashboard').html(result)
+  		  }
+      });
+    }
+  };
+  function get_election_dashboard() {
+	  $.ajax({
+        type: 'GET',
+        url: '/election_dashboard',
+        data: {},
+        cache: false,
+        success: function(result) {
+            $('#election_dashboard').html(result);
+        }
+    });
+	};
+  function goto_next_phase(election_id) {
+    $.ajax({
+      type: 'GET',
+      url: '/get_current_phase',
+      data: {'election_id':election_id
+      },
+      cache: false,
+      success: function(data) {
+        if (data.phase == "2") {
+          $.ajax({
+            type: 'POST',
+            url: '/goto_next_phase',
+            data: {'election_id':election_id
+            },
+            cache: false,
+            success: function() {
+              get_election_dashboard();
+      		  }
+          });
+		    }
+      }
+    });
+  }
+  </script>
+ 
+  <% if @current_user and @election_id != '' and @position_id != ''%>
+  <p>VOTING for <%=@position_id%></p>
+  <p>You can only vote once per position. Once you vote for candidate for a position, you cannot change your selection once you have submitted.</p>
+  <input id="election_selected_id" type="text" value="<%=@election_id%>" hidden>
+  <input id="position_name_id" type="text" value="<%=@position_id%>" hidden>
+  <input id="curr_user_votes" type="text" value="<%=@current_user_votes%>" hidden>
+  
+  <form id="vote_form_id"></form>
+    <% for @nom in @user_list %>
+      <div class="radio">
+        <label><input type="radio" name="nom" id="id_<%=@nom.user_email%>" value="<%=@nom.user_email%>"><%=@nom.user_name%> (<%=@nom.user_email%>)</label>
+      </div>
+    <% end %>
+    <button value="submit_button" id="vote_form_submit_id" onclick="render_modal('<%=@nom.user_email%>')">Vote!</button>
+  </form>
+  <% end %>
+  <% if @election_id == '' or @position_id == '' %>
+  <p> You've reached this page in error</p>
+  <% end %>
+  <br> <br>
+  <% if @current_user.is_admin_at_all? %>
+		<button type="button" onclick="goto_next_phase('<%=@election_id%>')"><i class="fa fa-gabel" aria-hidden="true"></i> End voting</button>
+	<% end %>
+  
+

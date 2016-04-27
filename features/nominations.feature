@@ -10,7 +10,7 @@ Feature: Nominate candidates
   
   Scenario: Nominate a candidate
     # during nomination phase
-    Given I am logged in as a member
+    Given I am logged in as a member in CSUA
     And I am on the dashboard page for a member 
     Then I should see in the browser "test election"
     Then I should see in the browser "new_election_org04162016__test_candidate"
@@ -32,7 +32,7 @@ Feature: Nominate candidates
     Then I log out
   
   Scenario: Not nomination phase
-    Given I am logged in as a member
+    Given I am logged in as a member in CSUA
     And I am on the dashboard page for a member 
     Then I should see in the browser "test election"
     When I press "test candidate"
@@ -41,7 +41,7 @@ Feature: Nominate candidates
     Then I log out
     
   Scenario: Non-special admin cannot start nomination phase
-    Given I am logged in as a member
+    Given I am logged in as a member in CSUA
     And I am on the dashboard page for a member
     Then I should see "test election"
     When I press "test candidate"
@@ -50,7 +50,7 @@ Feature: Nominate candidates
     Then I log out
     
   Scenario: Special admin start nomination phase
-    Given I am logged in as a special admin
+    Given I am logged in as a super admin
     And I am on the dashboard page as a specialadmin
     Then I should see "test election"
     When I press "test candidate"
@@ -61,7 +61,7 @@ Feature: Nominate candidates
     Then I log out
   
   Scenario: Member in another org should not be seen in nomination
-    Given I am logged in as a member
+    Given I am logged in as a member in CSUA
     And I am on the dashboard page for a member
     Then I should see in the browser "test election"
     When I click in the browser "test candidate"
@@ -71,7 +71,7 @@ Feature: Nominate candidates
     Then I log out
     
   Scenario: Nominate invalid candidate
-    Given I am logged in as a member
+    Given I am logged in as a member in CSUA
     And I am on the dashboard page for a member 
     Then I should see in the browser "test election"
     When I click in the browser "new_election_org04162016__test_candidate"

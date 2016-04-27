@@ -21,10 +21,8 @@ ActiveRecord::Schema.define(version: 20160312000005) do
     t.string   "organization"
     t.string   "position"
     t.string   "user_id"
-    t.integer  "num_votes"
     t.datetime "election_time"
-    t.boolean  "did_win"
-    t.integer  "phase" #0 adding positions 1: nomination 2:voting 3: closed
+    t.integer  "phase"
     t.string   "created_by"
   end
 
@@ -36,7 +34,9 @@ ActiveRecord::Schema.define(version: 20160312000005) do
     t.integer "threshold"
     t.string  "position"
     t.integer "num_seconds"
-    t.integer  "prime_product"
+    t.integer "prime_product"
+    t.integer "num_votes"
+    t.boolean "did_win"
   end
 
   create_table "users", force: :cascade do |t|
@@ -48,10 +48,10 @@ ActiveRecord::Schema.define(version: 20160312000005) do
     t.string  "oauth_expires_at"
     t.string  "user_email"
     t.string  "organization"
-    t.integer "admin_status" #0: member #1: admin #2: super-admin
+    t.integer "admin_status"
     t.integer "user_prime"
-    t.string  "votes" #all the people they've voted for
-    t.boolean "has_voted" #this is okay because only 1 election of a org can happen at once. Reset to false at end of election of a position
+    t.string  "votes"
+    t.boolean "has_voted"
   end
 
 end

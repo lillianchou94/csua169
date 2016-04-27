@@ -1,0 +1,46 @@
+<!-- left election panel -->
+  <script>
+  function get_election_dashboard() {
+	  $.ajax({
+        type: 'GET',
+        url: '/election_dashboard',
+        data: {},
+        cache: false,
+        success: function(result) {
+            $('#election_dashboard').html(result);
+        }
+    });
+	};
+  function goto_next_phase(election_id) {
+    $.ajax({
+      type: 'GET',
+      url: '/get_current_phase',
+      data: {'election_id':election_id
+      },
+      cache: false,
+      success: function(data) {
+        if (data.phase == "0") {
+          $.ajax({
+            type: 'POST',
+            url: '/goto_next_phase',
+            data: {'election_id':election_id
+            },
+            cache: false,
+            success: function() {
+              get_election_dashboard();
+      		  }
+          });
+		    }
+      }
+    });
+  }
+  </script>
+ 
+  <% if @current_user.is_admin_at_all? %>
+		<button type="button" id="start_nomination_id" onclick="goto_next_phase('<%=@election_id%>')"><i class="fa fa-gabel" aria-hidden="true"></i> Start nomination</button>
+	<% end %>
+  <% if @election_id == '' or @position_id == '' %>
+  <p> You've reached this page in error</p>
+  <% end %>
+  
+

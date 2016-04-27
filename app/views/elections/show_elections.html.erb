@@ -50,6 +50,17 @@
       }
     });
   }
+  function get_election_dashboard(election_id) {
+		 $.ajax({
+          type: 'GET',
+          url: '/election_dashboard',
+          data: {'election_id': election_id},
+          cache: false,
+          success: function(result) {
+              $('#election_dashboard').html(result);
+          }
+      });
+	};
   function update_dashboard_position(election_id_position) {
     var election_id = election_id_position.substr(0,election_id_position.indexOf('__'));
     var position_id = election_id_position.substr(election_id_position.indexOf('__')+2);
@@ -79,25 +90,47 @@
 
   <input id="button_id" style="display:none;" value=""></input>
   <ul style="display:inline;list-style-type:none">
-    <li><button type="button" onclick="open_organization_modal()"><i class="fa fa-plus-square-o"></i> Add organization</button></li>
-    <li><button type="button" onclick="open_election_modal()"><i class="fa fa-plus-square-o"></i> Add election</button></li>
+
+    <% if @current_user.is_admin_at_all? %>
+      <li><button type="button" onclick="open_election_modal()"><i class="fa fa-plus-square-o"></i> Add election</button></li>
+    <% end %>
+    
     <% for @election in @election_list %>
-    <li><br></li>
-    <li id="<%= @election.election_id %>"> <i id="delete_election_<%=@election.election_id%>" name="delete_election_<%=@election.election_name%>" class="fa fa-times" style="cursor:pointer;cursor:hand;" onclick="delete_election('<%=@election.election_id%>')"></i> <p style="display:inline;cursor:pointer;cursor:hand;text-decoration:underline" onclick="update_dashboard('<%=@election.election_id%>')"> <%= @election.election_name %> </p>
-      <ul style="list-style-type:none;margin-left:-20px">
-        <% if @position_list_acc != nil && @position_list_acc != {} %>
-          <% if @position_list_acc[@election.election_id] != nil && @position_list_acc[@election.election_id] != [] %>
-            <% for @position in @position_list_acc[@election.election_id] %>
-              <li style="margin-bottom:2px;margin-top:1px"><button style="background:none;border:none;padding:0;font-family:arial,sans-serif;color:#000;text-decoration:underline;cursor:pointer;" type="button" id="<%= @election.election_id %>__<%= @position %>" name="<%=@election.election_name%>__<%=@position%>" onclick="update_dashboard_position('<%= @election.election_id %>__<%= @position %>')"> <%= @position %> </button></li>
+      <% org = @election.election_id.sub(@election.election_id[/([0-9]{8}_?.*)$/],"") %>
+      <% if @current_user.is_in_org(org) == true %>
+      
+        <% @curr_election = @election.election_id %>
+        <% user_org_adminstatus_pair = @current_user.getAdminStatus()%>
+          <% if user_org_adminstatus_pair.has_key?(org) %>
+            <% if user_org_adminstatus_pair[org] == 1 %>
+              <li id="<%= @election.election_id %>"> <i id="delete_election_<%=@election.election_id%>" name="delete_election_<%=@election.election_name%>" class="fa fa-times" style="cursor:pointer;cursor:hand;" onclick="delete_election('<%=@election.election_id%>')"></i> 
             <% end %>
           <% end %>
-        <% end %>
-        <% @curr_election = @election.election_id %>
-        <li style="margin-bottom:2px;margin-top:1px"></i><button type="button" id="<%=@election.election_id%>" onclick="open_position_modal('<%=@election.election_id%>')"><i class="fa fa-plus-square-o"></i> Add position</button></li>
-        
-      </ul>
-      </li>
+              <p style="display:inline;cursor:pointer;cursor:hand;text-decoration:underline" id="select_election_<%=@election.election_id%>" onclick="get_election_dashboard('<%=@election.election_id%>')"> <%= @election.election_name %> </p>
+              <ul style="list-style-type:none;margin-left:-20px">
+           
+            
+            <% if @position_list_acc != nil && @position_list_acc != {} %>
+              <% if @position_list_acc[@election.election_id] != nil && @position_list_acc[@election.election_id] != [] %>
+                <% for @position in @position_list_acc[@election.election_id] %>
+                  <li style="margin-bottom:2px;margin-top:1px"><button style="background:none;border:none;padding:0;font-family:arial,sans-serif;color:#000;text-decoration:underline;cursor:pointer;" type="button" id="<%= @election.election_id %>__<%= @position %>" name="<%=@election.election_name%>__<%=@position%>" onclick="update_dashboard_position('<%= @election.election_id %>__<%= @position %>')"> <%= @position %> </button></li>
+                <% end %>
+              <% end %>
+            <% end %>
+            
+            <% if user_org_adminstatus_pair.has_key?(org) %>
+              <% if user_org_adminstatus_pair[org] == 1 %>
+                <li style="margin-bottom:2px;margin-top:1px"></i><button type="button" id="<%=@election.election_id%>" onclick="open_position_modal('<%=@election.election_id%>')"><i class="fa fa-plus-square-o"></i> Add position</button></li>
+              <% end %>
+            <% end %>
+            
+          </ul>
+        </li>
+      <% end %>
     <% end %>
   </ul>
-  <button type="button" class="fa fa-cog" id="settings" onclick="update_dashboard_settings()" style="display:inline;cursor:pointer;cursor:hand;text-decoration:underline">Settings</button>
-
+ 
+  
+  <% if @current_user.is_admin_at_all? == true %>
+    <button type="button" class="fa fa-cog" id="settings" onclick="update_dashboard_settings()" style="display:inline;cursor:pointer;cursor:hand;text-decoration:underline">Settings</button>
+  <% end %>

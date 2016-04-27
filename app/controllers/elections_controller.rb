@@ -1,6 +1,7 @@
 class ElectionsController < ApplicationController
 respond_to :html
 respond_to :js
+respond_to :json
 
   attr_accessor :election_list, :embed_livestream, :position_list_acc, :curr_election
   
@@ -25,10 +26,14 @@ respond_to :js
   
   def show_settings
     @current_user = User.find_by(id: session[:user_id])
+    @user_org_adminstatus_pair = @current_user.getAdminStatus()
     all_same_user = User.where(user_email: @current_user.user_email)
+    all_org = @current_user.getAdminStatus()
     @my_orgs = Array.new
-    for user in all_same_user
-      @my_orgs << user.organization
+    for org in all_org.keys
+      if all_org[org] == 1
+        @my_orgs << org
+      end
     end
     @org_member_pair = Hash.new
     @org_admin_pair = Hash.new
@@ -44,7 +49,7 @@ respond_to :js
       flash[:notice] = "Users Imported!" 
       redirect_to :action => 'show_settings'
     rescue
-      flash[:notice] = "#{params[:file].tempfile.to_path.to_s} Invalid CSV file format???."
+      flash[:notice] = "#{params[:file].tempfile.to_path.to_s} Invalid CSV file format."
       redirect_to :action => 'show_settings'
     end
   end
@@ -55,7 +60,7 @@ respond_to :js
       flash[:notice] = "User already exist"
       redirect_to :action => 'show_settings'
     else
-      User.create!(:user_name => params[:user_name], :user_email => params[:user_email], :organization => params[:organization], :admin_status => params[:admin_status], :user_prime => User.getPrime())
+      User.create!(:user_name => params[:user_name], :user_email => params[:user_email], :organization => params[:organization], :admin_status => params[:admin_status], :user_prime => User.getPrime(), :has_voted => false)
       flash[:notice] = "#{:user_name} Added."
       redirect_to :action => 'show_settings'
     end
@@ -74,9 +79,12 @@ respond_to :js
   def show_nominations
     @election_id = params.key?(:election_id) ? params[:election_id] : ''
     @position_id = params.key?(:position_id) ? params[:position_id] : ''
-    
+    org = ''
+    if @election_id != ''
+      org = @election_id.sub(@election_id[/([0-9]{8}_?.*)$/],"")
+    end
     @current_user = User.find_by(id: session[:user_id])
-    @user_list = User.all
+    @user_list = User.where(:organization => org)
     if @election_id != '' and @position_id != ''
       respond_to do |format|
             format.html
@@ -98,7 +106,6 @@ respond_to :js
     if prime == nil
       prime = 3
     end
-    #prime = 3 # NEEDS TO BE USER PRIME? but user prime is not initialized
     puts "POSTING NOMINATIONS"
     if not Nomination.where(:position => @position_id).blank?
       exist = Nomination.find_by(:position => @position_id)
@@ -115,12 +122,113 @@ respond_to :js
         render 'elections/submit_nominations.html.erb'
       end
     else
-      Nomination.create!(:election_id => @election_id, :organization => org, :user_id => @user_selected, :threshold => 1, :position => @position_id, :num_seconds => 0, :prime_product => prime)
+      Nomination.create!(:election_id => @election_id, 
+                         :organization => org, 
+                         :user_id => @user_selected, 
+                         :threshold => 1, 
+                         :position => @position_id, 
+                         :num_seconds => 0, 
+                         :prime_product => prime, 
+                         :num_votes => 0, 
+                         :did_win => false)
       render 'elections/submit_nominations.html.erb'
     end
   end
   
+  def show_vote
+    @election_id = params.key?(:election_id) ? params[:election_id] : ''
+    @position_id = params.key?(:position_id) ? params[:position_id] : ''
+    @current_user = User.find_by(id: session[:user_id])
+    @curr_user_votes = @current_user.votes
+
+    # only show successfully nominated users
+    election = Election.find_by(:election_id => @election_id)
+    org = election.organization
+    nominated_users_id = Nomination.where(:organization => org).pluck(:user_id)
+    nominated_users = User.where(:user_email => nominated_users_id)
+    # puts "NOMINATEDDDDDDDD"
+    # puts nominated_users_id
+    # puts nominated_users
+    
+    @user_list = nominated_users
+    if @election_id != '' and @position_id != ''
+      respond_to do |format|
+            format.html
+            format.rss
+      end
+    end
+    render 'elections/show_vote.html.erb'
+  end
   
+  def post_vote
+  #   # update the db based on the voting
+  #   @election_id = params.key?(:election_id) ? params[:election_id] : ''
+  #   @position_id = params.key?(:position_id) ? params[:position_id] : ''
+  #   @user_selected = params.key?(:user_selected) ? params[:user_selected] : ''
+  #   @current_user_email = params.key?(:user_email) ? params[:user_email] : ''
+  #   @user_organization = params.key?(:user_organization)? params[:user_organization] : ''
+    
+  #   org = Election.find_by(:election_id => @election_id).organization
+  #   curr_user = User.find_by(:user_email => @current_user_email)
+
+  #   curr_user_selected = Nomination.find_by(:user_id => @user_selected)
+    
+  #   # puts "NUMVOTESSS"
+  #   # puts curr_user_selected.num_votes
+  end
+  
+  def show_results
+    render 'elections/show_results.html.erb'
+  end
+  
+  def save_votes
+    
+  end
+  
+  def show_modal
+    @election_id = params.key?(:election_id) ? params[:election_id] : ''
+    @position_id = params.key?(:position_id) ? params[:position_id] : ''
+    @user_selected = params.key?(:user_selected) ? params[:user_selected] : ''
+    @curr_user = params.key?(:curr_user) ? params[:curr_user] : ''
+    @current_user_email = params.key?(:user_email) ? params[:user_email] : ''
+    
+    org = Election.find_by(:election_id => @election_id).organization
+    curr_user = User.find_by(:user_email => @current_user_email, :organization => org)
+    curr_user_votes = curr_user.votes
+    
+    curr_user_selected = Nomination.find_by(:user_id => @user_selected)
+    
+    @curr_user_selected_prime = User.find_by(:user_email => curr_user_selected.user_email).user_prime # Needs to be accessed in the modal controller
+    
+    if curr_user.has_voted
+      render 'elections/vote_error.html.erb'
+    else
+      curr_user.update_attribute(:has_voted, true) # this needs to be reset to false when the admin ends current position voting
+      curr_user_selected.update_attribute(:num_votes, curr_user_selected.num_votes + 1)
+    end
+    
+    @user_cache = curr_user
+    
+    render 'elections/modal.html.erb'
+  
+  end
+  
+  def encryption_save
+    @encrypted_text = params.key?(:encrypted_text) ? params[:encrypted_text] : ''
+    @current_user_email = params.key?(:user_email) ? params[:user_email] : ''
+    @election_id = params.key?(:election_id) ? params[:election_id] : ''
+    
+    org = Election.find_by(:election_id => @election_id).organization
+    
+    curr_user = User.find_by(:user_email => @current_user_email, :organization => org)
+    curr_user.update_attribute(:votes, @encrypted_text)
+    @current_user_email = curr_user.user_email
+    @organization = org
+    
+    render 'elections/submit_vote.html.erb'
+    
+  end
+    
   def dashboard
   #Super-Admin can only create an organization
     #is_admin = 0-> Regular Access, 1-> Admin Rights, 2-> Super Admin Rights
@@ -135,21 +243,100 @@ respond_to :js
         # {election_name : {"pos" : personA , "pos2" : personB }}, post request to server-side with the decrypted value. 
       #Client-side cookies
         # document.cookies.=> check whether private keys exists, if not => prompt to ask for private key, else => store private key as cookie
-      
+    
     #Both
       # Nominate 
       # Vote
-    puts "hi"
-    if params.key?(:election_id) and params.key?(:position_id)
-      puts "redirecting to"
-      redirect_to :action => 'show_nominations',:election_id => params[:election_id], :position_id => params[:position_id]
+      
+    current_election = params.key?(:election_id)
+    current_election_id = params.key?(:election_id) ? params[:election_id] : ''
+    current_phase = Election.find_by(:election_id => current_election_id)
+    if current_phase != nil
+      current_phase = current_phase.phase
+    end
+
+    if params.key?(:election_id) #and params.key?(:position_id)
+      if current_phase == 0   # phase 0 = adding positions 
+        curr_election_uid = Election.find_by(:election_id => current_election_id)
+        curr_election_uid = curr_election_uid.user_id
+        if current_user.user_email == curr_election_uid
+          @election_id = current_election_id
+          @current_user = User.find_by(id: session[:user_id]) 
+          render 'elections/show_start_nominations.html.erb'
+        else
+          render 'elections/error.html.erb'
+        end
+      elsif current_phase == 1    # phase 1 = nomination
+        @current_user = User.find_by(id: session[:user_id])
+        @user_list = User.where(organization: @current_user.organization)
+        @position_id = params.key?(:position_id) ? params[:position_id] : ''
+        @election_id = current_election_id
+        render 'elections/show_nominations.html.erb'
+        #redirect_to :action => 'show_nominations',:election_id => params[:election_id], :position_id => params[:position_id]
+      elsif current_phase == 2    # phase 2 = voting
+        @election_id = current_election_id
+        @current_user = User.find_by(id: session[:user_id])
+        @user_list = User.where(organization: @current_user.organization)
+        @position_id = params.key?(:position_id) ? params[:position_id] : ''
+        render 'elections/show_vote.html.erb'
+        #redirect_to :action => 'show_vote',:election_id => params[:election_id], :position_id => params[:position_id]
+      elsif current_phase == 3    # phase 3 = closed
+        render 'elections/show_results.html.erb'
+      end
     else
       render 'elections/show_main.html.erb'
     end
+    
     #@embed_livestream = "https://www.youtube.com/embed/KF47Za1lfjM"
     #puts "livestream url is #{@embed_livestream}"
     
    # render 'elections/show_main.html.erb'
+  end
+  
+  def get_current_phase
+    @election_id = params.key?(:election_id) ? params[:election_id] : ''
+    @current_user = User.find_by(id: session[:user_id])
+    @current_user_email = @current_user.user_email
+    curr_election = ''
+    curr_user = ''
+    if @election_id != ''
+      curr_election = Election.find_by(:election_id => @election_id)
+    end
+
+    if @current_user_email != '' && curr_election != '' && curr_election.user_id == @current_user_email
+      # set the next phase
+      respond_to do |format|
+        msg = {:phase => curr_election.phase.to_s}
+        format.json {render :json => msg}
+      end
+      #msg = {:phase => curr_election.phase}
+      #respond_with(msg)
+    else
+      respond_to do |format|
+        msg = {:phase => -1.to_s}
+        format.json {render :json => msg}
+      end
+    end
+  end
+  
+  def goto_next_phase
+    @election_id = params.key?(:election_id) ? params[:election_id] : ''
+    @current_user = User.find_by(id: session[:user_id])
+    @current_user_email = @current_user.user_email
+    curr_election = ''
+    curr_user = ''
+    if @election_id != ''
+      curr_election = Election.find_by(:election_id => @election_id)
+    end
+    if @current_user_email != '' && curr_election.user_id == @current_user_email
+      # set the next phase
+      curr_election.phase = curr_election.phase + 1
+      curr_election.save!
+    end
+    respond_to do |format|
+        msg = {:random => 0}
+        format.json {render :json => msg}
+    end
   end
   
   def embed_livestream
@@ -189,20 +376,7 @@ respond_to :js
   end
   
   def login
-    render 'login.html.erb'
-  end
-
-  def show_organizations_add
-    if params[:new_org] != nil && params[:super_admin_name] != nil && params[:super_admin_email] != nil
-      org_param_name = params[:new_org]
-      super_admin_param_name = params[:super_admin_name]
-      super_admin_param_email = params[:super_admin_email]
-      # super_admin_user = User.where(user_email: super_admin_param_email)
-      # super_admin_user.update_attributes(organization: org_param_name)
-      User.create!(:user_name => super_admin_param_name, :user_email => super_admin_param_email, :organization => org_param_name, :is_active => true, :admin_status => 2, :user_prime => User.getPrime())
-    end
-    
-    render 'elections/show_elections.html.erb'
+    render 'elections/login.html.erb'
   end
   
   def show_elections_add
@@ -211,6 +385,10 @@ respond_to :js
       election_param_org = params[:new_election_org]
       embed_livestream = params[:new_election_livestream]
       election_id_temp = election_param_org+DateTime.now.strftime("%m%d%Y").to_s
+      curr_user = ''
+      if session[:user_id]
+        curr_user = User.find_by(id: session[:user_id]).user_email
+      end
       if Election.find_by(election_id: election_id_temp) != nil
         count = 1
         while Election.find_by(election_id: election_id_temp+"_"+count.to_s) != nil
@@ -219,7 +397,7 @@ respond_to :js
         election_id_temp += "_"+count.to_s
       end
       election_time_new = DateTime.now.strftime("%m%d%Y").to_s
-      Election.create!(:election_livestream => embed_livestream, :election_id => election_id_temp, :election_name => election_param_name, :election_time => election_time_new, :organization => election_param_org, :position => "", :user_id => "", :num_votes => 0, :did_win => false)    
+      Election.create!(:election_livestream => embed_livestream, :election_id => election_id_temp, :election_name => election_param_name, :election_time => election_time_new, :organization => election_param_org, :position => "", :user_id => curr_user, :phase => 0)    
       @election_list = Election.all
       @position_list_acc = @@position_list
     end

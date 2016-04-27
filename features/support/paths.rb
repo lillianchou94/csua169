@@ -26,14 +26,14 @@ module NavigationHelpers
       '/'
     when /^the show elections page for a "voter"$/
       '/'
+    when /^the show elections page for an admin$/
+      '/'
     when /^the dashboard page as a specialadmin$/
       '/dashboard/home'
     when /^the dashboard page for a member/
       '/dashboard/home'
     when /^the dashboard page for googleuser$/
       '/dashboard/home'
-    when /^the show elections page for an admin$/
-      '/election_show_elections'
     when /^the add election page$/
       '/election_add_election'
     when /^the delete election page$/

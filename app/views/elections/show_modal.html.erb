@@ -1,0 +1,80 @@
+<script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/aes.js"></script>
+<script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/components/enc-base64-min.js"></script>
+
+<script>
+  function setCookie(name,value,expires){
+      document.cookie = name + "=" + value + ((expires==null) ? "" : ";expires=" + expires.toGMTString());
+  }
+  function submit_vote(user_email) {
+    
+    var modal = document.getElementById('myModal');
+    var inputText = document.getElementById('nome');
+    var btn = document.getElementById("myBtn");
+    var span = document.getElementsByClassName("close")[0];
+    var span2 = document.getElementsByClassName("close")[1];
+    
+    var election_id = $('#election_selected_id').val()
+    var position_id = $('#position_name_id').val()
+    var curr_votes = $('#curr_user_votes').val()
+    var user_prime = $('#selected_user_prime').val()
+    var user_email = $('#user_email').val()
+    
+    var input_val = inputText.value;
+    var encodeuri = btoa(input_val)
+    var key = CryptoJS.enc.Base64.parse(encodeuri.toString());
+    var iv  = CryptoJS.enc.Base64.parse("EBESExQVFhcYGRobHB0eHw==");
+    var text = curr_votes
+    var step_text = CryptoJS.AES.decrypt(text, key, {iv: iv});
+    var decrypted_text = step_text.toString(CryptoJS.enc.Utf8);
+    decrypted_text = decrypted_text + "{" + election_id + "{" + position_id + ":" + user_prime ","; // Need to do cleanup in the backend
+    var encrypted;
+    var encrypted = CryptoJS.AES.encrypt(decrypted_text, key, {iv : iv});
+    var decrypted = CryptoJS.AES.decrypt(encrypted, key, {iv: iv
+    var expirydate=new Date();
+    expirydate.setTime(expirydate.getTime()+(100*60*60*24*100))
+    setCookie("password", input_val, expirydate)
+    modal.style.display = "none";
+    
+    if(encrypted == null) {
+      alert('Encryption failed, try again');
+    }
+    else {
+      $.ajax({
+        type: 'POST',
+        url: '/encryption_save',
+        data: {'encrpyted_text' : encrypted
+               'user_email' : user_email
+               'election_id' : election_id
+        },
+        cache: false,
+        success: function(result) {
+  		              $('#election_dashboard').html(result)
+  		  }
+      });
+    }
+  }
+    
+</script>
+<!-- The Modal -->
+<div id="myModal" class="modal">
+  <!-- Modal content -->
+  <div class="modal-content">
+    <div class="modal-header">
+      <span class="close">×</span>
+      <h2>Enter your Password</h2>
+    </div>
+    <div class="modal-body">
+      <input id="nome" name="nome" type="password" placeholder="" class="input-xlarge" required="">
+      <input id="election_selected_id" type="text" value="<%=@election_id%>" hidden>
+      <input id="position_name_id" type="text" value="<%=@position_id%>" hidden>
+      <input id="curr_user_votes" type="text" value="<%=@curr_user_votes%>" hidden>
+      <input id="selected_user_prime" type="text" value="<%=@curr_user_selected_prime%>" hidden>
+      <input id="user_email", type="text" value="<%=@current_user_email%>" hidden>
+      <button value="submit_button" id="submit_button" onclick="submit_vote('<%=@nom.user_email%>')">Vote!</button>
+    </div>
+    <div class="modal-footer">
+      <h3>   </h3>
+    </div>
+  </div>
+
+</div>

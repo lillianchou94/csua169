@@ -37,6 +37,8 @@ gem 'rails_12factor', group: :production
 gem 'omniauth'
 gem 'omniauth-google-oauth2'
 
+gem "rails_admin_import", "~> 1.2"
+
 gem 'rspec-core'
 
 gem 'cucumber' 
@@ -109,6 +111,4 @@ end
 
 group :test do
   gem 'coveralls', require: false
-  gem 'factory_girl_rails'
-  gem 'codeclimate-test-reporter', require: nil
 end

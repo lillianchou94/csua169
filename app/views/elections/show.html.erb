@@ -33,22 +33,6 @@
 			    <!-- election panel code -->
 				<div class="election_column" id="election_content" style="float:left"></div>
 
-			  <div id="organizationmodal" title="Add Organization"; style="display:none">
-			    <form action="/election_add_organization" method="post" target="hiddenFrame" id="orgform" onsubmit="set_org_id(); setTimeout(function () { window.location.reload(); }, 10)">
-				  	<input type='hidden' name='<%=request_forgery_protection_token.to_s%>' value="<%=form_authenticity_token%>">
-				  	<label>New organization name:</label>
-				  	<input id="new_org" name="new_org" type="text"><br>
-				  	<% if current_user != nil %>
-      			<% puts "this is #{current_user}" %>
-      			<label>Admin Name:</label>
-				  	<input id="super_admin_name" name="super_admin_name" type="text" value='<%=current_user.user_name%>'><br>
-				  	<label>Admin Email:</label>
-				  	<input id="super_admin_email" name="super_admin_email" type="text" value='<%=current_user.user_email%>'><br>
-			      <% end %>
-				    <input id="org_submit" type="submit" value="Create">
-				  </form>
-				</div>
-
 			    
 			  <div id="electionmodal" title="Add Election" style="display:none">
 			    <form action="/election_add_election" method="post" target="hiddenFrame" id="electionform" onsubmit="set_election_id(); setTimeout(function () { window.location.reload(); }, 10)">
@@ -56,7 +40,7 @@
 				  	<label>Organization:</label>
 				  	<!--<input id="new_election_org" name="new_election_org" type="text" autofocus><br>-->
 				    <select type="text" name="new_election_org" id="new_election_org">
-				    <% User.where(:user_email => current_user.user_email, :admin_status => 2).each do |user| %>
+				    <% User.where(:user_email => current_user.user_email, :admin_status => 1).each do |user| %>
   					<% puts "this is #{user}" %>
   					<option value="<%=user.organization%>"><%=user.organization%></option>
   					<% end %>
@@ -90,8 +74,8 @@
 			<div style="width:10px">	</div>
 			<div id="main_page" style="border:1px solid gray; height:100%">
 			    <!-- main dashboard -->
-			    <div class="election_dashboard" id="election_dashboard" style="float:left">This is the election dashboard stuff</div>
-			    <div class="election_embed_livestream" id="election_embed_livestream" style="float:right">dis the livestream part</div>
+			    <div class="election_dashboard" id="election_dashboard" style="float:left"></div>
+			    <div class="election_embed_livestream" id="election_embed_livestream" style="float:right"></div>
 			</div> 
 	    </div>
 	    
@@ -108,6 +92,10 @@
 			  		$("#hiddenFrameID").empty();
 			  		$("#organizationmodal").dialog({autoOpen: false, modal:true});
 			  		$("#organizationmodal").dialog("open");
+			  		$("#org_submit").click(function(e) {
+							$("#organizationmodal").dialog("close");
+							$("#hiddenFrameID").empty();
+					});
 			  	});
 			};
 

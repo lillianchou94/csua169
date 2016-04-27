@@ -25,27 +25,6 @@ Feature: Admin Settings Page and Member Management
     And I should not see "HKN"
     Then I log out
   
-  Scenario: Admin uploading CSV file to add members: successful (happy path)
-    Given I am logged in as an admin
-    And On the settings page for an admin
-    Then I should see on the settings page "CSUA"
-    Given an import file exists with the following data:
-      | Name        | Email               |
-      | TestAdmin   | TestAdmin@gmail.com |
-    And I click Upload CSV
-    Then I should see an alert that says "Upload successful"
-    And I should see a list of preset members for CSUA
-    Then I log out
-  
-  Scenario: Admin uploading CSV file to add members: failed (sad path)
-    Given I am logged in as an admin
-    And On the settings page for an admin
-    And I click Upload CSV
-    And I supply a non-CSV file
-    Then I should see an alert that says "Upload failed, the file must be a .csv file"
-    And On the settings page for an admin
-    Then I log out
-
   Scenario: Adding member that does not exist already (happy path)
     Given I am logged in as an admin
     And On the settings page for an admin

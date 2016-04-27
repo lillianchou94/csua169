@@ -108,7 +108,7 @@ end
 
 Then /^(?:|I )should see "([^"]*)"$/ do |text|
   wait = Selenium::WebDriver::Wait.new(timeout: 20)
-  wait.until { @driver.page_source.include? "Add election" }
+  wait.until { @driver.page_source.include? text }
   raise "Error "+text+" not found" unless @driver.execute_script("return $(':contains("+text+")').length;") != 0
 
   #if page.respond_to? :should
@@ -267,7 +267,6 @@ end
 When(/^I add the election called "([^"]*)" for the organization "([^"]*)"$/) do |election_name, org_name|
   wait = Selenium::WebDriver::Wait.new(timeout: 20)
   raise "Error add" unless @driver.page_source.include? "Add Election"
-  raise "Error org" unless @driver.page_source.include? "Organization:"
   
   @driver.execute_script("$('#new_election_org').parents().css({'display':'block','visibility':'visible'})")
   @driver.execute_script("$('#new_election_name').parents().css({'display':'block','visibility':'visible'})")
@@ -334,10 +333,10 @@ When(/^I delete the election "([^"]*)"$/) do |name|
   
 end
 
-Given(/^I am logged in as an admin$/) do
+Given(/^I am logged in as an admin in CSUA$/) do
   @driver = Selenium::WebDriver.for :firefox
-  @driver.navigate.to "https://csuavoting.herokuapp.com"
-  #@driver.navigate.to "https://fierce-reef-37936.herokuapp.com"
+  @driver.navigate.to "https://csua-169-lillianchou94.c9users.io/login"
+  #@driver.navigate.to "https://csuavoting.herokuapp.com"
   @driver.manage.timeouts.implicit_wait = 10
 
   raise "Error CSUA" unless @driver.page_source.include? "CSUA"
@@ -356,21 +355,21 @@ Given(/^I am logged in as an admin$/) do
   #@driver.quit
 end
 
-Given(/^I am logged in as a member/) do
+Given(/^I am logged in as a member in CSUA/) do
   @driver = Selenium::WebDriver.for :firefox
-  @driver.navigate.to "https://csuavoting.herokuapp.com"
-  #@driver.navigate.to "https://fierce-reef-37936.herokuapp.com"
+  #@driver.navigate.to "https://csuavoting.herokuapp.com"
+  @driver.navigate.to "https://csua-169-lillianchou94.c9users.io/login"
   @driver.manage.timeouts.implicit_wait = 20
 
   raise "Error CSUA" unless @driver.page_source.include? "CSUA"
   @driver.find_element(:id => 'sign_in_id').click
   email_elem = @driver.find_element(:id => 'Email')
-  email_elem.send_keys "email1111222@gmail.com"
-  #email_elem.send_keys "member169csua@gmail.com"
+  #email_elem.send_keys "email1111222@gmail.com"
+  email_elem.send_keys "member169csua@gmail.com"
   email_elem.submit
   password_elem = @driver.find_element(:id => 'Passwd')
-  #password_elem.send_keys "169member"
-  password_elem.send_keys "169email"
+  password_elem.send_keys "169member"
+  #password_elem.send_keys "169email"
   password_elem.submit
   wait = Selenium::WebDriver::Wait.new(timeout: 10)
   wait.until { @driver.page_source.include? "CSUA" }
@@ -379,17 +378,17 @@ Given(/^I am logged in as a member/) do
   raise "Error add" unless @driver.page_source.include? "Add Election"
 end
 
-Given(/^I am logged in as a special admin/) do
+Given(/^I am logged in as a super admin/) do
   @driver = Selenium::WebDriver.for :firefox
-  @driver.navigate.to "https://csuavoting.herokuapp.com"
-  #@driver.navigate.to "https://fierce-reef-37936.herokuapp.com"
+  #@driver.navigate.to "https://csuavoting.herokuapp.com"
+  @driver.navigate.to "https://csua-169-lillianchou94.c9users.io/login"
   @driver.manage.timeouts.implicit_wait = 10
 
   raise "Error CSUA" unless @driver.page_source.include? "CSUA"
   @driver.find_element(:id => 'sign_in_id').click
   email_elem = @driver.find_element(:id => 'Email')
-  email_elem.send_keys "email1111222@gmail.com"
-  #email_elem.send_keys "super169csua@gmail.com"
+  #email_elem.send_keys "email1111222@gmail.com"
+  email_elem.send_keys "super169csua@gmail.com"
   email_elem.submit
   password_elem = @driver.find_element(:id => 'Passwd')
   password_elem.send_keys "169email"

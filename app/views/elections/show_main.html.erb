@@ -28,7 +28,11 @@
 		});
 	};
 	</script>
+	<% if current_user.has_non_zero_prime? == false %>
+	<p>You are not a registered member. Please make sure your organization leader has added your name and email to the system before trying to log in.</p>
+	<% end %>
+	<% if current_user.has_non_zero_prime? == true %>
+	<p> Click on an election to see election status. </p>
+	<% end %>
 	
-	<p>Rest of dashboard goes here</p>
-
 <% end %>

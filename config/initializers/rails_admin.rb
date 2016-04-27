@@ -18,6 +18,33 @@ RailsAdmin.config do |config|
   # config.audit_with :paper_trail, 'User', 'PaperTrail::Version' # PaperTrail >= 3.0.0
 
   ### More at https://github.com/sferik/rails_admin/wiki/Base-configuration
+  config.authorize_with do
+    redirect_to main_app.root_path unless current_user.is_super_admin?
+  end
+  
+  config.included_models = ["User"]
+  config.excluded_models = ["Election", "Nomination"]
+
+  config.model 'User' do
+    list do
+      include_all_fields
+      exclude_fields :provider, :uid, :oauth_token, :oauth_expires_at, :user_prime, :votes, :has_voted
+    end
+    
+    edit do
+      field :user_name
+      field :user_email
+      field :admin_status
+      field :organization
+      field :is_active
+      field :user_prime, :hidden do
+        default_value do
+          User.getPrime()
+        end
+      end
+    end
+    
+  end
 
   config.actions do
     dashboard                     # mandatory

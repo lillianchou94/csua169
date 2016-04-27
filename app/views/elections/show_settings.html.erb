@@ -94,95 +94,71 @@
 </script>
 
 <p id="flash"><%= flash[:notice] %></p>
-<%if @my_orgs.count == 0%>
+
+<% if @current_user.is_admin_at_all? == false %>
   <p>You're not a part of any organization</p>
 <% end %>
-<% @my_orgs.each do |org| %>
-    <h1><%= org %></h1>
-    <h2>Admins</h2>
-    <table>
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Email</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @org_admin_pair[org].each do |admin| %>
+
+<% if @current_user.is_admin_at_all? == true %>
+  <% @my_orgs.each do |org| %>
+      <h1><%= org %></h1>
+      <h2>Admins</h2>
+      <table>
+        <thead>
           <tr>
-            <td><%= admin.user_name %></td>
-            <td><%= admin.user_email %></td>
+            <th>Name</th>
+            <th>Email</th>
           </tr>
-        <% end %>
-      </tbody>
-    </table>
-    <br>
-    <div>
-    
-    <form name="admin_individual_form" id="admin_individual_form" target="hiddenFrame">
-      <h4>Add/Delete an Admin for <%=org%></h4>
-        Name: <input type="text" id="<%=org%>_admin_name" name="user_name"/> <br/>
-        Email: <input type="text" id="<%=org%>_admin_email" name="user_email" /> <br/>
-        <button value="admin_individual_form_add" id="submit_button" onclick="submit_individual('<%=org%>', '1'); return false;">Add</button>
-        <button value="admin_individual_form_delete" id="delete_button" onclick="delete_individual('<%=org%>', '1'); return false;">Delete</button>
-    </form>
-   
-    <!--<%= form_tag import_path, multipart: true do %>-->
-    <!--<%= file_field_tag :file, accept: 'csv' %>-->
-    <!--  <%= submit_tag "Import", :class => 'btn btn-primary' %>-->
-    <!--<% end %>-->
-   
-    <div id="dvImportSegments" class="fileupload ">
-      <form target="hiddenFrame">
-        <fieldset>
-            <legend>Upload a CSV File for Admins</legend>
-            Make sure you only have the following columns in this order: Name, Email
-            <br> 
-                <input type="file" name="File Upload" id="csvFile" accept=".csv" />
-                <button value="Submit" onclick="upload_csv('csvFile', '<%=org%>'); return false;">Upload CSV</button>
-         </fieldset>
-      </form>
-    </div>
-    
-    <h2>Members</h2>
-    <table>
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Email</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @org_member_pair[org].each do |member| %>
-          <tr>
-            <td><%= member.user_name %></td>
-            <td><%= member.user_email %></td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
-    <br>
-    <div>
-    
-    <form name="member_individual_form" id="member_individual_form" target="hiddenFrame">
-    <h4>Add/Delete a Member for <%=org%></h4>
-      Name: <input type="text" id="<%=org%>_member_name" name="user_name"/> <br/>
-      Email: <input type="text" id="<%=org%>_member_email" name="user_email" /> <br/>
-      <button value="member_individual_form_submit" onclick="submit_individual('<%=org%>', '0'); return false;">Add</button>
-      <button value="member_individual_form_delete" onclick="delete_individual('<%=org%>', '0'); return false;">Delete</button>
-    </form>  
+        </thead>
+        <tbody>
+          <% @org_admin_pair[org].each do |admin| %>
+            <tr>
+              <td><%= admin.user_name %></td>
+              <td><%= admin.user_email %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <br>
+      <div>
       
-    <div id="dvImportSegments" class="fileupload ">
-      <form name="csv_form" id="csv_form" target="hiddenFrame">
-        <fieldset>
-            <legend>Upload a CSV File for Members</legend>
-            Make sure you only have the following columns in this order: Name, Email
-            <br>
-                <input type="file" name="File Upload" id="csvFile" accept=".csv" />
-                <button value="Submit" onclick="upload_csv('csvFile', '<%=org%>'); return false;">Upload CSV</button>
-         </fieldset>
+      <form name="admin_individual_form" id="admin_individual_form" target="hiddenFrame">
+        <h4>Add/Delete an Admin for <%=org%></h4>
+          Name: <input type="text" id="<%=org%>_admin_name" name="user_name"/> <br/>
+          Email: <input type="text" id="<%=org%>_admin_email" name="user_email" /> <br/>
+          <button value="admin_individual_form_add" id="submit_button" onclick="submit_individual('<%=org%>', '1'); return false;">Add</button>
+          <button value="admin_individual_form_delete" id="delete_button" onclick="delete_individual('<%=org%>', '1'); return false;">Delete</button>
       </form>
-    </div>
+      
+      <h2>Members</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @org_member_pair[org].each do |member| %>
+            <tr>
+              <td><%= member.user_name %></td>
+              <td><%= member.user_email %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <br>
+      <div>
+      
+      <form name="member_individual_form" id="member_individual_form" target="hiddenFrame">
+      <h4>Add/Delete a Member for <%=org%></h4>
+        Name: <input type="text" id="<%=org%>_member_name" name="user_name"/> <br/>
+        Email: <input type="text" id="<%=org%>_member_email" name="user_email" /> <br/>
+        <button value="member_individual_form_submit" onclick="submit_individual('<%=org%>', '0'); return false;">Add</button>
+        <button value="member_individual_form_delete" onclick="delete_individual('<%=org%>', '0'); return false;">Delete</button>
+      </form>  
+
+  <% end %>
 <% end %>
 
 <iframe name="hiddenFrame" class="hide" id="hiddenFrameID" style="display:none;height:1;width:1;"></iframe>

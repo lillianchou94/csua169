@@ -33,6 +33,12 @@ Rails.application.routes.draw do
   match "/election_post_nominations" => "elections#post_nominations", via: [:get,:post]
   match "/election_settings" => "elections#show_settings", via: [:get,:post], as: :settings
   
+  match "/election_show_vote" => "elections#show_vote", via: [:get,:post]
+  match "/election_post_vote" => "elections#post_vote", via: [:get,:post]
+  match "/election_show_results" => "elections#show_results", via: [:get,:post]
+  
+  get "/get_current_phase" => "elections#get_current_phase"
+  match "/goto_next_phase" => "elections#goto_next_phase", via: [:get,:post]
   
   root :to => redirect("/login")
 
