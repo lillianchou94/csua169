@@ -19,6 +19,8 @@ module NavigationHelpers
       '/super_admin_setup'
     when /^the set up for non super admin page$/
       '/nonsuperadmin_setup'
+    when /^the super admin page as a nonsuper admin$/
+      '/dashboard/home'
     when /^the super admin page$/
       '/admin'
     when /^the login page$/

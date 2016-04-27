@@ -37,7 +37,6 @@ Feature: Election panel content
     Given I am logged in as a non member 
     # Given I am on the show elections page for a member
     And I am on the election dashboard page
-    Then I should see "You are not a registered member. Please make sure your organization leader has added your name and email to the system before trying to log in."
     Then I should see "CSUA Voting System"
     And I should not see "Add election"
     And I should not see "Add position"
