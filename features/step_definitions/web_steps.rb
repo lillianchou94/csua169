@@ -476,7 +476,13 @@ Then(/^I log out$/) do
   @driver.quit
 end
 
+Then /^"([^"]*)" should contain "([^"]*)"$/ do |dropdown, text|
+  expect(page).to have_select(dropdown, :options => [text])
+end
 
+Then /^"([^"]*)" should not contain "([^"]*)"$/ do |dropdown, text|
+  expect(page).not_to have_select(dropdown, :options => [text])
+end
 
 
 Then(/^I should see an element with id "([^"]*)"$/) do |id|

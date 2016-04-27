@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   get '/auth/failure', to: redirect('/')
   get '/signout', to: 'sessions#destroy', as: 'signout'
 
-  resources :sessions, only: [:create, :destroy]
+  resources :sessions, only: [:create, :destroy, :test_super_admin]
   resources :home, only: [:show]
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
@@ -16,9 +16,10 @@ Rails.application.routes.draw do
   # root :to => redirect('/dashboard/home')
   get "/dashboard/*page" => "elections#show"
   get "/election_show_elections" => "elections#show_elections"
+  match "/super_admin_setup" => "sessions#test_super_admin", via: [:get,:post]
+  match "/nonsuperadmin_setup" => "session#test_nonsuper_admin", via: [:get,:post]
   match "/election_add_individual" => "elections#add_individual", via: [:get,:post]
   match "election_delete_individual" => "elections#delete_individual", via: [:get,:post]
-  match "/election_import" => "elections#import", via: [:get,:post], as: :import
 
 
   get "/login" => "elections#login"

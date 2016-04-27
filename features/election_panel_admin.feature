@@ -46,11 +46,11 @@ Feature: Election panel content
   Scenario: admin for CSUA (election page)
     Given I am logged in as an admin in CSUA
     And I am on the show elections page for an admin
-    When I press "Add election"
+    When I click "Add election"
     Then I should see "Organization:"
-    And I should see a drop down menu to the right of "Organization:"
-    And I should see CSUA in the drop down menu to the right of "Organization:"
-    And I should not see HKN in the drop down menu to the right of "Organization:"
-    When I click CSUA
-    Then I should see CSUA in the "Organization:" field
+    Then "new_election_org" should contain "CSUA"
+    # And I should see a drop down menu to the right of "Organization:"
+    # And I should see CSUA in the drop down menu to the right of "Organization:"
+    # And I should not see HKN in the drop down menu to the right of "Organization:"
+    And "new_election_org" should not contain "HKN"
     Then I log out

@@ -15,7 +15,8 @@ Feature: Election panel content
     
   Scenario: super-admin have access to "/admin" #happy path
     Given I am logged in as a super admin 
-    And I am on the super admin page
+    And I am on the set up for super admin page
+    And I go to the super admin page
     Then I should be on the super admin page
     Then I should not see "Click on an election to see election status."
     Then I should not see "CSUA Voting System"
@@ -26,6 +27,7 @@ Feature: Election panel content
     
     Scenario: regular admin don't have access to "/admin" #sad path
     Given I am logged in as an admin in CSUA
+    And I am on the set up for non super admin page
     And I go to the super admin page
     Then I should be on the election dashboard page #instead of super admin page
     Then I should see "Click on an election to see election status."
@@ -34,6 +36,7 @@ Feature: Election panel content
     
     Scenario: member doesn't have access to "/admin" #sad path
     Given I am logged in as a member in CSUA
+    And I am on the set up for non super admin page
     And I go to the super admin page
     Then I should be on the election dashboard page #instead of super admin page
     Then I should see "Click on an election to see election status."

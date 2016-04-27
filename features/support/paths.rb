@@ -15,6 +15,10 @@ module NavigationHelpers
     when /^the home\s?page$/
       '/home'
       
+    when /^set up for super admin page$/
+      '/super_admin_setup'
+    when /^set up for non super admin page$/
+      '/nonsuperadmin_setup'
     when /^the super admin page$/
       '/admin'
     when /^the login page$/

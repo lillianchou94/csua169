@@ -19,6 +19,7 @@ User.create(user_name: 'CSUA Member', user_email: 'member169csua@gmail.com', org
 User.create(user_name: 'CSUA Admin', user_email: 'email1111222@gmail.com', organization: "CSUA", admin_status: 1, user_prime: 47, is_active: true, votes: '{}')
 User.create(user_name: 'HKN Admin', user_email: 'hknadmin@gmail.com', organization: "HKN", admin_status: 1, user_prime: 53, is_active: true, votes: '{}')
 User.create(user_name: 'Super Admin', user_email: 'super169csua@gmail.com', organization: "CSUA", admin_status: 2, user_prime: 59, is_active: true, votes: '{}')
+User.create(user_name: 'Not a Member', user_email: 'notamember@gmail.com', organization: "NA", admin_status: 0, user_prime: 0, is_active: true, votes: '{}')
 
 
 Election.create(election_livestream: '', election_id: 'csua_04012016', election_name: 'csua1', organization: 'CSUA', position: "President", user_id: "a@gmail.com", num_votes: 0, did_win: false)
