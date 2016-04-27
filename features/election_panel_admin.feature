@@ -48,7 +48,7 @@ Feature: Election panel content
     And I am on the show elections page for an admin
     When I click Add election
     Then I should see "Organization:"
-    Then the "new_election_org" drop-down should contain the option "CSUA"
+    And I select "CSUA" from "new_election_org"
     # Then "new_election_org" should contain "CSUA"
     # And I should see a drop down menu to the right of "Organization:"
     # And I should see CSUA in the drop down menu to the right of "Organization:"

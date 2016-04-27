@@ -2,8 +2,42 @@ Given(/^"([^"]*)" exists$/) do |arg1|
   fail "Unimplemented"
 end
 
+Then(/^I click on "([^"]*)"$/) do |arg1|
+  id = @driver.find_element(:id => "select_election_CSUA04262016_1")
+  id.click
+  wait = Selenium::WebDriver::Wait.new(timeout: 40)
+  wait.until { @driver.page_source.include? "CSUA" }
+
+end
+
+When /^(?:|I )press on "([^"]*)"$/ do |button|
+  # wait = Selenium::WebDriver::Wait.new(timeout: 40)
+  # wait.until { @driver.page_source.include? button}
+  # button_hashtag = "\"$('#"+button+"').parents().css({'display':'block','visibility':'visible'})\""
+  # @driver.execute_script(button_hashtag)
+  #@driver.execute_script("get_election_dashboard('CSUA04272016')")
+  @driver.find_element(:id => button).click
+  wait = Selenium::WebDriver::Wait.new(timeout: 40)
+  wait.until { @driver.page_source.include? "Start nomination"}
+
+  #@driver.execute_script("$('#<WHATEVERTHISID IS>').parents().css({'display':'block','visibility':'visible'})")
+end
+
+Then(/^I click on "([^"]*)" to start a nomination$/) do |button|
+  wait = Selenium::WebDriver::Wait.new(timeout: 40)
+  wait.until { @driver.page_source.include? button }
+
+  button_hashtag = "\"$('#"+button+"').parents().css({'display':'block','visibility':'visible'})\""
+  @driver.execute_script(button_hashtag)
+  id = @driver.find_element(:id => button)
+  id.click
+  wait = Selenium::WebDriver::Wait.new(timeout: 40)
+  wait.until { @driver.page_source.include? "Start nomination" }
+end
+
 Given(/^the election "([^"]*)" exists for "([^"]*)"$/) do |election_name, org|
   wait = Selenium::WebDriver::Wait.new(timeout: 20)
+  wait.until { @driver.page_source.include? "New election name:" }
   raise "Error add" unless @driver.page_source.include? "Add Election"
   
   @driver.execute_script("$('#new_election_org').parents().css({'display':'block','visibility':'visible'})")
@@ -25,7 +59,8 @@ end
 Given(/^the position "([^"]*)" exists for "([^"]*)"$/) do |position_name, election|
   wait = Selenium::WebDriver::Wait.new(timeout: 20)
   raise "Error add position" unless @driver.page_source.include? "Add Position"
-  raise "Error position" unless @driver.page_source.include? "New position:"
+  wait.until { @driver.page_source.include? "New position:" }
+  #raise "Error position" unless @driver.page_source.include? "New position:"
   
   @driver.execute_script("$('#new_position_name').parents().css({'display':'block','visibility':'visible'})")
   position_element = @driver.find_element(:id => 'new_position_name')

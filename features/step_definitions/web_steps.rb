@@ -481,8 +481,8 @@ Then /^"([^"]*)" should not contain "([^"]*)"$/ do |dropdown, text|
   expect(page).not_to have_select(dropdown, :options => [text])
 end
 
-Then /^the "([^"]*)" drop-down should contain the option "([^"]*)"$/ do |id, value|
-  page.should have_xpath "//select[@id = '#{id}']/option[@value = '#{value}']"
+When /^I select "(.*)" from "(.*)"$/ do |value, field|
+  select(value, :from => field) 
 end
 
 When(/^I click Add election/) do
