@@ -19,11 +19,12 @@ RailsAdmin.config do |config|
 
   ### More at https://github.com/sferik/rails_admin/wiki/Base-configuration
   config.authorize_with do
-    if @current_user == nil
-      redirect_to main_app.root_path
-    else
-      redirect_to main_app.root_path unless @current_user.is_super_admin?
+    if @current_user != nil
+      if !@current_user.is_super_admin?
+        redirect_to main_app.root_path
+      end
     end
+
   end
   
   config.included_models = ["User"]
