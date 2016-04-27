@@ -409,7 +409,7 @@ respond_to :json
       end
       Election.destroy_all(election_id: params[:election_id])
       Nomination.destroy_all(election_id: params[:election_id])
-      
+      @@position_list.delete(params[:election_id])
       @election_list = Election.all
       @position_list_acc = @@position_list
     end

@@ -15,7 +15,7 @@ Feature: Election panel content
     Then I log out
   
   Scenario: election dashboard page should not have content for non-member #sad path
-    Given I am logged in as a member in CSUA
+    Given I am logged in as a non member
     And I am on the election dashboard page
     Then I should see "CSUA Voting System"
     And I should not see "Add election"
