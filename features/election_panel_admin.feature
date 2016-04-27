@@ -1,4 +1,4 @@
-Feature: Election pages content
+Feature: Election panel content
   As a admin
   So that I can manage members and elections in my organization
   I should also be able to add and delete election and be able add and delete members and admins.
@@ -13,7 +13,6 @@ Feature: Election pages content
     
   Scenario: admin election page
     Given I am on the show elections page for a member
-    Then I should not see "Add organization"
     And I should see "Add election"
     And I should see "Add position"
     And I should see "Settings"

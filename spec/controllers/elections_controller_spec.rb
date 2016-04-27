@@ -3,9 +3,12 @@ require "capybara/dsl"
 
 
 RSpec.describe ElectionsController, type: :request do
+  
   before do
     OmniAuth.config.test_mode = true
     Rails.application.env_config["omniauth.auth"] = OmniAuth.config.mock_auth[:google]
+    # controller.stub!(:current_user).and_return(user)
+    # view.stub(:current_user) { User.create(user_name: 'A', user_email: 'a@gmail.com', organization: "CSUA", admin_status: 1, user_prime: 2, is_active: true, votes: '{"csua_04012016_President":"3"}') # return a user }
   end
   
   describe "testing routing" do
@@ -15,13 +18,13 @@ RSpec.describe ElectionsController, type: :request do
     end
   end
   
-  describe "GET show" do
-    it "successfully renders the show template" do
-      get "/election_show_elections"
-      expect(response).to be_successful
-      expect(response).to render_template(:show_elections)
-    end
-  end
+  # describe "GET show" do
+  #   it "successfully renders the show template" do
+  #     get "/election_show_elections"
+  #     expect(response).to be_successful
+  #     expect(response).to render_template(:show_elections)
+  #   end
+  # end
   
   
   describe "Home requests" do
@@ -126,20 +129,6 @@ RSpec.describe ElectionsController, type: :controller do
     end
   end
   
-  describe "import" do 
-    it "should call the Model" do
-      file = CSV.generate do |csv|
-        csv << ["Name", "Email"] 
-        csv << ["name2", "email2"]
-        csv << ["email3", "email3"]
-      end 
-      expect(User).to receive(:import).with(file, "CSUA", 1)
-      User.import(file, "CSUA", 1)
-      # expect(User.where(:user_name => 'Name').user_email).to eq "Email"
-    end
-    
-  end
-  
   describe "show_elections check current_user" do
     it "should have no current_user" do
       get "show_elections"
@@ -179,13 +168,6 @@ RSpec.describe ElectionsController, type: :controller do
   describe "calling show_elections_add" do
     it "should be successful" do
       get :show_elections_add
-      response.should be_success
-    end
-  end
-  
-  describe "calling show_organizations_add" do
-    it "should be successful" do
-      get :show_organizations_add
       response.should be_success
     end
   end

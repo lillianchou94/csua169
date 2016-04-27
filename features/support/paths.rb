@@ -14,6 +14,9 @@ module NavigationHelpers
     case page_name
     when /^the home\s?page$/
       '/home'
+      
+    when /^the super admin page$/
+      '/admin'
     when /^the login page$/
       '/login'
     when /^the dashboard page as an admin$/

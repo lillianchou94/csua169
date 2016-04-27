@@ -1,20 +1,23 @@
-Feature: Election pages content
+Feature: Election panel content
   As a member
   So that I only have access to nomination and voting pages that I am a member of the organization for. 
   And I should not have access to /admin page nor do I have the ability to start nomination and election.
   I want to be able to vote only.
   
-  Background:
-    Given I am logged in as a member 
- 
-  Scenario: election dashboard page
+  Scenario: election dashboard page should have content for member #happy path
+    Given I am logged in as a member in CSUA 
     Given I am on the election dashboard page
-    Then I should see "Rest of dashboard goes here"
+    Then I should see "Click on an election to see election status."
+    Then I should see "CSUA Voting System"
+    And I should not see "Add election"
+    And I should not see "Add position"
+    And I should not see "Settings"
     Then I log out
   
-  Scenario: member election page
+  Scenario: election dashboard page should not have content for non-member #sad path
     Given I am on the show elections page for a member
-    Then I should not see "Add organization"
+    Then I should see "You are not a registered member. Please make sure your organization leader has added your name and email to the system before trying to log in."
+    Then I should see "CSUA Voting System"
     And I should not see "Add election"
     And I should not see "Add position"
     And I should not see "Settings"

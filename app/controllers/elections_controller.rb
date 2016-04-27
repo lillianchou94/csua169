@@ -99,14 +99,8 @@ respond_to :json
     @election_id = params.key?(:election_id) ? params[:election_id] : ''
     @position_id = params.key?(:position_id) ? params[:position_id] : ''
     @user_selected = params.key?(:user_selected) ? params[:user_selected] : ''
-    @current_user_email = params.key?(:user_email) ? params[:user_email] : ''
     org = Election.find_by(:election_id => @election_id).organization
-    curr_user = User.find_by(:user_email => @current_user_email)
-    prime = curr_user.user_prime
-    if prime == nil
-      prime = 3
-    end
-    puts "POSTING NOMINATIONS"
+    @current_user = User.find_by(id: session[:user_id])
     if not Nomination.where(:position => @position_id).blank?
       exist = Nomination.find_by(:position => @position_id)
       if exist.prime_product == nil
@@ -114,25 +108,24 @@ respond_to :json
       end
       # if current user prime exists in prime product of given position then
       # user cannot nominate again for same position
-      if (exist.prime_product != 1) and (exist.prime_product % prime == 0)
+      if (exist.prime_product != 1) and (exist.prime_product % @current_user.user_prime == 0)
         render 'elections/nominations_error.html.erb'
       else
-        #exist.prime_product * prime
-        exist.update_attribute(:prime_product, exist.prime_product * prime)
-        render 'elections/submit_nominations.html.erb'
+        if exist.user_id == @user_selected
+          exist.update_attribute(:prime_product, exist.prime_product * @current_user.user_prime)
+        end
       end
-    else
-      Nomination.create!(:election_id => @election_id, 
-                         :organization => org, 
-                         :user_id => @user_selected, 
-                         :threshold => 1, 
-                         :position => @position_id, 
-                         :num_seconds => 0, 
-                         :prime_product => prime, 
-                         :num_votes => 0, 
-                         :did_win => false)
-      render 'elections/submit_nominations.html.erb'
     end
+    Nomination.create!(:election_id => @election_id, 
+                       :organization => org, 
+                       :user_id => @user_selected, 
+                       :threshold => 1, 
+                       :position => @position_id, 
+                       :num_seconds => 0, 
+                       :prime_product => @current_user.user_prime, 
+                       :num_votes => 0, 
+                       :did_win => false)
+    render 'elections/submit_nominations.html.erb'
   end
   
   def show_vote
@@ -274,6 +267,8 @@ respond_to :json
         render 'elections/show_nominations.html.erb'
         #redirect_to :action => 'show_nominations',:election_id => params[:election_id], :position_id => params[:position_id]
       elsif current_phase == 2    # phase 2 = voting
+        puts "NOMMM"
+        puts Nomination.all
         @election_id = params.key?(:election_id) ? params[:election_id] : ''
         @position_id = params.key?(:position_id) ? params[:position_id] : ''
         @current_user = User.find_by(id: session[:user_id])
