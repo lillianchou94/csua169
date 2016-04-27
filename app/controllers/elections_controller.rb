@@ -236,6 +236,7 @@ respond_to :json
       # Nominate 
       # Vote
       
+    @current_user = User.find_by(id: session[:user_id]) 
     current_election = params.key?(:election_id)
     current_election_id = params.key?(:election_id) ? params[:election_id] : ''
     current_phase = Election.find_by(:election_id => current_election_id)

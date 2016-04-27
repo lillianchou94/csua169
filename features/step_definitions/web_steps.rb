@@ -130,7 +130,7 @@ end
 
 Then /^(?:|I )should not see "([^"]*)"$/ do |text|
   wait = Selenium::WebDriver::Wait.new(timeout: 20)
-  wait.until { @driver.page_source.include? "Add election" }
+  wait.until { @driver.page_source.include? "CSUA" }
   raise "Error "+text+" found" unless not @driver.execute_script("return $(':contains("+text+")').length;") != 0
   # if page.respond_to? :should
   #   page.should have_no_content(text)
@@ -431,11 +431,10 @@ Given(/^I am logged in as a non member/) do
   raise "Error CSUA" unless @driver.page_source.include? "CSUA"
   @driver.find_element(:id => 'sign_in_id').click
   email_elem = @driver.find_element(:id => 'Email')
-  #email_elem.send_keys "email1111222@gmail.com"
   email_elem.send_keys "notamember@gmail.com"
   email_elem.submit
   password_elem = @driver.find_element(:id => 'Passwd')
-  password_elem.send_keys "169nonmember"
+  password_elem.send_keys "169email"
   password_elem.submit
   wait = Selenium::WebDriver::Wait.new(timeout: 10)
   wait.until { @driver.page_source.include? "CSUA" }
