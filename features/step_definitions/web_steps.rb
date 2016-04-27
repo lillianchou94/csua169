@@ -434,10 +434,10 @@ Given(/^I am logged in as a non member/) do
   password_elem = @driver.find_element(:id => 'Passwd')
   password_elem.send_keys "169email"
   password_elem.submit
-  wait = Selenium::WebDriver::Wait.new(timeout: 10)
+  wait = Selenium::WebDriver::Wait.new(timeout: 20)
   wait.until { @driver.page_source.include? "CSUA" }
   raise "Error CSUA afterwards" unless @driver.page_source.include? "CSUA"
-  raise "Error hello" unless @driver.page_source.include? "Hello, "
+  raise "Error hello" unless @driver.page_source.include? "Hello,"
 end
 
 When(/^I click in the browser "([^"]*)"$/) do |click_id|
@@ -481,7 +481,7 @@ Then /^"([^"]*)" should not contain "([^"]*)"$/ do |dropdown, text|
   expect(page).not_to have_select(dropdown, :options => [text])
 end
 
-When /^I select "(.*)" from "(.*)"$/ do |value, field|
+When /^I Select "(.*)" from "(.*)"$/ do |value, field|
   select(value, :from => field) 
 end
 
