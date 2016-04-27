@@ -48,10 +48,4 @@ Feature: Election panel content
     And I am on the show elections page for an admin
     When I click Add election
     Then I should see "Organization:"
-    # And I Select "CSUA" from "new_election_org"
-    # Then "new_election_org" should contain "CSUA"
-    # And I should see a drop down menu to the right of "Organization:"
-    # And I should see CSUA in the drop down menu to the right of "Organization:"
-    # And I should not see HKN in the drop down menu to the right of "Organization:"
-    # And "new_election_org" should not contain "HKN"
     Then I log out

@@ -429,13 +429,13 @@ Given(/^I am logged in as a non member/) do
   raise "Error CSUA" unless @driver.page_source.include? "CSUA"
   @driver.find_element(:id => 'sign_in_id').click
   email_elem = @driver.find_element(:id => 'Email')
-  email_elem.send_keys "notamember169@gmail.com"
+  email_elem.send_keys "super169csua@gmail.com"
   email_elem.submit
   password_elem = @driver.find_element(:id => 'Passwd')
   password_elem.send_keys "169email"
   password_elem.submit
-  # wait = Selenium::WebDriver::Wait.new(timeout: 20)
-  # wait.until { @driver.page_source.include? "CSUA" }
+  wait = Selenium::WebDriver::Wait.new(timeout: 20)
+  wait.until { @driver.page_source.include? "CSUA" }
   raise "Error CSUA afterwards" unless @driver.page_source.include? "CSUA"
   raise "Error hello" unless @driver.page_source.include? "Hello,"
 end
