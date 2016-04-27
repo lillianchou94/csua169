@@ -8,7 +8,7 @@ User.create(user_name: 'C', user_email: 'c@gmail.com', organization: "HKN", admi
 User.create(user_name: 'D', user_email: 'd@gmail.com', organization: "CSUA", admin_status: 0, user_prime: 11, is_active: true, votes: '{}')
 User.create(user_name: 'E', user_email: 'e@gmail.com', organization: "HKN", admin_status: 0, user_prime: 13, is_active: true, votes: '{}')
 User.create(user_name: 'Lillian Chou', user_email: 'lillianchou94@gmail.com', organization: "CSUA", admin_status: 1, user_prime: 17, is_active: true, votes: '{}')
-User.create(user_name: 'Lillian Chou', user_email: 'lillianchou94@gmail.com', organization: "HKN", admin_status: 1, user_prime: 19, is_active: true, votes: '{}')
+User.create(user_name: 'Lillian Chou', user_email: 'lillianchou94@gmail.com', organization: "HKN", admin_status: 2, user_prime: 19, is_active: true, votes: '{}')
 User.create(user_name: 'MELANIE ELIZABETH TOM', user_email: 'melanietom@berkeley.edu', organization: "CSUA", admin_status: 1, user_prime: 23, is_active: true, votes: '{}')
 User.create(user_name: 'Rashmi Vidyasagar', user_email: 'rashmi.vidyasagar@berkeley.edu', organization: "HKN", admin_status: 2, user_prime: 29, is_active: true, votes: '{}')
 User.create(user_name: 'Rashmi Vidyasagar', user_email: 'rashmi.vidyasagar@berkeley.edu', organization: "CSUA", admin_status: 2, user_prime: 31, is_active: true, votes: '{}')
@@ -21,8 +21,7 @@ User.create(user_name: 'HKN Admin', user_email: 'hknadmin@gmail.com', organizati
 User.create(user_name: 'Super Admin', user_email: 'super169csua@gmail.com', organization: "CSUA", admin_status: 2, user_prime: 59, is_active: true, votes: '{}')
 User.create(user_name: 'Not a Member', user_email: 'notamember@gmail.com', organization: "NA", admin_status: 0, user_prime: 0, is_active: true, votes: '{}')
 
-
-Election.create(election_livestream: '', election_id: 'csua_04012016', election_name: 'csua1', organization: 'CSUA', position: "President", user_id: "a@gmail.com", num_votes: 0, did_win: false)
+Election.create(election_livestream: '', election_id: 'csua_04012016', election_name: 'CSUA Election 1', organization: 'CSUA', position: "President", user_id: "a@gmail.com", num_votes: 0, did_win: false)
 #Nomination.create(election_id: 'csua_04012016', organization: 'CSUA', position: "President", threshold: 2, user_id: "a@gmail.com", num_seconds: 0, prime_product: 1)
 
 # Examples:

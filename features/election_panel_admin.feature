@@ -46,7 +46,7 @@ Feature: Election panel content
   Scenario: admin for CSUA (election page)
     Given I am logged in as an admin in CSUA
     And I am on the show elections page for an admin
-    When I click "Add election"
+    When I click Add election
     Then I should see "Organization:"
     Then "new_election_org" should contain "CSUA"
     # And I should see a drop down menu to the right of "Organization:"

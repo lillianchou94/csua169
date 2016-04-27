@@ -92,7 +92,7 @@
   <ul style="display:inline;list-style-type:none">
 
     <% if @current_user.is_admin_at_all? %>
-      <li><button type="button" onclick="open_election_modal()"><i class="fa fa-plus-square-o"></i> Add election</button></li>
+      <li><button type="button" id="add_election_button" onclick="open_election_modal()"><i class="fa fa-plus-square-o"></i> Add election</button></li>
     <% end %>
     
     <% for @election in @election_list %>

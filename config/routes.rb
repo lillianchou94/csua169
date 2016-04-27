@@ -16,8 +16,8 @@ Rails.application.routes.draw do
   # root :to => redirect('/dashboard/home')
   get "/dashboard/*page" => "elections#show"
   get "/election_show_elections" => "elections#show_elections"
-  match "/super_admin_setup" => "sessions#test_super_admin", via: [:get,:post]
-  match "/nonsuperadmin_setup" => "sessionsn#test_nonsuper_admin", via: [:get,:post]
+  get "/super_admin_setup" => "sessions#test_super_admin"
+  get "/nonsuperadmin_setup" => "sessions#test_nonsuper_admin"
   match "/election_add_individual" => "elections#add_individual", via: [:get,:post]
   match "election_delete_individual" => "elections#delete_individual", via: [:get,:post]
 

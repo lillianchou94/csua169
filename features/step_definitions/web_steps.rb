@@ -484,6 +484,11 @@ Then /^"([^"]*)" should not contain "([^"]*)"$/ do |dropdown, text|
   expect(page).not_to have_select(dropdown, :options => [text])
 end
 
+When(/^I click Add election/) do
+  addElectionButton = @driver.find_element(:id => 'add_election_button')
+  addElectionButton.click
+end
+
 
 Then(/^I should see an element with id "([^"]*)"$/) do |id|
   # c = page.find(id)   
