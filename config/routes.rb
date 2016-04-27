@@ -17,7 +17,7 @@ Rails.application.routes.draw do
   get "/dashboard/*page" => "elections#show"
   get "/election_show_elections" => "elections#show_elections"
   match "/super_admin_setup" => "sessions#test_super_admin", via: [:get,:post]
-  match "/nonsuperadmin_setup" => "session#test_nonsuper_admin", via: [:get,:post]
+  match "/nonsuperadmin_setup" => "sessionsn#test_nonsuper_admin", via: [:get,:post]
   match "/election_add_individual" => "elections#add_individual", via: [:get,:post]
   match "election_delete_individual" => "elections#delete_individual", via: [:get,:post]
 

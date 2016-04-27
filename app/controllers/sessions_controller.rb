@@ -13,13 +13,13 @@ class SessionsController < ApplicationController
   end
   
   def test_super_admin
-    user = User.where(:user_email => "super169csua@gmail.com")
+    user = User.where(user_email: "super169csua@gmail.com")
     session[:user_id] = user.id
     redirect_to root_path
   end
   
   def test_nonsuper_admin
-    user = User.where(:user_email => "email1111222@gmail.com")
+    user = User.where(user_email: "email1111222@gmail.com")
     session[:user_id] = user.id
     redirect_to root_path
   end
