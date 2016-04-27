@@ -429,7 +429,7 @@ Given(/^I am logged in as a non member$/) do
   raise "Error CSUA" unless @driver.page_source.include? "CSUA"
   @driver.find_element(:id => 'sign_in_id').click
   email_elem = @driver.find_element(:id => 'Email')
-  email_elem.send_keys "notamember169@gmail.com"
+  email_elem.send_keys "member169csua@gmail.com"
   email_elem.submit
   password_elem = @driver.find_element(:id => 'Passwd')
   password_elem.send_keys "169email"
