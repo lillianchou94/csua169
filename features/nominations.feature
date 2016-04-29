@@ -3,18 +3,13 @@ Feature: Nominate candidates
   I want to nominate a member for a position
   So that we can vote for the candidate I nominated
   
-  #a@gmail.com = Adam Rockler
-  # Background:
-  #   Given I am logged in as an admin
-  #   And I add the election called "test election" for the organization "CSUA"
-  
   Scenario: Nominate a candidate
     # during nomination phase
     Given I am logged in as a member in CSUA
     And I am on the dashboard page for a member 
     Then I should see in the browser "test election"
-    Then I should see in the browser "new_election_org04162016__test_candidate"
-    When I click in the browser "new_election_org04162016__test_candidate"
+    Then I should see in the browser "CSUA04292016_1__test_candidate"
+    When I click in the browser "CSUA04292016_1__test_candidate"
     Then I should see in the browser "Nomination for test_candidate"
     And I select radio button "id_email1111222@gmail.com" from "nomination_form_id"
     And I click in the browser "nomination_form_submit_id"

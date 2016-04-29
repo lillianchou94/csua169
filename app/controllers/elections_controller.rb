@@ -237,8 +237,10 @@ respond_to :json
     @current_user_email = params.key?(:user_email) ? params[:user_email] : ''
     curr_user = User.find_by(:user_email => @current_user_email, :organization => org)
     
-    curr_user_nom = Nominations.find_by(:user_id =>@current_user_email)
-    curr_user_nom.update_attribute(:num_votes, curr_user_nom.num_votes + 1)
+    if params.key?(:increment_vote)
+      curr_user_nom = Nomination.find_by(:user_id => @current_user_email)
+      curr_user_nom.update_attribute(:num_votes, curr_user_nom.num_votes + 1)
+    end
     
     @curr_user_prime = User.find_by(:user_email => @current_user_email).user_prime # Needs to be accessed in the modal controller
     if @curr_user_prime != ''

@@ -77,6 +77,7 @@ class User < ActiveRecord::Base
       user.organization = (user.organization != nil ? user.organization : 'NA')
       user.admin_status = (user.admin_status != nil ? user.admin_status : 0)
       user.is_active = true
+      user.votes = ""
       user.save!
     end
   end

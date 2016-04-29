@@ -13,91 +13,108 @@
       document.cookie = name + "=" + value + ((expires==null) ? "" : ";expires=" + expires.toGMTString());
   };
   
-  function render_modal2(prime) {
-    var election_id = $('#election_selected_id').val();
-    var position_name_id = $('#position_name_id').val();
-    var user_email = $("#user_email").val()
-    var is_cached;
-    var current_user_votes = $('#curr_user_votes').val()
-    var user_prime = prime
-    is_cached_password = getCookie("password");
-    if (is_cached_password != undefined){
-      var encodeuri = btoa(is_cached_password)
-      var key = CryptoJS.enc.Base64.parse(encodeuri.toString());
-      var iv  = CryptoJS.enc.Base64.parse("EBESExQVFhcYGRobHB0eHw==");
-      var text = current_user_votes
-      var step_text = CryptoJS.AES.decrypt(text, key, {iv: iv});
-      var decrypted_text = step_text.toString(CryptoJS.enc.Utf8);
-      decrypted_text = decrypted_text + "{" + election_id + "{" + position_id + ":" + "3" +  ","; // TODO: Need to find alternative way to retrieve prime
-      var encrypted;
-      var encrypted = CryptoJS.AES.encrypt(decrypted_text, key, {iv : iv});
-      if (encrypted != undefined){
-        $.ajax({
+  function check_cookie(){
+    $.ajax({
           type: 'POST',
-          url: '/encryption_save',
-          data: {'encrypted_text' : encrypted,
-                'user_email' : user_email,
-                'election_id' : election_id
+          url: '/get_user_prime',
+          data: {'user_email' : $("#nom_user_email").val(),
+                'election_id' : $("#election_selected_id").val(),
+                'increment_vote' : true,
           },
           cache: false,
           success: function(result) {
-            console.log("What hath this wrought?");
-    		              $('#election_dashboard').html(result)
+                cookie_val = getCookie("password");
+                alert(document.cookie)
+                alert(cookie_val);
+                
+                if (cookie_val !== undefined){
+                  render_modal3(cookie_val, result.prime); // Popup is not show
+                }
+                else {
+                  render_modal(); // Popup is shown
+                }
     		  }
         });
-      }
-    }
-    else {
-      var input_val = $("#password_id").val();
-      var encodeuri = btoa(input_val);
-      var key = CryptoJS.enc.Base64.parse(encodeuri.toString());
-      var iv  = CryptoJS.enc.Base64.parse("EBESExQVFhcYGRobHB0eHw==");
-      var text = current_user_votes;
-      var step_text = CryptoJS.AES.decrypt(text, key, {iv: iv});
-      var decrypted_text = step_text.toString(CryptoJS.enc.Utf8);
-      decrypted_text = decrypted_text + "{" + election_id + "{" + position_name_id + " : " + user_prime + ","; // Need to do cleanup in the backend
-      // alert(decrypted_text)
-      var encrypted;
-      var encrypted = CryptoJS.AES.encrypt(decrypted_text, key, {iv : iv});
-      alert("this is encrypted: "+encrypted);
-      var decrypted = CryptoJS.AES.decrypt(encrypted, key, {iv: iv});
-      alert("This is the decrypted: "+decrypted.toString(CryptoJS.enc.Utf8));
-      console.log("ending decryption");
-      var expirydate=new Date();
-      expirydate.setTime(expirydate.getTime()+(100*60*60*24*100));
-      // setCookie("password", input_val, expirydate)
-      $.ajax({
-        type: 'POST',
-        url: '/encryption_save',
-        data: {'encrypted_text' : encrypted.toString(),
-              'election_id' : election_id,
-              'user_email' : user_email,
-        },
-        cache: false,
-        success: function(result) {
-          console.log("got to the encryption alert");
-                    alert("the value is "+result);
-  		              // $('#election_dashboard').html(result);
-  		  },
-  		  complete: function(result) {
-  		    
-  		    console.log("well then");
-  		  }
-      });
-      console.log("DO YOU EVEN RUN BRO");
-    }
   };
-  function render_modal(button_id) {
-  		var opt = {
-        autoOpen: false,
-        modal: true,
-        width: 300,
-        height:150,
-        title: 'Enter Password'
-  		};
-  		var theDialog = $("#confirmVoteModal").dialog(opt);
-  		theDialog.dialog("open");
-  		
+  
+  function render_modal2(prime) {
+    var election_id = $('#election_selected_id').val();
+    var position_name_id = $('#position_name_id').val();
+    var user_email = $("#user_email").val();
+    var is_cached;
+    var current_user_votes = $('#curr_user_votes').val();
+    var user_prime = prime;
+    var input_val = $("#password_id").val();
+    var encodeuri = btoa(input_val);
+    var key = CryptoJS.enc.Base64.parse(encodeuri.toString());
+    var iv  = CryptoJS.enc.Base64.parse("EBESExQVFhcYGRobHB0eHw==");
+    var text = current_user_votes;
+    var step_text = CryptoJS.AES.decrypt(text, key, {iv: iv});
+    var decrypted_text = step_text.toString(CryptoJS.enc.Utf8);
+    decrypted_text = decrypted_text + "{" + election_id + "{" + position_name_id + " : " + user_prime + ","; // Need to do cleanup in the backend
+    var encrypted;
+    var encrypted = CryptoJS.AES.encrypt(decrypted_text, key, {iv : iv});
+    // alert("this is encrypted: "+encrypted);
+    var decrypted = CryptoJS.AES.decrypt(encrypted, key, {iv: iv});
+    // alert("This is the decrypted: "+decrypted.toString(CryptoJS.enc.Utf8));
+    console.log("ending decryption");
+    var expirydate=new Date();
+    expirydate.setTime(expirydate.getTime()+(100*60*60*24*100));
+    setCookie("password", input_val, expirydate);
+    $.ajax({
+      type: 'POST',
+      url: '/encryption_save',
+      data: {'encrypted_text' : encrypted.toString(),
+            'election_id' : election_id,
+            'user_email' : user_email,
+      },
+      cache: false
+    });
+  };
+  
+  function render_modal3(password, prime) {
+    var election_id = $('#election_selected_id').val();
+    var position_name_id = $('#position_name_id').val();
+    var user_email = $("#user_email").val();
+    var is_cached;
+    var current_user_votes = $('#curr_user_votes').val();
+    var user_prime = prime;
+    var input_val = password;
+    console.log(input_val)
+    var encodeuri = btoa(input_val);
+    var key = CryptoJS.enc.Base64.parse(encodeuri.toString());
+    var iv  = CryptoJS.enc.Base64.parse("EBESExQVFhcYGRobHB0eHw==");
+    var text = current_user_votes;
+    var step_text = CryptoJS.AES.decrypt(text, key, {iv: iv});
+    var decrypted_text = step_text.toString(CryptoJS.enc.Utf8);
+    decrypted_text = decrypted_text + "{" + election_id + "{" + position_name_id + " : " + user_prime + ","; // Need to do cleanup in the backend
+    var encrypted;
+    var encrypted = CryptoJS.AES.encrypt(decrypted_text, key, {iv : iv});
+    // alert("this is encrypted: "+encrypted);
+    var decrypted = CryptoJS.AES.decrypt(encrypted, key, {iv: iv});
+    // alert("This is the decrypted: "+decrypted.toString(CryptoJS.enc.Utf8));
+    console.log("ending decryption");
+    $.ajax({
+      type: 'POST',
+      url: '/encryption_save',
+      data: {'encrypted_text' : encrypted.toString(),
+            'election_id' : election_id,
+            'user_email' : user_email,
+      },
+      cache: false
+    });
+  };
+  
+  function render_modal() {
+    		var opt = {
+          autoOpen: false,
+          modal: true,
+          width: 300,
+          height:150,
+          title: 'Enter Password'
+    		};
+    		var theDialog = $("#confirmVoteModal").dialog(opt);
+    		theDialog.dialog("open");
   };
   function get_election_dashboard() {
 	  $.ajax({
@@ -149,8 +166,8 @@
           <label><input type="radio" name="nom" id="id_<%=@nom.user_email%>" value="<%=@nom.user_email%>"><%=@nom.user_name%> (<%=@nom.user_email%>)</label>
         </div>
       <% end %>
-      <button value="submit_button" id="vote_form_submit_id" onclick="render_modal('<%=@nom.user_email%>')">Vote!</button>
-      <input id="user_email" type="text" value="<%=@nom.user_email%>" hidden>
+      <input id="nom_user_email" type="text" value="<%=@nom.user_email%>" hidden>
+      <button value="submit_button" id="vote_form_submit_id" onclick="check_cookie()">Vote!</button>
     </form>
     <% end %>
   
@@ -169,8 +186,9 @@
 	      $.ajax({
           type: 'POST',
           url: '/get_user_prime',
-          data: {'user_email' : $("#user_email").val(),
+          data: {'user_email' : $("#nom_user_email").val(),
                 'election_id' : $("#election_selected_id").val(),
+                'increment_vote' : true
           },
           cache: false,
           success: function(result) {

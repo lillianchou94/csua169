@@ -99,7 +99,9 @@ Given(/^the election "([^"]*)" has started$/) do |election_name|
 end
 
 Then(/^I should see a timeout error$/) do
-  fail "Unimplemented"
+  wait = Selenium::WebDriver::Wait.new(timeout: 100)
+  raise "Timeout Error"
+  
 end
 
 Then(/^I should see a popup$/) do
