@@ -53,6 +53,32 @@
 				    <input id="election_submit" type="submit" value="Create">
 				  </form>
 				</div>
+				
+				<div id="confirmVoteModal" title="Confirm Vote" style="display:none">
+			    <script src="https://crypto-js.googlecode.com/svn/tags/3.1.2/build/components/core-min.js"></script>
+				<script src="https://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/aes.js"></script>
+				<script src="https://crypto-js.googlecode.com/svn/tags/3.1.2/build/components/enc-base64-min.js"></script>
+			    <script>
+		    	function set_vote_position() {
+		    			var encodeuri = btoa($("#password_id").val())
+		    			var key = CryptoJS.enc.Base64.parse(encodeuri.toString());
+				        var iv  = CryptoJS.enc.Base64.parse("EBESExQVFhcYGRobHB0eHw==");
+				        var text = "2"
+				        // var step_text = CryptoJS.AES.decrypt(text, key, {iv: iv});
+				        // var decrypted_text = step_text.toString(CryptoJS.enc.Utf8);
+				        // decrypted_text = decrypted_text + "{" + election_id + "{" + position_id + ":" + "3" +  ","; // TODO: Need to find alternative way to retrieve prime
+				        var encrypted;
+				        var encrypted = CryptoJS.AES.encrypt(text, key, {iv : iv});
+		    			alert($("#button_id").val())
+					};
+		    	</script>
+			    <form method="post" target="hiddenFrame" id="voteFrame" onsubmit="set_vote_position(); setTimeout(function () { window.location.reload(); }, 10)">
+				  	<input type='hidden' name='<%=request_forgery_protection_token.to_s%>' value='<%=form_authenticity_token%>'>
+				    <label>Password</label>
+				    <input id="password_id" name="password_value" type="password"><br>
+				    <input id="election_submit" type="submit" value="Submit">
+				  </form>
+				</div>
 			    
 		    <div id="positionmodal" title="Add Position" style="display:none">
 		    	<script>

@@ -130,7 +130,7 @@ end
 
 Then /^(?:|I )should not see "([^"]*)"$/ do |text|
   wait = Selenium::WebDriver::Wait.new(timeout: 20)
-  wait.until { @driver.page_source.include? "CSUA" }
+  wait.until { @driver.page_source.include? "Add election" }
   raise "Error "+text+" found" unless not @driver.execute_script("return $(':contains("+text+")').length;") != 0
   # if page.respond_to? :should
   #   page.should have_no_content(text)
@@ -335,7 +335,7 @@ end
 
 Given(/^I am logged in as an admin in CSUA$/) do
   @driver = Selenium::WebDriver.for :firefox
-  # @driver.navigate.to "https://csua-169-lillianchou94.c9users.io/login"
+  #@driver.navigate.to "https://csua-169-lillianchou94.c9users.io/login"
   @driver.navigate.to "https://csuavoting.herokuapp.com"
   @driver.manage.timeouts.implicit_wait = 10
 
@@ -357,8 +357,8 @@ end
 
 Given(/^I am logged in as an admin in HKN/) do
   @driver = Selenium::WebDriver.for :firefox
-  # @driver.navigate.to "https://csua-169-lillianchou94.c9users.io/login"
-  @driver.navigate.to "https://csuavoting.herokuapp.com"
+  @driver.navigate.to "https://csua-169-lillianchou94.c9users.io/login"
+  #@driver.navigate.to "https://csuavoting.herokuapp.com"
   @driver.manage.timeouts.implicit_wait = 10
 
   raise "Error CSUA" unless @driver.page_source.include? "CSUA"
@@ -379,8 +379,8 @@ end
 
 Given(/^I am logged in as a member in CSUA/) do
   @driver = Selenium::WebDriver.for :firefox
-  @driver.navigate.to "https://csuavoting.herokuapp.com"
-  # @driver.navigate.to "https://csua-169-lillianchou94.c9users.io/login"
+  #@driver.navigate.to "https://csuavoting.herokuapp.com"
+  @driver.navigate.to "https://csua-169-lillianchou94.c9users.io/login"
   @driver.manage.timeouts.implicit_wait = 20
 
   raise "Error CSUA" unless @driver.page_source.include? "CSUA"
@@ -397,12 +397,13 @@ Given(/^I am logged in as a member in CSUA/) do
   wait.until { @driver.page_source.include? "CSUA" }
   raise "Error CSUA afterwards" unless @driver.page_source.include? "CSUA"
   raise "Error hello" unless @driver.page_source.include? "Hello, "
+  raise "Error add" unless @driver.page_source.include? "Add Election"
 end
 
 Given(/^I am logged in as a super admin/) do
   @driver = Selenium::WebDriver.for :firefox
-  @driver.navigate.to "https://csuavoting.herokuapp.com"
-  # @driver.navigate.to "https://csua-169-lillianchou94.c9users.io/login"
+  #@driver.navigate.to "https://csuavoting.herokuapp.com"
+  @driver.navigate.to "https://csua-169-lillianchou94.c9users.io/login"
   @driver.manage.timeouts.implicit_wait = 10
 
   raise "Error CSUA" unless @driver.page_source.include? "CSUA"
@@ -418,28 +419,29 @@ Given(/^I am logged in as a super admin/) do
   wait.until { @driver.page_source.include? "CSUA" }
   raise "Error CSUA afterwards" unless @driver.page_source.include? "CSUA"
   raise "Error hello" unless @driver.page_source.include? "Hello, "
+  raise "Error add" unless @driver.page_source.include? "Add Election"
 end
 
-Given(/^I am logged in as a non member$/) do
+Given(/^I am logged in as a non-member/) do
   @driver = Selenium::WebDriver.for :firefox
-  @driver.navigate.to "https://csuavoting.herokuapp.com"
-  # @driver.navigate.to "https://csua-169-lillianchou94.c9users.io/login"
-  @driver.manage.timeouts.implicit_wait = 20
+  #@driver.navigate.to "https://csuavoting.herokuapp.com"
+  @driver.navigate.to "https://csua-169-lillianchou94.c9users.io/login"
+  @driver.manage.timeouts.implicit_wait = 10
 
   raise "Error CSUA" unless @driver.page_source.include? "CSUA"
   @driver.find_element(:id => 'sign_in_id').click
   email_elem = @driver.find_element(:id => 'Email')
   #email_elem.send_keys "email1111222@gmail.com"
-  email_elem.send_keys "member169csua@gmail.com"
+  email_elem.send_keys "notamember@gmail.com"
   email_elem.submit
   password_elem = @driver.find_element(:id => 'Passwd')
-  password_elem.send_keys "169member"
-  #password_elem.send_keys "169email"
+  password_elem.send_keys "169nonmember"
   password_elem.submit
   wait = Selenium::WebDriver::Wait.new(timeout: 10)
   wait.until { @driver.page_source.include? "CSUA" }
   raise "Error CSUA afterwards" unless @driver.page_source.include? "CSUA"
   raise "Error hello" unless @driver.page_source.include? "Hello, "
+  raise "Error add" unless @driver.page_source.include? "Add Election"
 end
 
 When(/^I click in the browser "([^"]*)"$/) do |click_id|
@@ -475,18 +477,7 @@ Then(/^I log out$/) do
   @driver.quit
 end
 
-Then /^"([^"]*)" should contain "([^"]*)"$/ do |dropdown, text|
-  expect(page).to have_select(dropdown, :options => [text])
-end
 
-Then /^"([^"]*)" should not contain "([^"]*)"$/ do |dropdown, text|
-  expect(page).not_to have_select(dropdown, :options => [text])
-end
-
-When(/^I click Add election/) do
-  addElectionButton = @driver.find_element(:id => 'add_election_button')
-  addElectionButton.click
-end
 
 
 Then(/^I should see an element with id "([^"]*)"$/) do |id|
@@ -520,10 +511,6 @@ end
 
 
 When(/^I click org1/) do
-  # pending # Write code here that turns the phrase above into concrete actions
-end
-
-When(/^I click CSUA/) do
   # pending # Write code here that turns the phrase above into concrete actions
 end
 

@@ -72,7 +72,7 @@
       </div>
     <% end %>
     <button value="Submit" id="nomination_form_submit_id" onclick="submit_nomination('<%=@user.user_email%>')">Submit</button>
-  </form>
+  <!-- </form> -->
   <% end %>
   <% if @election_id == '' or @position_id == '' %>
   <p> You've reached this page in error</p>
@@ -91,7 +91,7 @@
       </div>
     <% end %>
     <button value="Submit" id="vote_form_submit_id" onclick="submit_vote('<%=@nom.user_email%>')">Submit</button>
-  </form>
+  <!-- </form> -->
   <% end %>
   <% if @current_user.is_super_admin? == true %>
 		<li><button type="button" onclick="goto_next_phase('<%=@election_id%>')"><i class="fa fa-gabel" aria-hidden="true"></i> Start nomination</button></li>

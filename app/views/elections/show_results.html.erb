@@ -1,1 +1,16 @@
-<p>Results go here</p>
+<p>Results</p>
+<ul>
+<% for pos in @winners_pos %>
+    <li><ul>
+    <%=pos%>
+    <% for winner in @winners[pos] %>
+        <li><%=winner%></li>
+    <% end %>
+    </ul> 
+    </li>
+<% end %>
+
+<br>
+
+<p>Your votes (stored via AES encryption, use your password to decrypt)</p>
+<%=@current_user.votes%>

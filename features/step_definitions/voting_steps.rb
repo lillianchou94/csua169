@@ -10,6 +10,18 @@ Then(/^I click on "([^"]*)"$/) do |arg1|
 
 end
 
+Then(/^I press on "([^"]*)" for nominations$/) do |button|
+  @driver.find_element(:id => button).click
+  wait = Selenium::WebDriver::Wait.new(timeout: 40)
+  wait.until { @driver.page_source.include? "nomination"}
+end
+
+Then(/^I press on "([^"]*)" for voting$/) do |button|
+  @driver.find_element(:id => button).click
+  wait = Selenium::WebDriver::Wait.new(timeout: 40)
+  wait.until { @driver.page_source.include? "voting"}
+end
+
 When /^(?:|I )press on "([^"]*)"$/ do |button|
   # wait = Selenium::WebDriver::Wait.new(timeout: 40)
   # wait.until { @driver.page_source.include? button}
@@ -17,8 +29,8 @@ When /^(?:|I )press on "([^"]*)"$/ do |button|
   # @driver.execute_script(button_hashtag)
   #@driver.execute_script("get_election_dashboard('CSUA04272016')")
   @driver.find_element(:id => button).click
-  wait = Selenium::WebDriver::Wait.new(timeout: 40)
-  wait.until { @driver.page_source.include? "Start nomination"}
+  # wait = Selenium::WebDriver::Wait.new(timeout: 40)
+  # wait.until { @driver.page_source.include? "Start nomination"}
 
   #@driver.execute_script("$('#<WHATEVERTHISID IS>').parents().css({'display':'block','visibility':'visible'})")
 end
@@ -83,14 +95,6 @@ Given(/^I voted for "([^"]*)" for postion "([^"]*)"$/) do |candidate, position|
 end
 
 Given(/^the election "([^"]*)" has started$/) do |election_name|
-  fail "Unimplemented"
-end
-
-Given(/^the election "([^"]*)" has ended$/) do |election_name|
-  fail "Unimplemented"
-end
-
-Then(/^I should not see "([^"]*)" for "([^"]*)"$/) do |arg1, election_name|
   fail "Unimplemented"
 end
 

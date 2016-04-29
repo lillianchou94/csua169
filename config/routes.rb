@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
   # resources :elections
   # root :to => redirect('/dashboard/home')
-  get "/dashboard/*page" => "elections#show"
+  match "/dashboard/*page" => "elections#show", via: [:get,:post]
   get "/election_show_elections" => "elections#show_elections"
   get "/super_admin_setup" => "sessions#test_super_admin"
   get "/nonsuperadmin_setup" => "sessions#test_nonsuper_admin"
@@ -40,6 +40,7 @@ Rails.application.routes.draw do
   
   get "/get_current_phase" => "elections#get_current_phase"
   match "/goto_next_phase" => "elections#goto_next_phase", via: [:get,:post]
+  match "/get_user_prime" => "elections#get_user_prime", via: [:get,:post]
   
   match "/encryption_save" => "elections#encryption_save", via: [:get,:post]
   match "/show_modal" => "elections#show_modal", via: [:get,:post]

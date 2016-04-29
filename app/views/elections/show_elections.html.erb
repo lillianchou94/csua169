@@ -91,7 +91,7 @@
   <input id="button_id" style="display:none;" value=""></input>
   <ul style="display:inline;list-style-type:none">
 
-    <% if @current_user.is_admin_at_all? %>
+    <% if @current_user and @current_user.is_admin_at_all? %>
       <li><button type="button" id="add_election_button" onclick="open_election_modal()"><i class="fa fa-plus-square-o"></i> Add election</button></li>
     <% end %>
     
@@ -131,6 +131,6 @@
   </ul>
  
   
-  <% if @current_user.is_admin_at_all? == true %>
+  <% if @current_user and @current_user.is_admin_at_all? == true %>
     <button type="button" class="fa fa-cog" id="settings" onclick="update_dashboard_settings()" style="display:inline;cursor:pointer;cursor:hand;text-decoration:underline">Settings</button>
   <% end %>
