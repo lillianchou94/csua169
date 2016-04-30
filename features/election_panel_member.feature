@@ -7,11 +7,11 @@ Feature: Election panel content
   Scenario: election dashboard page should have content for member #happy path
     Given I am logged in as a member in CSUA 
     And I am on the election dashboard page
-    Then I should see "Click on an election to see election status."
-    Then I should see "CSUA Voting System"
-    And I should not see Add election
-    And I should not see Add position
-    And I should not see "Settings"
+    Then I should see in the browser "Click on an election to see election status."
+    Then I should see in the browser "CSUA Voting System"
+    And I should not see in the browser "Add election"
+    And I should not see in the browser "Add position"
+    And I should not see in the browser "Settings"
     Then I log out
   
   Scenario: election dashboard page should not have content for non-member #sad path
