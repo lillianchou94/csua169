@@ -10,7 +10,7 @@ Feature: Add elections
   Scenario: Add election
     Given I am on the show elections page for an admin
     And I should see "Add election"
-    When I press "Add election"
+    When I click Add election
     And I add the election called "election1" for the organization "CSUA"
     Then I should be on the show elections page for an admin
     And I should see "Add election" 

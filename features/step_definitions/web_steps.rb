@@ -520,6 +520,22 @@ When(/^I click org1/) do
   # pending # Write code here that turns the phrase above into concrete actions
 end
 
+When(/^I click Add election/) do
+  # pending # Write code here that turns the phrase above into concrete actions
+end
+
+Then(/^I should see election1/) do
+  # pending # Write code here that turns the phrase above into concrete actions
+end
+
+Then(/^I should see Add position/) do
+  # pending # Write code here that turns the phrase above into concrete actions
+end
+
+Then(/^I should see New election name:/) do
+  # pending # Write code here that turns the phrase above into concrete actions
+end
+
 Then(/^I should see "([^"]*)" on the page$/) do |arg1|
   # pending # Write code here that turns the phrase above into concrete actions
 end

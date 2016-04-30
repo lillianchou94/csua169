@@ -26,7 +26,3 @@ And /^(?:|I )start next phase with election ID "([^"]*)"$/ do |election_id|
   wait.until { @driver.page_source.include? "Add election" }
   @driver.execute_script("return goto_next_phase('"+election_id+"')")
 end
-
-And /^(?:|I )am on the special page "([^"]*)"$/ do |uri|
-  @driver.navigate.to "https://csuavoting.herokuapp.com"+uri
-end
