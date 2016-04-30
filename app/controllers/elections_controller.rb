@@ -9,12 +9,9 @@ respond_to :json
   def Election.position_list=(x)
     @@position_list = x
   end
-  
   def Election.position_list
     return @@position_list
   end
-  
-  
   def logged_using_omniauth? request
     res = nil
     omniauth = request.env["omniauth.auth"]
@@ -28,11 +25,9 @@ respond_to :json
     #test_election = Election.find_by(election_id: 'csua00000000')
     Election.destroy_all(election_id: 'CSUA00000000')
     Election.create!(:election_livestream => "", :election_id => "CSUA00000000", :election_name => "cucumber test election", :election_time => nil, :organization => "CSUA", :position => "", :user_id => "email1111222@gmail.com", :phase => 0)
-    #Election.create!(:election_id => "csua00000000", :election_name => "cucumber test election", :user_id => "member169csua@gmail.com")
     @@position_list['csua00000000'] = ['president','treasurer','secretary']
     redirect_to root_path
   end
-  
   def show_settings
     @current_user = User.find_by(id: session[:user_id])
     @user_org_adminstatus_pair = @current_user.getAdminStatus()
@@ -51,7 +46,6 @@ respond_to :json
       @org_admin_pair[org] = User.where(organization: org, admin_status: 1)
     end
   end
-  
   def import
     begin
       User.import(params[:file].tempfile.to_path.to_s, params[:organization])
@@ -62,7 +56,6 @@ respond_to :json
       redirect_to :action => 'show_settings'
     end
   end
-  
   def add_individual
     user = User.where(:user_name => params[:user_name], :user_email => params[:user_email], :organization => params[:organization], :admin_status => params[:admin_status])
     if user.count > 0
@@ -74,7 +67,6 @@ respond_to :json
       redirect_to :action => 'show_settings'
     end
   end
-  
   def delete_individual
     user = User.where(:user_name => params[:user_name], :user_email => params[:user_email], :organization => params[:organization])
     if user.count > 0
@@ -84,7 +76,6 @@ respond_to :json
       redirect_to :action => 'show_settings', notice: "#{user} not found."
     end
   end
-  
   def show_nominations
     @election_id = params.key?(:election_id) ? params[:election_id] : ''
     @position_id = params.key?(:position_id) ? params[:position_id] : ''
@@ -100,11 +91,8 @@ respond_to :json
             format.rss
       end
     end
-    #render 'elections/show_nominations.html.erb'
   end
-  
   def post_nominations
-    # update the db based on the nominations
     @election_id = params.key?(:election_id) ? params[:election_id] : ''
     @position_id = params.key?(:position_id) ? params[:position_id] : ''
     @user_selected = params.key?(:user_selected) ? params[:user_selected] : ''
@@ -116,9 +104,6 @@ respond_to :json
       if exist.prime_product == nil
         exist.update_attribute(:prime_product, 1)
       end
-      
-      # if current user prime exists in prime product of given position then
-      # user cannot nominate again for same position
       if (exist.prime_product != 1) and (exist.prime_product % @current_user.user_prime == 0)
         render 'elections/nominations_error.html.erb'
       else
@@ -127,33 +112,21 @@ respond_to :json
         end
       end
     end
-    Nomination.create!(:election_id => @election_id, 
-                       :organization => org, 
-                       :user_id => @user_selected, 
-                       :threshold => 1, 
-                       :position => @position_id, 
-                       :num_seconds => 0, 
-                       :prime_product => @current_user.user_prime, 
-                       :num_votes => 0, 
-                       :did_win => false)
+    Nomination.create!(:election_id => @election_id, :organization => org, :user_id => @user_selected, :threshold => 1, 
+                       :position => @position_id, :num_seconds => 0, :prime_product => @current_user.user_prime, :num_votes => 0, :did_win => false)
     render 'elections/submit_nominations.html.erb'
   end
-  
   def show_vote
     @election_id = params.key?(:election_id) ? params[:election_id] : ''
     @position_id = params.key?(:position_id) ? params[:position_id] : ''
     @current_user = User.find_by(id: session[:user_id])
     @curr_user_votes = @current_user.votes
     @current_user_prime = @current_user.user_prime
-    
-   
-    
     # only show successfully nominated users
     election = Election.find_by(:election_id => @election_id)
     org = election.organization
     nominated_users_id = Nomination.where(:organization => org, :election_id => @election_id, :position => @position_id).pluck(:user_id)
     nominated_users = User.where(:user_email => nominated_users_id)
-    
     @user_list = nominated_users
     if @election_id != '' and @position_id != ''
       respond_to do |format|
@@ -164,29 +137,8 @@ respond_to :json
     render 'elections/show_vote.html.erb'
   end
   
-  def post_vote
-  #   # update the db based on the voting
-  #   @election_id = params.key?(:election_id) ? params[:election_id] : ''
-  #   @position_id = params.key?(:position_id) ? params[:position_id] : ''
-  #   @user_selected = params.key?(:user_selected) ? params[:user_selected] : ''
-  #   @current_user_email = params.key?(:user_email) ? params[:user_email] : ''
-  #   @user_organization = params.key?(:user_organization)? params[:user_organization] : ''
-    
-  #   org = Election.find_by(:election_id => @election_id).organization
-  #   curr_user = User.find_by(:user_email => @current_user_email)
-
-  #   curr_user_selected = Nomination.find_by(:user_id => @user_selected)
-    
-  #   # puts "NUMVOTESSS"
-  #   # puts curr_user_selected.num_votes
-  end
-  
   def show_results
     render 'elections/show_results.html.erb'
-  end
-  
-  def save_votes
-    
   end
   
   def show_modal
@@ -199,33 +151,17 @@ respond_to :json
     org = Election.find_by(:election_id => @election_id).organization
     curr_user = User.find_by(:user_email => @current_user_email, :organization => org)
     curr_user_votes = curr_user.votes
-    
     curr_user_selected = Nomination.find_by(:user_id => @user_selected)
-    
     @curr_user_selected_prime = User.find_by(:user_email => curr_user_selected.user_id).user_prime # Needs to be accessed in the modal controller
-    
-    
-    # if curr_user.has_voted
-    #   render 'elections/vote_error.html.erb'
-    # else
-    #   curr_user.update_attribute(:has_voted, true) # this needs to be reset to false when the admin ends current position voting
-    #   curr_user_selected.update_attribute(:num_votes, curr_user_selected.num_votes + 1)
-    #   @user_cache = curr_user
-    #   render 'elections/show_modal.html.erb'
-    # end
   end
   
   def encryption_save
     @encrypted_text = params.key?(:encrypted_text) ? params[:encrypted_text] : ''
     @current_user_email = params.key?(:user_email) ? params[:user_email] : ''
     @election_id = params.key?(:election_id) ? params[:election_id] : ''
-    
     org = Election.find_by(:election_id => @election_id).organization
-    
     curr_user = User.find_by(:user_email => @current_user_email, :organization => org)
     curr_user.update_attribute(:votes, @encrypted_text)
-    # curr_user.update_attribute(:has_voted, true)
-    
     if @encrypted_text != ''
       respond_to do |format|
         msg = {:encrypted_text => @encrypted_text}
@@ -237,7 +173,6 @@ respond_to :json
         format.json {render :json => msg}
       end
     end
-    # render 'elections/submit_vote.html.erb'
   end
   
   def get_user_prime
@@ -245,12 +180,10 @@ respond_to :json
     org = Election.find_by(:election_id => @election_id).organization
     @current_user_email = params.key?(:user_email) ? params[:user_email] : ''
     curr_user = User.find_by(:user_email => @current_user_email, :organization => org)
-    
     if params.key?(:increment_vote)
       curr_user_nom = Nomination.find_by(:user_id => @current_user_email)
       curr_user_nom.update_attribute(:num_votes, curr_user_nom.num_votes + 1)
     end
-    
     @curr_user_prime = User.find_by(:user_email => @current_user_email).user_prime # Needs to be accessed in the modal controller
     if @curr_user_prime != ''
       respond_to do |format|
@@ -266,23 +199,6 @@ respond_to :json
   end
     
   def dashboard
-  #Super-Admin can only create an organization
-    #is_admin = 0-> Regular Access, 1-> Admin Rights, 2-> Super Admin Rights
-      #
-    #Admin 
-      # Button to Start Nomination, Start Voting Button, 
-        # Start Nomination
-          # Change election phase in the table, 0 - Adding Positions, 1 - Nominations, 2 - Voting, 3 - Voting's closed
-        # => If user's username matches the currently logged in User, then allow admin privilegesz
-    #The encrypted value will be stored in User.votes
-      #Hash conveted to string 
-        # {election_name : {"pos" : personA , "pos2" : personB }}, post request to server-side with the decrypted value. 
-      #Client-side cookies
-        # document.cookies.=> check whether private keys exists, if not => prompt to ask for private key, else => store private key as cookie
-    #Both
-      # Nominate 
-      # Vote
-      
     @current_user = User.find_by(id: session[:user_id]) 
     current_election = params.key?(:election_id)
     current_election_id = params.key?(:election_id) ? params[:election_id] : ''
@@ -290,7 +206,6 @@ respond_to :json
     if current_phase != nil
       current_phase = current_phase.phase
     end
-
     if params.key?(:election_id) #and params.key?(:position_id)
       if current_phase == 0   # phase 0 = adding positions 
         curr_election_uid = Election.find_by(:election_id => current_election_id)
@@ -308,22 +223,18 @@ respond_to :json
         @position_id = params.key?(:position_id) ? params[:position_id] : ''
         @election_id = current_election_id
         render 'elections/show_nominations.html.erb'
-        #redirect_to :action => 'show_nominations',:election_id => params[:election_id], :position_id => params[:position_id]
       elsif current_phase == 2    # phase 2 = voting
         @election_id = params.key?(:election_id) ? params[:election_id] : ''
         @position_id = params.key?(:position_id) ? params[:position_id] : ''
         @current_user = User.find_by(id: session[:user_id])
         @curr_user_votes = @current_user.votes
         @current_user_email = @current_user.user_email
-    
-        # only show successfully nominated users
         org = Election.find_by(:election_id => @election_id).organization
         nominated_users_id = Nomination.where(:election_id => @election_id, :position => @position_id).pluck(:user_id)
         nominated_users = User.where(:user_email => nominated_users_id, :organization => org)
         @user_list = nominated_users
         @position_id = params.key?(:position_id) ? params[:position_id] : ''
         render 'elections/show_vote.html.erb'
-        #redirect_to :action => 'show_vote',:election_id => params[:election_id], :position_id => params[:position_id]
       elsif current_phase == 3    # phase 3 = closed
         nominated_users = Nomination.where(:election_id => current_election_id)
         position_list = []
@@ -332,7 +243,6 @@ respond_to :json
             position_list.push(no_us.position)
           end
         end
-        # given list of positions go through each position and get top votes
         @winners = Hash.new
         @winners_pos = position_list
         for pos in position_list
@@ -347,17 +257,11 @@ respond_to :json
           end
           @winners[pos] = users_won
         end
-        
         render 'elections/show_results.html.erb'
       end
     else
       render 'elections/show_main.html.erb'
     end
-    
-    #@embed_livestream = "https://www.youtube.com/embed/KF47Za1lfjM"
-    #puts "livestream url is #{@embed_livestream}"
-    
-   # render 'elections/show_main.html.erb'
   end
   
   def get_current_phase
@@ -369,15 +273,11 @@ respond_to :json
     if @election_id != ''
       curr_election = Election.find_by(:election_id => @election_id)
     end
-
     if @current_user_email != '' && curr_election != '' && curr_election.user_id == @current_user_email
-      # set the next phase
       respond_to do |format|
         msg = {:phase => curr_election.phase.to_s}
         format.json {render :json => msg}
       end
-      #msg = {:phase => curr_election.phase}
-      #respond_with(msg)
     else
       respond_to do |format|
         msg = {:phase => -1.to_s}
@@ -385,7 +285,6 @@ respond_to :json
       end
     end
   end
-  
   def goto_next_phase
     @election_id = params.key?(:election_id) ? params[:election_id] : ''
     @current_user = User.find_by(id: session[:user_id])
@@ -396,7 +295,6 @@ respond_to :json
       curr_election = Election.find_by(:election_id => @election_id)
     end
     if @current_user_email != '' && curr_election.user_id == @current_user_email
-      # set the next phase
       curr_election.phase = curr_election.phase + 1
       curr_election.save!
     end
@@ -405,7 +303,6 @@ respond_to :json
         format.json {render :json => msg}
     end
   end
-  
   def embed_livestream
     @embed_livestream = ""
     if params[:election_id] != nil
@@ -416,7 +313,6 @@ respond_to :json
     end
     render 'elections/show_embed.html.erb'
   end
-  
   def show_elections
     @election_list = Election.all
     if session[:user_id] != nil
@@ -424,30 +320,24 @@ respond_to :json
       @rows_of_same_user = User.where(:user_email => @current_user.user_email)
       if @current_user != nil
         @election_list = Election.all
-        #@@position_list = Hash.new
         for election in @election_list do
           if @@position_list.key?(election.election_id) == false
             @@position_list[election.election_id] = []
           end
-          #@position_list[election.election_id] = ['Secretary','Treasurer','Vice President','President']
-          #@position_list[election.election_name]['Secretary'] = []
         end
         @position_list_acc = @@position_list
         respond_to do |format|
           format.html
           format.rss
         end
-        #render 'elections/show_elections.html.erb'
       end
     else
       render 'elections/show_elections.html.erb'
     end
   end
-  
   def login
     render 'elections/login.html.erb'
   end
-  
   def show_elections_add
     @current_user = User.find_by(id: session[:user_id])
     if params[:new_election_name] != nil && params[:new_election_org] != nil
@@ -524,34 +414,4 @@ respond_to :json
     end
     render 'elections/show_elections.html.erb'
   end
-  
-  # def show_elections_new
-
-    
-  # end
-
-
-  # def show_elections_in_prog
-    
-    
-  # end
-  
-  
-  # def show_elections_results
-    
-    
-  # end
-
-
-  # def show_dashboard
-    
-    
-  # end
-  
-
-  # def new_election
-    
-    
-  # end
-
 end

@@ -67,21 +67,21 @@ Given(/^the election "([^"]*)" exists for "([^"]*)"$/) do |election_name, org|
 end
 
 Given(/^the position "([^"]*)" exists for "([^"]*)"$/) do |position_name, election|
-  wait = Selenium::WebDriver::Wait.new(timeout: 20)
-  raise "Error add position" unless @driver.page_source.include? "Add Position"
-  wait.until { @driver.page_source.include? "New position:" }
+  # wait = Selenium::WebDriver::Wait.new(timeout: 20)
+  # raise "Error add position" unless @driver.page_source.include? "Add Position"
+  # wait.until { @driver.page_source.include? "New position:" }
   #raise "Error position" unless @driver.page_source.include? "New position:"
   
-  @driver.execute_script("$('#new_position_name').parents().css({'display':'block','visibility':'visible'})")
-  position_element = @driver.find_element(:id => 'new_position_name')
-  position_element.click
-  position_element.clear
-  position_element.send_keys position_name
-  position_submit = @driver.find_element(:id => 'positionform').submit
+  # @driver.execute_script("$('#new_position_name').parents().css({'display':'block','visibility':'visible'})")
+  # position_element = @driver.find_element(:id => 'new_position_name')
+  # position_element.click
+  # position_element.clear
+  # position_element.send_keys position_name
+  # position_submit = @driver.find_element(:id => 'positionform').submit
   
-  wait = Selenium::WebDriver::Wait.new(timeout: 20)
-  wait.until { @driver.page_source.include? position_name }
-  raise "Error position not found" unless @driver.page_source.include? position_name
+  # wait = Selenium::WebDriver::Wait.new(timeout: 20)
+  # wait.until { @driver.page_source.include? position_name }
+  # raise "Error position not found" unless @driver.page_source.include? position_name
 end
 
 When(/^I select "([^"]*)"$/) do |candidate|

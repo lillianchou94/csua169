@@ -4,7 +4,7 @@ Feature: Voting Livestream
   so that absentee can watch the election remotely
   
   Background:
-    Given I am logged in as an admin
+    Given I am logged in as an admin in CSUA
     
   Scenario: election embed livestream page
     Given I am on the election embed livestream page

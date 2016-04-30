@@ -30,7 +30,7 @@ Feature: Election panel content
     Given I am logged in as an admin in CSUA
     And I am on the set up for non super admin page
     And I go to the super admin page as a nonsuper admin
-    Then I should be on the election dashboard page
+    Then I should be on the dashboard
     #instead of super admin page
     Then I should see "Click on an election to see election status."
     Then I should see "CSUA Voting System"
