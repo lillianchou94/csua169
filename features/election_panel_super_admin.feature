@@ -8,9 +8,9 @@ Feature: Election panel content
     And I am on the election dashboard page
     Then I should see "Click on an election to see election status."
     Then I should see "CSUA Voting System"
-    And I should not see "Add election"
-    And I should not see "Add position"
-    And I should not see "Settings"
+    And I should not see in the browser "Add election"
+    And I should not see in the browser "Add position"
+    And I should not see in the browser "Settings"
     Then I log out
     
   Scenario: super-admin have access to "/admin" #happy path
@@ -21,9 +21,9 @@ Feature: Election panel content
     Then I go to the dashboard
     Then I should see "Click on an election to see election status."
     Then I should see "CSUA Voting System"
-    And I should not see "Add election"
-    And I should not see "Add position"
-    And I should not see "Settings"
+    And I should not see in the browser "Add election"
+    And I should not see in the browser "Add position"
+    And I should not see in the browser "Settings"
     Then I log out
     
     Scenario: regular admin don't have access to "/admin" #sad path

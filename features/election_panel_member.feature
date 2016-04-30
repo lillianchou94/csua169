@@ -18,7 +18,7 @@ Feature: Election panel content
     Given I am logged in as a non member
     And I am on the election dashboard page
     Then I should see "CSUA Voting System"
-    And I should not see "Add election"
-    And I should not see "Add position"
-    And I should not see "Settings"
+    And I should not see in the browser "Add election"
+    And I should not see in the browser "Add position"
+    And I should not see in the browser "Settings"
     Then I log out
