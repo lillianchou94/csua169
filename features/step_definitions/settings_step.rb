@@ -16,7 +16,6 @@ end
 
 When /^(?:|I )fill in the field "([^"]*)" with "([^"]*)"$/ do |field, value|
   @driver.find_element(:name, field).send_keys value
-  
 end
 
 Given(/^that "([^"]*)" with email "([^"]*)" is a member for "([^"]*)"$/) do |name, email, org|
