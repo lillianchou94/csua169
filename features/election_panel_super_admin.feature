@@ -13,6 +13,7 @@ Feature: Election panel content
     And I should not see in the browser "Settings"
     Then I log out
     
+    
   Scenario: super-admin have access to "/admin" #happy path
     Given I am logged in as a super admin 
     And I am on the set up for super admin page

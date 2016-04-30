@@ -20,7 +20,7 @@ Feature: Voting for admin
     And I should see in the browser Start nomination
     Then I press on start_nomination_id for nominations
     Then I am on the show elections page for an admin
-    And I should see in the browser "position1"
-    And I should see in the browser "Click on an election to see election status."
-    And I should not see in the browser "Start nomination"
+    And I should see position1
+    And I should see Click on an election to see election status.
+    And I should not see Start nomination
     Then I log out
