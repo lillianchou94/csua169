@@ -11,8 +11,9 @@ And(/^On the settings page for an admin$/) do
 end
 
 And (/^I click Add$/) do
+  wait = Selenium::WebDriver::Wait.new(timeout: 20)
+  wait.until {@driver.page_source.include? "Settings"}
   @driver.find_element(:id => "submit_button").click
-
 end
 
 When /^(?:|I )fill in the field "([^"]*)" with "([^"]*)"$/ do |field, value|
