@@ -17,7 +17,7 @@ Feature: Voting for admin
     Then I should see position1
     Then I click on "select_election_CSUA04272016" for nominations
     When I am on the election dashboard page
-    And I should see in the browser "Start nomination"
+    And I should see in the browser Start nomination
     Then I press on "start_nomination_id" for nominations
     Then I am on the show elections page for an admin
     And I should see in the browser "position1"

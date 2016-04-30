@@ -29,7 +29,7 @@ Feature: Voting phase for member
     Then I should see a popup
     When I enter a password
     And I click Enter
-    Then I should see "You have voted for candidate1"
+    Then I should see You have voted for candidate1
     Then I log out
     
   Scenario: Voter votes and cache contains password (happy path)
@@ -37,7 +37,7 @@ Feature: Voting phase for member
     And I am on the results page
     And I click vote
     Then I should not see a modal dialog
-    Then I should see "You have voted for candidate1"
+    Then I should see You have voted for candidate1
     Then I log out
   
   Scenario: Correct encryption and decryption after voting
@@ -47,8 +47,8 @@ Feature: Voting phase for member
     Then I should not see a modal dialog
     Then I should have an "encrypted" value of votes
     And I should have a "decrypted" value of votes
-    When I click enter
-    Then I should see "You have voted for candidate1"
+    When I click Enter
+    Then I should see You have voted for candidate1
     Then I log out
   
   Scenario: Attempt decryption after voting, cache is cleared (sad path)
