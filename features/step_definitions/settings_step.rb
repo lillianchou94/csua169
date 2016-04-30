@@ -12,7 +12,7 @@ end
 
 And (/^I click Add$/) do
   @driver.find_element(:id => "submit_button").click
-  
+
 end
 
 When /^(?:|I )fill in the field "([^"]*)" with "([^"]*)"$/ do |field, value|
