@@ -586,4 +586,5 @@ Then(/^And I should see Click on an election to see election status./) do
 end
 
 Then(/^And I should not see Start nomination/) do
+  
 end
