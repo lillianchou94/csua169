@@ -11,8 +11,8 @@ Feature: Voting phase for member
   Scenario: See results
     Given I voted for "candidate1" for postion "position1"
     And I am on the results page
-    Then I should see in the browser "position1"
-    And I should see in the browser "candidate1 won"
+    Then I should see position1
+    And I should see in the browser candidate1 won
     Then I log out
   
   Scenario: Request from Server Timeout (sad path)

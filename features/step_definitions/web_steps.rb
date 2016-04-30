@@ -517,7 +517,7 @@ When(/^I click vote/) do
   # pending # Write code here that turns the phrase above into concrete actions
 end
 
-When(/^I click enter/) do
+When(/^I click Enter/) do
   # pending # Write code here that turns the phrase above into concrete actions
 end
 
@@ -527,6 +527,12 @@ end
 
 When(/^I click Add election/) do
   # pending # Write code here that turns the phrase above into concrete actions
+end
+
+When(/^I should see in the browser candidate1 won/) do
+end
+
+When(/^I should see You have voted for candidate1/) do
 end
 
 Then(/^I should see election1/) do
