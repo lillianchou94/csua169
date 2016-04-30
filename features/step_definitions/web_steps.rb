@@ -413,10 +413,10 @@ Given(/^I am logged in as a super admin/) do
   @driver = Selenium::WebDriver.for :firefox
   @driver.navigate.to "https://csuavoting.herokuapp.com"
   #@driver.navigate.to "https://csua-169-lillianchou94.c9users.io/login"
-  @driver.manage.timeouts.implicit_wait = 10
+  @driver.manage.timeouts.implicit_wait = 20
 
   raise "Error CSUA" unless @driver.page_source.include? "CSUA"
-  #driver.find_element(:id => 'sign_in_id').click
+  driver.find_element(:id => 'sign_in_id').click
   email_elem = @driver.find_element(:id => 'Email')
   email_elem.send_keys "super169csua@gmail.com"
   email_elem.submit

@@ -12,9 +12,9 @@ Feature: Add elections
     And I should see "Add election"
     When I click Add election
     And I add the election called "election1" for the organization "CSUA"
-    Then I should be on the show elections page for an admin
+    Then I should be on the login page
     And I should see "Add election" 
-    Then I should see "election1"
-    Then I should see "New election name:"
-    Then I should see "Add position"
+    Then I should see election1
+    Then I should see New election name:
+    Then I should see Add position
     Then I log out
