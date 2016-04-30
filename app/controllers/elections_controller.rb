@@ -27,7 +27,7 @@ respond_to :json
   def setup_cucumber
     #test_election = Election.find_by(election_id: 'csua00000000')
     Election.destroy_all(election_id: 'csua00000000')
-    Election.create!(:election_id => "csua00000000", :election_name => "cucumber test election")
+    Election.create!(:election_id => "csua00000000", :election_name => "cucumber test election", :user_id => "member169csua@gmail.com")
   end
   
   def show_settings
