@@ -197,27 +197,26 @@ RSpec.describe ElectionsController, type: :controller do
 end
 
 RSpec.describe ElectionsController, type: :controller do
-    
-    # it "deletes the user that exist" do
-    #   expect{
-    #     delete :delete_individual, user_name: "A", user_email: "a@gmail.com", organization: "CSUA"
-    #   }.to change(User,:count).by(-1)
-    # end
-      
   describe "nomination in CSUA" do
-    describe 'add nomination' do 
+    describe 'nomination process' do 
       before :each do
         @current_user = User.create!(:uid => "ID", :user_name => "A", :user_email => "a@gmail.com", :organization => "CSUA", :user_prime => 3, :admin_status => 1)
-        Election.create!(:election_livestream => "blah", :election_id => "election_id", :election_name => "election_name", :election_time => "time", :organization => "CSUA", :position => "", :user_id => "user_id", :phase => 0) 
+        Election.create!(:election_livestream => "blah", :election_id => "election_CSUA04192016", :election_name => "election_name", :election_time => "time", :organization => "CSUA", :position => "", :user_id => "user_id", :phase => 0) 
         session[:user_id] = @current_user.id
+      end
+      
+      it "shows possible nominees" do
+          get :show_nominations, election_id: "election_CSUA04192016", position_id: "position"
+          #expect(page).to have_text("a@gmail.com")
       end
     
       it "adds a nomination in CSUA" do
         expect{
-          get :post_nominations, election_id: "election_id", position_id: "position", user_id: "ID"
-          }.to change(Nomination,:count).by(1)
+          get :post_nominations, election_id: "election_CSUA04192016", position_id: "position", user_id: "ID"
+          }.to change(Nomination, :count).by(1)
       end
     end
   end
+
 end
 

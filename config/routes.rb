@@ -44,6 +44,8 @@ Rails.application.routes.draw do
   
   match "/encryption_save" => "elections#encryption_save", via: [:get,:post]
   match "/show_modal" => "elections#show_modal", via: [:get,:post]
+  
+  match "/setup_cucumber" => "elections#setup_cucumber", via: [:get,:post]
   root :to => redirect("/login")
 
   # # get "/loginlogin"

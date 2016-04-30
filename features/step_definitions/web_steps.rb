@@ -357,8 +357,8 @@ end
 
 Given(/^I am logged in as an admin in HKN/) do
   @driver = Selenium::WebDriver.for :firefox
-  @driver.navigate.to "https://csua-169-lillianchou94.c9users.io/login"
-  #@driver.navigate.to "https://csuavoting.herokuapp.com"
+  #@driver.navigate.to "https://csua-169-lillianchou94.c9users.io/login"
+  @driver.navigate.to "https://csuavoting.herokuapp.com"
   @driver.manage.timeouts.implicit_wait = 10
 
   raise "Error CSUA" unless @driver.page_source.include? "CSUA"
@@ -400,8 +400,8 @@ end
 
 Given(/^I am logged in as a super admin/) do
   @driver = Selenium::WebDriver.for :firefox
-  #@driver.navigate.to "https://csuavoting.herokuapp.com"
-  @driver.navigate.to "https://csua-169-lillianchou94.c9users.io/login"
+  @driver.navigate.to "https://csuavoting.herokuapp.com"
+  #@driver.navigate.to "https://csua-169-lillianchou94.c9users.io/login"
   @driver.manage.timeouts.implicit_wait = 10
 
   raise "Error CSUA" unless @driver.page_source.include? "CSUA"
@@ -421,8 +421,8 @@ end
 
 Given(/^I am logged in as a non-member/) do
   @driver = Selenium::WebDriver.for :firefox
-  #@driver.navigate.to "https://csuavoting.herokuapp.com"
-  @driver.navigate.to "https://csua-169-lillianchou94.c9users.io/login"
+  @driver.navigate.to "https://csuavoting.herokuapp.com"
+  #@driver.navigate.to "https://csua-169-lillianchou94.c9users.io/login"
   @driver.manage.timeouts.implicit_wait = 10
 
   raise "Error CSUA" unless @driver.page_source.include? "CSUA"

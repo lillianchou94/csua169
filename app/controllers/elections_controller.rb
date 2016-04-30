@@ -24,6 +24,12 @@ respond_to :json
     return res
   end
   
+  def setup_cucumber
+    #test_election = Election.find_by(election_id: 'csua00000000')
+    Election.destroy_all(election_id: 'csua00000000')
+    Election.create!(:election_id => "csua00000000", :election_name => "cucumber test election")
+  end
+  
   def show_settings
     @current_user = User.find_by(id: session[:user_id])
     @user_org_adminstatus_pair = @current_user.getAdminStatus()

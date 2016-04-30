@@ -1,0 +1,196 @@
+{"level":"INFO","message":"[fxdriver.badCertListener] Found preference for webdriver_assume_untrusted_issuer: true","timestamp":1461980247939,"type":""}
+{"level":"INFO","message":"[fxdriver.badCertListener] Found preference for webdriver_accept_untrusted_certs: true","timestamp":1461980247940,"type":""}
+{"level":"INFO","message":"[fxdriver.WdCertOverrideService] Accept untrusted certificates: true","timestamp":1461980247940,"type":""}
+{"level":"INFO","message":"[fxdriver.Utils] Loading: resource://fxdriver/evaluate.js","timestamp":1461980248047,"type":""}
+{"level":"INFO","message":"[fxdriver.Utils] Done reading: resource://fxdriver/evaluate.js","timestamp":1461980248048,"type":""}
+{"level":"INFO","message":"[fxdriver.ServerFactory] Driven by WebDriver version 2.53.0","timestamp":1461980248220,"type":""}
+{"level":"INFO","message":"[fxdriver.nsCommandProcessor] Received command: newSession","timestamp":1461980248540,"type":""}
+{"level":"INFO","message":"[fxdriver.wdSessionStoreService] Setting preferences based on required capabilities","timestamp":1461980248599,"type":""}
+{"level":"INFO","message":"[fxdriver.nsCommandProcessor] Created a new session with id: d7740d76-c2ec-45ff-86a5-e936f6202349","timestamp":1461980248601,"type":""}
+{"level":"INFO","message":"[fxdriver.nsCommandProcessor] Received command: get","timestamp":1461980248641,"type":""}
+{"level":"INFO","message":"[fxdriver.wdSession] setWaitForPageLoad false","timestamp":1461980248642,"type":""}
+{"level":"INFO","message":"[fxdriver.wdSession] setWaitForPageLoad true","timestamp":1461980248667,"type":""}
+{"level":"INFO","message":"[fxdriver.badCertListener] Found preference for webdriver_accept_untrusted_certs: true","timestamp":1461980248923,"type":""}
+{"level":"INFO","message":"[fxdriver.WdCertOverrideService] Allowing certificate from site: csuavoting.herokuapp.com:443","timestamp":1461980248923,"type":""}
+{"level":"INFO","message":"[fxdriver.WdCertOverrideService] Setting all Override Bits","timestamp":1461980248924,"type":""}
+{"level":"INFO","message":"[fxdriver.WdCertOverrideService] Override Bits: 7","timestamp":1461980248924,"type":""}
+{"level":"INFO","message":"[fxdriver.PatientListener] request status is 0","timestamp":1461980249509,"type":""}
+{"level":"INFO","message":"[fxdriver.badCertListener] Found preference for webdriver_accept_untrusted_certs: true","timestamp":1461980249524,"type":""}
+{"level":"INFO","message":"[fxdriver.WdCertOverrideService] Allowing certificate from site: csuavoting.herokuapp.com:443","timestamp":1461980249524,"type":""}
+{"level":"INFO","message":"[fxdriver.WdCertOverrideService] Setting all Override Bits","timestamp":1461980249525,"type":""}
+{"level":"INFO","message":"[fxdriver.WdCertOverrideService] Override Bits: 7","timestamp":1461980249526,"type":""}
+{"level":"INFO","message":"[fxdriver.nsCommandProcessor] Received command: implicitlyWait","timestamp":1461980249540,"type":""}
+{"level":"INFO","message":"[fxdriver.nsCommandProcessor] Received command: getPageSource","timestamp":1461980249551,"type":""}
+{"level":"INFO","message":"[fxdriver.nsCommandProcessor] Received command: findElement","timestamp":1461980249560,"type":""}
+{"level":"INFO","message":"[fxdriver.nsCommandProcessor] Received command: clickElement","timestamp":1461980249630,"type":""}
+{"level":"INFO","message":"[fxdriver.SyntheticMouse] SyntheticMouse.move [object HTMLInputElement] 79 11","timestamp":1461980249643,"type":""}
+{"level":"INFO","message":"[fxdriver.SyntheticMouse] Calling mouse.move with: 79, 11, [object HTMLInputElement]","timestamp":1461980249643,"type":""}
+{"level":"INFO","message":"[fxdriver.SyntheticMouse] Calling fireMouseEvent mouseout 305, 128.4166717529297, [object HTMLBodyElement]","timestamp":1461980249647,"type":""}
+{"level":"INFO","message":"[fxdriver.SyntheticMouse] Calling fireMouseEvent mouseover 305, 128.4166717529297, [object HTMLInputElement]","timestamp":1461980249648,"type":""}
+{"level":"INFO","message":"[fxdriver.SyntheticMouse] Calling fireMouseEvent mousemove 305, 128.4166717529297, [object HTMLInputElement]","timestamp":1461980249649,"type":""}
+{"level":"INFO","message":"[fxdriver.SyntheticMouse] SyntheticMouse.click [object HTMLInputElement]","timestamp":1461980249651,"type":""}
+{"level":"INFO","message":"[fxdriver.SyntheticMouse] About to do a bot.action.click on [object HTMLInputElement]","timestamp":1461980249654,"type":""}
+{"level":"INFO","message":"[fxdriver.SyntheticMouse] Calling fireMouseEvent mousemove 305, 128.4166717529297, [object HTMLInputElement]","timestamp":1461980249660,"type":""}
+{"level":"INFO","message":"[fxdriver.SyntheticMouse] Calling fireMouseEvent mousedown 305, 128.4166717529297, [object HTMLInputElement]","timestamp":1461980249666,"type":""}
+{"level":"INFO","message":"[fxdriver.SyntheticMouse] Calling fireMouseEvent mouseup 305, 128.4166717529297, [object HTMLInputElement]","timestamp":1461980249707,"type":""}
+{"level":"INFO","message":"[fxdriver.SyntheticMouse] Calling fireMouseEvent click 305, 128.4166717529297, [object HTMLInputElement]","timestamp":1461980249751,"type":""}
+{"level":"INFO","message":"[fxdriver.badCertListener] Found preference for webdriver_accept_untrusted_certs: true","timestamp":1461980250056,"type":""}
+{"level":"INFO","message":"[fxdriver.WdCertOverrideService] Allowing certificate from site: accounts.google.com:443","timestamp":1461980250058,"type":""}
+{"level":"INFO","message":"[fxdriver.WdCertOverrideService] Setting all Override Bits","timestamp":1461980250059,"type":""}
+{"level":"INFO","message":"[fxdriver.WdCertOverrideService] Override Bits: 7","timestamp":1461980250059,"type":""}
+{"level":"INFO","message":"[fxdriver.badCertListener] Found preference for webdriver_accept_untrusted_certs: true","timestamp":1461980250397,"type":""}
+{"level":"INFO","message":"[fxdriver.WdCertOverrideService] Allowing certificate from site: accounts.google.com:443","timestamp":1461980250398,"type":""}
+{"level":"INFO","message":"[fxdriver.WdCertOverrideService] Setting all Override Bits","timestamp":1461980250398,"type":""}
+{"level":"INFO","message":"[fxdriver.WdCertOverrideService] Override Bits: 7","timestamp":1461980250398,"type":""}
+{"level":"INFO","message":"[fxdriver.badCertListener] Found preference for webdriver_accept_untrusted_certs: true","timestamp":1461980250523,"type":""}
+{"level":"INFO","message":"[fxdriver.WdCertOverrideService] Allowing certificate from site: accounts.google.com:443","timestamp":1461980250524,"type":""}
+{"level":"INFO","message":"[fxdriver.WdCertOverrideService] Setting all Override Bits","timestamp":1461980250524,"type":""}
+{"level":"INFO","message":"[fxdriver.WdCertOverrideService] Override Bits: 7","timestamp":1461980250524,"type":""}
+{"level":"INFO","message":"[fxdriver.badCertListener] Found preference for webdriver_accept_untrusted_certs: true","timestamp":1461980250593,"type":""}
+{"level":"INFO","message":"[fxdriver.WdCertOverrideService] Allowing certificate from site: accounts.google.com:443","timestamp":1461980250593,"type":""}
+{"level":"INFO","message":"[fxdriver.WdCertOverrideService] Setting all Override Bits","timestamp":1461980250593,"type":""}
+{"level":"INFO","message":"[fxdriver.WdCertOverrideService] Override Bits: 7","timestamp":1461980250594,"type":""}
+{"level":"INFO","message":"[fxdriver.badCertListener] Found preference for webdriver_accept_untrusted_certs: true","timestamp":1461980250606,"type":""}
+{"level":"INFO","message":"[fxdriver.WdCertOverrideService] Allowing certificate from site: accounts.google.com:443","timestamp":1461980250607,"type":""}
+{"level":"INFO","message":"[fxdriver.WdCertOverrideService] Setting all Override Bits","timestamp":1461980250607,"type":""}
+{"level":"INFO","message":"[fxdriver.WdCertOverrideService] Override Bits: 7","timestamp":1461980250607,"type":""}
+{"level":"INFO","message":"[fxdriver.PatientListener] request status is 0","timestamp":1461980250617,"type":""}
+{"level":"INFO","message":"[fxdriver.Utils] New page loading.","timestamp":1461980250617,"type":""}
+{"level":"INFO","message":"[fxdriver.badCertListener] Found preference for webdriver_accept_untrusted_certs: true","timestamp":1461980250623,"type":""}
+{"level":"INFO","message":"[fxdriver.WdCertOverrideService] Allowing certificate from site: accounts.google.com:443","timestamp":1461980250624,"type":""}
+{"level":"INFO","message":"[fxdriver.WdCertOverrideService] Setting all Override Bits","timestamp":1461980250624,"type":""}
+{"level":"INFO","message":"[fxdriver.WdCertOverrideService] Override Bits: 7","timestamp":1461980250624,"type":""}
+{"level":"INFO","message":"[fxdriver.nsCommandProcessor] Received command: findElement","timestamp":1461980250658,"type":""}
+{"level":"SEVERE","message":"[fxdriver.wdSession] Lost DOM in window undefined","timestamp":1461980250661,"type":""}
+{"level":"INFO","message":"[fxdriver.nsCommandProcessor] Received command: sendKeysToElement","timestamp":1461980250686,"type":""}
+{"level":"INFO","message":"[fxdriver.WebElement] No need to switch focus","timestamp":1461980250707,"type":""}
+{"level":"INFO","message":"[fxdriver.Utils] Doing sendKeys...","timestamp":1461980250722,"type":""}
+{"level":"INFO","message":"[fxdriver.nsCommandProcessor] Received command: submitElement","timestamp":1461980250967,"type":""}
+{"level":"INFO","message":"[fxdriver.badCertListener] Found preference for webdriver_accept_untrusted_certs: true","timestamp":1461980251149,"type":""}
+{"level":"INFO","message":"[fxdriver.WdCertOverrideService] Allowing certificate from site: accounts.google.com:443","timestamp":1461980251149,"type":""}
+{"level":"INFO","message":"[fxdriver.WdCertOverrideService] Setting all Override Bits","timestamp":1461980251150,"type":""}
+{"level":"INFO","message":"[fxdriver.WdCertOverrideService] Override Bits: 7","timestamp":1461980251150,"type":""}
+{"level":"INFO","message":"[fxdriver.nsCommandProcessor] Received command: findElement","timestamp":1461980251166,"type":""}
+{"level":"INFO","message":"[fxdriver.nsCommandProcessor] Received command: sendKeysToElement","timestamp":1461980251290,"type":""}
+{"level":"INFO","message":"[fxdriver.WebElement] Need to switch focus","timestamp":1461980251310,"type":""}
+{"level":"INFO","message":"[fxdriver.Utils] Doing sendKeys...","timestamp":1461980251323,"type":""}
+{"level":"INFO","message":"[fxdriver.nsCommandProcessor] Received command: submitElement","timestamp":1461980251383,"type":""}
+{"level":"INFO","message":"[fxdriver.badCertListener] Found preference for webdriver_accept_untrusted_certs: true","timestamp":1461980252576,"type":""}
+{"level":"INFO","message":"[fxdriver.WdCertOverrideService] Allowing certificate from site: csuavoting.herokuapp.com:443","timestamp":1461980252577,"type":""}
+{"level":"INFO","message":"[fxdriver.WdCertOverrideService] Setting all Override Bits","timestamp":1461980252577,"type":""}
+{"level":"INFO","message":"[fxdriver.WdCertOverrideService] Override Bits: 7","timestamp":1461980252578,"type":""}
+{"level":"INFO","message":"[fxdriver.PatientListener] request status is 0","timestamp":1461980253018,"type":""}
+{"level":"INFO","message":"[fxdriver.badCertListener] Found preference for webdriver_accept_untrusted_certs: true","timestamp":1461980253022,"type":""}
+{"level":"INFO","message":"[fxdriver.WdCertOverrideService] Allowing certificate from site: csuavoting.herokuapp.com:443","timestamp":1461980253022,"type":""}
+{"level":"INFO","message":"[fxdriver.WdCertOverrideService] Setting all Override Bits","timestamp":1461980253023,"type":""}
+{"level":"INFO","message":"[fxdriver.WdCertOverrideService] Override Bits: 7","timestamp":1461980253023,"type":""}
+{"level":"INFO","message":"[fxdriver.nsCommandProcessor] Received command: getPageSource","timestamp":1461980253079,"type":""}
+{"level":"SEVERE","message":"[fxdriver.wdSession] Lost DOM in window undefined","timestamp":1461980253079,"type":""}
+{"level":"INFO","message":"[fxdriver.DelayedCommand] Ignoring pending about:document-onload-blocker request","timestamp":1461980253083,"type":""}
+{"level":"INFO","message":"[fxdriver.badCertListener] Found preference for webdriver_accept_untrusted_certs: true","timestamp":1461980253199,"type":""}
+{"level":"INFO","message":"[fxdriver.WdCertOverrideService] Allowing certificate from site: csuavoting.herokuapp.com:443","timestamp":1461980253201,"type":""}
+{"level":"INFO","message":"[fxdriver.WdCertOverrideService] Setting all Override Bits","timestamp":1461980253201,"type":""}
+{"level":"INFO","message":"[fxdriver.WdCertOverrideService] Override Bits: 7","timestamp":1461980253201,"type":""}
+{"level":"INFO","message":"[fxdriver.badCertListener] Found preference for webdriver_accept_untrusted_certs: true","timestamp":1461980253620,"type":""}
+{"level":"INFO","message":"[fxdriver.WdCertOverrideService] Allowing certificate from site: csuavoting.herokuapp.com:443","timestamp":1461980253620,"type":""}
+{"level":"INFO","message":"[fxdriver.WdCertOverrideService] Setting all Override Bits","timestamp":1461980253621,"type":""}
+{"level":"INFO","message":"[fxdriver.WdCertOverrideService] Override Bits: 7","timestamp":1461980253621,"type":""}
+{"level":"INFO","message":"[fxdriver.badCertListener] Found preference for webdriver_accept_untrusted_certs: true","timestamp":1461980253637,"type":""}
+{"level":"INFO","message":"[fxdriver.WdCertOverrideService] Allowing certificate from site: csuavoting.herokuapp.com:443","timestamp":1461980253637,"type":""}
+{"level":"INFO","message":"[fxdriver.WdCertOverrideService] Setting all Override Bits","timestamp":1461980253637,"type":""}
+{"level":"INFO","message":"[fxdriver.WdCertOverrideService] Override Bits: 7","timestamp":1461980253638,"type":""}
+{"level":"INFO","message":"[fxdriver.badCertListener] Found preference for webdriver_accept_untrusted_certs: true","timestamp":1461980253639,"type":""}
+{"level":"INFO","message":"[fxdriver.WdCertOverrideService] Allowing certificate from site: csuavoting.herokuapp.com:443","timestamp":1461980253639,"type":""}
+{"level":"INFO","message":"[fxdriver.WdCertOverrideService] Setting all Override Bits","timestamp":1461980253639,"type":""}
+{"level":"INFO","message":"[fxdriver.WdCertOverrideService] Override Bits: 7","timestamp":1461980253639,"type":""}
+{"level":"SEVERE","message":"[fxdriver.wdSession] Lost DOM in window undefined","timestamp":1461980253657,"type":""}
+{"level":"INFO","message":"[fxdriver.nsCommandProcessor] Received command: getPageSource","timestamp":1461980253677,"type":""}
+{"level":"INFO","message":"[fxdriver.nsCommandProcessor] Received command: getPageSource","timestamp":1461980253702,"type":""}
+{"level":"INFO","message":"[fxdriver.nsCommandProcessor] Received command: getPageSource","timestamp":1461980253727,"type":""}
+{"level":"INFO","message":"[fxdriver.nsCommandProcessor] Received command: getPageSource","timestamp":1461980255090,"type":""}
+{"level":"INFO","message":"[fxdriver.nsCommandProcessor] Received command: getPageSource","timestamp":1461980255116,"type":""}
+{"level":"INFO","message":"[fxdriver.nsCommandProcessor] Received command: getPageSource","timestamp":1461980255339,"type":""}
+{"level":"INFO","message":"[fxdriver.nsCommandProcessor] Received command: getPageSource","timestamp":1461980255559,"type":""}
+{"level":"INFO","message":"[fxdriver.nsCommandProcessor] Received command: getPageSource","timestamp":1461980255781,"type":""}
+{"level":"INFO","message":"[fxdriver.nsCommandProcessor] Received command: getPageSource","timestamp":1461980256007,"type":""}
+{"level":"INFO","message":"[fxdriver.nsCommandProcessor] Received command: getPageSource","timestamp":1461980256256,"type":""}
+{"level":"INFO","message":"[fxdriver.nsCommandProcessor] Received command: getPageSource","timestamp":1461980256483,"type":""}
+{"level":"INFO","message":"[fxdriver.nsCommandProcessor] Received command: getPageSource","timestamp":1461980256737,"type":""}
+{"level":"INFO","message":"[fxdriver.nsCommandProcessor] Received command: getPageSource","timestamp":1461980256972,"type":""}
+{"level":"INFO","message":"[fxdriver.nsCommandProcessor] Received command: getPageSource","timestamp":1461980257198,"type":""}
+{"level":"INFO","message":"[fxdriver.nsCommandProcessor] Received command: getPageSource","timestamp":1461980257426,"type":""}
+{"level":"INFO","message":"[fxdriver.nsCommandProcessor] Received command: getPageSource","timestamp":1461980257671,"type":""}
+{"level":"INFO","message":"[fxdriver.nsCommandProcessor] Received command: getPageSource","timestamp":1461980257907,"type":""}
+{"level":"INFO","message":"[fxdriver.nsCommandProcessor] Received command: getPageSource","timestamp":1461980258136,"type":""}
+{"level":"INFO","message":"[fxdriver.nsCommandProcessor] Received command: getPageSource","timestamp":1461980258456,"type":""}
+{"level":"INFO","message":"[fxdriver.nsCommandProcessor] Received command: getPageSource","timestamp":1461980258671,"type":""}
+{"level":"INFO","message":"[fxdriver.nsCommandProcessor] Received command: getPageSource","timestamp":1461980258890,"type":""}
+{"level":"INFO","message":"[fxdriver.nsCommandProcessor] Received command: getPageSource","timestamp":1461980259110,"type":""}
+{"level":"INFO","message":"[fxdriver.nsCommandProcessor] Received command: getPageSource","timestamp":1461980259424,"type":""}
+{"level":"INFO","message":"[fxdriver.nsCommandProcessor] Received command: getPageSource","timestamp":1461980259650,"type":""}
+{"level":"INFO","message":"[fxdriver.nsCommandProcessor] Received command: getPageSource","timestamp":1461980259884,"type":""}
+{"level":"INFO","message":"[fxdriver.nsCommandProcessor] Received command: getPageSource","timestamp":1461980260130,"type":""}
+{"level":"INFO","message":"[fxdriver.nsCommandProcessor] Received command: getPageSource","timestamp":1461980260364,"type":""}
+{"level":"INFO","message":"[fxdriver.nsCommandProcessor] Received command: getPageSource","timestamp":1461980260611,"type":""}
+{"level":"INFO","message":"[fxdriver.nsCommandProcessor] Received command: getPageSource","timestamp":1461980260863,"type":""}
+{"level":"INFO","message":"[fxdriver.nsCommandProcessor] Received command: getPageSource","timestamp":1461980261120,"type":""}
+{"level":"INFO","message":"[fxdriver.nsCommandProcessor] Received command: getPageSource","timestamp":1461980261378,"type":""}
+{"level":"INFO","message":"[fxdriver.nsCommandProcessor] Received command: getPageSource","timestamp":1461980261619,"type":""}
+{"level":"INFO","message":"[fxdriver.nsCommandProcessor] Received command: getPageSource","timestamp":1461980261839,"type":""}
+{"level":"INFO","message":"[fxdriver.nsCommandProcessor] Received command: getPageSource","timestamp":1461980262064,"type":""}
+{"level":"INFO","message":"[fxdriver.nsCommandProcessor] Received command: getPageSource","timestamp":1461980262296,"type":""}
+{"level":"INFO","message":"[fxdriver.nsCommandProcessor] Received command: getPageSource","timestamp":1461980262541,"type":""}
+{"level":"INFO","message":"[fxdriver.nsCommandProcessor] Received command: getPageSource","timestamp":1461980262768,"type":""}
+{"level":"INFO","message":"[fxdriver.nsCommandProcessor] Received command: getPageSource","timestamp":1461980263007,"type":""}
+{"level":"INFO","message":"[fxdriver.nsCommandProcessor] Received command: getPageSource","timestamp":1461980263231,"type":""}
+{"level":"INFO","message":"[fxdriver.nsCommandProcessor] Received command: getPageSource","timestamp":1461980263449,"type":""}
+{"level":"INFO","message":"[fxdriver.nsCommandProcessor] Received command: getPageSource","timestamp":1461980263672,"type":""}
+{"level":"INFO","message":"[fxdriver.nsCommandProcessor] Received command: getPageSource","timestamp":1461980263898,"type":""}
+{"level":"INFO","message":"[fxdriver.nsCommandProcessor] Received command: getPageSource","timestamp":1461980264130,"type":""}
+{"level":"INFO","message":"[fxdriver.nsCommandProcessor] Received command: getPageSource","timestamp":1461980264429,"type":""}
+{"level":"INFO","message":"[fxdriver.nsCommandProcessor] Received command: getPageSource","timestamp":1461980264645,"type":""}
+{"level":"INFO","message":"[fxdriver.nsCommandProcessor] Received command: getPageSource","timestamp":1461980264865,"type":""}
+{"level":"INFO","message":"[fxdriver.nsCommandProcessor] Received command: getPageSource","timestamp":1461980265083,"type":""}
+{"level":"INFO","message":"[fxdriver.nsCommandProcessor] Received command: getPageSource","timestamp":1461980265304,"type":""}
+{"level":"INFO","message":"[fxdriver.nsCommandProcessor] Received command: getPageSource","timestamp":1461980265520,"type":""}
+{"level":"INFO","message":"[fxdriver.nsCommandProcessor] Received command: getPageSource","timestamp":1461980265732,"type":""}
+{"level":"INFO","message":"[fxdriver.nsCommandProcessor] Received command: getPageSource","timestamp":1461980265946,"type":""}
+{"level":"INFO","message":"[fxdriver.nsCommandProcessor] Received command: getPageSource","timestamp":1461980266164,"type":""}
+{"level":"INFO","message":"[fxdriver.nsCommandProcessor] Received command: getPageSource","timestamp":1461980266410,"type":""}
+{"level":"INFO","message":"[fxdriver.nsCommandProcessor] Received command: getPageSource","timestamp":1461980266624,"type":""}
+{"level":"INFO","message":"[fxdriver.nsCommandProcessor] Received command: getPageSource","timestamp":1461980266837,"type":""}
+{"level":"INFO","message":"[fxdriver.nsCommandProcessor] Received command: getPageSource","timestamp":1461980267056,"type":""}
+{"level":"INFO","message":"[fxdriver.nsCommandProcessor] Received command: getPageSource","timestamp":1461980267270,"type":""}
+{"level":"INFO","message":"[fxdriver.nsCommandProcessor] Received command: getPageSource","timestamp":1461980267506,"type":""}
+{"level":"INFO","message":"[fxdriver.nsCommandProcessor] Received command: getPageSource","timestamp":1461980267729,"type":""}
+{"level":"INFO","message":"[fxdriver.nsCommandProcessor] Received command: getPageSource","timestamp":1461980267948,"type":""}
+{"level":"INFO","message":"[fxdriver.nsCommandProcessor] Received command: getPageSource","timestamp":1461980268343,"type":""}
+{"level":"INFO","message":"[fxdriver.nsCommandProcessor] Received command: getPageSource","timestamp":1461980268565,"type":""}
+{"level":"INFO","message":"[fxdriver.nsCommandProcessor] Received command: getPageSource","timestamp":1461980268799,"type":""}
+{"level":"INFO","message":"[fxdriver.nsCommandProcessor] Received command: getPageSource","timestamp":1461980269019,"type":""}
+{"level":"INFO","message":"[fxdriver.nsCommandProcessor] Received command: getPageSource","timestamp":1461980269243,"type":""}
+{"level":"INFO","message":"[fxdriver.nsCommandProcessor] Received command: getPageSource","timestamp":1461980269456,"type":""}
+{"level":"INFO","message":"[fxdriver.nsCommandProcessor] Received command: getPageSource","timestamp":1461980269674,"type":""}
+{"level":"INFO","message":"[fxdriver.nsCommandProcessor] Received command: getPageSource","timestamp":1461980269888,"type":""}
+{"level":"INFO","message":"[fxdriver.nsCommandProcessor] Received command: getPageSource","timestamp":1461980270104,"type":""}
+{"level":"INFO","message":"[fxdriver.nsCommandProcessor] Received command: getPageSource","timestamp":1461980270321,"type":""}
+{"level":"INFO","message":"[fxdriver.nsCommandProcessor] Received command: getPageSource","timestamp":1461980270554,"type":""}
+{"level":"INFO","message":"[fxdriver.nsCommandProcessor] Received command: getPageSource","timestamp":1461980270772,"type":""}
+{"level":"INFO","message":"[fxdriver.nsCommandProcessor] Received command: getPageSource","timestamp":1461980270996,"type":""}
+{"level":"INFO","message":"[fxdriver.nsCommandProcessor] Received command: getPageSource","timestamp":1461980271237,"type":""}
+{"level":"INFO","message":"[fxdriver.nsCommandProcessor] Received command: getPageSource","timestamp":1461980271470,"type":""}
+{"level":"INFO","message":"[fxdriver.nsCommandProcessor] Received command: getPageSource","timestamp":1461980271706,"type":""}
+{"level":"INFO","message":"[fxdriver.nsCommandProcessor] Received command: getPageSource","timestamp":1461980271964,"type":""}
+{"level":"INFO","message":"[fxdriver.nsCommandProcessor] Received command: getPageSource","timestamp":1461980272231,"type":""}
+{"level":"INFO","message":"[fxdriver.nsCommandProcessor] Received command: getPageSource","timestamp":1461980272453,"type":""}
+{"level":"INFO","message":"[fxdriver.nsCommandProcessor] Received command: getPageSource","timestamp":1461980272680,"type":""}
+{"level":"INFO","message":"[fxdriver.nsCommandProcessor] Received command: getPageSource","timestamp":1461980272910,"type":""}
+{"level":"INFO","message":"[fxdriver.nsCommandProcessor] Received command: getPageSource","timestamp":1461980273168,"type":""}
+{"level":"INFO","message":"[fxdriver.nsCommandProcessor] Received command: getPageSource","timestamp":1461980273402,"type":""}
+{"level":"INFO","message":"[fxdriver.nsCommandProcessor] Received command: getPageSource","timestamp":1461980273620,"type":""}
+{"level":"INFO","message":"[fxdriver.nsCommandProcessor] Received command: getPageSource","timestamp":1461980273841,"type":""}
+{"level":"INFO","message":"[fxdriver.nsCommandProcessor] Received command: getPageSource","timestamp":1461980274057,"type":""}
+{"level":"INFO","message":"[fxdriver.nsCommandProcessor] Received command: getPageSource","timestamp":1461980274278,"type":""}
+{"level":"INFO","message":"[fxdriver.nsCommandProcessor] Received command: getPageSource","timestamp":1461980274507,"type":""}
+{"level":"INFO","message":"[fxdriver.nsCommandProcessor] Received command: getPageSource","timestamp":1461980274826,"type":""}
+{"level":"INFO","message":"[fxdriver.nsCommandProcessor] Received command: getPageSource","timestamp":1461980275142,"type":""}
