@@ -16,6 +16,7 @@ And (/^I click Add$/) do
 end
 
 When /^(?:|I )fill in the field "([^"]*)" with "([^"]*)"$/ do |field, value|
+  wait = Selenium::WebDriver::Wait.new(timeout: 20)
   wait.until {@driver.page_source.include? "CSUA"}
   @driver.find_element(:name, field).send_keys value
 end
