@@ -64,7 +64,9 @@ module NavigationHelpers
       '/election_embed_livestream'
     when /^the election page$/
       '/elections'
-
+    when /^setup cucumber page$/
+      '/setup_cucumber'
+      
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
     #

@@ -4,7 +4,7 @@ Feature: Add elections
   So that I can start elections
   
   Background:
-    Given I am logged in as an admin
+    Given I am logged in as an admin in CSUA
     And I should see "Hello,"
     
   Scenario: Add election

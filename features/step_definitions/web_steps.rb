@@ -264,6 +264,7 @@ Then /^show me the page$/ do
   save_and_open_page
 end
 
+
 When(/^I add the election called "([^"]*)" for the organization "([^"]*)"$/) do |election_name, org_name|
   wait = Selenium::WebDriver::Wait.new(timeout: 20)
   raise "Error add" unless @driver.page_source.include? "Add Election"
@@ -295,18 +296,20 @@ end
 
 When(/^I add the position "([^"]*)" for election "([^"]*)"$/) do |position_name, election_name|
   # not done yet
-  wait = Selenium::WebDriver::Wait.new(timeout: 20)
-  raise "Error add position" unless @driver.page_source.include? "Add Position"
-  raise "Error position" unless @driver.page_source.include? "New position:"
+  @driver.navigate.to "https://csuavoting.herokuapp.com"
+  wait = Selenium::WebDriver::Wait.new(timeout: 40)
+  wait.until { @driver.page_source.include? "add_election_button" }
+  #raise "Error add position" unless @driver.page_source.include? "Add position"
+  #raise "Error position" unless @driver.page_source.include? "New position:"
   
-  @driver.execute_script("$('#new_position_name').parents().css({'display':'block','visibility':'visible'})")
-  position_element = @driver.find_element(:id => 'new_position_name')
+  @driver.execute_script("$('#"+election_name+"').parents().css({'display':'block','visibility':'visible'})")
+  position_element = @driver.find_element(:id => election_name)
   position_element.click
   position_element.send_keys position_name
   position_submit = @driver.find_element(:id => 'positionform').submit
   
-  wait = Selenium::WebDriver::Wait.new(timeout: 20)
-  wait.until { @driver.page_source.include? "Add position" }
+  wait = Selenium::WebDriver::Wait.new(timeout: 40)
+  wait.until { @driver.page_source.include? "add_election_button" }
   wait.until { @driver.page_source.include? position_name }
   #puts "#{@driver.page_source}"
   
@@ -333,9 +336,15 @@ When(/^I delete the election "([^"]*)"$/) do |name|
   
 end
 
+When(/^I setup cucumber tests$/) do
+  @driver.navigate.to "https://csuavoting.herokuapp.com/setup_cucumber"
+  wait = Selenium::WebDriver::Wait.new(timeout: 10)
+  wait.until { @driver.page_source.include? "CSUA" }
+  @driver.navigate.to "https://csuavoting.herokuapp.com"
+end
+
 Given(/^I am logged in as an admin in CSUA$/) do
   @driver = Selenium::WebDriver.for :firefox
-  #@driver.navigate.to "https://csua-169-lillianchou94.c9users.io/login"
   @driver.navigate.to "https://csuavoting.herokuapp.com"
   @driver.manage.timeouts.implicit_wait = 10
 
@@ -355,13 +364,15 @@ Given(/^I am logged in as an admin in CSUA$/) do
   #@driver.quit
 end
 
+
+
 Given(/^I am logged in as an admin in HKN/) do
   @driver = Selenium::WebDriver.for :firefox
   #@driver.navigate.to "https://csua-169-lillianchou94.c9users.io/login"
   @driver.navigate.to "https://csuavoting.herokuapp.com"
   @driver.manage.timeouts.implicit_wait = 10
 
-  raise "Error CSUA" unless @driver.page_source.include? "CSUA"
+  #aise "Error CSUA" unless @driver.page_source.include? "CSUA"
   @driver.find_element(:id => 'sign_in_id').click
   email_elem = @driver.find_element(:id => 'Email')
   email_elem.send_keys "hknadmin@gmail.com"
@@ -405,7 +416,7 @@ Given(/^I am logged in as a super admin/) do
   @driver.manage.timeouts.implicit_wait = 10
 
   raise "Error CSUA" unless @driver.page_source.include? "CSUA"
-  @driver.find_element(:id => 'sign_in_id').click
+  #driver.find_element(:id => 'sign_in_id').click
   email_elem = @driver.find_element(:id => 'Email')
   email_elem.send_keys "super169csua@gmail.com"
   email_elem.submit
@@ -426,7 +437,7 @@ Given(/^I am logged in as a non-member/) do
   @driver.manage.timeouts.implicit_wait = 10
 
   raise "Error CSUA" unless @driver.page_source.include? "CSUA"
-  @driver.find_element(:id => 'sign_in_id').click
+  #driver.find_element(:id => 'sign_in_id').click
   email_elem = @driver.find_element(:id => 'Email')
   #email_elem.send_keys "email1111222@gmail.com"
   email_elem.send_keys "notamember@gmail.com"

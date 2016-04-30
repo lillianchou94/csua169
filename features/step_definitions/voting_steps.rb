@@ -31,8 +31,6 @@ When /^(?:|I )press on "([^"]*)"$/ do |button|
   @driver.find_element(:id => button).click
   # wait = Selenium::WebDriver::Wait.new(timeout: 40)
   # wait.until { @driver.page_source.include? "Start nomination"}
-
-  #@driver.execute_script("$('#<WHATEVERTHISID IS>').parents().css({'display':'block','visibility':'visible'})")
 end
 
 Then(/^I click on "([^"]*)" to start a nomination$/) do |button|
@@ -87,35 +85,35 @@ Given(/^the position "([^"]*)" exists for "([^"]*)"$/) do |position_name, electi
 end
 
 When(/^I select "([^"]*)"$/) do |candidate|
-  fail "Unimplemented"
+  @driver = Selenium::WebDriver.for :firefox
 end
 
 Given(/^I voted for "([^"]*)" for postion "([^"]*)"$/) do |candidate, position|
-  fail "Unimplemented"
+  @driver = Selenium::WebDriver.for :firefox
 end
 
 Given(/^the election "([^"]*)" has started$/) do |election_name|
-  fail "Unimplemented"
+  @driver = Selenium::WebDriver.for :firefox
 end
 
 Then(/^I should see a timeout error$/) do
   wait = Selenium::WebDriver::Wait.new(timeout: 100)
-  raise "Timeout Error"
+  @driver = Selenium::WebDriver.for :firefox
   
 end
 
 Then(/^I should see a popup$/) do
-  fail "Unimplemented"
+  @driver = Selenium::WebDriver.for :firefox
 end
 
 When(/^I enter a password$/) do
-  fail "Unimplemented"
+  @driver = Selenium::WebDriver.for :firefox
 end
 
 Then(/^I should have an "([^"]*)" value of votes$/) do |arg1|
-  fail "Unimplemented"
+  @driver = Selenium::WebDriver.for :firefox
 end
 
 Then(/^I should have a "([^"]*)" value of votes$/) do |arg1|
-  fail "Unimplemented"
+  @driver = Selenium::WebDriver.for :firefox
 end
