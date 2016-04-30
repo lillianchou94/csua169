@@ -26,9 +26,11 @@ respond_to :json
   
   def setup_cucumber
     #test_election = Election.find_by(election_id: 'csua00000000')
-    Election.destroy_all(election_id: 'csua00000000')
-    Election.create!(:election_id => "csua00000000", :election_name => "cucumber test election", :user_id => "member169csua@gmail.com")
+    Election.destroy_all(election_id: 'CSUA00000000')
+    Election.create!(:election_livestream => "", :election_id => "CSUA00000000", :election_name => "cucumber test election", :election_time => nil, :organization => "CSUA", :position => "", :user_id => "email1111222@gmail.com", :phase => 0)
+    #Election.create!(:election_id => "csua00000000", :election_name => "cucumber test election", :user_id => "member169csua@gmail.com")
     @@position_list['csua00000000'] = ['president','treasurer','secretary']
+    redirect_to root_path
   end
   
   def show_settings

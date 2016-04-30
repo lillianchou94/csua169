@@ -7,17 +7,17 @@ Feature: Nominate candidates
     # during nomination phase
     Given I am logged in as a member in CSUA
     And I am on the dashboard page for a member 
-    Then I should see in the browser "test election"
-    Then I should see in the browser "CSUA04292016_1__test_candidate"
-    When I click in the browser "CSUA04292016_1__test_candidate"
-    Then I should see in the browser "Nomination for test_candidate"
+    Then I should see in the browser "cucumber test election"
+    Then I should see in the browser "csua00000000__president"
+    When I click in the browser "csua00000000__president"
+    Then I should see in the browser "Nomination for president"
     And I select radio button "id_email1111222@gmail.com" from "nomination_form_id"
     And I click in the browser "nomination_form_submit_id"
     Then I should see in the browser "Submitted nominations successfully"
     
     # can only nominate once?
     And I should see in the browser "test election"
-    When I click in the browser "new_election_org04162016__test_candidate"
+    When I click in the browser "csua00000000__president"
     Then I should see in the browser "Nomination for test_candidate"
     And I select radio button "id_email1111222@gmail.com" from "nomination_form_id"
     And I click in the browser "nomination_form_submit_id"
@@ -68,8 +68,8 @@ Feature: Nominate candidates
   Scenario: Nominate invalid candidate
     Given I am logged in as a member in CSUA
     And I am on the dashboard page for a member 
-    Then I should see in the browser "test election"
-    When I click in the browser "new_election_org04162016__test_candidate"
+    Then I should see in the browser "cucumber test election"
+    When I click in the browser "csua00000000__president"
     Then I should not see in the browser "fakeemail@notarealaddress.com"
     And I should see in the browser "nomination_form_submit_id"
     Then I log out
