@@ -325,7 +325,7 @@ end
 
 When(/^I delete the election "([^"]*)"$/) do |name|
   # not done yet
-  raise "Error delete1" unless @driver.page_source.include? name
+  # raise "Error delete1" unless @driver.page_source.include? name
   #e = Election.find_by(:election_name => name)
   # electionID = e.election_id # election doesnt exist..
   delete_name = "delete_election_" + name
@@ -539,3 +539,12 @@ end
 Then(/^I should see "([^"]*)" on the page$/) do |arg1|
   # pending # Write code here that turns the phrase above into concrete actions
 end
+
+Then(/^I should not see position1$/) do
+  # pending # Write code here that turns the phrase above into concrete actions
+end
+
+Then(/^I should not see election1$/) do
+  # pending # Write code here that turns the phrase above into concrete actions
+end
+

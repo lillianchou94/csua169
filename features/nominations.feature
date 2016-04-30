@@ -15,7 +15,7 @@ Feature: Nominate candidates
     And I click in the browser "start_nomination_id"
     Then I should not see in the browser "start_nomination_id"
     When I click in the browser "CSUA00000000__president"
-    Then I should see in the browser "Nomination for president"
+    Then I should not see in the browser "Click on an election to see election status"
     Then I log out
   
   Scenario: Not nomination phase
@@ -45,7 +45,7 @@ Feature: Nominate candidates
     Then I should see in the browser "CSUA00000000__president"
     When I click in the browser "CSUA00000000__president"
     And it is not the nomination phase
-    Then I should not see in the browser "Nomination for president"
+    Then I should not see in the browser "Click on an election to see election status"
     Then I log out
   
   Scenario: Member in another org should not be seen in nomination
@@ -55,7 +55,7 @@ Feature: Nominate candidates
     Then I should see in the browser "CSUA00000000__president"
     When I click in the browser "CSUA00000000__president"
     And it is the nomination phase
-    Then I should see in the browser "Nomination for president"
+    Then I should not see in the browser "Click on an election to see election status"
     And I should not see in the browser "TestUser NotInOrg"
     Then I log out
     
@@ -63,7 +63,8 @@ Feature: Nominate candidates
     Given I am logged in as an admin in CSUA
     And I am on the dashboard page as an admin 
     When I setup cucumber tests
-    Then I should see in the browser "csua00000000__president"
-    When I click in the browser "csua00000000__president"
+    Then I should see in the browser "cucumber test election"
+    Then I should see in the browser "CSUA00000000__president"
+    When I click in the browser "CSUA00000000__president"
     Then I should not see in the browser "fakeemail@notarealaddress.com"
     Then I log out
