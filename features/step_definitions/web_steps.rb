@@ -550,6 +550,9 @@ Then(/^I should see Add position/) do
   # pending # Write code here that turns the phrase above into concrete actions
 end
 
+When(/^I press on start_nomination_id for nominations/) do
+end
+
 Then(/^I should not see Add position$/) do
    # Write code here that turns the phrase above into concrete actions
 end
