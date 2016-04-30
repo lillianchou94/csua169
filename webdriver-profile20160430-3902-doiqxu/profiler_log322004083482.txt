@@ -1,6 +1,0 @@
-{"level":"INFO","message":"{\"event\":\"YIELD_TO_PAGE_LOAD\",\"startorend\":\"start\"}","timestamp":1461994280012,"type":"profiler"}
-{"level":"INFO","message":"{\"event\":\"YIELD_TO_PAGE_LOAD\",\"startorend\":\"end\"}","timestamp":1461994280013,"type":"profiler"}
-{"level":"INFO","message":"{\"event\":\"YIELD_TO_PAGE_LOAD\",\"startorend\":\"start\"}","timestamp":1461994280018,"type":"profiler"}
-{"level":"INFO","message":"{\"event\":\"YIELD_TO_PAGE_LOAD\",\"startorend\":\"end\"}","timestamp":1461994280019,"type":"profiler"}
-{"level":"INFO","message":"{\"event\":\"YIELD_TO_PAGE_LOAD\",\"startorend\":\"start\"}","timestamp":1461994280170,"type":"profiler"}
-{"level":"INFO","message":"{\"event\":\"YIELD_TO_PAGE_LOAD\",\"startorend\":\"end\"}","timestamp":1461994280171,"type":"profiler"}
