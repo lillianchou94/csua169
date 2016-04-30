@@ -526,6 +526,10 @@ Then(/^I should see election1/) do
   # pending # Write code here that turns the phrase above into concrete actions
 end
 
+Then(/^I should see position1/) do
+  # pending # Write code here that turns the phrase above into concrete actions
+end
+
 Then(/^I should see Add position/) do
   # pending # Write code here that turns the phrase above into concrete actions
 end
