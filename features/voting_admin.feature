@@ -14,7 +14,7 @@ Feature: Voting for admin
     And I should see in the browser "Click on an election to see election status."
     When I am on the show elections page for an admin
     Then I should see in the browser "Election1"
-    Then I should see in the browser "position1"
+    Then I should see position1
     Then I click on "select_election_CSUA04272016" for nominations
     When I am on the election dashboard page
     And I should see in the browser "Start nomination"

@@ -513,6 +513,13 @@ When(/^I click Add organization$/) do
   # pending # Write code here that turns the phrase above into concrete actions
 end
 
+When(/^I click vote/) do
+  # pending # Write code here that turns the phrase above into concrete actions
+end
+
+When(/^I click enter/) do
+  # pending # Write code here that turns the phrase above into concrete actions
+end
 
 When(/^I click org1/) do
   # pending # Write code here that turns the phrase above into concrete actions
