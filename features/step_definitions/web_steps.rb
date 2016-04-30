@@ -434,22 +434,20 @@ Given(/^I am logged in as a non member/) do
   @driver = Selenium::WebDriver.for :firefox
   @driver.navigate.to "https://csuavoting.herokuapp.com"
   #@driver.navigate.to "https://csua-169-lillianchou94.c9users.io/login"
-  @driver.manage.timeouts.implicit_wait = 10
+  @driver.manage.timeouts.implicit_wait = 20
 
   raise "Error CSUA" unless @driver.page_source.include? "CSUA"
-  #driver.find_element(:id => 'sign_in_id').click
+  @driver.find_element(:id => 'sign_in_id').click
   email_elem = @driver.find_element(:id => 'Email')
-  #email_elem.send_keys "email1111222@gmail.com"
-  email_elem.send_keys "notamember@gmail.com"
+  email_elem.send_keys "member169csua@gmail.com"
   email_elem.submit
   password_elem = @driver.find_element(:id => 'Passwd')
-  password_elem.send_keys "169nonmember"
+  password_elem.send_keys "169member"
   password_elem.submit
   wait = Selenium::WebDriver::Wait.new(timeout: 10)
   wait.until { @driver.page_source.include? "CSUA" }
   raise "Error CSUA afterwards" unless @driver.page_source.include? "CSUA"
   raise "Error hello" unless @driver.page_source.include? "Hello, "
-  raise "Error add" unless @driver.page_source.include? "Add Election"
 end
 
 When(/^I click in the browser "([^"]*)"$/) do |click_id|
@@ -529,6 +527,11 @@ Then(/^I should see election1/) do
 end
 
 Then(/^I should see Add position/) do
+  # pending # Write code here that turns the phrase above into concrete actions
+end
+
+
+Then(/^I should not see Add election/) do
   # pending # Write code here that turns the phrase above into concrete actions
 end
 

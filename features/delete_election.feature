@@ -12,7 +12,7 @@ Feature: delete elections
     Given I am logged in as an admin in CSUA
     And I am on the dashboard page as an admin
     And I add the election called "election1" for the organization "CSUA"
-    Then I should be on the login page
+    Then I should be on the dashboard
     And I should see "Add election" 
     Then I should see election1
     And I should not see position1

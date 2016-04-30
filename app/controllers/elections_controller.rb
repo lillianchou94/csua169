@@ -126,15 +126,8 @@ respond_to :json
         end
       end
     end
-    Nomination.create!(:election_id => @election_id, 
-                       :organization => org, 
-                       :user_id => @user_selected, 
-                       :threshold => 1, 
-                       :position => @position_id, 
-                       :num_seconds => 0, 
-                       :prime_product => @current_user.user_prime, 
-                       :num_votes => 0, 
-                       :did_win => false)
+    Nomination.create!(:election_id => @election_id, :organization => org, :user_id => @user_selected, :threshold => 1, :position => @position_id, :num_seconds => 0, 
+                       :prime_product => @current_user.user_prime, :num_votes => 0, :did_win => false)
     render 'elections/submit_nominations.html.erb'
   end
   
@@ -144,9 +137,7 @@ respond_to :json
     @current_user = User.find_by(id: session[:user_id])
     @curr_user_votes = @current_user.votes
     @current_user_prime = @current_user.user_prime
-    
-   
-    
+
     # only show successfully nominated users
     election = Election.find_by(:election_id => @election_id)
     org = election.organization
