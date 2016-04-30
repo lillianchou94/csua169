@@ -13,9 +13,9 @@ module NavigationHelpers
   def path_to(page_name)
     case page_name
     when /^the home\s?page$/
-      '/home'
+      /dashboard/home'
     when /^the results\s?page$/
-      '/home'
+      '/dashboard/home'
     when /^the dashboard$/
       '/dashboard/home'
     when /^the set up for super admin page$/

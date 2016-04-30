@@ -530,6 +530,10 @@ Then(/^I should see Add position/) do
   # pending # Write code here that turns the phrase above into concrete actions
 end
 
+Then(/^I should not see Add position$/) do
+   # Write code here that turns the phrase above into concrete actions
+end
+
 
 Then(/^I should not see Add election/) do
   # pending # Write code here that turns the phrase above into concrete actions
@@ -551,3 +555,6 @@ Then(/^I should not see election1$/) do
   # pending # Write code here that turns the phrase above into concrete actions
 end
 
+Then(/^I click on "([^"]*)" for nominations$/) do |arg1|
+ # Write code here that turns the phrase above into concrete actions
+end
